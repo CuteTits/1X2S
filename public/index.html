@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Card with Active Button Styling</title>
+    <link rel="stylesheet" href="fonts.css">
+    <style>
+
+
+body {
+font-family: Arial, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #0f0f0f;
+flex-direction: column;
+gap: 20px;
+padding: 20px;
+overflow-x: hidden;
+}
+
+#section1{
+min-height: 100vh;
+width: 100vw;
+}
+.section-1-front-image img{
+height: 100vh;
+width: 100vw;
+object-fit: cover;
+opacity: 25%;
+}
+.section1-parent-container1{
+color: white;
+position: absolute;
+top: 25%;
+left: 25%;
+}
+.section1-parent-container1 h1{
+color: white;
+font-size: 6em;
+font-family: inter;
+}
+.section1-dynamic-counter{
+display: flex;
+}
+@keyframes flash {
+0%, 100% { opacity: 1; }
+50% { opacity: 0; }
+}
+
+.section1-dynamic-counter img {
+width: 50px;
+height: 50px;
+animation: flash 2s infinite;
+}
+#counter{
+margin: 0;
+font-family: orbitron;
+}
+.section1-parent-container2{
+position: absolute;
+bottom: 5%;
+left: 5%;
+color: white;
+}
+.section1-parent-container2 h3{
+font-family: montserrat;
+font-weight: 500;
+margin: 0;
+}
+.section1-parent-container2 a{
+font-family: montserrat;
+font-weight: 200;
+}
+
+
+
+#section2{
+min-height: 100vh;
+width: 100vw;
+}
+#section3{
+min-height: 100vh;
+width: 100vw;
+}
+
+
+
+
+.card {
+width: 40%;
+background: rgb(20, 20, 20);
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+text-align: center;
+position: relative;
+justify-self: center;
+}
+
+
+.dropdown-content {
+max-height: 0;
+overflow: hidden;
+margin-top: 10px;
+padding: 0 10px;
+border-top: 1px solid #ddd;
+text-align: left;
+transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+.dropdown-content.show {
+max-height: 200vh;
+padding: 10px;
+}
+.dropdownContentButtonContainer{
+text-align: center;
+justify-content: center;
+gap: 2%;
+}
+.content-btn {
+color: white;
+position: relative;
+text-decoration: none;
+border: none;
+padding: 3px;
+background-color: transparent;
+transition: all 0.5s ease;
+font-family: orbitron;
+font-weight: 400;
+cursor: pointer;
+}
+.content-btn:hover{
+color: rgb(175, 175, 175);
+transition: all 0.5s ease;
+}
+.content-btn:active{
+color: red;
+transition: all 0.5s ease;
+}
+.content-btn::after {
+content: '';
+position: absolute;
+width: 100%;
+transform: scaleX(0);
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: #ff0000;
+transform-origin: bottom right;
+transition: transform 0.25s ease-out;
+}
+.content-btn:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+} 
+.content-btn.active::after {
+color: white;
+content: '';
+position: absolute;
+width: 100%;
+transform: scaleX(1);
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: #ff0000;
+}
+.dynamic-content {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0; 
+  padding: 0; 
+  border-radius: 5px;
+  transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, visibility 0.3s, margin 0.3s, padding 0.3s;
+}
+
+.dynamic-content.show {
+  opacity: 1;
+  visibility: visible;
+  max-height: 200vh;
+  margin-top: 10px;
+  padding: 10px; 
+}
+
+
+
+
+
+
+
+
+.CardHeader h2{
+font-family: orbitron;
+color: white;
+}
+
+.card-content-column{
+display: block;
+background-color: #0f0f0f;
+padding: 2%;
+border-radius: 5px;
+margin-top: 5px;
+}
+.card-content-text-1-row{
+display: flex;
+color: rgb(56, 56, 56);
+height: 20px;
+justify-content: space-between;
+padding: 0 5% 0 5%;
+}
+.card-content-text-2-row{
+display: flex;
+color: white;
+justify-content: space-between;
+padding: 0 7% 0 7%;
+}
+
+.a-class-012{
+color: white;
+font-size: 1.2em;
+border-bottom: solid 2px rgb(255, 28, 28);
+padding: 2px;
+}
+.a-class-013{
+padding-left: 2%;
+color: gray;
+font-size:.8em;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+<section id="section1">
+<div class="section-1-front-image">
+<img src="resources/images/fp-img-1031-kai-havertz-png-unlimited.png" alt="frontpageimg">
+</div>
+        <div class="section1-parent-container1">
+                <div class="section1-parent-header-container" style="display: flex;">
+                <h2 style="font-family: zendots;">1X2</h2><h2 style="font-family: lexendzettabold;">S</h2>
+                </div>
+            <h1 style="margin: 0;">Stats <span style="color: red;">Don't</span> Lie</h1>
+            <div class="section1-dynamic-counter">
+            <h1 id="counter">0</h1><img src="resources/images/upg-image-icon-refresh-12903-unlimited.png">
+            </div>
+            <h2 style="font-family: inter;">Made From <span style="border-bottom: solid 2px red;">Precision</span> Betting</h2>
+            <a style="color: gray; font-family: montserrat;">*Last 12 Months</a>
+        </div>
+        <div class="section1-parent-container2">
+            <h3>♡ 4 The Game</h3>
+            <a>Supporting Clubs and Fans</a>
+        </div>
+
+</div>
+<script>
+        let targetNumber = 30912;
+        let currentNumber = 0;
+        let increment = Math.ceil(targetNumber / 100); // Adjust speed
+
+        function updateCounter() {
+            currentNumber += increment;
+            if (currentNumber > targetNumber) {
+                currentNumber = targetNumber;
+            }
+            document.getElementById("counter").textContent = currentNumber.toLocaleString() + "$";
+            if (currentNumber < targetNumber) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+        updateCounter();
+</script>
+</section>
+
+
+<section id="section2">
+</section>
+
+
+
+<section id="section3">
+
+
+    <div class="card" id="card1">
+        <div class="CardHeader" style="display: flex;">
+            <h2>Arsenal</h2>
+            <h2 style="padding: 0 1% 0 1%;">v</h2>
+            <h2>Newcastle FC</h2>
+        </div>
+        <button class="dropdown-btn" onclick="toggleDropdown('card1')">Show More</button>
+        <div class="dropdown-content" id="dropdownContent-card1">
+            <div class="dropdownContentButtonContainer" style="display: flex;">
+                <button class="content-btn" onclick="showContent('content1-card1', this, 'card1')">Stats</button>
+                <button class="content-btn" onclick="showContent('content2-card1', this, 'card1')">Tips</button>
+                <button class="content-btn" onclick="showContent('content3-card1', this, 'card1')">Reviews</button>
+            </div>
+            <div id="content1-card1" class="dynamic-content">
+                <div class="card-content-column">
+                    <a class="a-class-012">H2H</a><a class="a-class-013">Last 5 Encounters</a>
+                    <div class="card-content-text-1-row">
+                        <p>Home</p><p>Draw</p><p>Away</p>
+                    </div>
+                    <div class="card-content-text-2-row">
+                        <p>0</p><p>1</p><p>12</p>
+                    </div>
+                </div>
+
+ 
+            </div>
+            <div id="content2-card1" class="dynamic-content">
+            </div>
+            <div id="content3-card1" class="dynamic-content">
+            <p>BroadBandbitch</p>
+            </div>
+    </div>
+
+    
+
+
+
+</section>
+
+
+    <script>
+        function toggleDropdown(cardId) {
+            var content = document.getElementById("dropdownContent-" + cardId);
+            var button = document.querySelector("#" + cardId + " .dropdown-btn");
+
+            if (content.classList.contains("show")) {
+                content.classList.remove("show");
+                button.textContent = "Show More";
+            } else {
+                content.classList.add("show");
+                button.textContent = "Show Less";
+            }
+        }
+
+        function showContent(contentId, btn, cardId) {
+            // Hide all dynamic content sections inside this specific card
+            document.querySelectorAll("#" + cardId + " .dynamic-content").forEach(div => {
+                div.classList.remove('show');
+            });
+
+            // Show the selected content
+            document.getElementById(contentId).classList.add('show');
+
+            // Remove active class from all buttons inside this card
+            document.querySelectorAll("#" + cardId + " .content-btn").forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Add active class to the clicked button
+            btn.classList.add('active');
+        }
+
+
+
+
+
+    </script>
+
+</body>
+</html>
