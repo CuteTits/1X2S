@@ -8,28 +8,31 @@
     <style>
 
 
+
+
 body {
 font-family: Arial, sans-serif;
-display: flex;
-justify-content: center;
-align-items: center;
 background-color: #0f0f0f;
-flex-direction: column;
-gap: 20px;
-padding: 20px;
 overflow-x: hidden;
+width: 100vw;
 }
+
 
 #section1{
 min-height: 100vh;
 width: 100vw;
 }
 
+
 .section-1-front-image {
 position: relative;
-height: 100vh; 
+height: 100vh;
 overflow: hidden;
+width: 100vw;
+top: 0;
+left: 0;
 }
+
 
 .section-1-front-image img {
 width: 100%;
@@ -41,12 +44,20 @@ left: 50%;
 transform: translate(-50%, -50%) scale(1.2);
 will-change: transform;
 }
-
 @media (prefers-reduced-motion: no-preference) {
 .section-1-front-image img {
 transition: transform 0.1s linear;
 }
 }
+@media screen and (max-width: 1080px) {
+.section-1-front-image img {
+height: 100vh;
+width: 100vw;
+object-fit: cover;
+content: url('/resources/images/fp-img-12315-kai-havertz-png-unlimited'); 
+}
+}
+
 
 
 .section1-parent-container1{
@@ -56,10 +67,16 @@ top: 25%;
 left: 25%;
 overflow-x: hidden;
 }
+@media screen and (max-width: 1080px) {
+.section1-parent-container1{
+left: 5%;
+}
+}
 .section1-parent-container1 h1{
 color: white;
 font-size: 5vw;
 font-family: inter;
+
 
 }
 .section1-dynamic-counter{
@@ -87,6 +104,9 @@ font-weight: 200;
 
 
 
+
+
+
 #section2{
 min-height: 100vh;
 width: 100vw;
@@ -95,6 +115,10 @@ width: 100vw;
 min-height: 100vh;
 width: 100vw;
 }
+
+
+
+
 
 
 
@@ -110,7 +134,7 @@ text-align: center;
 position: relative;
 justify-self: center;
 overflow: hidden;
-border-left: SOLID 10PX RED;
+border-left: SOLID 10PX rgb(240, 36, 36);
 }
 @media screen and (max-width: 1010px) {
 .card{
@@ -134,16 +158,22 @@ font-size: 1vw;
 
 
 
+
+
+
 .dropdown-btn {
-width: 50px; 
+width: 50px;
 height: 50px;
-cursor: pointer; 
+cursor: pointer;
 transition: transform 0.5s ease;
 }
+
 
 .dropdown-btn.rotate {
 transform: rotate(180deg);
 }
+
+
 
 
 .dropdown-content {
@@ -197,7 +227,7 @@ transition: transform 0.25s ease-out;
 .content-btn:hover::after {
 transform: scaleX(1);
 transform-origin: bottom left;
-} 
+}
 .content-btn.active::after {
 color: white;
 content: '';
@@ -214,8 +244,8 @@ opacity: 0;
 visibility: hidden;
 max-height: 0;
 overflow: hidden;
-margin-top: 0; 
-padding: 0; 
+margin-top: 0;
+padding: 0;
 border-radius: 5px;
 transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, visibility 0.3s, margin 0.3s, padding 0.3s;
 }
@@ -224,8 +254,16 @@ opacity: 1;
 visibility: visible;
 max-height: 200vh;
 margin-top: 10px;
-padding: 10px; 
+padding: 10px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -239,6 +277,7 @@ padding: 10px;
 font-size: 3vw;
 }
 }
+
 
 .card-content-column{
 display: block;
@@ -261,6 +300,7 @@ justify-content: space-between;
 padding: 0 7% 0 7%;
 }
 
+
 .a-class-012{
 color: white;
 font-size: 1.2em;
@@ -274,6 +314,8 @@ font-size:.8em;
 }
 
 
+
+
 .card-content-text-3-row{
 display: flex;
 justify-content: space-between;
@@ -282,7 +324,7 @@ margin-top: 2%;
 transition: all 0.5s ease-in-out;
 }
 .card-content-text-3-row:hover {
-transform: scale(1.01); 
+transform: scale(1.01);
 background: rgb(48, 48, 48);
 transition: all 0.5s ease-in-out;
 }
@@ -302,9 +344,86 @@ font-weight: 400;
 }
 
 
+.gemini-text-link{
+background: linear-gradient(to right, rgb(127, 120, 253), rgb(237, 96, 81));
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+
+
+.section2-parent-container-flex-0 {
+    margin-top: 2%;
+display: flex;
+justify-content: space-between; 
+width: 70%; 
+justify-self: center;
+gap: 20px; 
+overflow-x: hidden;
+
+}
+@media screen and (max-width: 1080px) {
+.section2-parent-container-flex-0 {
+width: 90%;
+display: block;
+}
+}
+.section2-parent-container-flex-0 > * {
+position: relative;
+padding: 10px;
+}
+.section2-parent-container-flex-0 > *:not(:last-child)::before {
+content: "";
+position: absolute;
+right: -10%;
+top: 0;
+width: 1px;
+height: 100%;
+background-color: gray;
+}
+
+.section2-content-container-block-0{
+width: 20%;
+}
+@media screen and (max-width: 1080px) {
+.section2-content-container-block-0 {
+width: 90%;
+}
+}
+.section2-content-container-block-0 a{
+font-size: 100%;
+color: #ffffff;
+font-family: montserrat;
+}
+.section2-content-container-block-0 h1{
+font-size: 150%;
+color: #ff3a3a;
+font-family: zendots;
+}
+@media screen and (max-width: 1080px) {
+.section2-content-container-block-0 a {
+font-size: 100%;
+}
+}
+@media screen and (max-width: 1080px) {
+.section2-content-container-block-0 h1 {
+font-size: 70%;
+}
+}
+
+
+.section4{
+height: 100vh;
+}
+
+
+
+
     </style>
 </head>
 <body>
+
 
 <section id="section1">
 <div class="section-1-front-image">
@@ -314,6 +433,7 @@ font-weight: 400;
   let scrollPosition = window.scrollY;
   img.style.transform = `translate(-50%, calc(-50% + ${scrollPosition * 0.3}px)) scale(1.2)`;
 });
+
 
 </script>
 <img src="resources/images/fp-img-1031-kai-havertz-png-unlimited.png" alt="frontpageimg">
@@ -336,9 +456,10 @@ font-weight: 400;
 
 </div>
 <script>
-        let targetNumber = 30912;
+        let targetNumber = 35670;
         let currentNumber = 0;
         let increment = Math.ceil(targetNumber / 100); // Adjust speed
+
 
         function updateCounter() {
             currentNumber += increment;
@@ -355,12 +476,39 @@ font-weight: 400;
 </section>
 
 
+
+
 <section id="section2">
+
+    <div class="section2-parent-container-flex-0">
+        <div class="section2-content-container-block-0" style="display: block;">
+        <img src="/resources/images/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+        <h1>Extensive Sourcing</h1>
+        <a>Stats & Analytics from Trusted Data Sources</span></a>
+        </div>
+        <div class="section2-content-container-block-0" style="display: block;">
+        <img src="/resources/images/equalizer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+        <h1>Data Driven</h1>
+        <a>Predictions Based on Precise Data, Trends and Markets</a>
+        </div>
+        <div class="section2-content-container-block-0" style="display: block;">
+        <img src="/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+        <h1>Match Picks</h1>
+        <a>Exclusively Selected Matches With the Best Odds and Markets</a>
+        </div>
+        <div class="section2-content-container-block-0" style="display: block;">
+        <img src="/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+        <h1>AI Analysis</h1>
+        <a>Manual Analysis Reinforced Using <span class="gemini-text-link">Google Gemini ✦</span></a>
+        </div>
+    </div>
+
 </section>
 
 
 
 <section id="section3">
+
 
 
     <div class="card" id="card1">
@@ -393,15 +541,22 @@ font-weight: 400;
                         <p>Arsenal</p><p>Draw</p><p>Newcastle</p>
                     </div>
                     <div class="card-content-text-2-row">
-                        <p>0</p><p>1</p><p>12</p>
+                        <p>1</p><p>0</p><p>4</p>
                     </div>
                 </div>
                 <div class="card-content-column">
                     <a class="a-class-012">Form</a><a class="a-class-013">Recent 5 Games</a>
                     <div class="card-content-text-2-row">
-                        <p>WWLDW</p><p>WDDWW</p>
+                        <p>WLDDW</p><p>LLWLW</p>
                     </div>
                 </div>
+                <div class="card-content-column">
+                    <a class="a-class-012">Standings</a><a class="a-class-013">Domestic league Standings</a>
+                    <div class="card-content-text-2-row" style="margin-top: 2%;">
+                    <iframe id="sofa-standings-embed-1-61627" src="https://widgets.sofascore.com/embed/tournament/1/season/61627/standings/Premier%20League?widgetTitle=Premier%20League&showCompetitionLogo=true&widgetTheme=dark" style=height:1123px!important;max-width:768px!important;width:100%!important;background-color:transparent; frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
             </div>
 
             <div id="content2-card1" class="dynamic-content">
@@ -432,10 +587,12 @@ font-weight: 400;
     </div>
 </div>
 
-    
+
+   
 <div class="card" id="card2">
     <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
         <img src="/resources/images/laliga.png" width="50px" height="50px">
+
 
         <div class="CardHeader" style="display: flex; flex-direction: column; width: 100%;">
                 <div class="cardtag-container" style="display: flex;" >
@@ -448,6 +605,7 @@ font-weight: 400;
                 </div>
         </div>
              <img src="/resources/images/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.png" class="dropdown-btn" onclick="toggleDropdown('card2')" alt="Dropdown Icon">
+
 
     </div>
         <div class="dropdown-content" id="dropdownContent-card2">
@@ -474,7 +632,9 @@ font-weight: 400;
                 </div>
             </div>
 
+
             <div id="content2-card2" class="dynamic-content">
+
 
                 <div class="card-content-column">
                     <a class="a-class-012">Tips</a><a class="a-class-013">Predictions across all markets</a>
@@ -495,6 +655,7 @@ font-weight: 400;
                     </div>
                 </div>
 
+
             </div>
             <div id="content3-card2" class="dynamic-content">
             <p></p>
@@ -502,14 +663,23 @@ font-weight: 400;
     </div>
 </div>
 
+</section>
+
+<section class="section4">
+
+    <div data-widget-type="entityScores" data-entity-type="league" data-entity-id="7" data-lang="en" data-widget-id="445af449-ba18-4078-947a-e828190631c7" data-use-scrolling-buttons="true" data-theme="dark"></div>
+    <script src="https://widgets.365scores.com/main.js"></script>
+
 
 </section>
+
 
 
     <script>
 function toggleDropdown(cardId) {
     var content = document.getElementById("dropdownContent-" + cardId);
     var image = document.querySelector("#" + cardId + " .dropdown-btn");
+
 
     if (content.classList.contains("show")) {
         content.classList.remove("show");
@@ -520,19 +690,23 @@ function toggleDropdown(cardId) {
     }
 }
 
+
         function showContent(contentId, btn, cardId) {
             // Hide all dynamic content sections inside this specific card
             document.querySelectorAll("#" + cardId + " .dynamic-content").forEach(div => {
                 div.classList.remove('show');
             });
 
+
             // Show the selected content
             document.getElementById(contentId).classList.add('show');
+
 
             // Remove active class from all buttons inside this card
             document.querySelectorAll("#" + cardId + " .content-btn").forEach(button => {
                 button.classList.remove('active');
             });
+
 
             // Add active class to the clicked button
             btn.classList.add('active');
@@ -542,7 +716,16 @@ function toggleDropdown(cardId) {
 
 
 
+
+
+
+
+
     </script>
+
 
 </body>
 </html>
+
+
+
