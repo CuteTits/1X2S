@@ -15,6 +15,8 @@ font-family: Arial, sans-serif;
 background-color: #0f0f0f;
 overflow-x: hidden;
 width: 100vw;
+overflow-x: hidden;
+margin: 0;
 }
 
 
@@ -29,8 +31,6 @@ position: relative;
 height: 100vh;
 overflow: hidden;
 width: 100vw;
-top: 0;
-left: 0;
 }
 
 
@@ -76,9 +76,26 @@ left: 5%;
 color: white;
 font-size: 5vw;
 font-family: inter;
-
+}
+.section1-parent-title-container{
+width: 100%;
+height: auto;
+}
+.section1-parent-title-container h1{
+font-size: 5em;
+}
+@media screen and (max-width: 600px) {
+.section1-parent-title-container h1{
+font-size: 2em;
+}
+}
+@media screen and (max-width: 600px) {
+.section1-parent-title-container h2{
+font-size: 1.5em;
 
 }
+}
+
 .section1-dynamic-counter{
 display: flex;
 }
@@ -354,14 +371,15 @@ background-clip: text;
 
 
 .section2-parent-container-flex-0 {
-    margin-top: 2%;
+margin-top: 2%;
 display: flex;
 justify-content: space-between; 
 width: 70%; 
 justify-self: center;
 gap: 20px; 
+padding: 5px;
 overflow-x: hidden;
-
+overflow: hidden;
 }
 @media screen and (max-width: 1080px) {
 .section2-parent-container-flex-0 {
@@ -385,6 +403,12 @@ background-color: gray;
 
 .section2-content-container-block-0{
 width: 20%;
+transition: all 0.5s ease-in-out;
+}
+.section2-content-container-block-0:hover{
+transform: scale(1.05);
+cursor: pointer;
+transition: all 0.5s ease-in-out;
 }
 @media screen and (max-width: 1080px) {
 .section2-content-container-block-0 {
@@ -439,16 +463,18 @@ height: 100vh;
 <img src="resources/images/fp-img-1031-kai-havertz-png-unlimited.png" alt="frontpageimg">
 </div>
         <div class="section1-parent-container1">
-                <div class="section1-parent-header-container" style="display: flex;">
+            <div class="section1-parent-header-container" style="display: flex;">
                 <h2 style="font-family: zendots;">1X2</h2><h2 style="font-family: lexendzettabold;">S</h2>
-                </div>
+            </div>
+        <div class="section1-parent-title-container">
             <h1 style="margin: 0;">Stats <span style="color: red;">Don't</span> Lie</h1>
             <div class="section1-dynamic-counter">
             <h1 id="counter">0</h1>
             </div>
-            <h2 style="font-family: inter;">Made From <span style="border-bottom: solid 2px red;">Precision</span> Betting</h2>
+            <h2>Made From <span style="border-bottom: solid 2px red;">Precision</span> Betting</h2>
             <a style="color: gray; font-family: montserrat;">*Last 12 Months</a>
         </div>
+    </div>
         <div class="section1-parent-container2">
             <h3>♡ 4 The Game</h3>
             <a>Supporting Clubs and Fans</a>
@@ -509,7 +535,7 @@ height: 100vh;
 
 <section id="section3">
 
-
+<h1 style="justify-self: center; color: white; font-family: orbitron;">Weekly Picks</h1>
 
     <div class="card" id="card1">
     <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
