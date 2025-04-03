@@ -19,6 +19,12 @@ width: 100vw;
 overflow-x: hidden;
 margin: 0;
 }
+::selection {
+background-color: #f74545;
+color: black; 
+opacity: 25%;
+}
+
 ::-webkit-scrollbar {
 width: 8px;
 height: 8px;
@@ -95,12 +101,18 @@ color: white;
 font-size: 5vw;
 font-family: inter;
 }
+.section1-parent-container1 h2{
+font-family: montserrat;
+font-weight: 500;
+margin: 0;
+}
 .section1-parent-title-container{
 width: 100%;
 height: auto;
 }
 .section1-parent-title-container h1{
 font-size: 5em;
+font-family: orbitron;
 }
 @media screen and (max-width: 600px) {
 .section1-parent-title-container h1{
@@ -109,7 +121,7 @@ font-size: 2em;
 }
 @media screen and (max-width: 600px) {
 .section1-parent-title-container h2{
-font-size: 1.5em;
+font-size: 1.8em;
 
 }
 }
@@ -120,21 +132,28 @@ display: flex;
 #counter{
 margin: 0;
 font-family: orbitron;
+font-size: 4em;
 }
+
+
 .section1-parent-container2{
 position: absolute;
 bottom: 5%;
 left: 5%;
 color: white;
 }
+
 .section1-parent-container2 h3{
 font-family: montserrat;
-font-weight: 500;
+font-weight: 200;
 margin: 0;
 }
 .section1-parent-container2 a{
 font-family: montserrat;
-font-weight: 200;
+font-weight: 600;
+color: black;
+background-color: #fa3939;
+padding: 2px;
 }
 
 
@@ -145,7 +164,6 @@ font-weight: 200;
 #section2{
 height: auto;
 width: 100vw;
-padding: 2%;
 }
 #section3{
 min-height: 100vh;
@@ -395,7 +413,7 @@ background-clip: text;
 margin-top: 2%;
 display: flex;
 justify-content: space-between; 
-width: 70%; 
+width: 80%; 
 justify-self: center;
 gap: 20px; 
 padding: 5px;
@@ -418,7 +436,7 @@ position: absolute;
 right: -10%;
 top: 0;
 width: 1px;
-height: 100%;
+height: 70%;
 background-color: gray;
 }
 
@@ -442,12 +460,14 @@ margin-top: 5px;
 }
 }
 .section2-content-container-block-0 a{
-font-size: 100%;
+font-size: 15px;
 color: #ffffff;
 font-family: montserrat;
 }
 .section2-content-container-block-0 h1{
-font-size: 150%;
+font-size: 17px;
+padding: 0;
+margin: 0;
 color: #ff3a3a;
 font-family: orbitron;
 }
@@ -496,7 +516,7 @@ padding: 50px 20px 20px 20px;
 </div>
         <div class="section1-parent-container1">
             <div class="section1-parent-header-container" style="display: flex;">
-                <h2 style="font-family: zendots;">1X2</h2><h2 style="font-family: lexendzettabold;">S</h2>
+                <h2 style="font-family: zendots;">1X2S</h2>
             </div>
         <div class="section1-parent-title-container">
             <h1 style="margin: 0;">Stats <span style="color: red;">Don't</span> Lie</h1>
@@ -566,13 +586,18 @@ padding: 50px 20px 20px 20px;
 
 <section id="section3">
 
-<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 5%;">News</h1>
+    <div class="section-cfg-divider" style=" margin-top: 5%; width: 70%; border-bottom: solid 1px rgb(241, 82, 82); justify-self: center;"></div>
+
+<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 1%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px; text-align: center;">News</h1>
 
 <div class="c-container-for-section-flex-0">
 <rssapp-carousel id="tcqyVfGLmXyUV6FC"></rssapp-carousel><script src="https://widget.rss.app/v1/carousel.js" type="text/javascript" async></script>
 </div>
 
-<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 5%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px; text-align: center;">Weekly Picks</h1>
+    <div class="section-cfg-divider" style=" margin-top: 5%; width: 70%; border-bottom: solid 1px rgb(241, 82, 82); justify-self: center;"></div>
+
+
+<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 1%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px; text-align: center;">Weekly Picks</h1>
 
     <div class="card" id="card1">
     <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
