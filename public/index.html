@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expandable Card with Active Button Styling</title>
+    <link rel="icon" href="/resources/images/logo.png">
+    <title>1X2S</title>
     <link rel="stylesheet" href="fonts.css">
     <style>
 
@@ -17,6 +18,23 @@ overflow-x: hidden;
 width: 100vw;
 overflow-x: hidden;
 margin: 0;
+}
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+::-webkit-scrollbar-track {
+background: #0f0f0f;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+background: #f75454;
+border-radius: 10px;
+transition: all 0.5s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #ff2e2e;
+transition: all 0.5s ease-in-out;
 }
 
 
@@ -125,8 +143,9 @@ font-weight: 200;
 
 
 #section2{
-min-height: 100vh;
+height: auto;
 width: 100vw;
+padding: 2%;
 }
 #section3{
 min-height: 100vh;
@@ -141,6 +160,7 @@ width: 100vw;
 
 
 .card {
+bottom: 0;
 margin-top: 2%;
 width: 40%;
 background: rgb(20, 20, 20);
@@ -423,7 +443,8 @@ font-family: montserrat;
 .section2-content-container-block-0 h1{
 font-size: 150%;
 color: #ff3a3a;
-font-family: zendots;
+font-family: orbitron;
+text-shadow: 0 0 5px #ff3a3a, 0 0 12px #4b1e1e;
 }
 @media screen and (max-width: 1080px) {
 .section2-content-container-block-0 a {
@@ -442,7 +463,13 @@ height: 100vh;
 }
 
 
-
+.c-container-for-section-flex-0{
+width: 70%;
+justify-self: center;
+border-radius: 15px;
+background-color: rgb(19, 19, 19);
+padding: 50px 20px 20px 20px;
+}
 
     </style>
 </head>
@@ -532,10 +559,15 @@ height: 100vh;
 </section>
 
 
-
 <section id="section3">
 
-<h1 style="justify-self: center; color: white; font-family: orbitron;">Weekly Picks</h1>
+<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 5%;">News</h1>
+
+<div class="c-container-for-section-flex-0">
+<rssapp-carousel id="tcqyVfGLmXyUV6FC"></rssapp-carousel><script src="https://widget.rss.app/v1/carousel.js" type="text/javascript" async></script>
+</div>
+
+<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 5%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px;">Weekly Picks</h1>
 
     <div class="card" id="card1">
     <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
@@ -692,9 +724,7 @@ height: 100vh;
 </section>
 
 <section class="section4">
-
-    <div data-widget-type="entityScores" data-entity-type="league" data-entity-id="7" data-lang="en" data-widget-id="445af449-ba18-4078-947a-e828190631c7" data-use-scrolling-buttons="true" data-theme="dark"></div>
-    <script src="https://widgets.365scores.com/main.js"></script>
+  
 
 
 </section>
