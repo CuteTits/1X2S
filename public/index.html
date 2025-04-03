@@ -107,12 +107,13 @@ font-family: inter;
 }
 .section1-parent-container1 h2{
 font-family: montserrat;
-font-weight: 500;
-margin: 0;
+margin: 1px;
+font-size: 2em;
 }
 .section1-parent-title-container{
 width: 100%;
 height: auto;
+overflow: hidden;
 }
 .section1-parent-title-container h1{
 font-size: 5em;
@@ -126,7 +127,6 @@ font-size: 2em;
 @media screen and (max-width: 600px) {
 .section1-parent-title-container h2{
 font-size: 1.2em;
-
 }
 }
 
@@ -138,7 +138,11 @@ margin: 0;
 font-family: orbitron;
 font-size: 300%;
 }
-
+@media screen and (max-width: 600px) {
+#counter{
+font-size: 2em;
+}
+}
 
 .section1-parent-container2{
 position: absolute;
@@ -189,22 +193,30 @@ justify-content: center;
 bottom: 0;
 margin-top: 2%;
 width: 40%;
-background: rgb(20, 20, 20);
 padding: 5px;
-border-radius: 8px;
+border-radius: 2px;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 text-align: center;
 position: relative;
 justify-self: center;
 justify-self: center;
 overflow: hidden;
-border-left: SOLID 10PX rgb(240, 36, 36);
+border-left: SOLID 5PX rgb(240, 36, 36);
+background: #111111;
+transition: all 0.5s ease;
+}
+.card:hover{
+transition: all 0.5s ease;
+background: #1a1a1a;
 }
 @media screen and (max-width: 1010px) {
 .card{
 width: 90%;
 }
 }
+
+
+
 .cardtag-container h2{
 margin: 0;
 font-family: orbitron;
@@ -508,11 +520,22 @@ padding: 50px 20px 20px 20px;
 
 .section-cfg-divider{
 width: 80%;
-border-bottom: solid 1px #f54e4e;
+border-bottom: solid 1px #2c2c2c;
 margin-top: 2%;
 margin-bottom: 2%;
 justify-self: center;
 }
+
+.page-title-undefined-3{
+justify-self: center; 
+color: white; 
+font-family: orbitron; 
+margin-top: 1%; 
+width: auto; 
+text-align: center;
+border-bottom: solid 5px #f74545;
+}
+
 
 
     </style>
@@ -542,8 +565,7 @@ justify-self: center;
             <div class="section1-dynamic-counter">
             <h1 id="counter">0</h1>
             </div>
-            <h2>Made From <span style="border-bottom: solid 2px red;">Precision</span> Betting</h2>
-            <a style="color: gray; font-family: montserrat;">*Last 12 Months</a>
+            <h2>Made From <span style="border-bottom: solid 5px red;">Precision</span> Betting</h2>
         </div>
     </div>
         <div class="section1-parent-container2">
@@ -607,7 +629,7 @@ justify-self: center;
 
     <div class="section-cfg-divider" ></div>
 
-<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 1%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px; text-align: center;">News</h1>
+<h1 class="page-title-undefined-3">News</h1>
 
 <div class="c-container-for-section-flex-0">
 <rssapp-carousel id="tcqyVfGLmXyUV6FC"></rssapp-carousel><script src="https://widget.rss.app/v1/carousel.js" type="text/javascript" async></script>
@@ -616,7 +638,7 @@ justify-self: center;
     <div class="section-cfg-divider"></div>
 
 
-<h1 style="justify-self: center; color: white; font-family: orbitron; margin-top: 1%; width: 70%; background-color: #131212; border-radius: 15px; padding: 20px; text-align: center;">Weekly Picks</h1>
+<h1 class="page-title-undefined-3">Weekly Picks</h1>
 
     <div class="card" id="card1">
     <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
