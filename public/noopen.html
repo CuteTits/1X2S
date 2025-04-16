@@ -1,0 +1,499 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    
+
+
+
+
+.card {
+bottom: 0;
+margin-top: 2%;
+width: 40%;
+padding: 5px;
+border-radius: 2px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+text-align: center;
+position: relative;
+justify-self: center;
+justify-self: center;
+overflow: hidden;
+background: #111111;
+transition: all 0.5s ease;
+border-left: SOLID 5PX transparent;
+
+}
+.card:hover{
+transition: all 0.5s ease;
+background: #1a1a1a;
+border-left: SOLID 5PX rgb(240, 36, 36);
+}
+@media screen and (max-width: 1080px) {
+.card{
+width: 90%;
+}
+}
+
+
+
+.contextheader1{
+margin: 0;
+font-family: orbitron;
+font-weight: 600;
+color: rgb(27, 27, 27);
+font-size: .8vw;
+background-color: #f82a2a;
+padding: 2px;
+}
+.contextheader2{
+margin: 2px;
+font-family: orbitron;
+font-weight: 500;
+color: rgb(88, 88, 88);
+font-size: .6vw;
+padding: 2px;
+}
+@media screen and (max-width: 1080px) {
+.contextheader1{
+font-size: 1.5vw;
+}
+}
+@media screen and (max-width: 1080px) {
+.contextheader2{
+font-size: 1.2vw;
+}
+}
+
+
+
+.cardheader-container h2{
+margin: 0;
+font-family: orbitron;
+color: white;
+font-size: 1vw;
+}
+
+
+
+
+
+
+.dropdown-btn {
+width: 50px;
+height: 50px;
+cursor: pointer;
+transition: transform 0.5s ease;
+}
+
+
+.dropdown-btn.rotate {
+transform: rotate(180deg);
+}
+
+
+
+
+.dropdown-content {
+max-height: 0;
+overflow: hidden;
+margin-top: 10px;
+padding: 0 10px;
+border-top: 0 solid #242424;
+text-align: left;
+transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+.dropdown-content.show {
+max-height: 200vh;
+border-top-width: 1px;
+transition: all 0.5s ease-in-out;
+padding: 10px;
+}
+.dropdownContentButtonContainer{
+text-align: center;
+justify-content: center;
+gap: 2%;
+}
+.content-btn {
+color: white;
+position: relative;
+text-decoration: none;
+border: none;
+padding: 3px;
+background-color: transparent;
+transition: all 0.5s ease;
+font-family: orbitron;
+font-weight: 400;
+cursor: pointer;
+}
+.content-btn:active{
+color: red;
+transition: all 0.5s ease;
+}
+.content-btn::after {
+content: '';
+position: absolute;
+width: 100%;
+transform: scaleX(0);
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: #ff0000;
+transform-origin: bottom right;
+transition: transform 0.25s ease-out;
+}
+.content-btn:hover::after {
+transform: scaleX(1);
+transform-origin: bottom left;
+}
+.content-btn.active::after {
+color: white;
+content: '';
+position: absolute;
+width: 100%;
+transform: scaleX(1);
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: #ff0000;
+}
+.dynamic-content {
+opacity: 0;
+visibility: hidden;
+max-height: 0;
+overflow: hidden;
+margin-top: 0;
+padding: 0;
+border-radius: 5px;
+transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out, visibility 0.3s, margin 0.3s, padding 0.3s;
+}
+.dynamic-content.show {
+opacity: 1;
+visibility: visible;
+max-height: 200vh;
+margin-top: 10px;
+padding: 10px;
+}
+
+
+@media screen and (max-width: 1080px) {
+.CardHeader h2{
+font-size: 3vw;
+}
+}
+
+
+.card-content-column{
+display: block;
+background-color: #0f0f0f;
+padding: 2%;
+border-radius: 5px;
+margin-top: 2%;
+}
+.card-content-text-1-row{
+display: flex;
+color: rgb(56, 56, 56);
+height: 20px;
+justify-content: space-between;
+padding: 0 5% 0 5%;
+}
+.card-content-text-2-row{
+display: flex;
+color: white;
+justify-content: space-between;
+padding: 0 7% 0 7%;
+}
+
+
+.a-class-012{
+color: white;
+font-size: 1.2em;
+border-bottom: solid 2px rgb(255, 28, 28);
+padding: 2px;
+}
+.a-class-013{
+padding-left: 2%;
+color: gray;
+font-size:.8em;
+}
+
+
+
+
+.card-content-text-3-row{
+display: flex;
+justify-content: space-between;
+background: rgb(31, 31, 31);
+margin-top: 2%;
+transition: all 0.5s ease-in-out;
+}
+.card-content-text-3-row:hover {
+transform: scale(1.01);
+background: rgb(48, 48, 48);
+transition: all 0.5s ease-in-out;
+}
+.row-pretag-3{
+color: #ddd;
+margin:2%;
+font-family: orbitron;
+}
+.row-subtag-3{
+background-color: rgb(255, 34, 34);
+padding:  2px 10px 2px 10px;
+border-radius: 50px;
+color: rgb(14, 14, 14);
+margin:2%;
+font-family: montserrat;
+font-weight: 600;
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section3-container-content-flex-defined-0">
+    <h1 class="page-title-undefined-3">Weekly Picks</h1>
+</div>
+
+    <div class="card" id="card1">
+    <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
+        <img src="/resources/images/ucl1.png" width="50px" height="50px">
+
+        <div class="CardHeader" style="display: flex; flex-direction: column; width: 100%;">
+                <div class="cardtag-container" style="display: flex;" >
+                    <a class="contextheader1">Champions League</a><a class="contextheader2">QTRF Leg. 2</a>
+                </div>
+                <div class="cardheader-container" style="display: flex; width: 100%;" >
+                    <h2>Real Madrid</h2>
+                    <h2 style="padding: 0 1% 0 1%;">v</h2>
+                    <h2>Arsenal</h2>
+                </div>
+        </div>
+             <img src="/resources/images/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.png" class="dropdown-btn" alt="Dropdown Icon"   onclick="toggleDropdown('card1')">
+
+    </div>
+        <div class="dropdown-content" id="dropdownContent-card1">
+            <div class="dropdownContentButtonContainer" style="display: flex;">
+                <button class="content-btn" onclick="showContent('content1-card1', this, 'card1')">Stats</button>
+                <button class="content-btn" onclick="showContent('content2-card1', this, 'card1')">Tips</button>
+                <button class="content-btn" onclick="showContent('content3-card1', this, 'card1')">Prob</button>
+            </div>
+            <div id="content1-card1" class="dynamic-content">
+                <div class="card-content-column">
+                    <a class="a-class-012">H2H</a><a class="a-class-013">Last (4) Encounters</a>
+                    <div class="card-content-text-1-row">
+                        <p>Real Madrid</p><p>Draw</p><p>Arsenal</p>
+                    </div>
+                    <div class="card-content-text-2-row">
+                        <p>1</p><p>1</p><p>2</p>
+                    </div>
+                </div>
+                <div class="card-content-column">
+                    <a class="a-class-012">Form</a><a class="a-class-013">Recent 5 Games</a>
+                    <div class="card-content-text-2-row">
+                        <p>WLDDW</p><p>LLWLW</p>
+                    </div>
+                </div>
+                <div class="card-content-column">
+                    <a class="a-class-012">Standings</a><a class="a-class-013">Domestic league Standings</a>
+                    <div class="card-content-text-2-row" style="margin-top: 2%;">
+                    <iframe id="sofa-standings-embed-1-61627" src="https://widgets.sofascore.com/embed/tournament/1/season/61627/standings/Premier%20League?widgetTitle=Premier%20League&showCompetitionLogo=true&widgetTheme=dark" style=height:1123px!important;max-width:768px!important;width:100%!important;background-color:transparent; frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="content2-card1" class="dynamic-content">
+
+                <div class="card-content-column">
+                    <a class="a-class-012">Tips</a><a class="a-class-013">Predictions across all markets</a>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">FT</p><p class="row-subtag-3">Arsenal or Draw</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">BTTS</p><p class="row-subtag-3">yes</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">xG</p><p class="row-subtag-3">1.5</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">Both to Recieve a Card</p><p class="row-subtag-3">Yes</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">tot. Corners</p><p class="row-subtag-3">Over 8</p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="content3-card1" class="dynamic-content">
+
+                <div class="card-content-column">
+                    <a class="a-class-012">Probability</a><a class="a-class-013">Odds Probability market</a>
+                    <div class="card-content-container-flex"></div>
+                </div>            
+            
+        </div>
+    </div>
+</div>
+
+
+   
+<div class="card" id="card2">
+    <div class="card-header-parent-container" style="display: flex; flex-direction: row;">
+        <img src="/resources/images/laliga.png" width="50px" height="50px" >
+
+
+        <div class="CardHeader" style="display: flex; flex-direction: column; width: 100%;">
+                <div class="cardtag-container" style="display: flex;" >
+                    <a class="contextheader1">LaLiga</a><a class="contextheader2">QTRF Leg. 2</a>
+                </div>
+                <div class="cardheader-container" style="display: flex; width: 100%;" >
+                    <h2>Rayo Vallecano</h2>
+                    <h2 style="padding: 0 1% 0 1%;">v</h2>
+                    <h2>Real Madrid</h2>
+                </div>
+        </div>
+             <img src="/resources/images/keyboard_arrow_down_24dp_000000_FILL0_wght400_GRAD0_opsz24.png" class="dropdown-btn" alt="Dropdown Icon"  onclick="toggleDropdown('card2')">
+
+
+    </div>
+        <div class="dropdown-content" id="dropdownContent-card2">
+            <div class="dropdownContentButtonContainer" style="display: flex;">
+                <button class="content-btn" onclick="showContent('content1-card2', this, 'card2')">Stats</button>
+                <button class="content-btn" onclick="showContent('content2-card2', this, 'card2')">Tips</button>
+                <button class="content-btn" onclick="showContent('content3-card2', this, 'card2')">Reviews</button>
+            </div>
+            <div id="content1-card2" class="dynamic-content">
+                <div class="card-content-column">
+                    <a class="a-class-012">H2H</a><a class="a-class-013">Last 5 Encounters</a>
+                    <div class="card-content-text-1-row">
+                        <p>Rayo</p><p>Draw</p><p>Real</p>
+                    </div>
+                    <div class="card-content-text-2-row">
+                        <p>0</p><p>1</p><p>12</p>
+                    </div>
+                </div>
+                <div class="card-content-column">
+                    <a class="a-class-012">Form</a><a class="a-class-013">Recent 5 Games</a>
+                    <div class="card-content-text-2-row">
+                        <p>WWLDW</p><p>WDDWW</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="content2-card2" class="dynamic-content">
+
+
+                <div class="card-content-column">
+                    <a class="a-class-012">Tips</a><a class="a-class-013">Predictions across all markets</a>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">FT</p><p class="row-subtag-3">Real Madrid</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">BTTS</p><p class="row-subtag-3">No</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">xG</p><p class="row-subtag-3">2.5</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">Both to Recieve a Card</p><p class="row-subtag-3">Yes</p>
+                    </div>
+                    <div class="card-content-text-3-row">
+                        <p class="row-pretag-3">tot. Corners</p><p class="row-subtag-3">Over 10</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="content3-card2" class="dynamic-content">
+            <p></p>
+            </div>
+    </div>
+</div>
+
+</section>
+
+<section class="section4" id="section4">
+  
+
+    
+</section>
+
+
+
+
+
+
+
+    <script>
+function toggleDropdown(cardId) {
+var content = document.getElementById("dropdownContent-" + cardId);
+var image = document.querySelector("#" + cardId + " .dropdown-btn");
+
+
+if (content.classList.contains("show")) {
+content.classList.remove("show");
+image.classList.remove("rotate");
+} else {
+content.classList.add("show");
+image.classList.add("rotate");
+}
+}
+
+
+function showContent(contentId, btn, cardId) {
+// Hide all dynamic content sections inside this specific card
+document.querySelectorAll("#" + cardId + " .dynamic-content").forEach(div => {
+div.classList.remove('show');
+});
+
+
+// Show the selected content
+document.getElementById(contentId).classList.add('show');
+
+
+// Remove active class from all buttons inside this card
+document.querySelectorAll("#" + cardId + " .content-btn").forEach(button => {
+button.classList.remove('active');
+});
+
+
+// Add active class to the clicked button
+btn.classList.add('active');
+}
+
+
+if ('scrollRestoration' in history) {
+history.scrollRestoration = 'manual';
+}
+
+</script>

@@ -1,0 +1,138 @@
+/*----- Navbar -----*/
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 100;
+padding-top: 2vh;
+transition: background-color 0.3s ease;
+color: white;
+backdrop-filter: none; 
+-webkit-backdrop-filter: none; 
+justify-content: center;
+text-align: center;
+align-content: center;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
+margin: 0 auto;
+text-align: center;
+display: flex;
+justify-content: center;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content  {
+position: absolute;
+left: 1%;
+top: 20%;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content img {
+width: 3vw;
+transition:smooth, 1.2s;
+}
+
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul {
+list-style-type: none; 
+display: flex; 
+justify-content: center; 
+gap: 10px;
+justify-self: center;
+text-align: center;
+padding: 0;
+}
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a {
+color: white; 
+text-decoration: none; 
+padding: 10px 20px; 
+font-family: montserrat;
+font-weight: 500;
+transition: background-color 0.3s; 
+font-size: 100%;
+transition: all 1s ease;
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a:hover {
+color: red; 
+transition: all 1s ease;
+}
+
+
+
+
+.Navigational-header-expanding-element-dynamic-0{
+border-bottom:  3px solid rgb(253, 67, 67);
+opacity: 25%;
+transition: width 0.5s ease; 
+position: relative;
+margin-top: 10px;
+justify-self: center;
+align-self: center;
+align-content: center;
+
+}
+.Navigational-header-expanding-element-dynamic-0-container{
+display: flex;
+justify-content: center; 
+align-items: center; 
+overflow: hidden;
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter:blur(10px);
+}
+
+
+
+
+.navigation-menu-desktop-buttons-user-options{
+position: absolute;
+right: 5%;
+top: 30%;
+display: flex;
+gap: 15px;
+}
+.loginbtn {
+overflow: hidden;
+font-family: montserrat;
+border-bottom: solid transparent 1px;
+font-size: 90%;
+transition: all 1s ease;
+margin: 5px;
+}
+.loginbtn a{
+text-decoration: none;
+color: white;
+font-size: 20px;
+}
+.loginbtn:hover{
+transition: all 1s ease;
+}
+
+
+.signupbtn {
+overflow: hidden;
+font-family: montserrat;
+border-bottom: solid transparent 1px;
+font-size: 90%;
+transition: all 1s ease;
+background-color: white;
+border: solid 1px white ;
+padding: 5px;
+border-radius: 5px;
+}
+.signupbtn a{
+text-decoration: none;
+color: rgb(19, 19, 19);
+font-size: 20px;
+transition: all 1s ease;
+}
+.signupbtn:hover{
+transition: all 1s ease;
+background-color: transparent;
+}
+.signupbtn:hover a{
+transition: all 1s ease;
+color: white;
+}
