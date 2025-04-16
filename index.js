@@ -35,7 +35,6 @@ app.get('/navbar.html', (req, res) => {
     res.send(data);
   });
 });
-
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
