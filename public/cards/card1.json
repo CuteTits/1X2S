@@ -1,0 +1,20 @@
+{
+  "title": "WED 16",
+  "name1": "Real Madrid",
+  "name2": "Arsenal",
+  "image": "/resources/images/ucl.png",
+  "details": [
+    "FT: Arsenal",
+    "Correct Score: 1-2",
+    "First 10': Over 0.5 Corner(s)",
+    "Total Shots: Over 27.5",
+    "Total Fouls: Over 25.5",
+    "Total Cards: Over 1.5",
+    "Both to Receive a Card: Yes",
+    "Vinicius Jr.: O.SoT 0.5",
+    "B. Saka: O.SoT 0.5",
+    "Goals Before 22': No",
+    "Both to Score in 2nd: Yes"
+  ],
+  "odds": "215x"
+}
