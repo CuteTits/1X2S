@@ -250,13 +250,12 @@ background-clip: text;
 
 .section2-parent-container-flex-0 {
 display: flex;
-justify-content: space-between; 
-width: 80%; 
-justify-self: center;
-gap: 20px; 
-padding: 10px;
-overflow-x: hidden;
-overflow: hidden;
+justify-content: space-between;  /* Distribute items with space in between */
+width: 80%;                      /* Container takes 80% of the parent width */
+margin: 0 auto;                  /* Center the container itself */
+gap: 20px;                       /* Adds space between the flex items */
+padding: 10px;                   /* Padding inside the container */
+overflow: hidden;                /* Hides any overflow content */
 }
 @media screen and (max-width: 1080px) {
 .section2-parent-container-flex-0 {
@@ -330,31 +329,28 @@ font-size: 100%;
 
 
 
-.c-container-for-section-flex-0{
-width: 70%;
-justify-self: center;
-border-radius: 15px;
-background-color: rgb(19, 19, 19);
-padding: 50px 20px 20px 20px;
-}
 
 
-
-.section-cfg-divider{
+.section-cfg-divider {
 width: 80vw;
 border-bottom: solid 1px #2c2c2c;
-justify-self: center;
-padding: 50px 0 50px 0;
+padding: 50px 0;
+margin: 0 auto; 
+box-sizing: border-box; 
 }
 
-.page-title-undefined-3{
-justify-self: center; 
-color: white; 
-font-family: orbitron; 
-margin: 1% 0 0 0; 
-width: 90vw; 
+.page-title-undefined-3 {
+color: white;
+font-family: 'Orbitron', sans-serif; 
+margin: 1% 0 0 0;
+width: 90vw;
 text-align: center;
 border-bottom: solid 5px #f74545;
+display: flex;
+justify-content: center; 
+align-items: center; 
+margin: 1% auto; 
+box-sizing: border-box; 
 }
 
 
@@ -369,18 +365,17 @@ margin: auto;
 overflow: visible;
 }
 
-
 .carousel-track {
-justify-self: center;
 display: flex;
 gap: 1rem;
 overflow-x: auto;
 scroll-behavior: smooth;
-padding: 40px; 
+padding: 40px;
 width: 100%;
 overflow: hidden;
+justify-content: center; 
+align-items: center; 
 }
-
 .carousel-card {
 position: relative;
 width: 20vw;
