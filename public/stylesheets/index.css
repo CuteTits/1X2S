@@ -5,7 +5,6 @@ overflow-x: hidden;
 width: 100%;
 margin: 0;
 justify-items: center;
-justify-items: center;
 scroll-behavior: smooth;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
@@ -50,43 +49,22 @@ transition: all 0.5s ease-in-out;
 
 
 .section-1-front-image {
-  height: 100dvh;
-  overflow: hidden;
-  width: 100vw;
-  position: relative;
-  z-index: 0;
+height: 100dvh;
+overflow: hidden;
+width: 100vw;
+z-index: 0;
 }
-
-.bg-image-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100dvh;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+.section-1-front-image img {
+width: 100%;
+height: auto;
+position: fixed;
+top: 50%;
+opacity: 15%;
+left: 50%;
+transform: translate(-50%, -50%) scale(1.2);
+will-change: transform;
+z-index: 1;
 }
-
-.bg-image-wrapper img {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.2);
-  opacity: 0.15;
-  will-change: transform;
-}
-@media (hover: none) and (pointer: coarse) {
-  .bg-image-wrapper {
-    position: absolute; /* no longer fixed on iOS */
-  }
-}
-
-
-
-
 @media (prefers-reduced-motion: no-preference) {
 .section-1-front-image img {
 transition: transform 0.1s linear;
@@ -225,7 +203,7 @@ gap: 5px;
 #section1{
 background: #050505;
 min-height: 100dvh;
-width: 100vw;
+width: 100%;
 justify-items: center;
 justify-content: center;
 display: flex;
@@ -237,7 +215,7 @@ position: relative;
 background-color:#050505 ;
 display: block;
 height: auto;
-width: 100vw;
+width: 100%;
 justify-items: center;
 justify-content: center;
 align-items: center;
@@ -247,7 +225,7 @@ position: relative;
 #section3{
 background-color:#050505 ;
 min-height: 200dvh;
-width: 100vw;
+width: 100%;
 justify-items: center;
 justify-content: center;
 z-index: 5;
@@ -572,14 +550,7 @@ object-fit: contain;
 flex-shrink: 0;
 }
 
-@keyframes scroll {
-0% {
-transform: translateX(0);
-}
-100% {
-transform: translateX(-50%);
-}
-}
+
 
 
 
