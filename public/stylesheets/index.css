@@ -16,7 +16,6 @@ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-outline: 1px solid red;
 }
 
 
