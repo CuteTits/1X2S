@@ -337,6 +337,7 @@ border-bottom: solid 1px #2c2c2c;
 padding: 50px 0;
 margin: 0 auto; 
 box-sizing: border-box; 
+
 }
 
 .page-title-undefined-3 {
@@ -370,15 +371,13 @@ display: flex;
 gap: 1rem;
 overflow-x: auto;
 scroll-behavior: smooth;
-padding: 40px;
+padding: 0;
 width: 100%;
-overflow: hidden;
-justify-content: center; 
-align-items: center; 
+
 }
 .carousel-card {
 position: relative;
-width: 20vw;
+width: 400px;
 min-height: 35vw;
 flex: 0 0 auto;
 color: white;
@@ -386,7 +385,7 @@ background: rgb(8, 8, 8);
 border-radius: 15px 0 15px 0;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 padding: 5px;
-transition: transform 0.3s ease; 
+transition: all 0.5s ease;
 transform-origin: center; 
 z-index: 0; 
 }
@@ -394,9 +393,9 @@ z-index: 0;
 background: rgb(8, 8, 8);
 }
 .carousel-card:hover {
-transform: scale(1.05);
 overflow: visible;
-z-index: 1;
+border: solid 2px red;
+transition: all 0.5s ease;
 }
 .carousel-nav {
 position: absolute;
@@ -747,7 +746,7 @@ height: 65vh;
 @media  (max-width: 600px) {
 .carousel-card {
 width: 40vw;
-height: 50dvh;
+min-height: 50dvh;
 }
 .carousel-card-image1 img{
 width: 50px;
@@ -782,11 +781,14 @@ right: -2rem;
 
 @media  (max-width: 480px) {
 .carousel-card {
-width: 60vw;
-height: 45dvh;
+width: 70vw;
+min-height: 45dvh;
+}
+.carousel-card li {
+font-size: .7em;
 }
 .odds{
-font-size: .8em !important;
+font-size: 1em !important;
 padding: 2px 5px 2px 5px !important;
 }
 .odds::before{

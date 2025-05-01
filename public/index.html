@@ -197,7 +197,7 @@
 
 
 <div class="carousel-container">
-    <button class="carousel-nav nav-left" onclick="scrollCarousel(-1)">❮</button>
+    <button class="carousel-nav nav-left" onclick="scrollCarousel(-2)">❮</button>
     <div class="carousel-track" id="carouselTrack">
         <div class="carousel-card" data-src="/cards/card1.json"></div>
         <div class="carousel-card" data-src="/cards/card2.json"></div>
@@ -211,7 +211,7 @@
   <script>
     function scrollCarousel(direction) {
       const track = document.getElementById('carouselTrack');
-      const cardWidth = track.querySelector('.carousel-card').offsetWidth + 16;
+      const cardWidth = track.querySelector('.carousel-card').offsetWidth + 1; 
       track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
     }
     function centerCard(card) {
@@ -254,7 +254,6 @@
       </div>
     `;
 
-    // This must come after the content is added
     const button = card.querySelector('.save-png-button');
     button.addEventListener('click', () => saveCardAsImage(card));
 
@@ -264,7 +263,6 @@
   }
 }
 
-// Define the function outside so it's available
 function saveCardAsImage(card) {
   const button = card.querySelector('.save-png-button');
   button.style.visibility = 'hidden';
