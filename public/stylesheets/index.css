@@ -225,6 +225,7 @@ min-height: 200dvh;
 width: 100vw;
 z-index: 5;
 position: relative;
+align-items: center;
 }
 .section4{
 background-color:#050505 ;
@@ -259,10 +260,11 @@ overflow: hidden;
 }
 @media screen and (max-width: 1080px) {
 .section2-parent-container-flex-0 {
-width: 90%;
-display: block;
+width: 90vw;
+display: grid;
 justify-content: center;
 align-items: center;
+gap: 0;
 justify-items: center;
 }
 .section2-parent-container-flex-0 > *:not(:last-child)::before {
@@ -339,7 +341,7 @@ padding: 50px 20px 20px 20px;
 
 
 .section-cfg-divider{
-width: 80%;
+width: 80vw;
 border-bottom: solid 1px #2c2c2c;
 justify-self: center;
 padding: 50px 0 50px 0;
@@ -349,19 +351,10 @@ padding: 50px 0 50px 0;
 justify-self: center; 
 color: white; 
 font-family: orbitron; 
-margin-top: 1% 0 0 0; 
-width: auto; 
+margin: 1% 0 0 0; 
+width: 90vw; 
 text-align: center;
 border-bottom: solid 5px #f74545;
-}
-
-
-
-
-
-.section4{
-width: 100vw;
-height: 100dvh;
 }
 
 
@@ -887,13 +880,14 @@ font-size: .8em;
 opacity: 100%;
 transition: all 1s ease;
 }
-.section3-element-container{
-display: block;
-justify-content: center;
-width: 90%;
-gap: 10%;
-align-items: center;
-text-align: center;
+.section3-element-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); /* Automatically adjusts columns */
+  justify-items: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  width: 90vw; /* Keeps the grid container width responsive */
+  margin: 0 auto; /* Centers the container on the page */
+  text-align: center;
 }
 .section3-element-container img:hover{
 transform: scale(1.1);
