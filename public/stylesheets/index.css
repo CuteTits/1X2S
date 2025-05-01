@@ -1,23 +1,23 @@
-
-
 html, body {
 font-family: Arial, sans-serif;
 background-color: #050505;
 overflow-x: hidden;
 width: 100%;
 margin: 0;
-padding: 0;
 justify-items: center;
 justify-items: center;
 scroll-behavior: smooth;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
--webkit-text-size-adjust: 100%
+-webkit-text-size-adjust: 100%;
+padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 * {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
+outline: 1px solid red;
+justify-items: center;
 }
 
 
@@ -51,7 +51,7 @@ transition: all 0.5s ease-in-out;
 
 
 .section-1-front-image {
-height: 100svh;
+height: 100dvh;
 overflow: hidden;
 width: 100vw;
 z-index: 0;
@@ -74,7 +74,7 @@ transition: transform 0.1s linear;
 }
 @media screen and (max-width: 1080px) {
 .section-1-front-image img {
-height: 100svh;
+height: 100dvh;
 width: 100vw;
 object-fit: cover;
 content: url('/resources/images/image-city-celebration-limited-png.png.png'); 
@@ -86,7 +86,7 @@ content: url('/resources/images/image-city-celebration-limited-png.png.png');
 .section1-parent-container1{
 color: white;
 position: absolute;
-top:10svh;
+top:10dvh;
 left: 15vw;
 overflow-x: hidden;
 }
@@ -204,7 +204,7 @@ gap: 5px;
 
 #section1{
 background: #050505;
-min-height: 100svh;
+min-height: 100dvh;
 width: 100vw;
 justify-items: center;
 justify-content: center;
@@ -226,7 +226,7 @@ position: relative;
 }
 #section3{
 background-color:#050505 ;
-min-height: 200svh;
+min-height: 200dvh;
 width: 100vw;
 justify-items: center;
 justify-content: center;
@@ -235,7 +235,7 @@ position: relative;
 }
 .section4{
 background-color:#050505 ;
-min-height: 200svh;
+min-height: 200dvh;
 width: 100vw;
 justify-items: center;
 justify-content: center;
@@ -369,7 +369,7 @@ border-bottom: solid 5px #f74545;
 
 .section4{
 width: 100vw;
-height: 100svh;
+height: 100dvh;
 }
 
 
@@ -454,7 +454,7 @@ display: block;
 .carousel-card-image2 img{
 position: absolute;
 opacity: 5%;
-height: 20svh;
+height: 20dvh;
 width: 20vw;
 object-fit: contain;
 bottom: 5%;
@@ -530,7 +530,7 @@ width: 30vw;
 overflow: hidden;
 background: none;
 padding: 20px 0;
-bottom: 2.5svh;
+bottom: 2.5dvh;
 right: 5%;
 -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -627,7 +627,7 @@ width: 90vw;
 .section1-parent-container1{
 color: white;
 position: absolute;
-top:25svh;
+top:25dvh;
 left: 25vw;
 }
 }
@@ -661,7 +661,7 @@ width: 90%;
 @media (max-width: 1080px) {
 .carousel-card {
 width: 40vw;
-height: 50svh;
+height: 50dvh;
 }
 }
 
@@ -716,7 +716,7 @@ width: 90vw;
 .section1-parent-container1 {
 color: white;
 position: absolute;
-top: 15svh;
+top: 15dvh;
 left: 50%;
 width: 90%;
 transform: translateX(-50%);
@@ -733,7 +733,7 @@ align-items: center;
 @media (max-width: 1080px) {
 .carousel-card {
 width: 30vw;
-height: 60svh;
+height: 60dvh;
 }
 .carousel-card li {
 font-size: .6em;
@@ -774,7 +774,7 @@ height: 65vh;
 @media  (max-width: 600px) {
 .carousel-card {
 width: 40vw;
-height: 50svh;
+height: 50dvh;
 }
 .carousel-card-image1 img{
 width: 50px;
@@ -810,7 +810,7 @@ right: -2rem;
 @media  (max-width: 480px) {
 .carousel-card {
 width: 60vw;
-height: 45svh;
+height: 45dvh;
 }
 .odds{
 font-size: .8em !important;
@@ -967,8 +967,10 @@ color: #f75454 !important;
 display: none;
 opacity: 0;
 transform: scaleY(0.9);
+-webkit-transform: scaleY(0.9);
 transform-origin: top;
 transition: opacity 0.4s ease, transform 0.4s ease;
+-webkit-transition: opacity 0.4s ease, transform 0.4s ease;
 padding: 0 20px;
 background: #0b0b0b;
 position: relative; 
