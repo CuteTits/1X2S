@@ -515,13 +515,13 @@ mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transpa
 mask-repeat: no-repeat;
 mask-size: 100% 100%;
 }
-
 .slider-track {
 display: flex;
 width: fit-content;
 animation: scroll 30s linear infinite;
+overflow-x: hidden;
+scroll-behavior: smooth;
 }
-
 .slider-track img {
 width: 100px;
 height: 100px;
@@ -529,6 +529,19 @@ margin: 0 10px;
 object-fit: contain;
 flex-shrink: 0;
 }
+.slider-track:hover {
+animation-play-state: paused;
+}
+@keyframes scroll {
+0% {
+transform: translateX(0);
+}
+100% {
+transform: translateX(-50%);
+}
+}
+
+
 
 
 
