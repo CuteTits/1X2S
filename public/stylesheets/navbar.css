@@ -1,5 +1,14 @@
 /*----- Navbar -----*/
 
+@media screen and (max-width: 1080px) {
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+  display: none;
+}
+}
+
+
+
+
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
 position: fixed;
 top: 0;
@@ -31,44 +40,46 @@ padding: 10px;
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080-content  {
 position: absolute;
 left: 1%;
-top: 20%;
+top: 10%;
 }
-.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content img {
-width: 3vw;
-transition:smooth, 1.2s;
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content h1{
+font-size: 2em;
+font-family: zendots;
 }
+  
 
 .Navigational-header-bar-style-top-aligned-flex-0 {
-  display: flex;           /* Make the parent a flex container */
+  display: grid;
   justify-content: center; /* Center children horizontally */
   align-items: center;     /* Center children vertically */
   width: 25%;
-  height: 100%;
 }
 
-  
+
 .Navigational-header-bar-style-top-aligned-flex-0 ul {
 list-style-type: none; 
 display: flex; 
-justify-content: center;    /* horizontal centering */
-align-items: center;        /* vertical centering */
-gap: 10%;
+justify-content: center;   
+align-items: center;       
+gap: 10%;                  
 text-align: center;
 padding: 0;
 width: 100%;
+height: 100%;               
 }
-
 
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a {
 color: white; 
 text-decoration: none; 
 font-family: montserrat;
 font-weight: 200;
-transition: background-color 0.3s; 
 font-size: 1em;
-transition: all 1s ease;
 position: relative;
 margin: 2px;
+display: flex;             
+justify-content: center;   
+align-items: center;        
+transition: all 1s ease;    
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a:after{
 content: '';

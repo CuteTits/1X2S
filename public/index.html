@@ -192,8 +192,8 @@
 
     <div class="section-cfg-divider" ></div>
 
-<h1 class="page-title-undefined-3">Upcoming</h1>
-
+    <h1 class="page-title-undefined-3">Upcoming</h1>
+    <h1 class="page-subtitle-undefined-3">This Week</h1>
 
 <div class="carousel-container">
     <button class="carousel-nav nav-left" onclick="scrollCarousel(-2)">❮</button>
@@ -272,22 +272,26 @@ function saveCardAsImage(card) {
   }).then(canvas => {
     button.style.visibility = 'visible';
     const link = document.createElement('a');
-    link.download = 'card.png';
+    link.download = '1X2S-Betslip.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
 }
-
-
 </script>
+
+<div class="section3-text-container-content">
+<p>The odds presented are based on current <a href="https://www.bet365.com">Bet365</a> markets and are intended for informational purposes only. Please be aware that odds, availability, and terms may vary between bookmakers, region and time and are subject to change at any time without notice.
+</p>
+<p2> Nothing in this content should be construed as financial advice or a recommendation to place any specific wager. The information provided is purely suggestive and is not a substitute for independent research or judgment. Users are solely responsible for their own betting decisions.
+  1X2S accepts no liability for any financial loss or damages incurred as a result of reliance on the information provided. Always gamble responsibly and within your means.</p2>
+</div>
 
 
 <div class="section-cfg-divider" ></div>
 
 
-<h1 class="page-title-undefined-3" style="margin-bottom: 10px;">Match Coverage</h1>
-
-
+<h1 class="page-title-undefined-3">Match Coverage</h1>
+<h1 class="page-subtitle-undefined-3">Worldwide</h1>
 
 <div class="content-card" id="content-card1">
   <h2>UEFA</h2><h1>Champions League</h1>
@@ -447,10 +451,10 @@ function saveCardAsImage(card) {
 </div>
 
 
-<div class="content-card" id="content-card26">
-<h2>Serbia</h2><h1>SuperLiga</h1>
-<img src="#" alt="">
-</div></div>
+<div class="content-card" id="content-card26" style="display: none;">
+  <h2>Serbia</h2>
+  <h1>SuperLiga</h1>
+  <img src="#" alt="">
 </div>
 
 
@@ -536,37 +540,55 @@ function saveCardAsImage(card) {
 
 
 
+<!-- Add this script at the end of your HTML file -->
+
+
 <script>
+  let activeCard = null; // Track the currently active card
+
   function showContentCard(cardId) {
-    const contentCards = document.querySelectorAll('.content-card');
-    const images = document.querySelectorAll('.section3-element-container img');
+    const card = document.getElementById(cardId);
 
-    const clickedCard = document.getElementById(cardId);
-    const isAlreadyActive = clickedCard.classList.contains('active');
-
-    // Reset all
-    contentCards.forEach(card => {
-      card.style.display = 'none';
-      card.classList.remove('active');
+    // Hide all other cards
+    document.querySelectorAll('.content-card').forEach(c => {
+      c.style.display = 'none';
+      c.classList.remove('active');
     });
-    images.forEach(img => img.classList.remove('active'));
 
-    if (!isAlreadyActive) {
-      clickedCard.style.display = 'block';
-      setTimeout(() => {
-        clickedCard.classList.add('active');
-      }, 10); // tiny timeout to allow CSS transition
-      const correspondingImg = document.getElementById('img-' + cardId);
-      if (correspondingImg) {
-        correspondingImg.classList.add('active');
-      }
+    // Show the selected card and disable scrolling
+    if (card) {
+      card.style.display = 'block';
+      card.classList.add('active');
+      document.documentElement.style.overflow = 'hidden'; // Disable scrolling on <html>
+      document.body.style.overflow = 'hidden'; // Disable scrolling on <body>
+      activeCard = card; // Set the active card
     }
   }
+
+  // Global click listener to close the card when clicking outside
+  document.addEventListener('click', (event) => {
+    if (activeCard && !activeCard.contains(event.target) && !event.target.matches(`[onclick*="showContentCard"]`)) {
+      activeCard.style.display = 'none';
+      activeCard.classList.remove('active');
+      document.documentElement.style.overflow = 'auto'; // Re-enable scrolling on <html>
+      document.body.style.overflow = 'auto'; // Re-enable scrolling on <body>
+      activeCard = null; // Clear the active card
+    }
+  });
+
+  // Prevent scrolling with keyboard or touch gestures while the card is active
+  window.addEventListener('keydown', (event) => {
+    if (activeCard && (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'PageUp' || event.key === 'PageDown' || event.key === ' ')) {
+      event.preventDefault();
+    }
+  });
+
+  window.addEventListener('touchmove', (event) => {
+    if (activeCard) {
+      event.preventDefault();
+    }
+  }, { passive: false });
 </script>
-
-
-
-
 
 
 
