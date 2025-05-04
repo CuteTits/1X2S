@@ -416,7 +416,7 @@ right: -4rem;
 .carousel-card-image1 img {
 position: relative;
 bottom: auto; 
-opacity: 15%;
+opacity: 50%;
 height: 70px;
 width: 70px !important;
 object-fit: contain;

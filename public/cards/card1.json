@@ -1,20 +1,18 @@
 {
-  "title": "WED 16",
-  "name1": "Real Madrid",
-  "name2": "Arsenal",
+  "title": "TUE 6TH",
+  "name1": "Inter Milan",
+  "name2": "FC Barcelona",
   "image": "/resources/images/league-icons/champions-league.png",
   "details": [
-    "FT: Arsenal",
-    "Correct Score: 1-2",
+    "Barcelona to Qualify: Yes",
+    "Over 2.5 Goals",
     "First 10': Over 0.5 Corner(s)",
-    "Total Shots: Over 27.5",
-    "Total Fouls: Over 25.5",
-    "Total Cards: Over 1.5",
     "Both to Receive a Card: Yes",
-    "Vinicius Jr.: O.SoT 0.5",
-    "B. Saka: O.SoT 0.5",
-    "Goals Before 22': No",
-    "Both to Score in 2nd: Yes"
+    "M. Thuram: O.SoT 0.5",
+    "L. Yamal: O.SoT 0.5",
+    "Raphina: O.SoT 0.5",
+    "Goal Before 22': Yes",
+    "Both to Score: Yes"
   ],
-  "odds": "215x"
+  "odds": "19x"
 }
