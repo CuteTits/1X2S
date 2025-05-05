@@ -61,11 +61,7 @@ display: none !important;
     font-size: 12px;
     display: block;
   }
-  .nav-item.active {
-    color: #ffffff; 
-    font-weight: bold;
-    border-bottom: 3px solid #f75454;
-}
+
 
 @media screen and (max-width: 300px) {
     .mobilenavbar {
