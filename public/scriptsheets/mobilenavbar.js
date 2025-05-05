@@ -12,22 +12,54 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 navbarContainer.innerHTML = data;
 
-                if (typeof initializeNavbar === 'function') {
-                    initializeNavbar(); // Ensure the function exists before calling it
-                }
-
-                window.scrollTo(0, 0); // Scroll to the top of the page
-
                 const navbarItems = document.querySelectorAll('.nav-item');
+                const tipsButton = document.getElementById('tips');
+                const section3 = document.querySelector('#section3');
 
                 function updateActiveNav() {
-                    const currentHash = window.location.hash || '/index.html'; // Default to index.html if no hash is present
+                    const currentPath = window.location.pathname; // Get the current path
                     navbarItems.forEach(item => {
-                        item.classList.remove('active'); 
-                        if (item.getAttribute('href') === currentHash) {
+                        const img = item.querySelector('img');
+                        const itemPath = new URL(item.getAttribute('href'), window.location.origin).pathname; // Normalize the href path
+                        item.classList.remove('active');
+
+                        if (itemPath === currentPath) {
                             item.classList.add('active');
+                            if (img) {
+                                img.src = img.src.replace('_FFFFFF_', '_F75454_'); // Replace part of the filename for active state
+                            }
+                        } else {
+                            if (img) {
+                                img.src = img.src.replace('_F75454_', '_FFFFFF_'); // Revert to default image
+                            }
                         }
                     });
+                }
+
+                // Observe #section3 to update the "Tips" button style
+                if (section3 && tipsButton) {
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    tipsButton.classList.add('active');
+                                    const img = tipsButton.querySelector('img');
+                                    if (img) {
+                                        img.src = img.src.replace('_FFFFFF_', '_F75454_');
+                                    }
+                                } else {
+                                    tipsButton.classList.remove('active');
+                                    const img = tipsButton.querySelector('img');
+                                    if (img) {
+                                        img.src = img.src.replace('_F75454_', '_FFFFFF_');
+                                    }
+                                }
+                            });
+                        },
+                        { threshold: 0.5 } // Trigger when 50% of the section is visible
+                    );
+
+                    observer.observe(section3);
                 }
 
                 // Update active nav on page load
