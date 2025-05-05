@@ -28,7 +28,6 @@
     <div id="navbar"></div>
     <script src="/scriptsheets/navbar.js"></script>
     <link rel="stylesheet" href="/stylesheets/navbar.css">
-    
     <div class="scroll-progress" id="progressBar"></div>
     <script>
         const progressBar = document.getElementById('progressBar');
@@ -40,6 +39,15 @@
         });
       </script>
 </nav>
+<mobilenav>
+    <!-- Navbar / for mobile devices -->
+    <div id="mobilenavbar"></div>
+    <script src="/scriptsheets/mobilenavbar.js"></script>
+    <link rel="stylesheet" href="/stylesheets/mobilenavbar.css">
+</mobilenav>  
+
+
+
 
 
 
@@ -163,25 +171,41 @@
 <section id="section2">
 
     <div class="section2-parent-container-flex-0">
-        <div class="section2-content-container-block-0" style="display: block;">
-        <img src="/resources/images/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
-        <h1>Extensive Sourcing</h1>
-        <a>Stats & Analytics from Trusted Data Sources</span></a>
+        <div class="section2-content-container-block-0">
+          <div class="section2-content-container-child-0">
+            <img src="/resources/images/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+          </div>
+          <div class="section2-content-container-child-0">
+            <h1>Extensive Sourcing</h1>
+            <a>In-Depth Stats & Analytics from Trusted Data Sources</span></a>
+          </div>
         </div>
-        <div class="section2-content-container-block-0" style="display: block;">
-        <img src="/resources/images/equalizer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
-        <h1>Data Driven</h1>
-        <a>Predictions Based on Precise Data, Trends and Markets</a>
+        <div class="section2-content-container-block-0">
+          <div class="section2-content-container-child-0">
+            <img src="/resources/images/equalizer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+          </div>
+          <div class="section2-content-container-child-0">
+            <h1>Data Driven</h1>
+            <a>Predictions Based on Precise Data, Trends and Markets</a>
+          </div>
         </div>
-        <div class="section2-content-container-block-0" style="display: block;">
-        <img src="/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
-        <h1>Match Picks</h1>
-        <a>Exclusively Selected Matches With the Best Odds and Markets</a>
+        <div class="section2-content-container-block-0"">
+          <div class="section2-content-container-child-0">
+            <img src="/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+          </div>
+          <div class="section2-content-container-child-0">
+            <h1>Match Picks</h1>
+            <a>Exclusively Selected Matches With the Best Odds and Markets</a>
+          </div>
         </div>
-        <div class="section2-content-container-block-0" style="display: block;">
-        <img src="/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
-        <h1>AI Analysis</h1>
-        <a>Manual Analysis Reinforced Using <span class="gemini-text-link">Google Gemini ✦</span></a>
+        <div class="section2-content-container-block-0"">
+          <div class="section2-content-container-child-0">
+            <img src="/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+          </div>
+          <div class="section2-content-container-child-0">
+            <h1>AI Analysis</h1>
+            <a>Manual Analysis Reinforced Using <span class="gemini-text-link">Google Gemini ✦</span></a>
+          </div>
         </div>
     </div>
 
@@ -199,7 +223,8 @@
     <h1 class="page-subtitle-undefined-3">This Week</h1>
   </div>
   <div class="section-title-content-container">
-    <p>We offer betting coverage on the best matches covering over 50+ leagues and competitions</p>
+    <h1 class="page-title-undefined-3">Football</h1>
+    <h1 class="page-subtitle-undefined-3">International</h1>
   </div>
 </div>
 
@@ -265,7 +290,7 @@
     button.addEventListener('click', () => saveCardAsImage(card));
 
   } catch (err) {
-    card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1vw; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+    card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
     console.error(`Failed to load ${src}`, err);
   }
 }
