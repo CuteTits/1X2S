@@ -1,6 +1,6 @@
 /*----- Navbar -----*/
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 770px) {
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
   display: none;
 }
@@ -22,7 +22,6 @@ backdrop-filter: none;
 justify-content: center;
 text-align: center;
 align-content: center;
-padding: 10px;
 }
 
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
@@ -189,9 +188,8 @@ overflow: hidden;
 
 .loginbtn:hover{
 transition: all 1s ease;
+opacity: 0.5;
 }
-
-
 .signupbtn:hover{
 transition: all 1s ease;
 background-color: transparent;
@@ -203,4 +201,15 @@ background-color: transparent;
 .signupbtn:hover a{
 transition: all 1s ease;
 color: white;
+}
+
+
+@media  (max-width: 880px) {
+.navigation-menu-desktop-buttons-user-options{
+gap: 0;
+right: 2%;
+}
+.loginbtn img, .signupbtn img {
+width: 2vw;
+}
 }

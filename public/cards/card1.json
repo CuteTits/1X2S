@@ -1,18 +1,18 @@
 {
-  "title": "TUE 6TH",
+  "title": "❌ Finished",
   "name1": "Inter Milan",
   "name2": "FC Barcelona",
   "image": "/resources/images/league-icons/champions-league.png",
   "details": [
-    "Barcelona to Qualify: Yes",
-    "Over 2.5 Goals",
-    "First 10': Over 0.5 Corner(s)",
-    "Both to Receive a Card: Yes",
-    "M. Thuram: O.SoT 0.5",
-    "L. Yamal: O.SoT 0.5",
-    "Raphina: O.SoT 0.5",
-    "Goal Before 22': Yes",
-    "Both to Score: Yes"
+    "❌Barcelona to Qualify: Yes",
+    "✅Over 2.5 Goals",
+    "❌First 10': Over 0.5 Corner(s)",
+    "✅Both to Receive a Card: Yes",
+    "✅M. Thuram: O.SoT 0.5",
+    "✅L. Yamal: O.SoT 0.5",
+    "✅Raphina: O.SoT 0.5",
+    "✅Goal Before 22': Yes",
+    "✅Both to Score: Yes"
   ],
-  "odds": "19x"
+  "odds": "🞫"
 }

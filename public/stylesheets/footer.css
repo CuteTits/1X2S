@@ -1,0 +1,121 @@
+
+
+
+footer {
+position:relative ;
+bottom: 0%; 
+width: 100%; 
+background-color: #080808;
+z-index: 99;
+height: 35vh;
+justify-content: center;
+align-items: center;
+align-content: center;
+}
+@media screen and (max-width: 800px) {
+footer {
+height: 50vh;
+display: flex;
+flex-direction: column; 
+justify-content: flex-start; 
+padding-top: 10px; 
+}
+}
+.social-icon-container{
+width: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 5%;
+margin: 20px auto;
+}
+.social-icon-container img{
+height: 40px;
+width: 40px;
+border-radius: 100px;
+border: solid 1px white;
+transition: all 0.5s ease;
+}
+.social-icon-container img:hover{
+opacity: 0.5;
+transition: all 0.5s ease;
+}
+
+.footer-content{
+display: flex;
+width: 100%;
+position: relative;
+gap: 2%;
+justify-content: center; 
+align-items: top;
+text-align: left; 
+}
+.footer-logo-container{
+width: 15%;
+display: block;
+}
+@media screen and (max-width: 800px) {
+.footer-logo-container{
+display: none;
+}
+}
+
+
+.footer-content-container{
+display: block;
+width: 15%;
+justify-content: center;
+display: flex; 
+justify-content: center; 
+align-items: center; 
+text-align: left; 
+}
+@media screen and (max-width: 800px) {
+.footer-content-container {
+width: 25%;
+}
+}
+.footer-content-container ul{
+list-style: none;
+}
+.footer-content-container ul li a {
+color: white;
+font-size: 14px;
+font-family: montserrat;
+list-style: none;
+text-decoration: none;
+line-height: 1.5; 
+}
+
+#divider{
+border-bottom: solid 1px rgb(78, 78, 78);
+width: 70%;
+margin: 25px auto;
+}
+
+
+.footer-bottom {
+display: block; 
+justify-content: center; 
+align-items: center;
+text-align: center; 
+}
+.footer-bottom p {
+color: white;
+font-family: montserrat;
+font-size: 13px;
+font-weight: 400;
+text-align: center;
+margin: 5px;
+}
+.footer-bottom a {
+color: rgb(255, 255, 255);
+font-family: montserrat;
+font-size: 14px;
+font-weight: 200;
+text-align: center;
+text-decoration: none;
+padding: 0 5px;
+border-left: 1px solid rgb(94, 94, 94);
+border-right: 1px solid rgb(94, 94, 94);
+}
