@@ -38,14 +38,7 @@ border-right: none;
 }
     
   }
-  .nav-home img {
-    width: 30px;
-    height: 30px;
-  }
-  .nav-home span {
-    font-size: 12px;
-    display: block;
-  }
+
   .nav-item {
     text-align: center;
     color: #ffffff;

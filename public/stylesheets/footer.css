@@ -11,6 +11,7 @@ height: 35vh;
 justify-content: center;
 align-items: center;
 align-content: center;
+border-top: solid 1px rgb(41, 41, 41);
 }
 @media screen and (max-width: 800px) {
 footer {
@@ -22,12 +23,18 @@ padding-top: 10px;
 }
 }
 .social-icon-container{
-width: 50%;
+width: 70%;
 display: flex;
-justify-content: center;
-align-items: center;
-gap: 5%;
+justify-content: flex-end;
+align-items: right;
+gap: 2%;
 margin: 20px auto;
+}
+@media screen and (max-width: 800px) {
+.social-icon-container{
+align-items: center;
+justify-content: center; 
+}
 }
 .social-icon-container img{
 height: 40px;
@@ -84,7 +91,34 @@ font-size: 14px;
 font-family: montserrat;
 list-style: none;
 text-decoration: none;
-line-height: 1.5; 
+line-height: 1.8; 
+transition: all 0.5s ease;
+}
+.footer-content-container a:hover {
+color: rgb(158, 158, 158);
+transition: all 0.5s ease;
+}
+.footer-content-container ul li a:after{
+content: '';
+position: relative;
+width: 0; height: 1px;
+display: block;
+right: 0;
+background: rgb(218, 52, 52);
+transition: width .2s ease;
+-webkit-transition: width .2s ease;
+}
+
+.footer-content-container ul li a:hover:after{
+width: 100%;
+left: 0;
+background:  rgb(218, 52, 52);
+}
+.footer-content-container a1{
+color: white;
+font-size: 12px;
+font-family: montserrat;
+font-weight: 200;
 }
 
 #divider{
@@ -108,7 +142,7 @@ font-weight: 400;
 text-align: center;
 margin: 5px;
 }
-.footer-bottom a {
+.footer-end a {
 color: rgb(255, 255, 255);
 font-family: montserrat;
 font-size: 14px;
@@ -118,4 +152,10 @@ text-decoration: none;
 padding: 0 5px;
 border-left: 1px solid rgb(94, 94, 94);
 border-right: 1px solid rgb(94, 94, 94);
+transition: all 0.5s ease;
+
+}
+.footer-end a:hover {
+opacity: 0.5;
+transition: all 0.5s ease;
 }

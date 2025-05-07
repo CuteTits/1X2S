@@ -28,9 +28,24 @@ position: relative;
 top: 25%;
 position: relative;
 }
-.section-1-content-title{
-    align-content: center;
+.section-1-content-container p{
+color: white;
+font-family: montserrat;
 
+}
+
+.section-1-content-container h1{
+color: white;
+text-decoration: none;
+font-family: montserrat;
+
+}
+.section-1-content-container li a{
+color: white;
+text-decoration: none;
+font-size: 14px;
+font-family: montserrat;
+list-style: none;
 }
 
 
