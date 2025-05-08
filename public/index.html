@@ -103,7 +103,7 @@
 
 
 
-    <div class="logo-dynamic-slider">
+    <div class="logo-a-slider">
       <div class="slider-track" id="sliderTrack">
         <img src="/resources/images/render.png" alt="Logo 1">
         <img src="/resources/images/logo2.png" alt="Logo 2">
@@ -137,8 +137,6 @@
       });
     </script>
 
-
-
     <div class="section1-parent-container2">
         <h3>Love 4 The Game</h3>
     </div>
@@ -147,9 +145,7 @@
 <script>
         let targetNumber = 85670;
         let currentNumber = 0;
-        let increment = Math.ceil(targetNumber / 100); // Adjust speed
-
-
+        let increment = Math.ceil(targetNumber / 100); 
         function updateCounter() {
             currentNumber += increment;
             if (currentNumber > targetNumber) {
@@ -170,6 +166,8 @@
 
 <section id="section2">
 
+
+
     <div class="section2-parent-container-flex-0">
         <div class="section2-content-container-block-0">
           <div class="section2-content-container-child-0">
@@ -189,7 +187,7 @@
             <a>Predictions Based on Precise Data, Trends and Markets</a>
           </div>
         </div>
-        <div class="section2-content-container-block-0"">
+        <div class="section2-content-container-block-0">
           <div class="section2-content-container-child-0">
             <img src="/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
           </div>
@@ -198,7 +196,7 @@
             <a>Exclusively Selected Matches With the Best Odds and Markets</a>
           </div>
         </div>
-        <div class="section2-content-container-block-0"">
+        <div class="section2-content-container-block-0">
           <div class="section2-content-container-child-0">
             <img src="/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
           </div>
@@ -214,47 +212,95 @@
 
 <section id="section3">
 
-    <div class="section-cfg-divider" ></div>
+
+  <div class="section-cfg-divider" ></div>
 
 
-<div class="section-title-parent-container">
-  <div class="section-title-content-container">
-    <h1 class="page-title-undefined-3">Upcoming</h1>
-    <h1 class="page-subtitle-undefined-3">This Week</h1>
+  <div class="section-title-parent-container">
+    <div class="section-title-content-container">
+      <h1 class="page-title-undefined-3">Upcoming</h1>
+      <h1 class="page-subtitle-undefined-3">Weekly</h1>
+    </div>
   </div>
-  <div id="hidden" class="section-title-content-container">
-    <h1 class="page-title-undefined-3">Football</h1>
-    <h1 class="page-subtitle-undefined-3">International</h1>
+  
+  <div class="b-section-dynamic-content-slider-container">
+    <button class="b-slider-nav bnav-left" onclick="bscrolldynamicslider(-1)">❮</button>
+    <div class="b-slider-track" id="b-sliderTrack">
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-1.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-2.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-3.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-4.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-5.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-6.json"></div>
+    </div>
+    <button class="b-slider-nav bnav-right" onclick="bscrolldynamicslider(1)">❯</button>
   </div>
-</div>
+  
+  <script>
+    function bscrolldynamicslider(direction) {
+      const track = document.getElementById('b-sliderTrack');
+      const cardWidth = track.querySelector('.b-slider-card').offsetWidth + 1; 
+      track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+    async function loadCard1Content(card) {
+      const src = card.dataset.src;
+      try {
+        const res = await fetch(src);
+        const data = await res.json();
+        card.innerHTML = `
+          <div class="b-slider-card-inner">
+            <div class="b-slider-card-image1"><img src="${data.image}" alt="${data.title}"/>
+            <h3>${data.title}</h3></div>
+            <p>${data.description}</p>
+            <div class="b-slider-card-icon"><img src="${data.icon}" alt="${data.context}"/>
+            <a>${data.context}<a>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+        console.error(`Failed to load ${src}`, err);
+      }
+    }
+      document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.b-slider-card');
+      cards.forEach(card => loadCard1Content(card));
+    });
+  </script>
 
-<div class="carousel-container">
-    <button class="carousel-nav nav-left" onclick="scrollCarousel(-2)">❮</button>
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-card" data-src="/cards/card1.json"></div>
-        <div class="carousel-card" data-src="/cards/card2.json"></div>
-        <div class="carousel-card" data-src="/cards/card3.json"></div>
-        <div class="carousel-card" data-src="/cards/card4.json"></div>
-        <div class="carousel-card" data-src="/cards/card5.json"></div>
-        <div class="carousel-card" data-src="/cards/card6.json"></div>
+
+
+
+
+
+
+<div class="section-dynamic-content-slider-container">
+    <button class="a-slider-nav nav-left" onclick="scrolldynamicslider(-1)">❮</button>
+    <div class="a-slider-track" id="a-sliderTrack">
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-1.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-2.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-3.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-4.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-5.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-6.json"></div>
       </div>
-    <button class="carousel-nav nav-right" onclick="scrollCarousel(1)">❯</button>
+    <button class="a-slider-nav nav-right" onclick="scrolldynamicslider(1)">❯</button>
   </div>
   <script>
-    function scrollCarousel(direction) {
-      const track = document.getElementById('carouselTrack');
-      const cardWidth = track.querySelector('.carousel-card').offsetWidth + 1; 
+    function scrolldynamicslider(direction) {
+      const track = document.getElementById('a-sliderTrack');
+      const cardWidth = track.querySelector('.a-slider-card').offsetWidth + 1; 
       track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
     }
     function centerCard(card) {
-      const track = document.getElementById('carouselTrack');
+      const track = document.getElementById('a-sliderTrack');
       const trackRect = track.getBoundingClientRect();
       const cardRect = card.getBoundingClientRect();
       const offset = cardRect.left - trackRect.left - (trackRect.width / 2) + (cardRect.width / 2);
       track.scrollBy({ left: offset, behavior: 'smooth' });
     }
     window.addEventListener('DOMContentLoaded', async () => {
-      const cards = document.querySelectorAll('.carousel-card');
+      const cards = document.querySelectorAll('.a-slider-card');
       for (let card of cards) {
         await loadCardContent(card);
         card.addEventListener('click', () => centerCard(card));
@@ -263,21 +309,21 @@
  
 
 
-    async function loadCardContent(card) {
+  async function loadCardContent(card) {
   const src = card.dataset.src;
   try {
     const res = await fetch(src);
     const data = await res.json();
     const detailsHTML = data.details?.map(item => `<li><a>${item}</a></li>`).join('') || '';
     card.innerHTML = `
-      <div class="carousel-card-inner">
-        <div class="carousel-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
+      <div class="a-slider-card-inner">
+        <div class="a-slider-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
         <h3>${data.title}</h3>
         <h2>${data.name1}</h2>
         <h2>${data.name2}</h2>
         <ul style="text-align:left; padding-left:1.2rem; margin-top:0.5rem; width:auto;">${detailsHTML}</ul>
         <h2 class="odds">${data.odds}</h2>
-        <div class="carousel-card-image2"><img src="/resources/images/logo2.png"></div>
+        <div class="a-slider-card-image2"><img src="/resources/images/logo2.png"></div>
         
         <!-- Image button -->
         <button class="save-png-button">
@@ -647,6 +693,58 @@ function saveCardAsImage(card) {
 
 
 </page>
+
+
+
+
+<script>
+function enableDragScroll(selector) {
+  const slider = document.querySelector(selector);
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// Enable drag scroll for both tracks
+enableDragScroll('.a-slider-track');
+enableDragScroll('.b-slider-track');
+
+
+</script>
+
+
+
+
+
+
+
+
 
 </body>
 </html>
