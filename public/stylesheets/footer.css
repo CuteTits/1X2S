@@ -59,7 +59,14 @@ text-align: left;
 }
 .footer-logo-container{
 width: 15%;
-display: block;
+display: flex;
+flex-direction: column;
+}
+.footer-logo-container a{
+color: gray;
+font-family: montserrat;
+font-weight: 300;
+font-size: 12px
 }
 @media screen and (max-width: 800px) {
 .footer-logo-container{

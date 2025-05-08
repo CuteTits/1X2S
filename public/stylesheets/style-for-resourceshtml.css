@@ -40,12 +40,14 @@ text-decoration: none;
 font-family: montserrat;
 
 }
+.section-1-content-container ul{
+    list-style: none;
+}
 .section-1-content-container li a{
 color: white;
 text-decoration: none;
 font-size: 14px;
 font-family: montserrat;
-list-style: none;
 }
 
 
