@@ -313,10 +313,11 @@ function saveCardAsImage(card) {
 </script>
 
 <div class="section3-text-container-content">
-<p>The odds presented are based on current <a href="https://www.bet365.com">Bet365</a> markets and are intended for informational purposes only. Please be aware that odds, availability, and terms may vary between bookmakers, region and time and are subject to change at any time without notice.
+<p id="p1">The odds presented are based on current <a href="https://www.bet365.com">Bet365</a> markets and are intended for informational purposes only. Please be aware that odds, availability, and terms may vary between bookmakers, region and time and are subject to change at any time without notice.
 </p>
-<p2> Nothing in this content should be construed as financial advice or a recommendation to place any specific wager. The information provided is purely suggestive and is not a substitute for independent research or judgment. Users are solely responsible for their own betting decisions.
-  1X2S accepts no liability for any financial loss or damages incurred as a result of reliance on the information provided. Always gamble responsibly and within your means.</p2>
+<p id="p2">ⓘ Disclaimer!
+  Nothing in this content should be construed as financial advice or a recommendation to place any specific wager. The information provided is purely suggestive and is not a substitute for independent research or judgment. Users are solely responsible for their own betting decisions.
+  1X2S accepts no liability for any financial loss or damages incurred as a result of reliance on the information provided. Always gamble responsibly and within your means.</p>
 </div>
 
 
@@ -576,11 +577,10 @@ function saveCardAsImage(card) {
 
 
 
-<!-- Add this script at the end of your HTML file -->
 
 
 <script>
-  let activeCard = null; // Track the currently active card
+  let activeCard = null;
 
   function showContentCard(cardId) {
     const card = document.getElementById(cardId);

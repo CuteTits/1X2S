@@ -1076,19 +1076,27 @@ text-decoration: none;
 border: solid 1px rgb(248, 52, 52);
 transition: all .5s ease;
 }
-.section3-text-container-content p2{
+#p1{
 font-size: .8em;
-color: rgba(223, 36, 36, 0.692);
+color: rgb(61, 61, 61);
 font-family: montserrat; 
-
+margin: 5px;
+}
+#p2{
+font-size: .8em;
+color: rgba(255, 255, 255, 0.692);
+font-family: montserrat; 
+border: solid 1px rgb(238, 48, 48);
+background-color: #f7454548;
+border-radius: 5px;
 }
 
 
 @media screen and (max-width: 600px) {
-.section3-text-container-content p{
+#p1{
 font-size: .6em;
 }
-.section3-text-container-content p2{
+#p2{
 font-size: .6em; 
 }
 }
