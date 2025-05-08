@@ -24,7 +24,7 @@ margin-top: 10px;
 
 @media screen and (max-width: 800px) {
 footer {
-height: 55vh;
+height: 500px;
 display: flex;
 flex-direction: column; 
 justify-content: flex-start; 
@@ -100,7 +100,6 @@ background: rgb(218, 52, 52);
 transition: width .2s ease;
 -webkit-transition: width .2s ease;
 }
-
 .footer-content-container ul li a:hover:after{
 width: 100%;
 left: 0;
