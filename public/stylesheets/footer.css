@@ -8,11 +8,20 @@ width: 100%;
 background-color: #080808;
 z-index: 99;
 height: 35vh;
+border-top: solid 1px rgb(41, 41, 41);
+overflow-y: hidden;
+}
+
+
+.footer-content-row{
 justify-content: center;
 align-items: center;
 align-content: center;
-border-top: solid 1px rgb(41, 41, 41);
+display: flex;
+width: 100%;
+margin-top: 10px;
 }
+
 @media screen and (max-width: 800px) {
 footer {
 height: 50vh;
@@ -22,34 +31,10 @@ justify-content: flex-start;
 padding-top: 10px; 
 }
 }
-.social-icon-container{
-width: 70%;
-display: flex;
-justify-content: flex-end;
-align-items: right;
-gap: 2%;
-margin: 20px auto;
-}
-@media screen and (max-width: 800px) {
-.social-icon-container{
-align-items: center;
-justify-content: center; 
-}
-}
-.social-icon-container img{
-height: 40px;
-width: 40px;
-border-radius: 100px;
-border: solid 1px white;
-transition: all 0.5s ease;
-}
-.social-icon-container img:hover{
-opacity: 0.5;
-transition: all 0.5s ease;
-}
+
 
 .footer-content{
-display: flex;
+display: block;
 width: 100%;
 position: relative;
 gap: 2%;
@@ -135,6 +120,44 @@ margin: 25px auto;
 }
 
 
+
+
+
+.footer-bottom-row{
+width: 70%;
+display: flex;
+justify-content: flex-end;
+align-items: right;
+align-content: center;
+gap: 2%;
+margin: 20px auto;
+}
+.social-icon-container{
+width: 70%;
+display: flex;
+justify-content: flex-end;
+align-items: right;
+gap: 2%;
+margin: 20px auto;
+}
+@media screen and (max-width: 800px) {
+.social-icon-container{
+align-items: center;
+justify-content: center; 
+}
+}
+.social-icon-container img{
+height: 40px;
+width: 40px;
+border-radius: 100px;
+border: solid 1px white;
+transition: all 0.5s ease;
+}
+.social-icon-container img:hover{
+opacity: 0.5;
+transition: all 0.5s ease;
+}
+    
 .footer-bottom {
 display: block; 
 justify-content: center; 
@@ -165,4 +188,15 @@ transition: all 0.5s ease;
 .footer-end a:hover {
 opacity: 0.5;
 transition: all 0.5s ease;
+}
+
+
+.footer-img-logo-container{
+display: flex;
+width: 70%;
+gap: 5px;
+}
+.footer-img-logo-container img{
+height: 40px;
+border: solid 1px rgb(88, 88, 88);
 }
