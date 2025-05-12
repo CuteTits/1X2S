@@ -231,7 +231,7 @@
           if (currentState !== 'absolute-top') {
             stickyElement.classList.remove('sticky-fixed');
             stickyElement.classList.add('sticky-absolute');
-            stickyElement.style.top = `400px`; //has to be +100 of stickyElement.style.top = 'x';
+            stickyElement.style.top = `300px`; //has to be +100 of stickyElement.style.top = 'x';
             currentState = 'absolute-top';
           }
         } else if (scrollTop + 200 + stickyHeight >= section4Top) {
@@ -247,7 +247,7 @@
           if (currentState !== 'fixed') {
             stickyElement.classList.remove('sticky-absolute');
             stickyElement.classList.add('sticky-fixed');
-            stickyElement.style.top = '300px'; // your fixed top value
+            stickyElement.style.top = '200px'; // your fixed top value
             currentState = 'fixed';
           }
         }
