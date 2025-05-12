@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sticky Text Container with Slide Up</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 2;
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 200px;
+      width: 200px;
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .hidden-up {
+      position: absolute;
+      transform: translateY(-100px);
+    }
+
+    .content {
+      height: 2000px;
+      padding-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sticky-container" id="stickyText">
+  I'm Sticky!
+</div>
+
+<div class="content">
+  <p>Scroll down to see the effect.</p>
+</div>
+
+<script>
+  const stickyElement = document.getElementById('stickyText');
+  const disappearAt = 500; // Scroll Y position in pixels where it disappears
+  let wasSticky = true;
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+
+    if (scrollTop > disappearAt) {
+      // Slide up and switch to absolute positioning
+      if (wasSticky) {
+        // Set absolute position based on current location
+        const rect = stickyElement.getBoundingClientRect();
+        stickyElement.style.position = 'absolute';
+        stickyElement.style.top = `${window.scrollY + rect.top}px`;
+        wasSticky = false;
+      }
+      requestAnimationFrame(() => {
+        stickyElement.classList.add('hidden-up');
+      });
+    } else {
+      // Revert to sticky and show
+      stickyElement.classList.remove('hidden-up');
+      stickyElement.style.position = '';
+      stickyElement.style.top = '';
+      wasSticky = true;
+    }
+  });
+</script>
+
+</body>
+</html>

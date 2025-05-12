@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script defer src="admin.js"></script>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <div id="card-container">
+        <!-- Cards will be dynamically loaded here -->
+    </div>
+    <button id="add-card-btn">Add Card</button>
+
+    <!-- Modal for editing/adding cards -->
+    <div id="card-modal" style="display: none;">
+        <form id="card-form">
+            <label for="card-content">Card Content:</label>
+            <textarea id="card-content" name="content"></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

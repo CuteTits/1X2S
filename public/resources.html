@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/resources/images/logo.png">
+    <title>1X2S</title>
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+    <link rel="stylesheet" href="/stylesheets/style-for-resourceshtml.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+<page class="page-content-on-load-true">
+
+
+<nav>
+    <!-- Navbar / for pc devices -->
+    <div id="navbar"></div>
+    <script src="/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    <div class="scroll-progress" id="progressBar"></div>
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = scrollPercent + '%';
+        });
+      </script>
+</nav>
+<mobilenav>
+    <!-- Navbar / for mobile devices -->
+    <div id="mobilenavbar"></div>
+    <script src="/scriptsheets/mobilenavbar.js"></script>
+    <link rel="stylesheet" href="/stylesheets/mobilenavbar.css">
+</mobilenav>  
+
+
+<section class="section1" id="section1">
+
+<div class="section-1-content">
+
+    <div class="section-1-content-container">
+            <h1>References</h1>
+            <p>For our in-dept manual analysis, we use the following sources for
+                statistics and data:</p>
+            <ul>
+                <li><a href="https://www.sofascore.com/">Sofascore</a>
+                </li>
+                <li><a href="https://www.statsperform.com/opta/">Opta</a>
+                </li>
+                <li><a href="https://www.espn.com/">Overlyzer</a>
+                </li>
+                <li><a href="https://www.flashscore.com/">Flashscore</a>
+                </li>
+                <li><a href="https://www.whoscored.com/">WhoScored</a>
+                </li>
+                <li><a href="https://1x2stats.com/">1X2Stat</a>
+                </li>
+                <li><a href="https://www.soccerstats.com/">soccerSTATS</a>
+                </li>
+                <li><a href="https://understat.com/">understat</a>
+                </li>
+                <li><a href="https://www.transfermarkt.com/">transfermarkt</a>
+                </li>
+                <li><a href="http://fbref.com/">FBref (StatsBomb)</a>
+                </li>
+                <li><a href="https://theanalyst.com/">theanalyst (Opta)</a>
+                </li>
+                <li><a href="https://chatgpt.com/">CIES Football Observatory</a>
+                </li>
+                <li><a href="https://www.livescore.com/">LiveScore</a>
+                </li>
+                <li><a href="https://www.sportsline.com/">SportsLine</a>
+                </li>
+                <li><a href="https://gemini.google.com/">Google Gemini 2.5-Flash</a>
+                <p>Advanced Reasoning and Analysis Capabilities, Large Scale Data Processing, 2025 Knowledge Cut-Off.
+                Great at giving scenarios, predictions and information backed by logical reasoning.
+                </p>
+                </li>
+                <li><a href="https://chatgpt.com/">ChatGPT</a>
+                <p>High-Output Fast-Processing, Fine-Tuning Capabilities, 2024 Knowledge Cut-Off. Great for 
+                processing & compiling large-scale information such as stats, anaytics and numbers.
+                </p>
+                </li>
+
+            </ul>
+
+    </div>
+
+
+</div>
+
+
+
+</section>
+
+
+<section class="section2" id="section2">
+
+</section>  
+
+
+
+
+
+
+
+
+
+
+
+<div id="footer-container"></div>
+<script src="/scriptsheets/global-footer.js"></script>
+<link rel="stylesheet" href="/stylesheets/footer.css">
+
+
+
+
+
+</body>
+
+</html>
+
+</page>

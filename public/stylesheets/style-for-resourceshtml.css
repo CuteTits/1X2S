@@ -1,0 +1,84 @@
+body{
+background-color: rgb(10, 10, 10);
+padding: 0;
+margin: 0;
+overflow-x: hidden;
+}
+
+
+#section1{
+background-color: rgb(10, 10, 10);
+height: 100vh;
+}
+#section2{
+background-color: rgb(10, 10, 10);
+height: 100vh;
+}
+
+
+.section-1-content{
+justify-items: center;
+height: 100%;
+width: 100%;
+position: relative;
+}
+
+
+.section-1-content-container{
+top: 25%;
+position: relative;
+padding: 10px;
+}
+.section-1-content-container p{
+color: white;
+font-family: montserrat;
+
+}
+
+.section-1-content-container h1{
+color: white;
+text-decoration: none;
+font-family: montserrat;
+}
+
+
+.section-1-content-container ul li {
+margin-bottom: 10px; 
+border: solid 1px rgba(240, 68, 68, 0.205);
+height: 50px;
+padding: 5px;
+
+}
+.section-1-content-container ul{
+list-style: none;
+}
+.section-1-content-container li a{
+color: white;
+text-decoration: none;
+font-size: 14px;
+font-family: montserrat;
+transition: all 0.5s ease;
+padding: 5px;
+
+}
+
+.section-1-content-container li a:hover{
+opacity: 0.5;
+transition: all 0.5s ease;
+}
+
+.section-1-content-container li a::after {
+content: ' 〉';
+display: none;
+transition: all 0.5s ease;
+}
+
+.section-1-content-container li a:hover::after {
+display: inline;
+}
+
+
+.section-1-content-container li p{
+color: rgb(230, 67, 67);
+font-size: 12px;
+}

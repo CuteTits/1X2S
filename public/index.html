@@ -1,0 +1,326 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="icon" href="/resources/images/logo.png">
+        <title>1X2S</title>
+        <link rel="stylesheet" href="/stylesheets/fonts.css">
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <link rel="stylesheet" href="/stylesheets/index-webkit-mobile.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+    </head>
+
+
+    <body>
+
+
+
+      
+    <page class="page-content-on-load-true">
+
+
+
+
+
+
+    <nav>
+        <!-- Navbar / for pc devices -->
+        <div id="navbar"></div>
+        <script src="/scriptsheets/navbar.js"></script>
+        <link rel="stylesheet" href="/stylesheets/navbar.css">
+        <div class="scroll-progress" id="progressBar"></div>
+    </nav>
+    <mobilenav>
+        <div id="mobilenavbar"></div>
+        <script src="/scriptsheets/mobilenavbar.js"></script>
+        <link rel="stylesheet" href="/stylesheets/mobilenavbar.css">
+    </mobilenav>  
+
+
+
+
+
+
+    <section id="section1">
+    <div class="section-1-front-image">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const img = document.querySelector(".section-1-front-image img");
+        let latestScrollY = 0;
+        let ticking = false;
+
+        function updateParallax() {
+          img.style.transform = `translate(-50%, calc(-50% + ${latestScrollY * 0.5}px)) scale(1.3)`;
+          ticking = false;
+        }
+
+        window.addEventListener("scroll", () => {
+          latestScrollY = window.scrollY;
+          if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        });
+      });
+    </script>
+    <img src="/resources/images/image-city-celebration-limited-png.png.png" alt="frontpageimg">
+    </div>
+            <div class="section1-parent-container1">
+                <div class="section1-parent-header-container" style="display: flex;">
+                    <h2 style="font-family: zendots;">1X2S</h2>
+                </div>
+            <div class="section1-parent-title-container">
+                <h1 style="margin: 0;">Game is<span style="color: rgb(255, 56, 56);"> Game</span></h1>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="logo-a-slider">
+          <div class="slider-track" id="sliderTrack">
+            <img src="/resources/images/render.png" alt="Logo 1">
+            <img src="/resources/images/logo2.png" alt="Logo 2">
+            <img src="/resources/images/uefa.png" alt="Logo 3">
+            <img src="/resources/images/ATKH.png" alt="Logo 4">
+            <img src="/resources/images/royalem.png" alt="Logo 5">
+            <img src="/resources/images/suissegroup.png" alt="Logo 6">
+            <img src="/resources/images/unistat.png" alt="Logo 7">
+            <img src="/resources/images/onealliance.png" alt="Logo 8">
+
+            <!-- Duplicates for seamless loop -->
+            <img src="/resources/images/render.png" alt="Logo 1">
+            <img src="/resources/images/logo2.png" alt="Logo 2">
+            <img src="/resources/images/uefa.png" alt="Logo 3">
+            <img src="/resources/images/ATKH.png" alt="Logo 4">
+            <img src="/resources/images/royalem.png" alt="Logo 5">
+            <img src="/resources/images/suissegroup.png" alt="Logo 6">
+            <img src="/resources/images/unistat.png" alt="Logo 7">
+            <img src="/resources/images/onealliance.png" alt="Logo 8">
+
+          </div>
+        </div>
+
+        <script>
+          const track = document.getElementById('sliderTrack');
+          const images = Array.from(track.children);
+        
+          images.forEach(img => {
+            const clone = img.cloneNode(true);
+            track.appendChild(clone);
+          });
+        </script>
+
+        <div class="section1-parent-container2">
+            <h3>Love 4 The Game</h3>
+        </div>
+
+    </div>
+
+    </section>
+
+
+
+
+
+    <section id="section2">
+
+
+
+        <div class="section2-parent-container-flex-0">
+            <div class="section2-content-container-block-0">
+              <div class="section2-content-container-child-0">
+                <img src="/resources/images/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+              </div>
+              <div class="section2-content-container-child-0">
+                <h1>Extensive Sourcing</h1>
+                <a>In-Depth Stats & Analytics from Trusted Data Sources</span></a>
+              </div>
+            </div>
+            <div class="section2-content-container-block-0">
+              <div class="section2-content-container-child-0">
+                <img src="/resources/images/equalizer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+              </div>
+              <div class="section2-content-container-child-0">
+                <h1>Data Driven</h1>
+                <a>Predictions Based on Precise Data, Trends and Markets</a>
+              </div>
+            </div>
+            <div class="section2-content-container-block-0">
+              <div class="section2-content-container-child-0">
+                <img src="/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+              </div>
+              <div class="section2-content-container-child-0">
+                <h1>Match Picks</h1>
+                <a>Exclusively Selected Matches With the Best Odds and Markets</a>
+              </div>
+            </div>
+            <div class="section2-content-container-block-0">
+              <div class="section2-content-container-child-0">
+                <img src="/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+              </div>
+              <div class="section2-content-container-child-0">
+                <h1>AI Analysis</h1>
+                <a>Manual Analysis Reinforced Using <span class="gemini-text-link">Google Gemini ✦</span></a>
+              </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="section3">
+
+  <div class="sticky-wrapper">
+    <div class="sticky-container" id="stickyText">
+      <span id="sticky-value">0.00</span>
+      <span id="sticky-text">Loading</span>
+    </div>
+  </div>
+
+    </section>
+
+    <section class="section4" id="section4">
+      
+
+        
+    </section>
+
+
+
+
+      <div id="footer-container"></div>
+      <script src="/scriptsheets/global-footer.js"></script>
+      <link rel="stylesheet" href="/stylesheets/footer.css">
+
+
+
+    </page>
+
+
+
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const stickyElement = document.getElementById('stickyText');
+      const wrapper = document.querySelector('.sticky-wrapper');
+      const section3 = document.getElementById('section3');
+      const section4 = document.getElementById('section4');
+
+      if (!stickyElement || !wrapper || !section3 || !section4) return;
+
+      let currentState = null;
+
+      function updateStickyState() {
+        const scrollTop = window.scrollY || window.pageYOffset;
+        const section3Top = section3.offsetTop;
+        const section4Top = section4.offsetTop;
+        const stickyHeight = stickyElement.offsetHeight;
+
+        const scrollPercent = scrollTop / (document.body.scrollHeight - window.innerHeight);
+
+        if (scrollTop + 200 < section3Top + (section3.offsetHeight * 0.1)) {
+          // Before 61% of section3: absolute
+          if (currentState !== 'absolute-top') {
+            stickyElement.classList.remove('sticky-fixed');
+            stickyElement.classList.add('sticky-absolute');
+            stickyElement.style.top = `400px`; //has to be +100 of stickyElement.style.top = 'x';
+            currentState = 'absolute-top';
+          }
+        } else if (scrollTop + 200 + stickyHeight >= section4Top) {
+          // Reached section4: pin it absolutely there
+          if (currentState !== 'absolute-bottom') {
+            stickyElement.classList.remove('sticky-fixed');
+            stickyElement.classList.add('sticky-absolute');
+            stickyElement.style.top = `${section4Top - section3Top - stickyHeight}px`;
+            currentState = 'absolute-bottom';
+          }
+        } else {
+          // Between 61% and section4: fixed
+          if (currentState !== 'fixed') {
+            stickyElement.classList.remove('sticky-absolute');
+            stickyElement.classList.add('sticky-fixed');
+            stickyElement.style.top = '300px'; // your fixed top value
+            currentState = 'fixed';
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateStickyState);
+      window.addEventListener('resize', updateStickyState);
+      updateStickyState(); // Initial check
+    });
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const stickyValue = document.getElementById('sticky-value');
+  const stickyText = document.getElementById('sticky-text');
+  const section = document.getElementById('section3');
+
+  const thresholds = [
+{ percent: 0.0,     value: "15.00$",   text: "Made" },
+{ percent: 0.07,     value: "512.60$",   text: "Made" },
+{ percent: 0.08,     value: "1784,00$",   text: "Made" },
+{ percent: 0.09,     value: "5235,82$",   text: "Made" },
+{ percent: 0.1,     value: "7560,20$",   text: "Made" },
+{ percent: 0.2,     value: "10.780,55$",   text: "Made" },
+{ percent: 0.3,     value: "15.092,20$",   text: "Made" },
+{ percent: 0.32,     value: "18.568,60$",   text: "Made" },
+{ percent: 0.34,     value: "18.568,60$",   text: "Made" },
+{ percent: 0.5,     value: "2.15%",   text: "ROI" },
+{ percent: 0.52,     value: "2.75%",   text: "ROI" },
+{ percent: 0.54,     value: "3.25%",   text: "ROI" },
+{ percent: 0.56,     value: "3.50%",   text: "ROI" },
+{ percent: 0.58,     value: "4.15%",   text: "ROI" },
+{ percent: 0.6,     value: "4.65%",   text: "ROI" },
+{ percent: 0.52,     value: "5.25%",   text: "ROI" },
+{ percent: 0.54,     value: "5.25%",   text: "ROI" },
+{ percent: 0.56,     value: "5.25%",   text: "ROI" },
+
+
+  ];
+
+  function updateStickyNumber() {
+    const rect = section.getBoundingClientRect();
+    const scrollTop = -rect.top;
+    const sectionHeight = section.clientHeight;
+
+    let scrollPercent = scrollTop / sectionHeight;
+    scrollPercent = Math.max(0, Math.min(scrollPercent, 1));
+
+    let current = thresholds[0];
+    for (let i = 0; i < thresholds.length; i++) {
+      if (scrollPercent >= thresholds[i].percent) {
+        current = thresholds[i];
+      } else {
+        break;
+      }
+    }
+
+    // Update both fields
+    stickyValue.textContent = current.value;
+    stickyText.textContent = current.text;
+  }
+
+  window.addEventListener('scroll', updateStickyNumber);
+  updateStickyNumber(); // Initial call
+});
+
+    </script>
+
+
+    </body>
+    </html>
+
+
+

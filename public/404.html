@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/resources/images/logo.png">
+    <title>1X2S</title>
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+</head>
+<body>
+
+<style>
+body{
+background-color: black;
+color: black;
+overflow-x: hidden;
+}
+
+.section1{
+height: 100vh;
+width: 100vw;
+align-items: center;
+align-content: center;
+justify-content: center ;
+}
+
+
+
+.page-title-container {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+width: 80vw;
+}
+
+.page-title-container h1{
+color: rgb(252, 54, 54);
+text-align: center;
+font-size: 5em;
+font-family: orbitron;
+font-weight: 500;
+margin: 0;
+}
+.page-title-container h2{
+color: white;
+text-align: center;
+font-size: 2em;
+font-family: MOntserrat;
+font-weight: 600;
+}
+.page-title-container a{
+color: rgb(255, 46, 46);
+text-align: center;
+font-size: 1em;
+font-family: MOntserrat;
+font-weight: 300;
+text-decoration: underline;
+transition: 0.5s;
+
+}
+.page-title-container a:hover{
+opacity: 50%;
+transition: 0.5s;
+}
+
+</style>
+
+
+<nav>
+    <!-- Navbar / for pc devices -->
+    <div id="navbar"></div>
+    <script src="/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    
+    <div class="scroll-progress" id="progressBar"></div>
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = scrollPercent + '%';
+        });
+      </script>
+</nav>
+<mobilenav>
+  <!-- Navbar / for mobile devices -->
+  <div id="mobilenavbar"></div>
+  <script src="/scriptsheets/mobilenavbar.js"></script>
+  <link rel="stylesheet" href="/stylesheets/mobilenavbar.css">
+</mobilenav>  
+
+<section class="section1" id="section1">
+
+
+<div class="page-title-container">
+<h1>404 Not Found!</h1>
+<h2>Content Unavailable.</h2>
+<a href="/">Return to Home</a>
+</div>
+
+
+</section>
+
+
+</body>
