@@ -10,6 +10,17 @@
         <link rel="stylesheet" href="/stylesheets/index-webkit-mobile.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<script>
+  // Add 'js' class immediately to <html> so CSS applies early
+  document.documentElement.classList.add('js');
+
+  // When the page is fully loaded, add 'fade-in' to body
+  window.addEventListener('load', function () {
+    document.body.classList.add('fade-in');
+  });
+</script>
+
+
 
     </head>
 
@@ -31,7 +42,6 @@
         <div id="navbar"></div>
         <script src="/scriptsheets/navbar.js"></script>
         <link rel="stylesheet" href="/stylesheets/navbar.css">
-        <div class="scroll-progress" id="progressBar"></div>
     </nav>
     <mobilenav>
         <div id="mobilenavbar"></div>
@@ -74,6 +84,7 @@
                 </div>
             <div class="section1-parent-title-container">
                 <h1 style="margin: 0;">Game is<span style="color: rgb(255, 56, 56);"> Game</span></h1>
+                <h2>Advanced Analytics and Insights based on Artificial Intelligence</h2>
             </div>
 
 
@@ -183,6 +194,95 @@
     </div>
   </div>
 
+
+
+
+  <div class="a-client-vGhIx17">
+      <div class="b-client-vGhIx17">
+        <h1>Over 500+ Leagues and Matches</h1>
+        <a>Across 5+ Sports</a>
+      </div>
+      <div class="b-client-vGhIx17">
+        <h1>Uncompromised Data</h1>
+        <a>Extensively Sourced Data and Insights</a>
+      </div>
+      <div class="b-client-vGhIx17">
+        <h1>Advanced Analysis</h1>
+        <a>Gemini Based Big-Data Processing</a>
+      </div>
+      <div class="b-client-vGhIx17">
+        <h1>Reliable Predictions</h1>
+        <a>Stats Don't Lie</a>
+      </div>
+      <div class="b-client-vGhIx17">
+        <h1>Free Forever</h1>
+        <a>Success Shouldn't Cost</a>
+      </div>
+        <div class="b-client-vGhIx17">
+        <h1>Beautiful Insights</h1>
+        <a>Let Us Guide You</a>
+      </div>
+  </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const clients = document.querySelectorAll('.b-client-vGhIx17');
+  let currentVisibleIndex = -1;
+  let ticking = false;
+
+  function updateVisibility() {
+    const viewportCenterY = window.innerHeight / 2;
+    let closestIndex = -1;
+    let minDistance = Infinity;
+
+    clients.forEach((client, index) => {
+      const rect = client.getBoundingClientRect();
+      const elementCenterY = rect.top + rect.height / 2;
+      const distance = Math.abs(elementCenterY - viewportCenterY);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (closestIndex !== currentVisibleIndex) {
+      clients.forEach((client, idx) => {
+        client.classList.toggle('is-visible', idx === closestIndex);
+      });
+      currentVisibleIndex = closestIndex;
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateVisibility);
+      ticking = true;
+    }
+  }
+
+  function debounce(func, delay) {
+    let timer;
+    return function () {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, arguments), delay);
+    };
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('resize', debounce(updateVisibility, 150));
+
+  updateVisibility(); // Initial call
+});
+</script>
+
+
+
+
+
     </section>
 
     <section class="section4" id="section4">
@@ -268,27 +368,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const section = document.getElementById('section3');
 
   const thresholds = [
-{ percent: 0.0,     value: "15.00$",   text: "Made" },
-{ percent: 0.07,     value: "512.60$",   text: "Made" },
-{ percent: 0.08,     value: "1784,00$",   text: "Made" },
-{ percent: 0.09,     value: "5235,82$",   text: "Made" },
-{ percent: 0.1,     value: "7560,20$",   text: "Made" },
-{ percent: 0.2,     value: "10.780,55$",   text: "Made" },
-{ percent: 0.3,     value: "15.092,20$",   text: "Made" },
-{ percent: 0.32,     value: "18.568,60$",   text: "Made" },
-{ percent: 0.34,     value: "18.568,60$",   text: "Made" },
-{ percent: 0.5,     value: "2.15%",   text: "ROI" },
-{ percent: 0.52,     value: "2.75%",   text: "ROI" },
-{ percent: 0.54,     value: "3.25%",   text: "ROI" },
-{ percent: 0.56,     value: "3.50%",   text: "ROI" },
-{ percent: 0.58,     value: "4.15%",   text: "ROI" },
-{ percent: 0.6,     value: "4.65%",   text: "ROI" },
-{ percent: 0.52,     value: "5.25%",   text: "ROI" },
-{ percent: 0.54,     value: "5.25%",   text: "ROI" },
-{ percent: 0.56,     value: "5.25%",   text: "ROI" },
+    { percent: 0.01, value: "0$", text: "Avg Investment" },
+    { percent: 0.02, value: "1.62$", text: "Avg Investment" },
+    { percent: 0.03, value: "1.90$", text: "Avg Investment" },
+    { percent: 0.04, value: "2.00$", text: "Avg Investment" },
 
+    { percent: 0.2, value: "60,82$", text: "Avg Return" },
 
+    { percent: 0.4, value: "1092,20$", text: "Made this Month" },
+
+    { percent: 0.5, value: "18.568,60$", text: "Made this Year" },
+
+    { percent: 0.6, value: "3.25%", text: "ROI" },
+    { percent: 0.62, value: "3.50%", text: "ROI" },
+    { percent: 0.63, value: "4.15%", text: "ROI" },
+    { percent: 0.64, value: "5.25%", text: "ROI" }
   ];
+
+  let lastValue = '';
+  let lastText = '';
 
   function updateStickyNumber() {
     const rect = section.getBoundingClientRect();
@@ -307,9 +405,20 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Update both fields
-    stickyValue.textContent = current.value;
-    stickyText.textContent = current.text;
+    if (current.value !== lastValue || current.text !== lastText) {
+      fadeUpdate(stickyValue, current.value);
+      fadeUpdate(stickyText, current.text);
+      lastValue = current.value;
+      lastText = current.text;
+    }
+  }
+
+  function fadeUpdate(element, newText) {
+    element.classList.add('fade-out');
+    setTimeout(() => {
+      element.textContent = newText;
+      element.classList.remove('fade-out');
+    }, 200); // Half of the transition duration (0.4s)
   }
 
   window.addEventListener('scroll', updateStickyNumber);

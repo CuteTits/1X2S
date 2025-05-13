@@ -11,8 +11,16 @@ scroll-behavior: smooth;
 -moz-osx-font-smoothing: grayscale;
 -webkit-text-size-adjust: 100%;
 padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-
 }
+  html.js body {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+
+  html.js body.fade-in {
+    opacity: 1;
+  }
+
 * {
 margin: 0;
 padding: 0;
@@ -114,19 +122,25 @@ font-weight: 200;
 margin: 0;
 }
 
-
-
-    
-
-
+.section1-parent-title-container{
+width: 45vw;
+}
 
 .section1-parent-title-container h1{
 font-size:4em;
 font-family: orbitron   ;
 }
+.section1-parent-title-container h2{
+font-size:2em;
+font-family: orbitron   ;
+}
+
 @media screen and (max-width: 600px) {
 .section1-parent-title-container h1{
 font-size: 3em;
+}
+.section1-parent-title-container h2{
+font-size: 1em;
 }
 }
 
@@ -751,176 +765,12 @@ font-size: .8em;
 
 
 
-
-
-
-
-.section3-element-container img.active {
-opacity: 100%;
-transition: all 1s ease;
-}
-.section3-element-container {
-display: block;
-grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-justify-content: center;
-align-content: center;
-place-content: center; 
-width: 80vw;
-height: 100%; 
-margin: 0 auto; 
-text-align: center;
-}
-.section3-element-container img:hover{
-transform: scale(1.1);
-transition: all 1s ease;
-opacity: 100%;
-}
-.section3-element-container img {
-width: 60px;
-margin: 10px;
-opacity: 0.7;
-cursor: pointer;
-transition: all 1s ease;
-}
-
-
-
-
-
-
-
-
-.section3-text-container-content{
-width: 70vw;
-text-align: center;
-display: block;
-justify-content: center; 
-align-items: center; 
-margin: 2% auto 0 auto; 
-box-sizing: border-box; 
-}
-.section3-text-container-content p{
-font-size: .8em;
-color: rgb(61, 61, 61);
-font-family: montserrat; 
-}
-.section3-text-container-content a{
-color: rgb(219, 46, 46);
-font-family: montserrat; 
-text-decoration: none;
-transition: all .5s ease;
-border: solid 1px transparent
-}
-.section3-text-container-content a:hover{
-color: rgb(248, 52, 52);
-text-decoration: none;
-border: solid 1px rgb(248, 52, 52);
-transition: all .5s ease;
-}
-#p1{
-font-size: .8em;
-color: rgb(61, 61, 61);
-font-family: montserrat; 
-margin: 5px;
-}
-#p2{
-font-size: .8em;
-color: rgba(255, 255, 255, 0.692);
-font-family: montserrat; 
-border: solid 1px rgb(238, 48, 48);
-background-color: #f7454548;
-border-radius: 5px;
-padding: 2px;
-}
-
-
-@media screen and (max-width: 600px) {
-#p1{
-font-size: .6em;
-}
-#p2{
-font-size: .6em; 
-}
-}
-
-
-
-
-
-
-
-
-
-
 .section-cfg-divider {
 width: 80vw;
 border-bottom: solid 1px #2c2c2c;
 padding: 20px 0;
 margin: 0 auto 2%; 
 box-sizing: border-box; 
-}
-
-.section-title-parent-container{
-display: flex;
-margin: 0 auto 25px 15%; 
-gap: 50px;
-}
-.section-title-content-container{
-justify-content: left; 
-align-items: left; 
-text-align: left;
-width: 25vw;
-border-bottom: #333 solid 1px;
-
-}
-.section-title-content-container p{
-color: white  ;
-font-family: orbitron;
-}
-
-
-  
-  
-    .page-title-undefined-3 {
-    color: white;
-    font-family: 'Orbitron', sans-serif; 
-    display: flex;
-    font-size: 2em;
-    box-sizing: border-box; 
-    margin-top: 20px;
-    }
-    .page-subtitle-undefined-3 {
-    color: rgb(248, 52, 52);
-    font-family: 'Orbitron', sans-serif; 
-    font-size: 1em;
-    margin: 0;
-    display: flex;
-    padding-bottom: 10px;
-    }
-
-@media screen and (max-width: 1080px) {
-.page-title-undefined-3 {
-color: white;
-font-family: 'Orbitron', sans-serif; 
-display: flex;
-font-size: 2em;
-}
-.page-subtitle-undefined-3 {
-color: rgb(248, 52, 52);
-font-family: 'Orbitron', sans-serif; 
-font-size: 1em;
-margin: 0;
-display: flex;
-}
-.section-title-parent-container{
-display: block;
-}
-.section-title-content-container{
-width: 50vw;
-}
-.section-title-content-container p{
-display: none;
-}
 }
 
 
@@ -1138,12 +988,19 @@ z-index: 10;
 #sticky-value{
 font-size: 7em;
 font-family: orbitron;
+transition: opacity 0.1s ease;
+
 }
 #sticky-text {
 font-weight: bold;
 font-size: 5em;
 font-family: orbitron;
+transition: opacity 0.1s ease;
 }
+.fade-out { /*Optional - Change opacity value to 0*/
+opacity: 1;
+}
+
 
 
 @media screen and (max-width:1100px) {
@@ -1176,4 +1033,34 @@ font-weight: bold;
 font-size: 3em;
 font-family: orbitron;
 }    
+}
+
+
+
+
+
+
+
+
+
+.a-client-vGhIx17 {
+  position: absolute;
+  display: block;
+  top: 50vh;
+  left: 20px;
+}
+
+.b-client-vGhIx17 {
+  color: white;
+  border: solid 1px white;
+  padding: 20px;
+  margin-top: 50%;
+  border-radius: 15px;
+  opacity: 25%;
+  transition: all 0.6s ease-in-out; 
+}
+
+.b-client-vGhIx17.is-visible {
+opacity: 1;
+transform: scale(1.1);
 }

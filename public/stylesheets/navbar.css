@@ -41,12 +41,19 @@ position: absolute;
 left: 5%;
 top: 5%;
 }
-.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content h1{
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content a{
 font-size: 2em;
 font-family: zendots;
 margin: 0;
+transition: all 0.3s ease;
+cursor: pointer;
+text-decoration: none;
+color: white;
 }
-
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content a:hover{
+color:#ea4040;
+transition: all 0.3s ease;
+}
 
 .Navigational-header-bar-style-top-aligned-flex-0 {
 display: grid;
@@ -111,23 +118,6 @@ transition: all 1s ease;
 
 
 
-.Navigational-header-expanding-element-dynamic-0{
-border-bottom:  2px solid rgb(253, 67, 67);
-opacity: 50%;
-transition: width 0.5s ease; 
-position: relative;
-justify-self: center;
-align-self: center;
-align-content: center;
-
-}
-.Navigational-header-expanding-element-dynamic-0-container{
-display: flex;
-justify-content: center; 
-align-items: center; 
-overflow: hidden;
-
-}
 
 
 
@@ -257,4 +247,21 @@ right: 2%;
 .loginbtn img, .signupbtn img {
 width: 2vw;
 }
+}
+
+
+
+
+
+
+
+#progress-bar {
+position: relative;
+top: 0%;
+left: 0;
+height: 2px;
+background-color: #dd3131; 
+width: 0%;
+z-index: 1000;
+transition: width 0.2s ease-out;
 }

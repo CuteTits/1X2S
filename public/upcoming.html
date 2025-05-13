@@ -28,16 +28,6 @@
     <div id="navbar"></div>
     <script src="/scriptsheets/navbar.js"></script>
     <link rel="stylesheet" href="/stylesheets/navbar.css">
-    <div class="scroll-progress" id="progressBar"></div>
-    <script>
-        const progressBar = document.getElementById('progressBar');
-        window.addEventListener('scroll', () => {
-          const scrollTop = window.scrollY;
-          const docHeight = document.body.scrollHeight - window.innerHeight;
-          const scrollPercent = (scrollTop / docHeight) * 100;
-          progressBar.style.width = scrollPercent + '%';
-        });
-      </script>
 </nav>
 <mobilenav>
     <!-- Navbar / for mobile devices -->
@@ -54,7 +44,6 @@
 <section id="section3">
 
 
-  <div class="section-cfg-divider" ></div>
 
 
   <div class="section-title-parent-container">
@@ -209,14 +198,8 @@ function saveCardAsImage(card) {
 
 
 
-
 </section>
 
-<section class="section4" id="section4">
-  
-
-    
-</section>
 
 
 
