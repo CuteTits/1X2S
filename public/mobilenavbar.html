@@ -1,18 +1,26 @@
+<html>
+    <head>
+        <!-- Add Font Awesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    </head>
+    <body>
+
 <div class="mobilenavbar" id="mobilenavbar">
-    <a href="/" class="nav-item" id="nav-item" data-scroll="true">
-        <img src="/resources/images/home_24dp_F75454_FILL1_wght400_GRAD0_opsz24.svg" alt="Home Icon" class="nav-icon">
-        <span style="color: rgb(228, 74, 74);">Home</span>
-    </a>
-    <a href="/upcoming.html" class="nav-item" id="tips">
-        <img src="/resources/images/sports_soccer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Tips Icon" class="nav-icon">
-        <span>Tips</span>
-    </a>
-    <a href="/resources.html" class="nav-item" id="resources">
-        <img src="/resources/images/apps_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="AI Icon" class="nav-icon">
-        <span>Resources</span>
-    </a>
-    <a href="/profile.html" class="nav-item" id="profile">
-        <img src="/resources/images/person_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Profile Icon" class="nav-icon">
-        <span>Profile</span>
-    </a>
+  <button id="toggleButton" class="toggle-button">☰</button>
+  <div id="sideNavbar" class="side-navbar">
+    <ul class="data-sideNavbar-icon">
+      <li><a href="/"><i class="fas fa-home"></i></a></li>
+      <li><a href="/upcoming.html"><i class="fa-solid fa-futbol"></i></a></li>
+      <li><a href="/resources.html"><i class="fa-solid fa-list"></i></a></li>
+      <li><a href="/"><i class="fa-regular fa-circle-question"></i></a></li>
+    </ul>
+
+    <ul class="data-sidenavbar-account-icon">
+      <li><a href="#home"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
+      <li><a href="#about"><i class="fa-solid fa-circle-user"></i></a></li>
+    </ul>
+  </div>
 </div>
+
+</body>
+</html>

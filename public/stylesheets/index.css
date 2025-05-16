@@ -1,5 +1,4 @@
 html, body {
-font-family: Arial, sans-serif;
 background-color: #050505;
 overflow-x: hidden;
 width: 100%;
@@ -12,22 +11,26 @@ scroll-behavior: smooth;
 -webkit-text-size-adjust: 100%;
 padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-  html.js body {
-    opacity: 0;
-    transition: opacity 1s ease-in;
-  }
-
-  html.js body.fade-in {
-    opacity: 1;
-  }
-
+html.js body {
+opacity: 0;
+transition: opacity 1s ease-in;
+}
+html.js body.fade-in {
+opacity: 1;
+}
+.no-scroll {
+overflow: hidden;
+height: 100%;
+position: fixed; 
+width: 100%; 
+}
 * {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
 
-
+/*Controlp*/
 
 ::selection {
 background-color: #f74545;
@@ -63,12 +66,15 @@ overflow: hidden;
 width: 100vw;
 z-index: 0;
 }
+.section-1-front-image {
+transition: all 0.3s ease-in-out;
+}
 .section-1-front-image img {
 width: 100%;
 height: auto;
 position: fixed;
 top: 50%;
-opacity: 15%;
+opacity: 8%;
 left: 50%;
 transform: translate(-50%, -50%) scale(1.2);
 will-change: transform;
@@ -90,22 +96,15 @@ content: url('/resources/images/image-city-celebration-limited-png.png.png');
 
 
 
-.section1-parent-container1{
-color: white;
-position: absolute;
-top:10dvh;
-left: 15vw;
-overflow-x: hidden;
+.section1-parent-container1 {
+    color: white;
+    position: absolute;
+    overflow-x: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    text-align: center;
 }
-@media screen and (max-width: 1080px) {
-.section1-parent-container1{
-left: 50%;
-transform: translateX(-50%);
-top: 5%;
-position: absolute;
-}
-}
-
 
 
 
@@ -115,24 +114,28 @@ bottom: 5%;
 left: 5%;
 color: white;
 }
-
 .section1-parent-container2 h3{
 font-family: montserrat;
-font-weight: 200;
+font-weight: 600;
 margin: 0;
 }
 
 .section1-parent-title-container{
-width: 45vw;
+width: 50vw;
 }
+
+
+
 
 .section1-parent-title-container h1{
 font-size:4em;
-font-family: orbitron   ;
+font-family: orbitron;
+font-weight: 600;
 }
 .section1-parent-title-container h2{
-font-size:2em;
-font-family: orbitron   ;
+font-size:1em;
+font-family: orbitron;
+font-weight: 200;
 }
 
 @media screen and (max-width: 600px) {
@@ -288,12 +291,12 @@ transition: all 0.5s ease-in-out;
 }
 @media screen and (max-width: 1080px) {
 .section2-content-container-block-0 {
-    display: flex;
-    flex-direction: row;
-    align-items: center; 
-    justify-content: flex-start; 
-    gap: 10px; 
-    }
+display: flex;
+flex-direction: row;
+align-items: center; 
+justify-content: flex-start; 
+gap: 10px; 
+}
 }
 .section2-content-container-block-0:hover{
 transform: scale(1.05);
@@ -668,7 +671,7 @@ display: none;
 display: none;
 }
 }
-    
+
 
 
 @media  (max-width: 1080px) {
@@ -972,68 +975,38 @@ border-radius: 8px;
 z-index: 10;
 display: flex;
 flex-direction: column;
-right: 15%;
+right: 20%;
 width: 50%;
 }
-
 .sticky-fixed {
 position: fixed;
 z-index: 10;
 }
-
 .sticky-absolute {
 position: absolute;
 z-index: 10;
 }
 #sticky-value{
-font-size: 7em;
-font-family: orbitron;
-transition: opacity 0.1s ease;
-
-}
-#sticky-text {
-font-weight: bold;
 font-size: 5em;
 font-family: orbitron;
 transition: opacity 0.1s ease;
+}
+#sticky-text {
+font-weight: bold;
+font-size: 3em;
+font-family: orbitron;
+transition: all 0.2s ease-in-out;
 }
 .fade-out { /*Optional - Change opacity value to 0*/
-opacity: 1;
+opacity: 0;
+transition: all 0.2s ease-in-out;
 }
 
 
 
-@media screen and (max-width:1100px) {
-.sticky-container {
-width: 80%;
-}
-#sticky-value{
-font-size: 5em;
-font-family: orbitron;
-}
-#sticky-text {
-font-weight: bold;
-font-size: 3em;
-font-family: orbitron;
-}    
-}
 
 
-@media screen and (max-width:600px) {
-.sticky-container {
-width: 100%;
-padding: 10px;
-}
-#sticky-value{
-font-size: 3em;
-font-family: orbitron;
-}
-#sticky-text {
-font-weight: bold;
-font-size: 3em;
-font-family: orbitron;
-}    
-}
+
 
 
 
@@ -1045,22 +1018,128 @@ font-family: orbitron;
 
 .a-client-vGhIx17 {
   position: absolute;
-  display: block;
-  top: 50vh;
-  left: 20vw;
+  top: 10%;
+  left: 20%;
+  width: 25%;
+  height: 100%;              
+  display: flex;
+  flex-direction: column;     
+  justify-content: space-evenly; 
 }
 
 .b-client-vGhIx17 {
   color: white;
-  border: solid 1px white;
   padding: 20px;
-  margin-top: 50%;
-  border-radius: 15px;
   opacity: 25%;
-  transition: all 0.6s ease-in-out; 
+  border-radius: 15px;
+  transition: all 0.6s ease-in-out;
+  box-sizing: border-box;
+}
+.b-client-vGhIx17.is-visible {
+  opacity: 1;
+  transform: scale(1.1);
+  border: solid 1px #f75454;
+  box-shadow: 0 0 10px 2px #f75454; /* Adds a subtle glow effect */
 }
 
-.b-client-vGhIx17.is-visible {
-opacity: 1;
-transform: scale(1.1);
+
+.b-client-vGhIx17 h1{
+font-size: 1em;
+font-family: montserrat;
+}
+.b-client-vGhIx17 p{
+font-size: .7em;
+font-family: montserrat;
+}
+
+
+
+.fa-xl {
+font-size: 3em !important;
+line-height: .03125em;
+vertical-align: -.1875em;
+}
+
+
+@media screen and (max-width:1100px) {
+.sticky-container {
+width: 80%;
+}
+#sticky-value{
+font-size: 4em;
+font-family: orbitron;
+}
+#sticky-text {
+font-weight: bold;
+font-size: 2.5em;
+font-family: orbitron;
+}   
+.sticky-container {
+right: 4%;
+width: 40%;
+}
+.a-client-vGhIx17 {
+width: 30%;
+left: 5%;
+height: 100%;
+} 
+}
+
+
+
+@media screen and (max-width:800px) {
+.sticky-container {
+width: 80%;
+}
+#sticky-value{
+font-size: 2.7em;
+font-family: orbitron;
+}
+#sticky-text {
+font-weight: bold;
+font-size: 2.2em;
+font-family: orbitron;
+}   
+.sticky-container {
+right: 5%;
+width: 50%;
+}
+.a-client-vGhIx17 {
+width: 40%;
+left: 5%;
+height: 100%;
+} 
+.b-client-vGhIx17 h1{
+font-size: .8em;
+font-family: montserrat;
+}
+.b-client-vGhIx17 p{
+font-size: .5em;
+font-family: montserrat;
+line-height: 1;
+}
+}
+
+
+
+
+@media screen and (max-width:500px) {
+.sticky-container {
+width: 80%;
+}
+#sticky-value{
+font-size: 2.2em;
+font-family: orbitron;
+}
+#sticky-text {
+font-weight: bold;
+font-size: 2em;
+font-family: orbitron;
+}   
+.sticky-container {
+width: 50%;
+}
+.a-client-vGhIx17 {
+width: 40%;
+} 
 }
