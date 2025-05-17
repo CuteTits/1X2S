@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/resources/images/logo.png">
+    <title>1X2S</title>
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+</head>
+<body>
+
+<style>
+body{
+background-color: black;
+color: black;
+overflow-x: hidden;
+}
+
+.section1{
+height: 100vh;
+width: 100vw;
+align-items: center;
+align-content: center;
+justify-content: center ;
+}
+.section1 img{
+height: 100vh;
+width: 100vw;
+z-index: -1;
+opacity: 10%;
+object-fit: fill;
+}
+
+
+.page-title-container {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+text-align: center;
+}
+
+.page-title-container h1{
+color: white;
+text-align: center;
+font-size: 5em;
+font-family: orbitron;
+font-weight: 500;
+}
+.page-title-container h2{
+color: white;
+text-align: center;
+font-size: 2em;
+font-family: MOntserrat;
+font-weight: 200;
+}
+
+
+
+
+</style>
+
+
+<nav>
+    <!-- Navbar / for pc devices -->
+    <div id="navbar"></div>
+    <script src="/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/stylesheets/navbar.css">
+    
+    <div class="scroll-progress" id="progressBar"></div>
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = scrollPercent + '%';
+        });
+      </script>
+</nav>
+
+<section class="section1" id="section1">
+
+<img src="/resources/images/image-arsenal-celebration-limited-png.png" alt="frontpageimg">
+
+<div class="page-title-container">
+<h1>404 Not Found!</h1>
+<h2>Content Currently Unavailable.</h2>
+</div>
+
+
+</section>
+
+
+</body>

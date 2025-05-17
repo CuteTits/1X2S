@@ -1,0 +1,111 @@
+@media  (max-width: 1080px) {
+.logo-dynamic-slider {
+width: 90vw;
+}
+}
+
+
+
+@media (max-width: 1080px) {
+.section1-parent-container1 {
+color: white;
+position: absolute;
+top: 15vh;
+left: 50%;
+width: 90%;
+transform: translateX(-50%);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+}
+  
+
+@media (max-width: 1080px) {
+.section1-parent-header-container{
+font-size: 1em;
+opacity: 25%;
+}
+}
+
+@media  (max-width: 1080px) {
+.carousel-card li {
+font-size: .8em;
+}
+.carousel-card-inner h2{
+font-size: 1.2em;
+}
+.carousel-card h3{
+font-size: 1em;
+}
+.odds{
+font-size: 1.5em !important;
+padding: 2px 5px 2px 5px !important;
+}
+.odds::before{
+display: none !important;
+}
+}
+@media (max-width: 1080px) {
+.carousel-container {
+width: 90%;
+}
+}
+@media (max-width: 1080px) {
+.carousel-card {
+width: 40vw;
+height: 70vh;
+}
+}
+
+
+@media  (max-width: 1080px) {
+.nav-left {
+left: 0rem;
+}
+.nav-right {
+right: 0rem;
+}
+}
+
+
+@media  (max-width: 1080px) {
+    .section-1-subtitle-content-container-flex-1 a,.section-1-subtitle-content-container-flex-2 a{
+font-size: 2.5em;
+}
+.section-1-subtitle-content-container-flex-1 a1,.section-1-subtitle-content-container-flex-2 a1{
+font-size: 1em;
+}
+}
+
+
+@media  (max-width: 1080px) {
+.navigation-menu-desktop-buttons-user-options{
+display: none;
+visibility: hidden;
+}
+}
+
+
+
+
+@media  (max-width: 1080px) {
+.section-1-subtitle-parent-container-block{
+display: flex;
+padding: 5%;
+justify-content: space-between;
+width: 70%;
+margin-top: 2%;
+}
+}
+@media  (max-width: 1080px) {
+.section-1-subtitle-content-container-flex-1 a{
+font-size: 2em;
+}
+.section-1-subtitle-content-container-flex-2 a{
+font-size: 2em;
+}
+}
+
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JSON Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f7f7f7;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    pre {
+      background: #eee;
+      padding: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:active {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Fill in the details</h2>
+  <input type="text" id="title" placeholder="Title" />
+  <input type="text" id="name1" placeholder="Name 1" />
+  <input type="text" id="name2" placeholder="Name 2" />
+  <textarea id="details" placeholder="Details (comma separated)"></textarea>
+  <input type="text" id="odds" placeholder="Odds" />
+
+  <pre id="jsonOutput" style="display:none;"></pre>
+  <button id="copyBtn" style="display:none;">Copy JSON</button>
+
+  <script>
+    const inputs = document.querySelectorAll("input, textarea");
+    const output = document.getElementById("jsonOutput");
+    const copyBtn = document.getElementById("copyBtn");
+
+    inputs.forEach(input => {
+      input.addEventListener("input", generateJSON);
+    });
+
+    function generateJSON() {
+      const title = document.getElementById("title").value.trim();
+      const name1 = document.getElementById("name1").value.trim();
+      const name2 = document.getElementById("name2").value.trim();
+      const detailsRaw = document.getElementById("details").value.trim();
+      const odds = document.getElementById("odds").value.trim();
+      const image = "/resources/images/";
+
+      if (title && name1 && name2 && detailsRaw && odds) {
+        const detailsArray = detailsRaw.split(',').map(item => item.trim());
+
+        const jsonObj = {
+          title,
+          name1,
+          name2,
+          image,
+          details: detailsArray,
+          odds
+        };
+
+        output.style.display = "block";
+        copyBtn.style.display = "inline-block";
+        output.textContent = JSON.stringify(jsonObj, null, 2);
+      } else {
+        output.style.display = "none";
+        copyBtn.style.display = "none";
+      }
+    }
+
+    copyBtn.addEventListener("click", () => {
+      const text = output.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => copyBtn.textContent = "Copy JSON", 1500);
+      });
+    });
+  </script>
+
+</body>
+</html>
