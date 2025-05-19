@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="/pagecontent/resources/images/logo.png">
+    <title>1X2S</title>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+    <link rel="stylesheet" href="/pagecontent/stylesheets/index.css">
+    <link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+<page class="page-content-on-load-true">
+
+
+
+
+
+
+<nav>
+    <!-- Navbar / for pc devices -->
+    <div id="navbar"></div>
+    <script src="/pagecontent/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+</nav>
+<mobilenav>
+    <!-- Navbar / for mobile devices -->
+    <div id="mobilenavbar"></div>
+    <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+</mobilenav>  
+
+
+
+
+
+
+<section id="section3">
+
+
+
+
+  <div class="section-title-parent-container">
+    <div class="section-title-content-container">
+      <h1 class="page-title-undefined-3">Upcoming</h1>
+      <h1 class="page-subtitle-undefined-3">Weekly</h1>
+    </div>
+  </div>
+  
+  <div class="b-section-dynamic-content-slider-container">
+    <button class="b-slider-nav bnav-left" onclick="bscrolldynamicslider(-1)">❮</button>
+    <div class="b-slider-track" id="b-sliderTrack">
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-1.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-2.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-3.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-4.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-5.json"></div>
+      <div class="b-slider-card" data-src="/page&card-1/&content-card-a1-6.json"></div>
+    </div>
+    <button class="b-slider-nav bnav-right" onclick="bscrolldynamicslider(1)">❯</button>
+  </div>
+  
+  <script>
+    function bscrolldynamicslider(direction) {
+      const track = document.getElementById('b-sliderTrack');
+      const cardWidth = track.querySelector('.b-slider-card').offsetWidth + 1; 
+      track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+    async function loadCard1Content(card) {
+      const src = card.dataset.src;
+      try {
+        const res = await fetch(src);
+        const data = await res.json();
+        card.innerHTML = `
+          <div class="b-slider-card-inner">
+            <div class="b-slider-card-image1"><img src="${data.image}" alt="${data.title}"/>
+            <h3>${data.title}</h3></div>
+            <p>${data.description}</p>
+            <div class="b-slider-card-icon"><img src="${data.icon}" alt="${data.context}"/>
+            <a>${data.context}<a>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+        console.error(`Failed to load ${src}`, err);
+      }
+    }
+      document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.b-slider-card');
+      cards.forEach(card => loadCard1Content(card));
+    });
+  </script>
+
+
+
+
+
+
+
+<div class="section-dynamic-content-slider-container">
+    <button class="a-slider-nav nav-left" onclick="scrolldynamicslider(-1)">❮</button>
+    <div class="a-slider-track" id="a-sliderTrack">
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-1.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-2.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-3.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-4.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-5.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-6.json"></div>
+      </div>
+    <button class="a-slider-nav nav-right" onclick="scrolldynamicslider(1)">❯</button>
+  </div>
+  <script>
+    function scrolldynamicslider(direction) {
+      const track = document.getElementById('a-sliderTrack');
+      const cardWidth = track.querySelector('.a-slider-card').offsetWidth + 1; 
+      track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+    function centerCard(card) {
+      const track = document.getElementById('a-sliderTrack');
+      const trackRect = track.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const offset = cardRect.left - trackRect.left - (trackRect.width / 2) + (cardRect.width / 2);
+      track.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+    window.addEventListener('DOMContentLoaded', async () => {
+      const cards = document.querySelectorAll('.a-slider-card');
+      for (let card of cards) {
+        await loadCardContent(card);
+        card.addEventListener('click', () => centerCard(card));
+      }
+    });
+ 
+
+
+  async function loadCardContent(card) {
+  const src = card.dataset.src;
+  try {
+    const res = await fetch(src);
+    const data = await res.json();
+    const detailsHTML = data.details?.map(item => `<li><a>${item}</a></li>`).join('') || '';
+    card.innerHTML = `
+      <div class="a-slider-card-inner">
+        <div class="a-slider-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
+        <h3>${data.title}</h3>
+        <h2>${data.name1}</h2>
+        <h2>${data.name2}</h2>
+        <ul style="text-align:left; padding-left:1.2rem; margin-top:0.5rem; width:auto;">${detailsHTML}</ul>
+        <h2 class="odds">${data.odds}</h2>
+        <div class="a-slider-card-image2"><img src="/pagecontent/resources/images/logo2.png"></div>
+        
+        <!-- Image button -->
+        <button class="save-png-button">
+          <img src="resources/images/ios_share_24dp_D93636_FILL0_wght400_GRAD0_opsz24.svg" alt="Save as PNG" class="download-icon">
+        </button>
+      </div>
+    `;
+
+    const button = card.querySelector('.save-png-button');
+    button.addEventListener('click', () => saveCardAsImage(card));
+
+  } catch (err) {
+    card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+    console.error(`Failed to load ${src}`, err);
+  }
+}
+
+function saveCardAsImage(card) {
+  const button = card.querySelector('.save-png-button');
+  button.style.visibility = 'hidden';
+
+  html2canvas(card, {
+    useCORS: true,
+    scale: 2
+  }).then(canvas => {
+    button.style.visibility = 'visible';
+    const link = document.createElement('a');
+    link.download = '1X2S-Betslip.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+</script>
+
+<div class="section3-text-container-content">
+<p id="p1">The odds presented are based on current <a href="https://www.bet365.com">Bet365</a> markets and are intended for informational purposes only. Please be aware that odds, availability, and terms may vary between bookmakers, region and time and are subject to change at any time without notice.
+</p>
+<p id="p2">ⓘ Disclaimer!
+  Nothing in this content should be construed as financial advice or a recommendation to place any specific wager. The information provided is purely suggestive and is not a substitute for independent research or judgment. Users are solely responsible for their own betting decisions.
+  1X2S accepts no liability for any financial loss or damages incurred as a result of reliance on the information provided. Always gamble responsibly and within your means.</p>
+</div>
+
+
+
+</section>
+
+
+
+
+
+  <div id="footer-container"></div>
+  <script src="/pagecontent/scriptsheets/global-footer.js"></script>
+  <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+
+
+
+</page>
+
+
+
+
+<script>
+function enableDragScroll(selector) {
+  const slider = document.querySelector(selector);
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// Enable drag scroll for both tracks
+enableDragScroll('.a-slider-track');
+enableDragScroll('.b-slider-track');
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+

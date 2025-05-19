@@ -1,0 +1,268 @@
+/*----- Navbar -----*/
+
+@media screen and (max-width: 770px) {
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+display: none;
+}
+}
+
+
+
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 6000;
+transition: background-color 0.3s ease;
+color: white;
+backdrop-filter: none; 
+-webkit-backdrop-filter: none; 
+justify-content: center;
+text-align: center;
+align-content: center;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
+margin: 0 auto;
+text-align: center;
+display: flex;
+justify-content: center; 
+align-items: center;     
+height: 50px;           
+}
+
+
+
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content  {
+position: absolute;
+left: 5%;
+top: 5%;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content a{
+font-size: 2em;
+font-family: zendots;
+margin: 0;
+transition: all 0.3s ease;
+cursor: pointer;
+text-decoration: none;
+color: white;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content a:hover{
+color:#ea4040;
+transition: all 0.3s ease;
+}
+
+.Navigational-header-bar-style-top-aligned-flex-0 {
+display: grid;
+justify-content: center; /* Center children horizontally */
+align-items: center;     /* Center children vertically */
+width: 25%;
+}
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul {
+list-style-type: none; 
+display: flex; 
+justify-content: center;   
+align-items: center;       
+gap: 10%;                  
+text-align: center;
+padding: 0;
+width: 100%;
+height: 100%;               
+}
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a {
+color: white; 
+text-decoration: none; 
+font-family: montserrat;
+font-weight: 200;
+font-size: 1em;
+position: relative;
+margin: 2px;
+display: flex;             
+justify-content: center;   
+align-items: center;        
+transition: all 1s ease;    
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a:after{
+content: '';
+position: relative;
+width: 0; height: 1px;
+display: block;
+margin-top: 5px;
+right: 0;
+background: hwb(0 13% 5%);
+transition: width .2s ease;
+-webkit-transition: width .2s ease;
+}
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a:hover:after{
+width: 100%;
+left: 0;
+background: hwb(0 13% 5%);
+}  
+
+
+
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a:hover {
+color: red; 
+transition: all 1s ease;
+}
+
+
+
+
+
+
+
+
+.navigation-menu-desktop-buttons-user-options {
+position: absolute;
+right: 5%;
+top: 20%;
+display: flex;
+gap: 15px;
+justify-content: center;
+align-items: center;
+}
+
+.loginbtn img, .signupbtn img {
+width: 1.2vw;
+display: block; 
+}
+
+
+.loginbtn, .signupbtn {
+padding: 5px 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: Montserrat, sans-serif;
+font-size: 0.8em;
+border-radius: 5px;
+transition: all 0.3s ease;
+}
+
+.loginbtn {
+background: transparent;
+border: 1px solid transparent;
+color: white;
+transition: all 0.3s ease;
+overflow: hidden;
+position: relative;
+}
+.loginbtn::before {
+content: '';
+position: absolute;
+bottom: 0;
+right: 100%; 
+height: 2px;
+width: 80%;
+background: rgb(224, 37, 37);
+z-index: -1;
+transition: right 0.4s ease;
+}
+.loginbtn:hover::before {
+right: 0; 
+}
+.loginbtn:hover {
+color: white;
+}
+
+
+.signupbtn {
+  position: relative;
+  background: white;
+  border: 1px solid white;
+  color: rgb(19, 19, 19);
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+.signupbtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 100%; 
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.623);
+  z-index: -1;
+  transition: right 0.4s ease;
+}
+.signupbtn:hover::before {
+  right: 0; 
+}
+.signupbtn:hover {
+  color: white;
+}
+
+
+
+.loginbtn a, .signupbtn a {
+display: flex;
+align-items: center; 
+justify-content: center; 
+text-decoration: none;
+color: inherit;
+gap: 8px; 
+}
+
+
+
+
+
+
+
+
+.loginbtn:hover{
+transition: all 1s ease;
+opacity: 0.5;
+}
+.signupbtn:hover{
+transition: all 1s ease;
+background-color: transparent;
+}
+
+
+
+
+.signupbtn:hover a{
+transition: all 1s ease;
+color: white;
+}
+
+
+@media  (max-width: 880px) {
+.navigation-menu-desktop-buttons-user-options{
+gap: 0;
+right: 2%;
+}
+.loginbtn img, .signupbtn img {
+width: 2vw;
+}
+}
+
+
+
+
+
+
+
+#progress-bar {
+position: relative;
+top: 0%;
+left: 0;
+height: 1px;
+box-shadow: 0 0 8px 1px #f75454;
+background-color: #dd3131; 
+width: 0%;
+z-index: 1000;
+transition: width 0.2s ease-out;
+}
