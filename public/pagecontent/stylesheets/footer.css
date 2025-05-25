@@ -68,6 +68,7 @@ display: flex;
 justify-content: center; 
 align-content: top; 
 text-align: left; 
+
 }
 @media screen and (max-width: 800px) {
 .footer-content-container {
@@ -77,9 +78,14 @@ width: 25%;
 .footer-content-container ul{
 list-style: none;
 }
+.footer-content-container ul li h1 {
+color: rgb(154, 154, 154);
+font-size: 9px;
+font-family: montserrat;
+}
 .footer-content-container ul li a {
 color: white;
-font-size: 14px;
+font-size: 11px;
 font-family: montserrat;
 list-style: none;
 text-decoration: none;
