@@ -1,0 +1,199 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="icon" href="/pagecontent/resources/images/logo.png">
+        <title>1X2S</title>
+        <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+        <link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-ai.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+            <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        
+
+    </head>
+    <body>  
+    <page class="page-content-on-load-true">
+
+
+    <nav>
+        <div id="navbar"></div>
+        <script src="/pagecontent/scriptsheets/navbar.js"></script>
+        <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+    </nav>
+    <mobilenav>
+        <div id="mobilenavbar"></div>
+        <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
+        <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+    </mobilenav>  
+
+
+
+<master class="master">
+    <div class="img-master">
+        <img src="/pagecontent/resources/images/arsenal-llama-1.webp" alt="swaggyllama" class="img-a-master">
+    </div>      
+
+    <section id="section1">
+        
+    
+        <div class="section1-container-parent">
+
+            <div class="section-container-content">
+                <h2 style="font-family: montserrat; color: white; font-weight: 400; margin: 0;">Meta Fine-Tuned</h2>
+                <h1><box-icon name='meta' type='logo' color='#ffffff' class="bx-i" ></box-icon>AI Sports Analyst</h1>
+            </div>
+
+        </div>
+
+<div class="section1-page-content-container-parent">
+    <div class="section-container-text-content">
+      <p><strong>Sports Analyst</strong> is an advanced football analytics engine built on top of <strong>Meta’s LLaMA 4 Scout</strong>, 
+        a cutting-edge large language model fine-tuned for real-time sports analysis, 
+        strategic forecasting, and player performance diagnostics. Designed for coaches, 
+        scouts, analysts, and fans alike, AI Scout turns raw match data into actionable 
+        insights within seconds.
+        Our fine-tuned version is specifically shaped for sports analytics advancedlarge data 
+        processing, predictive modeling, and natural language generation,
+        enabling it to deliver unparalleled insights into football matches and player performance.
+        Our frameworking leverages the latest advancements in AI and machine learning,
+        including reinforcement learning, computer vision, and natural language processing,
+        to provide a comprehensive suite of tools for analyzing and understanding the beautiful game.
+        </p>
+
+
+  <div class="dropdown">
+    <div class="dropdown-header">🔍 Core Features</div>
+    <div class="dropdown-content">
+      <ul>
+        <li><span class="highlight">Real-Time Match Analysis</span> Instant breakdowns of formations, transitions, and key moments using data from broadcasts and tactical reports.</li>
+        <li><span class="highlight">Player Profiling & Performance Forecasting</span> Predictive evaluations and role-fit assessments trained on player telemetry and scouting data.</li>
+        <li><span class="highlight">Tactical Strategy Modeling</span> Formation suggestions, substitution plans, and opponent-specific tactics modeled using reinforcement learning.</li>
+        <li><span class="highlight">Natural Language Match Summaries</span> Generates multilingual, human-readable match reports for fans, journalists, and social media.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <div class="dropdown-header">⚙️ Framework & Architecture</div>
+    <div class="dropdown-content">
+      <ul>
+        <li><strong>Base Model:</strong> Meta LLaMA 4 Scout (70B)</li>
+        <li><strong>Language Tuning:</strong> Instruction-tuned with football-specific corpora (commentaries, interviews, manuals)</li>
+        <li><strong>Multimodal:</strong> Integrates computer vision modules (OpenCV + PyTorch)</li>
+        <li><strong>Framework:</strong> PyTorch Lightning + Hugging Face Transformers</li>
+        <li><strong>Inference:</strong> Optimized with ONNX Runtime for fast GPU/edge inference</li>
+        <li><strong>Streaming:</strong> Real-time data via Kafka + Apache Flink</li>
+        <li><strong>Visualization:</strong> D3.js & Plotly tactical dashboards</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.dropdown-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('active');
+      });
+    });
+  </script>
+
+
+    <p>This "AI" is en enclosed model not available for commercial distribution. However it is fully used by us in our 
+        predictions and plays a crucial role in our data analysis and processing. About 25% of our predictions and tips are based
+        and assisted by our AI model.
+
+        Potential future commercial release is yet to be confirmed as per Meta's terms of usage and guidlines.
+    </p>
+
+    </div>
+       
+</div>
+
+</section>
+
+
+<section id="section2">
+
+ <div class="card-container">
+    <div id="card1" class="card active">This is content for Card 1.</div>
+    <div id="card2" class="card">This is content for Card 2.</div>
+    <div id="card3" class="card">This is content for Card 3.</div>
+  </div>
+
+  <div class="buttons">
+    <button onclick="showCard('card1')">About Sports Analyst</button>
+    <button onclick="showCard('card2')">Core Features</button>
+    <button onclick="showCard('card3')">Framework & Architecture</button>
+    <button onclick="showCard('card4')">Training & Data Sources</button>
+    <button onclick="showCard('card5')">LLaMA 4 Scout</button>
+  </div>
+
+  <script>
+    let currentCardId = 'card1';
+
+    function showCard(newCardId) {
+      if (newCardId === currentCardId) return;
+
+      const currentCard = document.getElementById(currentCardId);
+      const newCard = document.getElementById(newCardId);
+
+      // Step 1: Remove 'active' class (triggers exit animation)
+      currentCard.classList.remove('active');
+
+      // Step 2: Wait before showing new card
+      setTimeout(() => {
+        newCard.classList.add('active');
+        currentCardId = newCardId;
+      }, 300); // Delay between hide and show (ms)
+    }
+  </script>
+    
+</section>
+
+<section id="section3">
+        
+
+ <div class="h-section-content-container">
+            <div class="i-section-container">
+                <h1>Datasets</h1>
+                <p>All our datasets and resources can be found here.</p>
+                <a href="/resources" target="_self">Resources<span> 🡥</span></a>
+            </div>
+            <div class="i-section-container">
+                <h1>Meta LLaMA 4 Scout</h1>
+                <p>More info about Meta's LLaMA 4 Scout can be found here.</p>
+                <a href="/resources" target="_self">Resources<span> 🡥</span></a>
+            </div>
+    </div>
+
+    <h1 style="display: flex; align-items: center; color: white; font-family: montserrat; margin: 50px 0 0 0;"><box-icon name='code' color='#ffffff' ></box-icon>Documentation</h1>
+    <h3>All Documentation Can Be found on <span>Github</span></h3>
+    <div style="display: flex; flex-direction: row;">
+    <box-icon name='github' type='logo' color='#ffff' ></box-icon>
+    <box-icon name='codepen' type='logo' color='#ffffff' ></box-icon>
+    </div>
+</section>
+
+
+
+    <button id="scrollToTopBtn">Back to Top</button>
+            <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
+      <script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
+
+
+
+
+      <div id="footer-container"></div>
+      <script src="/pagecontent/scriptsheets/global-footer.js"></script>
+      <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+
+
+
+    </page>
+</master>
+
+    </body>
+    </html>
+
+
+

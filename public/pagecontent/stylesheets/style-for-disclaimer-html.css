@@ -1,0 +1,114 @@
+body, html{
+overflow-x: hidden;
+padding: 0;
+margin: 0;
+}
+
+
+#section1 {
+background-color: #0f0f0f;
+min-height: 100vh; 
+height: auto;
+justify-content: center;
+display: flex;
+align-items: center;
+}
+.section1-container-parent{
+position: absolute;
+display: flex;
+top: 15%;
+width: 70vw;
+}
+
+.section-container-content{
+line-height: 1;
+}
+.section-container-content h1{
+color: white;
+font-family: montserrat;
+font-size: 2em;
+font-weight: 600;
+margin: 0;
+padding: 2px;
+}
+.section-container-content h2{
+color: white;
+font-family: montserrat;
+font-size: 1.5em;
+font-weight: 400;
+margin: 0;
+padding: 2px;
+}
+.section-container-content a{
+color: rgb(111, 111, 111);
+font-family: montserrat;
+font-size: 1em;
+font-weight: 400;
+margin: 0 ;
+padding: 2px;
+text-decoration: none;
+}
+.section-container-content a::after{
+content: "";
+background-color: rgb(227, 68, 68);
+position: absolute;
+margin: 20px 0 0 0;
+width: 10%; height: 1px;
+display: block;
+}
+
+
+
+
+
+
+.section1-page-content-container-parent {
+
+}
+.section-container-text-content{
+width: 70%;
+display: flex;
+flex-direction: column; 
+margin: 25vh auto;
+}
+@media screen and (max-width:680px) {
+.section-container-text-content{
+width: 70vw;
+}
+}
+.section-container-text-content h2, h3{
+color: white;
+font-family: montserrat;
+}
+.section-container-text-content ul li{
+color: white;
+font-family: montserrat;
+}
+.section-container-text-content p{
+color: white;
+font-family: montserrat;
+}
+.section-container-text-content strong{
+color: white;
+font-family: montserrat;
+}
+.section-container-text-content a{
+color: #d73a3a;
+transition: all 0.3s ease-in-out;
+}
+.section-container-text-content a:hover{
+color: #842222;
+transition: all 0.3s ease-in-out;
+}
+
+
+
+
+
+
+.section1{
+background-color: #84222267;
+border: solid 1px red;
+border-radius: 10px;
+padding: 5px;
+}

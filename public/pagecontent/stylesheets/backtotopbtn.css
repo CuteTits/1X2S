@@ -1,0 +1,53 @@
+
+
+
+
+#scrollToTopBtn {
+font-family: orbitron;
+position: fixed;
+background: white;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid white;
+color: rgb(19, 19, 19);
+overflow: hidden;
+z-index: 100000;
+bottom: 5%;
+right: 5%;
+transition: all 0.5s ease-in-out;
+display: none;
+opacity: 1;
+cursor: pointer;
+}
+#scrollToTopBtn::before {
+content: '';
+position: absolute;
+top: 0;
+right: 100%; 
+height: 100%;
+width: 100%;
+background: rgba(0, 0, 0, 0.88);
+z-index: -1;
+transition: right 0.4s ease;
+}
+#scrollToTopBtn:hover::before {
+right: 0; 
+}
+#scrollToTopBtn:hover {
+color: white;
+}
+
+
+
+
+.show {
+  display: block !important; 
+  transition: all 0.5s ease-in-out;
+
+}
+
+.hide {
+  display: none !important;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+}
