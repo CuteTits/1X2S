@@ -114,37 +114,44 @@
 
 <section id="section2">
 
- <div class="card-container">
+  <div class="card-container">
     <div id="card1" class="card active">This is content for Card 1.</div>
     <div id="card2" class="card">This is content for Card 2.</div>
     <div id="card3" class="card">This is content for Card 3.</div>
+    <div id="card4" class="card">This is content for Card 4.</div>
   </div>
 
   <div class="buttons">
-    <button onclick="showCard('card1')">About Sports Analyst</button>
-    <button onclick="showCard('card2')">Core Features</button>
-    <button onclick="showCard('card3')">Framework & Architecture</button>
-    <button onclick="showCard('card4')">Training & Data Sources</button>
-    <button onclick="showCard('card5')">LLaMA 4 Scout</button>
+    <button id="btn1" class="active-btn" onclick="showCard('card1', 'btn1')">AI Analyst</button>
+    <button id="btn2" onclick="showCard('card2', 'btn2')">Core Features</button>
+    <button id="btn3" onclick="showCard('card3', 'btn3')">Framework & Architecture</button>
+    <button id="btn4" onclick="showCard('card4', 'btn4')">Meta Llama 4 Scout</button>
+
   </div>
 
   <script>
     let currentCardId = 'card1';
+    let currentButtonId = 'btn1';
 
-    function showCard(newCardId) {
+    function showCard(newCardId, newButtonId) {
       if (newCardId === currentCardId) return;
 
       const currentCard = document.getElementById(currentCardId);
       const newCard = document.getElementById(newCardId);
+      const currentButton = document.getElementById(currentButtonId);
+      const newButton = document.getElementById(newButtonId);
 
-      // Step 1: Remove 'active' class (triggers exit animation)
+      // Remove active class from current card and button
       currentCard.classList.remove('active');
+      currentButton.classList.remove('active-btn');
 
-      // Step 2: Wait before showing new card
+      // Delay before showing new card
       setTimeout(() => {
         newCard.classList.add('active');
+        newButton.classList.add('active-btn');
         currentCardId = newCardId;
-      }, 300); // Delay between hide and show (ms)
+        currentButtonId = newButtonId;
+      }, 300); // 300ms delay
     }
   </script>
     
@@ -162,7 +169,7 @@
             <div class="i-section-container">
                 <h1>Meta LLaMA 4 Scout</h1>
                 <p>More info about Meta's LLaMA 4 Scout can be found here.</p>
-                <a href="/resources" target="_self">Resources<span> 🡥</span></a>
+                <a href="https://www.llama.com/" target="_blank">LLaMA 4 Scout<span> 🡥</span></a>
             </div>
     </div>
 
