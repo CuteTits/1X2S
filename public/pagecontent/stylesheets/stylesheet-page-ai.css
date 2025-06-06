@@ -23,6 +23,7 @@ width: 50%;
 left: 20%;
 }
 
+
 .section-container-content{
   z-index: 100;
 
@@ -50,11 +51,13 @@ display: inline-block;
 right: 0;
 }
 
- .img-master img {
+.img-master img {
 position: relative;
 z-index: 1;
 display: block;
 opacity: 50%;
+height: 100vh;
+
 }
 
 
@@ -106,9 +109,6 @@ transition: all 0.3s ease-in-out;
 
 
 
-
-
-
 .h-section-content-container{
 display: flex;
 justify-content: space-evenly;
@@ -126,18 +126,15 @@ font-family: montserrat;
 color: white;
 font-family: montserrat;
 }
-
-
 .i-section-container a {
-  position: relative;
-  cursor: pointer;
-  color: rgb(239, 57, 57);
-  font-family: montserrat;
-  font-size: .9em;
-  transition: all 0.5s ease;
-  text-decoration: none;
+position: relative;
+cursor: pointer;
+color: rgb(239, 57, 57);
+font-family: montserrat;
+font-size: .9em;
+transition: all 0.5s ease;
+text-decoration: none;
 }
-
 .i-section-container a::after {
 content: '';
 position: absolute;
@@ -190,61 +187,95 @@ flex-direction: column;
 
 
 
+.bx-1{
+display: flex;
+flex-direction: column;
+width: 80%;
+justify-content: center;
+margin: 0 auto;
+align-items: center;
+}
+.buttons {
+display: flex;
+flex-direction: row;
+gap: 10px;
+z-index: 100;
+width: 100%;
+justify-content: center;
+margin: 0 auto;
+}
+button {
+padding: 5px 10px;
+font-size: 12px;
+cursor: pointer;
+color: #535353;
+border: 1px solid #252525;
+background-color: #0f0f0f;
+border-radius: 6px;
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+display: flex;
+align-items: center;
+gap: 10px;
+text-align: left;
+}
+.box-icon {
+width: 20px;
+height: 20px;
+}
+button:hover box-icon {
+transform: rotate(360deg);
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+button:hover {
+border: 1px solid #252525;
+color: #d73a3a;
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.active-btn {
+color: white;
+border: #d73a3a;
+transform: translateY(-10px);
+box-shadow: 0 0 10px 2px #f75454; 
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+.card-container {
+position: relative;
+width: 60%;
+height: 180px;
+left: 0;
+}
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      color: #535353;
-      border: 1px solid #252525;
-      border-radius: 6px;
-      background-color: transparent;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    button:hover {
-     opacity: 0.5;
-     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .active-btn {
-      color: white;
-      border: #d73a3a;
-      transform: translateX(40px);
-      box-shadow: 0 0 10px 2px #f75454; 
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .card-container {
-      position: relative;
-      width: 60%;
-      height: 180px;
-      left: 0;
-    }
-
-    .card {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 25%;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      pointer-events: none;
-    }
-
-    .card.active {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: auto;
-      z-index: 1;
-    }
+.card {
+backdrop-filter: blur(10px);
+position: absolute;
+top: 10px;
+LEFT:0 ;
+width: 100%;
+height: AUTO;
+opacity: 0;
+transform: translateX(-20px);
+transition: opacity 0.4s ease, transform 0.4s ease;
+padding: 50px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+pointer-events: none;
+border-radius: 10px;
+z-index: 1;
+}
+.card.active {
+opacity: 1;
+transform: translateX(0);
+pointer-events: auto;
+z-index: 1;
+}
+.card p, li, a, h2{
+color: white;
+font-family: montserrat;
+font-size: 1em;
+}
+.card h1 {
+color: white;
+font-family: montserrat;
+font-size: 1.5em;
+margin-bottom: 10px;
+}

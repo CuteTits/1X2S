@@ -48,23 +48,39 @@
 
 <div class="section1-page-content-container-parent">
     <div class="section-container-text-content">
-      <p><strong>Sports Analyst</strong> is an advanced football analytics engine built on top of <strong>Meta’s LLaMA 4 Scout</strong>, 
+
+
+
+
+
+    </div>
+       
+</div>
+
+
+<cont class="bx-1">
+   <div class="buttons">
+    <button id="btn1" class="active-btn" onclick="showCard('card1', 'btn1')"><box-icon name='component' type='solid' color='#ffffff' ></box-icon> AI Analyst</button>
+    <button id="btn2" onclick="showCard('card2', 'btn2')"><box-icon name='search' color='#ffffff' ></box-icon> Core Features</button>
+    <button id="btn3" onclick="showCard('card3', 'btn3')"><box-icon name='cog' type='solid' color='#ffffff' ></box-icon> Framework & Architecture</button>
+    <button id="btn4" onclick="showCard('card4', 'btn4')"><box-icon name='broadcast' color='#ffffff' ></box-icon> Broadcast Feed Integration</button>
+    <button id="btn5" onclick="showCard('card5', 'btn5')"><box-icon name='data' type='solid' color='#ffffff' ></box-icon> Telemetry & Event Feed APIs</button>
+    <button id="btn6" onclick="showCard('card6', 'btn6')"><box-icon name='meta' type='logo' color='#ffffff' ></box-icon> Meta Llama 4 Scout</button>
+
+  </div>
+
+
+
+  <div class="card-container">
+    <div id="card1" class="card active">
+        <p><strong>Sports Analyst</strong> is an advanced football analytics engine built on top of <strong>Meta’s LLaMA 4 Scout</strong>, 
         a cutting-edge large language model fine-tuned for real-time sports analysis, 
         strategic forecasting, and player performance diagnostics. Designed for coaches, 
         scouts, analysts, and fans alike, AI Scout turns raw match data into actionable 
         insights within seconds.
-        Our fine-tuned version is specifically shaped for sports analytics advancedlarge data 
-        processing, predictive modeling, and natural language generation,
-        enabling it to deliver unparalleled insights into football matches and player performance.
-        Our frameworking leverages the latest advancements in AI and machine learning,
-        including reinforcement learning, computer vision, and natural language processing,
-        to provide a comprehensive suite of tools for analyzing and understanding the beautiful game.
         </p>
-
-
-  <div class="dropdown">
-    <div class="dropdown-header">🔍 Core Features</div>
-    <div class="dropdown-content">
+    </div>
+    <div id="card2" class="card">
       <ul>
         <li><span class="highlight">Real-Time Match Analysis</span> Instant breakdowns of formations, transitions, and key moments using data from broadcasts and tactical reports.</li>
         <li><span class="highlight">Player Profiling & Performance Forecasting</span> Predictive evaluations and role-fit assessments trained on player telemetry and scouting data.</li>
@@ -72,11 +88,7 @@
         <li><span class="highlight">Natural Language Match Summaries</span> Generates multilingual, human-readable match reports for fans, journalists, and social media.</li>
       </ul>
     </div>
-  </div>
-
-  <div class="dropdown">
-    <div class="dropdown-header">⚙️ Framework & Architecture</div>
-    <div class="dropdown-content">
+    <div id="card3" class="card">
       <ul>
         <li><strong>Base Model:</strong> Meta LLaMA 4 Scout (70B)</li>
         <li><strong>Language Tuning:</strong> Instruction-tuned with football-specific corpora (commentaries, interviews, manuals)</li>
@@ -87,47 +99,29 @@
         <li><strong>Visualization:</strong> D3.js & Plotly tactical dashboards</li>
       </ul>
     </div>
-  </div>
-
-  <script>
-    document.querySelectorAll('.dropdown-header').forEach(header => {
-      header.addEventListener('click', () => {
-        header.parentElement.classList.toggle('active');
-      });
-    });
-  </script>
-
-
-    <p>This "AI" is en enclosed model not available for commercial distribution. However it is fully used by us in our 
-        predictions and plays a crucial role in our data analysis and processing. About 25% of our predictions and tips are based
-        and assisted by our AI model.
-
-        Potential future commercial release is yet to be confirmed as per Meta's terms of usage and guidlines.
-    </p>
+    <div id="card4" class="card">
+      <ul>
+        <p>Sports Analyst analyzes historical and live matches </p>
+          <img src="/pagecontent/resources/images/img-ai-illustration.png" alt="LLaMA 4 Scout Architecture" style="width: 400px;"">
 
     </div>
-       
-</div>
-
-</section>
-
-
-<section id="section2">
-
-  <div class="card-container">
-    <div id="card1" class="card active">This is content for Card 1.</div>
-    <div id="card2" class="card">This is content for Card 2.</div>
-    <div id="card3" class="card">This is content for Card 3.</div>
-    <div id="card4" class="card">This is content for Card 4.</div>
+    <div id="card5" class="card">
+       <h1>Telemetry & Event Feed APIs</h1>
+      <p>AI Scout integrates with various telemetry and event feed APIs to provide real-time data and insights:</p>
+      <p>These APIs allow AI Scout to access real-time player tracking data, live match events, and historical performance metrics, enabling it to generate accurate and actionable insights for coaches, analysts, and fans.</p>
+      <p>Key APIs and data sources include:</p>
+      <ul>
+        <li><strong>Telemetry APIs:</strong> Real-time player tracking data (GPS, accelerometers)</li>
+        <li><strong>Event Feed APIs:</strong> Live match events (goals, fouls, substitutions) via WebSocket</li>
+      </ul>
   </div>
-
-  <div class="buttons">
-    <button id="btn1" class="active-btn" onclick="showCard('card1', 'btn1')">AI Analyst</button>
-    <button id="btn2" onclick="showCard('card2', 'btn2')">Core Features</button>
-    <button id="btn3" onclick="showCard('card3', 'btn3')">Framework & Architecture</button>
-    <button id="btn4" onclick="showCard('card4', 'btn4')">Meta Llama 4 Scout</button>
-
-  </div>
+    <div id="card6" class="card">
+      <p>Meta LLaMA 4 Scout is a state-of-the-art large language model designed for real-time sports analysis, 
+        strategic forecasting, and player performance diagnostics. It is the foundation of our AI Sports Analyst, 
+        enabling it to provide accurate and actionable insights.</p>
+      <a href="https://www.llama.com/" target="_blank">Learn more about Meta LLaMA 4 Scout<span> 🡥</span></a>
+    </div>
+</cont>
 
   <script>
     let currentCardId = 'card1';
@@ -155,6 +149,8 @@
     }
   </script>
     
+
+    
 </section>
 
 <section id="section3">
@@ -171,14 +167,14 @@
                 <p>More info about Meta's LLaMA 4 Scout can be found here.</p>
                 <a href="https://www.llama.com/" target="_blank">LLaMA 4 Scout<span> 🡥</span></a>
             </div>
+            <div class="i-section-container">
+                <h1>Documentation</h1>
+                <p>Our Docs can be found on Github and Codepen.</p>
+                <box-icon name='github' type='logo' color='#ffff' ></box-icon>
+                <box-icon name='codepen' type='logo' color='#ffffff' ></box-icon>
+            </div>
     </div>
 
-    <h1 style="display: flex; align-items: center; color: white; font-family: montserrat; margin: 50px 0 0 0;"><box-icon name='code' color='#ffffff' ></box-icon>Documentation</h1>
-    <h3>All Documentation Can Be found on <span>Github</span></h3>
-    <div style="display: flex; flex-direction: row;">
-    <box-icon name='github' type='logo' color='#ffff' ></box-icon>
-    <box-icon name='codepen' type='logo' color='#ffffff' ></box-icon>
-    </div>
 </section>
 
 

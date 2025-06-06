@@ -83,11 +83,8 @@ font-size: .8em;
 }
 .contact-point a span{
 color: white;
-display: none;
-font-size: .9em;
-}
-.contact-point a:hover span{
 display: inline;
+font-size: .9em;
 }
 
 
@@ -113,12 +110,31 @@ transition: all 0.3s ease-in-out;
 
 @media screen and (max-width:1200px) {
 .section1-container-parent{
-width: 70%;
+width: 80%;
+margin-top: 70px;
 justify-content: center;
 align-content: center;
 }
 .h-section1-content-container{
 display:  block;
 }
-
+.j-section-box-container{
+width: 100%;
+}
+.av-mobile {
+width: 100%;
+padding: 5px;
+border-radius: 5px;
+border: solid 1px #262626;
+}
+.av-mobile h2 {
+font-size: .6em;
+}
+.av-mobile .contact-point address {
+font-size: .5em;
+}
+.av-mobile svg {
+width: 16px;
+height: 16px;
+}
 }
