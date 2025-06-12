@@ -1,23 +1,24 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-        <meta property="og:image" content="https://1x2s.com/resources/images/logo.png" />
-        <meta name="description" content="1X2S offers AI-driven sports predictions to help you make smarter betting decisions.">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Game Is Game | 1X2S">
-        <meta name="twitter:description" content="AI-driven Sports Predictions to help you win smarter.">
-        <meta name="twitter:image" content="https://1x2s.com/resources/images/logo.png">
+<meta property="og:image" content="https://1x2s.com/resources/images/logo.png" />
+<meta name="description" content="1X2S offers AI-driven sports predictions to help you make smarter betting decisions.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Game Is Game | 1X2S">
+<meta name="twitter:description" content="AI-driven Sports Predictions to help you win smarter.">
+<meta name="twitter:image" content="https://1x2s.com/resources/images/logo.png">
 
 
-        <link rel="icon" href="/pagecontent/resources/images/logo.png">
-        <title>Game Is Game | 1X2S</title>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-        <link rel="stylesheet" href="/pagecontent/stylesheets/index.css">
-        <link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<title>Game Is Game | 1X2S</title>
+<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/index.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
   document.documentElement.classList.add('js');
@@ -402,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (currentState !== 'absolute-bottom') {
             stickyElement.classList.remove('sticky-fixed');
             stickyElement.classList.add('sticky-absolute');
-            stickyElement.style.top = `${section4Top - section3Top - stickyHeight}px`;
+            stickyElement.style.top = `${section3Top - stickyHeight + 100}px`;
             currentState = 'absolute-bottom';
           }
         } else {

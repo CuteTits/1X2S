@@ -1,0 +1,26 @@
+
+::selection {
+background-color: #f74545;
+color: black; 
+opacity: 25%;
+}
+
+::-webkit-scrollbar {
+width: 5px;
+height: 4px;
+}
+::-webkit-scrollbar-track {
+background: #0f0f0f;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+background: #f75454;
+border-radius: 10px;
+transition: all 0.5s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #ff2e2e;
+transition: all 0.5s ease-in-out;
+}
+
+

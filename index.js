@@ -1,30 +1,25 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 const port = 3000;
 
-// Serve static files (HTML, CSS, etc.)
 app.use(express.static('public'));
+app.get('/api/cards', (req, res) => {
+  const cardsDirectory = path.join(__dirname, 'public', 'page&card-1'); // Path to the directory with the cards
 
-// Endpoint to fetch teams
-app.get('/teams', (req, res) => {
-  fs.readFile('teams.txt', 'utf-8', (err, data) => {
+  fs.readdir(cardsDirectory, (err, files) => {
     if (err) {
-      return res.status(500).send('Error reading teams file');
+      return res.status(500).send('Error reading the cards directory');
     }
-    res.json(data.split('\n').filter(Boolean)); // Send non-empty lines as JSON
+    const jsonFiles = files.filter(file => file.endsWith('.json')).map(file => ({
+      src: `/page&card-1/${file}` // Relative path to each card JSON file
+    }));
+
+    res.json(jsonFiles); // Return the list of card JSON file paths
   });
 });
 
-// Endpoint to fetch leagues
-app.get('/leagues', (req, res) => {
-  fs.readFile('leagues.txt', 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).send('Error reading leagues file');
-    }
-    res.json(data.split('\n').filter(Boolean)); // Send non-empty lines as JSON
-  });
-});
 
 // Endpoint to serve navbar.html dynamically
 app.get('/navbar.html', (req, res) => {
@@ -35,6 +30,7 @@ app.get('/navbar.html', (req, res) => {
     res.send(data);
   });
 });
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
