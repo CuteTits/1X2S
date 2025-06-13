@@ -6,19 +6,22 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.get('/api/cards', (req, res) => {
-  const cardsDirectory = path.join(__dirname, 'public', 'page&card-1'); // Path to the directory with the cards
+  const cardsDirectory = path.join(__dirname, 'public', 'page-card-1');
+  console.log('Reading from:', cardsDirectory);
 
   fs.readdir(cardsDirectory, (err, files) => {
     if (err) {
+      console.error('Error reading cards:', err);
       return res.status(500).send('Error reading the cards directory');
     }
     const jsonFiles = files.filter(file => file.endsWith('.json')).map(file => ({
-      src: `/page&card-1/${file}` // Relative path to each card JSON file
+      src: `/page-card-1/${file}`
     }));
-
-    res.json(jsonFiles); // Return the list of card JSON file paths
+    console.log('Serving card list:', jsonFiles);
+    res.json(jsonFiles);
   });
 });
+
 
 
 // Endpoint to serve navbar.html dynamically
