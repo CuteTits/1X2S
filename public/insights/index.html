@@ -43,6 +43,19 @@
 <section id="section1">
 
 
+
+
+</section>
+
+
+<section id="section3">
+
+  <div class="b-section-dynamic-content-slider-container">
+    <contentdata class="datacontent">
+    <h1>1X2, Moneyline</h1>
+    <h2>Simple yet reliable match result predictions</h2>
+    </contentdata>
+
   <label>
     <input type="checkbox" id="toggleSwitch">
     <div class="g-switch-container">
@@ -64,16 +77,6 @@
     </div>
   </label>
 
-</section>
-
-
-<section id="section3">
-
-  <div class="b-section-dynamic-content-slider-container">
-    <contentdata class="datacontent">
-    <h1>1X2, Moneyline</h1>
-    <h2>Simple yet reliable match result predictions</h2>
-    </contentdata>
   <button class="b-slider-nav bnav-left" onclick="bscrolldynamicslider(-1)">❮</button>
   <div class="b-slider-track" id="b-sliderTrack">
 
@@ -118,6 +121,9 @@
             }</a></dataclass>
           </div>
         </div>
+          <div class="b-slider-card-background">
+            <img src="${cardData.background}" alt="${cardData.title} Logo" />
+          </div>
       `;
     } catch (err) {
       console.error('Failed to load card content:', err);

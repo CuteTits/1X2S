@@ -114,43 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
 
 
-        <div class="logo-a-slider">
-          <div class="slider-track" id="sliderTrack">
-            <img src="/pagecontent/resources/images/render.png" alt="Logo 1">
-            <img src="/pagecontent/resources/images/logo2.png" alt="Logo 2">
-            <img src="/pagecontent/resources/images/uefa.png" alt="Logo 3">
-            <img src="/pagecontent/resources/images/ATKH.png" alt="Logo 4">
-            <img src="/pagecontent/resources/images/royalem.png" alt="Logo 5">
-            <img src="/pagecontent/resources/images/suissegroup.png" alt="Logo 6">
-            <img src="/pagecontent/resources/images/unistat.png" alt="Logo 7">
-            <img src="/pagecontent/resources/images/onealliance.png" alt="Logo 8">
+      
 
-            <!-- Duplicates for seamless loop -->
-            <img src="/pagecontent/resources/images/render.png" alt="Logo 1">
-            <img src="/pagecontent/resources/images/logo2.png" alt="Logo 2">
-            <img src="/pagecontent/resources/images/uefa.png" alt="Logo 3">
-            <img src="/pagecontent/resources/images/ATKH.png" alt="Logo 4">
-            <img src="/pagecontent/resources/images/royalem.png" alt="Logo 5">
-            <img src="/pagecontent/resources/images/suissegroup.png" alt="Logo 6">
-            <img src="/pagecontent/resources/images/unistat.png" alt="Logo 7">
-            <img src="/pagecontent/resources/images/onealliance.png" alt="Logo 8">
-
-          </div>
-        </div>
-
-        <script>
-          const track = document.getElementById('sliderTrack');
-          const images = Array.from(track.children);
-        
-          images.forEach(img => {
-            const clone = img.cloneNode(true);
-            track.appendChild(clone);
-          });
-        </script>
-
-        <div class="section1-parent-container2">
-            <h3>Love 4 The Game</h3>
-        </div>
+    
 
     </div>
 
@@ -323,22 +289,21 @@ document.addEventListener("DOMContentLoaded", () => {
       cards.forEach((c, j) => {
         if (i !== j) {
           const direction = j < i ? -1 : 1;
-          // Move non-hovered cards outward and preserve their stacked offset
-          c.style.transform = `translateX(${direction * -120}px) translateY(${direction * 30}px) rotateX(30deg) rotateZ(10deg)`;
-        } else {
-          // Bring hovered card forward in 3D
+          // Move other cards vertically only
+          c.style.transform = `translateY(${direction * 120}px) rotateX(30deg) rotateZ(10deg)`;
         }
       });
     });
 
     card.addEventListener('mouseleave', () => {
-      cards.forEach((c, j) => {
-        // Reset all cards to original stacked position and rotation
+      cards.forEach((c) => {
+        // Reset transform
         c.style.transform = 'rotateX(30deg) rotateZ(10deg)';
       });
     });
   });
 </script>
+
 
 
 

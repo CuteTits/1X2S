@@ -400,8 +400,30 @@ overflow-y: hidden;
 scroll-behavior: smooth;
 padding: 20px;
 width: 100%;
+height: 100%;
 cursor: grab;
 }
+.b-slider-track::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-image: url("/pagecontent/resources/images/img-amH912jk9A8qoP98Q76uvg87xFD82100iERi920");
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+opacity: 0.2; 
+z-index: 0;
+pointer-events: none;
+}
+.b-slider-track > * {
+position: relative;
+z-index: 1; 
+}
+
+
 .b-slider-track.active {
 cursor: grabbing;
 user-select: none;
@@ -427,10 +449,6 @@ transform-origin: center;
 z-index: 0; 
 border: solid 1px rgb(34, 34, 34);
 }
-
-
-
-
 .b-slider-card:hover {
 overflow: visible;
 border: solid 1px rgb(228, 71, 71);
@@ -449,7 +467,28 @@ width: 25px;
 display: flex;
 }
 
+.b-slider-card-background{
+position: absolute;
+top: 0; 
+left: 0;
+height: 85px;
+width: 300px;
+background: rgba(0, 0, 0, 0.5);
+z-index: -1;
+pointer-events: none;
 
+}
+.b-slider-card-background img{
+width: 100%;
+height: 100%;
+opacity: .5;
+border-radius: 15px 0 15px 0;
+object-fit: cover;
+}
+.b-slider-card p {
+font-family: orbitron;
+color: #f75454;
+}
 .b-slider-card-inner h3{
 font-family: orbitron;
 font-size: 18px;
@@ -469,8 +508,8 @@ color:#9b9b9b;
 }
 .b-odds{
 position: absolute;
-right: 5px;
-bottom: 2px;
+right: 8px;
+bottom: 5px;
 }
 .b-odds a{
 color: white;
@@ -509,7 +548,7 @@ right: -4rem;
 
 #section1{
 background-color: #050505;
-height: 50dvh;
+height: 20dvh;
 width: 100vw;
 z-index: 10;
 position: relative;
@@ -531,8 +570,8 @@ border: solid 1px #3e3e3e;
 border-radius: 10px;
 overflow: hidden;
 cursor: pointer;
-bottom: 10%;
-left: 20%;
+top: 20%;
+right: 10%;
 }
 .g-switch-fill {
 position: absolute;
@@ -576,7 +615,7 @@ left: 50%;
 border-radius: 0 ;
 }
 input:checked + .g-switch-container .g-switch-content .left {
-color: #656565;
+color: #969696;
 }
 input:checked + .g-switch-container .g-switch-content .right {
 color: #0c0c0c;
@@ -585,7 +624,7 @@ color: #0c0c0c;
 color: #161616;
 }
 .g-switch-content .right {
-color: #656565;
+color: #969696;
 }
 /**/
 
@@ -597,7 +636,7 @@ color: #656565;
 
 #section3{
 background-color:#050505 ;
-height: 300dvh;
+height: 100dvh;
 width: 100vw;
 z-index: 10;
 position: relative;
