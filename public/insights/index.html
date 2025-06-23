@@ -84,7 +84,7 @@
   </div>
   <button class="b-slider-nav bnav-right" onclick="bscrolldynamicslider(1)">❯</button>
 </div>
-
+<link rel="stylesheet" href="/pagecontent/stylesheets/insight-class-style.css">
 <script>
   //b-cards
   async function fetchCards() {
@@ -103,12 +103,14 @@
     try {
       const res = await fetch(data.src); // Load the content of each JSON card
       const cardData = await res.json();  // Parse the JSON response
+      const styleClass = cardData.style ? cardData.style.toLowerCase() : '';
+
 
       console.log('Card data:', cardData); // Log the card data
 
       // Insert the content into the card element
       cardElement.innerHTML = `
-        <div class="b-slider-card-inner">
+        <div class="b-slider-card-inner ${styleClass}" >
           <div class="b-slider-card-image1">
             <img src="${cardData.image}" alt="${cardData.title}" />
             <h3>${cardData.title}</h3>

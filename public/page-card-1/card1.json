@@ -1,10 +1,11 @@
 {
-  "image":"/pagecontent/resources/images/league-icons/europa-league.png",
+  "image":"/pagecontent/resources/images/league-icons/uel.png",
   "title": "Tottenham Hotspur",
   "description": [
   "Hotspur v Man Utd"
   ],
   "context": "Europa League Finals Bilbao 2025",
   "odds": "2.27x",
-  "background":"/pagecontent/resources/images/img-amH912jk9A8qoD13hag87xFD82F1ywg375920"
+  "background":"/pagecontent/resources/images/img-amH912jk9A8qoD13hag87xFD82F1ywg375920",
+  "style":"uel"
 }

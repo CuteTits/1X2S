@@ -1,0 +1,84 @@
+
+.b-slider-card-inner.ucl {
+position: relative;
+height: 100%;
+width: 100%;
+border-radius: 15px 0 15px 0;
+overflow: hidden; /* Ensure pseudo-element stays within bounds */
+z-index: 0;
+}
+.b-slider-card-inner.ucl::before {
+content: "";
+position: absolute;
+inset: 0;
+background: linear-gradient(131deg, rgba(15, 216, 247, 1) 0%, rgba(120, 64, 194, 1) 51%, rgba(43, 10, 255, 1) 100%);
+opacity: 0.2; 
+z-index: -1;
+}
+.b-slider-card-inner.ucl .b-odds a{
+color: white;
+}
+.b-slider-card-inner.ucl .b-text a{
+color: white;
+}
+.b-slider-card-inner.ucl p{
+color: white;
+}
+
+
+
+.b-slider-card-inner.uel {
+position: relative;
+height: 100%;
+width: 100%;
+border-radius: 15px 0 15px 0;
+overflow: hidden; 
+z-index: 0;
+}
+.b-slider-card-inner.uel::before {
+content: "";
+position: absolute;
+inset: 0;
+opacity: 0.2; 
+background: linear-gradient(131deg, rgba(10, 10, 10, 1) 0%, rgba(194, 129, 64, 1) 51%, rgba(20, 20, 20, 1) 100%);opacity: 0.2; 
+z-index: -1;
+}
+.b-slider-card-inner.uel .b-odds a{
+color: white;
+}
+.b-slider-card-inner.uel .b-text a{
+color: white;
+}
+.b-slider-card-inner.uel p{
+color: white;
+}
+
+
+
+
+.b-slider-card-inner.cwc {
+position: relative;
+height: 100%;
+width: 100%;
+border-radius: 15px 0 15px 0;
+overflow: hidden;
+z-index: 0;
+}
+.b-slider-card-inner.cwc::before {
+content: "";
+position: absolute;
+inset: 0;
+background: #0a0a0a;
+opacity: 0.2; 
+background: linear-gradient(131deg, rgba(10, 10, 10, 1) 0%, rgb(181, 152, 44) 51%, rgba(20, 20, 20, 1) 100%);
+z-index: -1;
+}
+.b-slider-card-inner.cwc .b-odds a{
+color: white;
+}
+.b-slider-card-inner.cwc .b-text a{
+color: white;
+}
+.b-slider-card-inner.cwc p{
+color: white;
+}
