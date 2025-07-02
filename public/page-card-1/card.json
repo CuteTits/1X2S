@@ -1,11 +1,11 @@
 {
-  "image":"/pagecontent/resources/images/league-icons/champions-league.png",
-  "title": "Paris Saint-Germain",
+  "image":"/pagecontent/resources/images/league-icons/cwc.png",
+  "title": "Bayern Munich",
   "description": [
-  "PSG v Arsenal"
+  "PSG - Bayern Munich"
   ],
-  "context": "Champions League Semi-Finals Leg 2",
+  "context": "Club World Cup 2025, Quarter-Finals",
   "odds": "1.47x",
   "background":"/pagecontent/resources/images/img-amH912jk9A8qoD13hag87xFD82F1ywg375920",
-  "style":"ucl"
+  "style":"cwc"
 }

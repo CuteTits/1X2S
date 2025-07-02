@@ -103,7 +103,7 @@ font-family: montserrat;
   bottom: -2px; 
   left: 0;
   width: 0;
-  height: 1px;
+  height: .5px;
   background: rgb(218, 52, 52);
   transition: width 0.2s ease;
 }

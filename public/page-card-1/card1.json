@@ -1,11 +1,11 @@
 {
-  "image":"/pagecontent/resources/images/league-icons/uel.png",
-  "title": "Tottenham Hotspur",
+  "image":"/pagecontent/resources/images/league-icons/cwc.png",
+  "title": "Chelsea",
   "description": [
-  "Hotspur v Man Utd"
+  "Palmeiras - Chelsea"
   ],
-  "context": "Europa League Finals Bilbao 2025",
+  "context": "Club World Cup 2025, Quarter-Finals",
   "odds": "2.27x",
   "background":"/pagecontent/resources/images/img-amH912jk9A8qoD13hag87xFD82F1ywg375920",
-  "style":"uel"
+  "style":"cwc"
 }

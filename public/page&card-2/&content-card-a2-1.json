@@ -1,13 +1,14 @@
 {
     "title": "",
-    "name1": "",
-    "name2": "",
-    "image": "/resources/images/league-icons/",
+    "name1": "Internazionale Milan",
+    "name2": "Manchester City",
+    "image": "/pagecontent/resources/images/league-icons/cwc.png",
     "details": [
-      "",
-      "",
-      "",
-      ""
-    ],
-    "odds": "12.89x"
+      "Over 6 Corners - Match Total Corners",
+      "Over 2.5 Goals - Match Total Goals",
+      "Under 4.5 Cards - Match Total Cards",
+      "Most Corners - Team 1",
+      "Both Teams to Recieve a Card - Yes",
+      "BTTS (Both Teams to Score) - Yes"
+    ]
   }
