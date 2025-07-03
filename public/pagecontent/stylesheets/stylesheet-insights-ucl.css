@@ -1,0 +1,233 @@
+html, body {
+background-color: #050505;
+overflow-x: hidden;
+width: 100%;
+margin: 0;
+justify-items: center;
+justify-items: center;
+scroll-behavior: smooth;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-text-size-adjust: 100%;
+padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+html.js body {
+opacity: 0;
+transition: opacity 1s ease-in;
+}
+html.js body.fade-in {
+opacity: 1;
+}
+.no-scroll {
+overflow: hidden;
+height: 100%;
+position: fixed; 
+width: 100%; 
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#section1{
+background-color: #050505;
+min-height: 100dvh;
+height: auto;
+width: 100vw;
+z-index: 0;
+position: relative;
+align-items: center;
+display: block;
+justify-content: center;
+}
+
+
+.h-section-4-content {
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 100%;
+align-items: center;
+justify-content: center;
+}
+.h-section-4-content-container {
+display: flex;
+flex-direction: column;
+width: 50%;
+height: 100%;
+align-items: center;
+}
+.h-section-4-content-container a,p,h1,h2,h3{
+color: white;
+font-family: montserrat;
+}
+.h-class-text {
+display: flex;
+flex-direction: column;
+width: 100%;
+margin: 20px 0;
+line-height: 1.5;
+}
+.h-class-text h2{
+color: white;
+font-family: montserrat;
+font-weight: 200;
+font-size: 1em;
+}
+.h-class-text p{
+color: white;
+font-family: montserrat;
+font-weight: 200;
+font-size: .7em;
+padding: 5px;
+background-color: #131313;
+}
+
+
+
+.h-section-4-content-dropdowns{
+display: flex;
+flex-direction: column;
+}
+.h-section-4-content-dropdowns h2{
+font-weight: 600;
+font-size: 1em;
+}
+
+.h-section-4-content-dropdowns-container-parent {
+display: flex;
+flex-direction: row;
+margin-top: 20px;
+align-items: flex-start; 
+}
+
+.h-section-4-content-dropdowns-container-parent h1 {
+color: rgb(255, 255, 255);
+background-color: rgb(255, 54, 54);
+padding: 2px 5px;
+margin: 5px;
+font-weight: 800;
+font-size: 1em;
+display: inline-block;      
+line-height: 1.1;            
+vertical-align: top;        
+}
+
+
+.dropdown {
+margin: 5px 0;
+overflow: hidden;
+background-color: #131313;
+width: 45vw;
+cursor: pointer;
+}
+.dropdown-header {
+font-weight: 400;
+font-size: .7em;
+margin: 2px;
+padding: 2px;
+color: white;
+font-family: montserrat;
+width: 90%;
+}
+.dropdown-header span{
+font-weight: 600;
+color: rgb(255, 49, 49);
+}
+.dropdown-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.4s ease;
+padding: 0 10px;
+}
+.dropdown.open .dropdown-content {
+display: block;
+width: 45vw;
+}
+.dropdown p{
+color: white;
+font-family: montserrat;
+font-weight: 200;
+font-size: .7em;
+margin: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+.button-group {
+margin-top: 20dvh;
+}
+.tab-button {
+padding: 5px 10px;
+margin: 0 5px;
+border: none;
+cursor: pointer;
+background-color: transparent;
+opacity: 0.3;
+transition: all 0.3s ease-in-out;
+}
+
+.tab-button h1 {
+font-size: 1em;
+font-weight: 500;
+transition: color 0.3s ease-in-out;
+}
+.tab-button h2 {
+font-size: 0.7em;
+font-weight: 500;
+transition: color 0.3s ease-in-out;
+}
+.tab-button.active {
+opacity: 1;
+color: rgb(248, 58, 58);
+transform: scale(1.25);
+transition: all 0.3s ease-in-out;
+box-shadow: 0 4px 12px rgba(255, 50, 50, 0.674);
+
+}
+.tab-button.active h1,
+.tab-button.active h2 {
+color: rgb(254, 77, 77);
+}
+.card-container {
+width: 60vw;
+}
+.card {
+display: none;
+background-color: transparent;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: opacity 0.3s ease-in-out;
+width: 60vw;
+}
+
+.card.active {
+display: block;
+}
