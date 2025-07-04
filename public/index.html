@@ -274,49 +274,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <section class="section4" id="section4">
       
+<div class="section4-parent-container">
 
-<div class="card-stack">
-  <div class="g-stackcard" data-index="0" style="background: #ffb3b3;">Card 1</div>
-  <div class="g-stackcard" data-index="1" style="background: #b3d1ff;">Card 2</div>
-  <div class="g-stackcard" data-index="2" style="background: #b3ffcc;">Card 3</div>
-  <div class="g-stackcard" data-index="3" style="background: #ffffb3;">Card 4</div>
+<div class="section4-container">
+
+  <h1>♰ In Remembrance of Diogo Jota</h1>
+  <p>In loving memory of Diogo Jota, a beloved player and soul taken far too soon.
+  Your brilliance on the field and humility off it united countless.
+  You will be deeply missed, but never forgotten. Your Inspiration will live on.
+  Rest in peace.</p>
+  <img src="/pagecontent/resources/images/diogo-jota.png" alt="Diogo Jota" class="diogo-jota-image">
+  <p class="tribute-text">
+    "In the game of life, you played with heart. Your spirit will forever be a part of our team. Rest in peace, Diogo Jota."
+  </p>
+  <a>Diogo José Teixeira da Silva, 1996-2025</a>
 </div>
-<script>
-  const cards = document.querySelectorAll('.g-stackcard');
+</div>
 
-  cards.forEach((card, i) => {
-    card.addEventListener('mouseenter', () => {
-      cards.forEach((c, j) => {
-        if (i !== j) {
-          const direction = j < i ? -1 : 1;
-          // Move other cards vertically only
-          c.style.transform = `translateY(${direction * 120}px) rotateX(30deg) rotateZ(10deg)`;
-        }
-      });
-    });
 
-    card.addEventListener('mouseleave', () => {
-      cards.forEach((c) => {
-        // Reset transform
-        c.style.transform = 'rotateX(30deg) rotateZ(10deg)';
-      });
-    });
-  });
-</script>
+</section>
 
 
 
+<section class="section5">
 
 
-
-    </section>
-
-
-
-    <section class="section5">
-
-
-    </section>
+</section>
 
 
 
