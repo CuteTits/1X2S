@@ -11,19 +11,6 @@ scroll-behavior: smooth;
 -webkit-text-size-adjust: 100%;
 padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-html.js body {
-opacity: 0;
-transition: opacity 1s ease-in;
-}
-html.js body.fade-in {
-opacity: 1;
-}
-.no-scroll {
-overflow: hidden;
-height: 100%;
-position: fixed; 
-width: 100%; 
-}
 * {
 margin: 0;
 padding: 0;
@@ -134,13 +121,13 @@ vertical-align: top;
 
 
 .dropdown {
-margin: 5px 0;
+margin: 5px;
 overflow: hidden;
 background-color: #131313;
 width: 45vw;
 cursor: pointer;
 }
-.dropdown-header {
+.dropdown-header p{
 font-weight: 400;
 font-size: .7em;
 margin: 2px;
@@ -148,6 +135,7 @@ padding: 2px;
 color: white;
 font-family: montserrat;
 width: 90%;
+display: flex;
 }
 .dropdown-header span{
 font-weight: 600;
@@ -162,6 +150,10 @@ padding: 0 10px;
 .dropdown.open .dropdown-content {
 display: block;
 width: 45vw;
+min-height: 50px;
+}
+.dropdown.open {
+box-shadow: 0px 0px 10px rgb(255, 35, 35);
 }
 .dropdown p{
 color: white;
@@ -171,8 +163,37 @@ font-size: .7em;
 margin: 10px;
 }
 
+.teaminfo{
+color: rgb(73, 73, 73) !important;
+font-weight: 400 !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+
+.h-2{
+font-weight: 400 !important;
+padding: 2px;
+}
+.h-2 span{
+background-color: rgb(255, 45, 45);
+margin: 2px;
+padding: 2px;
+border-radius: 5px;
+color: #131313;
+font-weight: 500;
+}
 
 
+.h-1{
+font-weight: 400 !important;
+border: solid 1px rgb(37, 37, 37);
+padding: 2px;
+}
+
+.h-1::before{
+content: "❯ " !important;
+color: rgb(249, 58, 58) !important;
+}
 
 
 
@@ -191,6 +212,7 @@ cursor: pointer;
 background-color: transparent;
 opacity: 0.3;
 transition: all 0.3s ease-in-out;
+border-radius: 5px;
 }
 
 .tab-button h1 {
@@ -208,7 +230,7 @@ opacity: 1;
 color: rgb(248, 58, 58);
 transform: scale(1.25);
 transition: all 0.3s ease-in-out;
-box-shadow: 0 4px 12px rgba(255, 50, 50, 0.674);
+box-shadow: 0 4px 12px rgba(247, 74, 74, 0.674);
 
 }
 .tab-button.active h1,
@@ -230,4 +252,42 @@ width: 60vw;
 
 .card.active {
 display: block;
+}
+
+
+@media screen and (max-width: 800px) {
+.card-container {
+width: 100vw;
+justify-content: center;
+display: flex;
+}
+.card.card.active {
+width: 100vw;
+display: flex;
+}
+.button-group {
+justify-content: center;
+display: flex;
+}
+.button-group h1{
+font-size: .5em;
+}
+.button-group h2{
+font-size: .4em;
+}
+}
+
+@media screen and (max-width: 570px) {
+.h-section-4-content-dropdowns-container-parent{
+flex-direction: column;
+}
+.h-section-4-content-dropdowns-container{
+width: 100%;
+}
+.dropdown{
+width: 100%;
+}
+.dropdown.open .dropdown-content{
+width: 100%;
+}
 }
