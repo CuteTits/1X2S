@@ -1,96 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const navbarContainer = document.getElementById('mobilenavbar');
+  const navbarContainer = document.getElementById('mobilenavbar');
 
-    if (navbarContainer) {
-        fetch('/mobilenavbar.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                navbarContainer.innerHTML = data;
+  if (navbarContainer) {
+    fetch('/mobilenavbar.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(data => {
+        navbarContainer.innerHTML = data;
 
-                const toggleButton = document.getElementById('toggleButton');
-                const sideNavbar = document.getElementById('sideNavbar');
-                const masterElement = document.querySelector('master'); // Select the <master> element
+        // Once loaded, attach the menu toggle functionality
+        const sideNavbar = document.getElementById('sideNavbar');
+        const closeButton = document.getElementById('closeButton');
+        const toggleButton = document.getElementById('toggleButton');
 
-                if (toggleButton && sideNavbar) {
-                    toggleButton.addEventListener('click', function () {
-                        if (sideNavbar.style.left === '0px') {
-                            sideNavbar.style.left = '-250px';
-                            toggleButton.textContent = '☰'; // Change to hamburger icon
-                            document.body.classList.remove('no-scroll'); // Enable scrolling
-                            if (masterElement) {
-                                masterElement.style.filter = 'none'; // Remove blur effect
-                            }
-                        } else {
-                            sideNavbar.style.left = '0px';
-                            toggleButton.textContent = '✖'; // Change to "X" icon
-                            document.body.classList.add('no-scroll'); // Disable scrolling
-                            if (masterElement) {
-                                masterElement.style.filter = 'blur(2px)'; // Add blur effect
-                            }
-                        }
-                    });
+        function openNavbar() {
+          sideNavbar.style.left = '0';
+          closeButton.style.display = 'block';
+          toggleButton.style.display = 'none';
+          document.getElementById('overlay').style.display = 'block';
+          document.body.style.overflow = 'hidden';
+          document.documentElement.style.overflow = 'hidden';
+        }
 
-                    // Close the navbar when clicking outside of it
-                    document.addEventListener('click', (event) => {
-                        if (
-                            sideNavbar.style.left === '0px' &&
-                            !sideNavbar.contains(event.target) &&
-                            !toggleButton.contains(event.target)
-                        ) {
-                            sideNavbar.style.left = '-250px';
-                            toggleButton.textContent = '☰'; // Change to hamburger icon
-                            document.body.classList.remove('no-scroll'); // Enable scrolling
-                            if (masterElement) {
-                                masterElement.style.filter = 'none'; // Remove blur effect
-                            }
-                        }
-                    });
-                } else {
-                    console.error('Error: toggleButton or sideNavbar not found.');
-                }
+        function closeNavbar() {
+          sideNavbar.style.left = '-250px';
+          closeButton.style.display = 'none';
+          toggleButton.style.display = 'block';
+          document.getElementById('overlay').style.display = 'none';
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+        }
 
-                if (typeof initializeNavbar === 'function') {
-                    initializeNavbar(); // Ensure the function exists before calling it
-                }
+        if (toggleButton) toggleButton.addEventListener('click', openNavbar);
+        if (closeButton) closeButton.addEventListener('click', closeNavbar);
 
-                window.scrollTo(0, 0); // Scroll to the top of the page
-
-                const navbarItems = document.querySelectorAll('.nav-item');
-
-                function updateActiveNav() {
-                    const currentHash = window.location.hash || '/index.html'; // Default to index.html if no hash is present
-                    navbarItems.forEach(item => {
-                        item.classList.remove('active');
-                        if (item.getAttribute('href') === currentHash) {
-                            item.classList.add('active');
-                        }
-                    });
-                }
-
-                // Update active nav on page load
-                updateActiveNav();
-
-                // Update active nav on hash change
-                window.addEventListener('hashchange', updateActiveNav);
-            })
-            .catch(error => console.error('Error loading navbar:', error));
-    } else {
-        console.error('Error: Element with ID "mobilenavbar" not found.');
-    }
-
-    const homeButton = document.getElementById('nav-home');
-
-    if (homeButton) {
-        homeButton.addEventListener('click', (event) => {
-            if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-                event.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+        // Close navbar when clicking outside of it
+        document.addEventListener('mousedown', function(event) {
+          if (
+            sideNavbar.style.left === '0px' &&
+            !sideNavbar.contains(event.target) &&
+            !toggleButton.contains(event.target)
+          ) {
+            closeNavbar();
+          }
         });
-    }
+
+        // Highlight active page button
+        const path = window.location.pathname.toLowerCase();
+        let selector;
+        if (path === '/' || path.includes('index.html')) {
+          selector = '.data-sideNavbar-icon a[href="/"]';
+        } else if (path.includes('insights')) {
+          selector = '.data-sideNavbar-icon a[href="/insights"]';
+        } else if (path.includes('resources')) {
+          selector = '.data-sideNavbar-icon a[href="/resources"]';
+        } else if (path.includes('about') || path.includes('contact')) {
+          selector = '.data-sideNavbar-icon a[href="/about"]';
+        }
+        if (selector) {
+          const activeLink = document.querySelector(selector);
+          if (activeLink) activeLink.classList.add('active-page');
+        }
+      })
+      .catch(error => console.error('Error loading navbar:', error));
+  } else {
+    console.error('Error: Element with ID "mobilenavbar" not found.');
+  }
 });

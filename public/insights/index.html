@@ -48,6 +48,27 @@
 
 <section id="section3">
 
+  <content class="section3-content">
+
+  <div class="section3-side-bar">
+    <div class="section3-side-bar-content">
+      <ul>
+        <h1>Leagues and Competitions</h1>
+        <li class=""><img src="/pagecontent/resources/images/league-icons/cwc.png" alt=""><a href="/insights/1x2s">FIFA Club World Cup</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/champions-league.png" alt=""><a href="/insights/uefa-champions-league">UEFA Champions League</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/uel.png" alt=""><a href="/insights/1x2s/1x2s-betslip">UEFA Europa League</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/uecl.png" alt=""><a href="/insights/1x2s/1x2s-odds">UEFA Conference League</a></li>
+      </ul>
+    </div>
+
+
+
+  </div>
+
+
+
+  <contentcolumn class="section3-content-column align-right"
+  
   <div class="b-section-dynamic-content-slider-container">
 
 
@@ -105,7 +126,7 @@
 
       // Insert the content into the card element
       cardElement.innerHTML = `
-        <div class="b-slider-card-inner ${styleClass}" >
+        <div class="b-slider-card-inner ${styleClass}">
           <div class="b-slider-card-image1">
             <img src="${cardData.image}" alt="${cardData.title}" />
             <h3>${cardData.title}</h3>
@@ -210,6 +231,9 @@
     <button class="a-slider-nav nav-right" onclick="scrolldynamicsliderA(1)">❯</button>
 </div>
 
+</contentcolumn>
+
+
 <script>
   // Function to scroll the 'A' slider
   function scrolldynamicsliderA(direction) {
@@ -228,36 +252,43 @@
   }
 
   // Load card content for the 'A' slider
-  async function loadCardContentA(card) {
-    const src = card.dataset.src;
-    try {
-      const res = await fetch(src);
-      const data = await res.json();
-      const detailsHTML = data.details?.map(item => `<li><a>${item}</a></li>`).join('') || '';
-      card.innerHTML = `
-        <div class="a-slider-card-inner">
-          <div class="a-slider-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
-          <h3>${data.title}</h3>
-          <h2>${data.name1}</h2>
-          <h2>${data.name2}</h2> 
-          <ul style="text-align:left; padding-left:1.2rem; margin-top:0.5rem; width:auto;">${detailsHTML}</ul>
-          <div class="a-slider-card-image2"><img src="/pagecontent/resources/images/logo2.png"></div>
-          
-          <!-- Image button -->
-          <button class="save-png-button">
-            <box-icon name='download' color='#ffffff'></box-icon>
-          </button>
-        </div>
-      `;
+async function loadCardContentA(card) {
+  const src = card.dataset.src;
+  try {
+    const res = await fetch(src);
+    const data = await res.json();
+    const detailsHTML = data.details?.map(item => `<li><a>${item}</a></li>`).join('') || '';
 
-      const button = card.querySelector('.save-png-button');
-      button.addEventListener('click', () => saveCardAsImageA(card));
-
-    } catch (err) {
-      card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
-      console.error(`Failed to load ${src}`, err);
+    // Assign the ID from the JSON to the card element
+    if (data.id) {
+      card.id = data.id;
     }
+
+    card.innerHTML = `
+      <div class="a-slider-card-inner">
+        <div class="a-slider-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
+        <h3>${data.title}</h3>
+        <h2>${data.name1}</h2>
+        <h2>${data.name2}</h2> 
+        <ul style="text-align:left; padding-left:1.2rem; margin-top:0.5rem; width:auto;">${detailsHTML}</ul>
+        <div class="a-slider-card-image2"><img src="/pagecontent/resources/images/logo2.png"></div>
+
+        <!-- Image button -->
+        <button class="save-png-button">
+          <box-icon name='download' color='#ffffff'></box-icon>
+        </button>
+      </div>
+    `;
+
+    const button = card.querySelector('.save-png-button');
+    button.addEventListener('click', () => saveCardAsImageA(card));
+
+  } catch (err) {
+    card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+    console.error(`Failed to load ${src}`, err);
   }
+}
+
 
   // Save card as an image for 'A' slider
   function saveCardAsImageA(card) {
@@ -285,6 +316,9 @@
     }
   });
 </script>
+
+</content>
+
 
 </section>
 

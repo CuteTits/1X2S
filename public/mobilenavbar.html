@@ -1,25 +1,38 @@
-<html>
-    <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
-<div class="mobilenavbar" id="mobilenavbar">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@100" rel="stylesheet" />
+  
+</head>
+<body>
+
+<div class="mobilenavbar">
   <button id="toggleButton" class="toggle-button">☰</button>
+
   <div id="sideNavbar" class="side-navbar">
+    <button id="closeButton" class="close-button">✖</button>
+    <img src ="/pagecontent/resources/images/icon.png" alt="Logo" class="logo">
+    <div class="divider" style="border-bottom: solid .5px rgb(32, 32, 32);"></div>
     <ul class="data-sideNavbar-icon">
-      <li><a href="/"><i class="fas fa-home"></i></a></li>
-      <li><a href="/insights"><i class="fa-solid fa-futbol"></i></a></li>
-      <li><a href="/resources"><i class="fa-solid fa-list"></i></a></li>
-      <li><a href="/about"><i class="fa-regular fa-circle-question"></i></a></li>
+      <li><a href="/"><span class="material-symbols-rounded">roofing</span>Homepage</a></li>
+      <li><a href="/insights"><span class="material-symbols-rounded">sports_and_outdoors</span>Insights</a></li>
+      <li><a href="/resources"><span class="material-symbols-rounded">dashboard</span>Resources</a></li>
+      <li><a href="/about"><span class="material-symbols-rounded">mail</span>Contact</a></li>
     </ul>
 
-    <ul class="data-sidenavbar-account-icon">
-      <li><a href="/"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
-      <li><a href="/"><i class="fa-solid fa-circle-user"></i></a></li>
-    </ul>
+    <div class="data-sidenavbar-account-icon">
+      <a href="/"><span class="material-symbols-rounded">edit_square</span></i>Register</a>
+      <div class="divider" style="border-left: solid 1px rgb(54, 54, 54);"></div>
+      <a href="/"><span class="material-symbols-rounded">login</span></i>Login</a>
+      </div>
   </div>
+
+  <div class="overlay" id="overlay"></div>  
+
 </div>
+
 
 </body>
 </html>

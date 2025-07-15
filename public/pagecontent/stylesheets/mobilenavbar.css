@@ -1,104 +1,222 @@
-.mobilenavbar {
-  position: fixed;
-  bottom: 2%;
-  left: 0;
-  width: 100%;
-  justify-content: flex-end;
-  padding: 10px;
-  z-index: 100000000;
-  display: none;
+/* Button that opens the menu */
 
-}
-@media screen and (max-width:770px) {
-.mobilenavbar{
-display: block;
-}
-}
 
 
 
 .toggle-button {
-  font-size: 40px;
-  cursor: pointer;
+  font-size: 24px;
   background: none;
   border: none;
-  color: #d24d4d;
-  top: 5%;
-  left: 35px;
-  z-index: 1000000;
+  cursor: pointer;
+  padding: 10px;
+  color: #fff;
   position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1100;
+  transition: all 0.5s ease;
+  display: none;
 }
 
+
+@media screen and (max-width: 700px) {
+  .toggle-button {
+    display: block;
+  }
+  
+}
+
+.toggle-button:hover{
+color: red;
+transform: rotate(360deg);
+transition: all 0.5s ease;
+}
+
+
+/* Side navbar */
 .side-navbar {
   position: fixed;
   top: 0;
-  left: -100px; /* Start off-screen */
-  width: 100px;
-  height: 100%;
-  background-color: #090909d7;
+  left: -400px;
+  width: 170px;
+  height:95vh;
+  background-color: #111;
   color: white;
-  overflow-x: hidden;
-  transition: 0.3s; /* Smooth transition */
-  padding-top: 100px;
-  border-right: solid 1px #d24d4d;
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+.side-navbar img{
+  width: 60px;
+  height: auto;
+  margin: 10px auto;
+  display: flex;
 }
 
-
-
-
-
-
-
-
-.data-sideNavbar-icon {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex; /* Make the list horizontal */
-  flex-direction: column;
-  justify-content: space-around; /* Space items evenly */
-  align-items: center; /* Center items vertically */
-  height: 60%; /* Ensure it fills the navbar height */
-}
-.data-sideNavbar-icon li {
-  padding: 0; /* Remove padding for horizontal alignment */
-  text-align: center;
-}
-.data-sideNavbar-icon li a {
-  color: white;
-  text-decoration: none;
-  display: inline-block; /* Ensure proper alignment */
-  padding: 10px 15px; /* Add some spacing around the icons */
-}
-.data-sideNavbar-icon a:hover {
-  background-color: #d24d4d;
-  border-radius: 5px; /* Optional: Add rounded corners on hover */
-}
-
-
-.data-sidenavbar-account-icon {
-  list-style-type: none;
-  bottom: 0;
+/* Close button inside navbar */
+.close-button {
   position: absolute;
-  padding: 0;
-  margin: 0;
-  display: flex; 
-  flex-direction: row;
-  justify-content: space-evenly; 
-  align-items: center; 
-  height: 10%;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.3s;
 }
-.data-sidenavbar-account-icon li {
-  padding: 0; 
+.toggle-button:active{
+color: red;
+transform: rotate(360deg);
+transition: all 0.5s ease;
+}
+
+/* Navigation items */
+.side-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.side-navbar ul li {
+  margin: 20px 0;
   text-align: center;
 }
-.data-sidenavbar-account-icon li a {
-  color: white;
-  text-decoration: none;
-  display: inline-block; /* Ensure proper alignment */
-  padding: 10px 15px; /* Add some spacing around the icons */
+.active-page {
+border-left: solid 5px #d73a3a;
+color: white !important;
+box-shadow: #d73a3a 0px 0px 10px 0px;
 }
-.data-sidenavbar-account-icon a:hover {
-  background-color: #d24d4d;
-  border-radius: 5px; /* Optional: Add rounded corners on hover */
+.active-page ul li a{
+border: solid 1px #d73a3a;
+color: white !important;
+}
+
+.side-navbar ul li a {
+  color: rgb(185, 185, 185);
+  font-size: 12px;
+  text-decoration: none;
+  gap: 10px;
+  font-family: montserrat;
+  display: flex;
+  align-items: center;
+  opacity: 0.6;
+  background-color: rgb(26, 26, 26);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' -25,
+  'opsz' 20;
+font-weight: 100;
+font-size: 18px;
+vertical-align: middle;
+font-optical-sizing: 20;
+}
+
+
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* Initially hidden */
+  z-index: 900; /* Below the navbar */
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+
+}
+
+@keyframes spin-in {
+  0% {
+    transform: rotate(-360deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.close-button[style*="display: block"] {
+  animation: spin-in 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes expand-in {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.side-navbar[style*="left: 0"] ul li a {
+  animation: expand-in .5s cubic-bezier(.4,0,.2,1);
+  transform-origin: left;
+}
+
+.side-navbar[style*="left: 0"] ul li:nth-child(1) a {
+  animation-delay: 0s;
+}
+.side-navbar[style*="left: 0"] ul li:nth-child(2) a {
+  animation-delay: 0.08s;
+}
+.side-navbar[style*="left: 0"] ul li:nth-child(3) a {
+  animation-delay: 0.16s;
+}
+.side-navbar[style*="left: 0"] ul li:nth-child(4) a {
+  animation-delay: 0.24s;
+}
+.side-navbar[style*="left: 0"] ul li:nth-child(5) a {
+  animation-delay: 0.32s;
+}
+
+@keyframes expand-toggle {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.toggle-button[style*="display: block"] {
+  animation: expand-toggle 0.5s cubic-bezier(.4,0,.2,1);
+  transform-origin: center;
+}
+
+
+.data-sidenavbar-account-icon{
+  position: absolute;
+  bottom: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  left: 0;
+}
+.data-sidenavbar-account-icon a{
+margin: 5px 0 !important;
+display: flex;
+flex-direction: column;
+text-decoration: none;
+color: white;
+font-size: 10px;
+font-family: montserrat;
+align-content: center;
+align-items: center;
 }
