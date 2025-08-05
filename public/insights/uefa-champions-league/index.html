@@ -9,8 +9,11 @@
 <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-insights-ucl.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@100" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400" rel="stylesheet" />
+
+
+
 
 </head>
 
@@ -41,6 +44,154 @@
 
 
 <section id="section1">
+
+  <div class="section1-parent-container">
+    <div class="section1-child-container">
+        
+          <div class="section1-content-text-header">
+            <img src="/pagecontent/resources/images/league-icons/champions-league.png" alt="Logo" class="logo">
+            <h1>UEFA Champions League</h1>
+          </div>
+
+          <div class="section1-content-body">
+ 
+
+<div class="carousel-container" id="carousel-container">
+  <div class="carousel" id="carousel">
+    <div class="carousel-card" onclick="centerCard(this)">
+    <div class="tag"><h1>Jul 8-9 2025</h1><span class="material-symbols-outlined">check</span></div>
+    <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>
+        <h2>Qualification Round 1 Leg. 1</h2>
+      </div>
+  </div>
+
+    <div class="carousel-card" onclick="centerCard(this)">
+      <div class="tag"><h1>Jul 15-16 2025</h1><span class="material-symbols-outlined">check</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>        
+        <h2>Qualification Round 1 Leg. 2</h2>
+      </div>
+    </div>
+
+    <div class="carousel-card centered" onclick="centerCard(this)">
+      <div class="tag next"><h1>July 22-23 2025</h1><span class="material-symbols-outlined">event_upcoming</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>        
+        <h2>Qualification Round 2 Leg. 1</h2>
+        <ul class="dropdown-list">
+<!-- Dropdown items -->
+          <li class="dropdown-item">
+              <div class="i-parent">
+              <div class="i-container">
+                  <span>Rangers Glasgow</span>
+                  <a>Panathinaikos</a>
+              </div>
+              <div class="i-score">
+                <a>1</a>
+                <a>2</a>
+              </div>
+              </div>
+              <p>52-40</p>
+            <div class="dropdown-content">Details for Rangers Glasgow vs Panathinaikos</div>
+          </li>
+<!-- End -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-card" onclick="centerCard(this)">
+      <div class="tag"><h1>July 29-30</h1><span class="material-symbols-outlined">event</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>        
+        <h2>Qualification Round 2 Leg. 2</h2>
+      </div>
+    </div>
+
+    <div class="carousel-card" onclick="centerCard(this)">
+      <div class="tag"><h1>TBD</h1><span class="material-symbols-outlined">event</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>        
+        <h2>Play-off Round</h2>
+        <a>TBD</a>
+      </div>
+    </div>
+
+    <div class="carousel-card" onclick="centerCard(this)">
+      <div class="tag"><h1>TBD</h1><span class="material-symbols-outlined">event</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>        
+        <h2>Group Stage</h2>
+        <a>TBD</a>
+      </div>
+    </div>
+
+    <div class="carousel-card" onclick="centerCard(this)">
+      <div class="tag"><h1>TBD</h1><span class="material-symbols-outlined">event</span></div>
+      <div class="inner">
+        <h1>UEFA Champions League 2025/2026</h1>
+        <h2>Knockout Round</h2>
+        <a>TBD</a>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<script>
+function centerCard(card) {
+  const container = document.getElementById("carousel-container");
+  const cardRect = card.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const cardCenter = cardRect.left + cardRect.width / 2;
+  const containerCenter = containerRect.left + containerRect.width / 2;
+
+  const scrollOffset = cardCenter - containerCenter;
+
+  container.scrollBy({
+    left: scrollOffset,
+    behavior: "smooth"
+  });
+
+  // Highlight the centered card
+  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('centered'));
+  card.classList.add('centered');
+}
+
+// Dropdown toggle for match list
+function setupDropdowns() {
+  document.querySelectorAll('.dropdown-item').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      var item = this.closest('.dropdown-item');
+      if (item) item.classList.toggle('open');
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  var centeredCard = document.querySelector('.carousel-card.centered');
+  if (centeredCard) {
+    centerCard(centeredCard);
+  }
+  setupDropdowns();
+});
+</script>
+
+
+
+
+
+            
+
+          </div>
+
+    </div>
+</div>
 
 
 </section>

@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function openNavbar() {
           sideNavbar.style.left = '0';
+          sideNavbar.style.opacity = '1';
+          sideNavbar.style.transition = 'left 0.3s ease, opacity 0.3s ease';
+          sideNavbar.style.zIndex = '1000'; // Ensure it appears above
           closeButton.style.display = 'block';
           toggleButton.style.display = 'none';
           document.getElementById('overlay').style.display = 'block';
@@ -28,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function closeNavbar() {
           sideNavbar.style.left = '-250px';
+          sideNavbar.style.transition = 'left 0.3s ease, opacity 0.3s ease';
+          sideNavbar.style.opacity = '0';
           closeButton.style.display = 'none';
           toggleButton.style.display = 'block';
           document.getElementById('overlay').style.display = 'none';

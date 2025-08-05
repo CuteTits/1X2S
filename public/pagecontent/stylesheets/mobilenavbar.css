@@ -39,7 +39,7 @@ transition: all 0.5s ease;
   top: 0;
   left: -400px;
   width: 170px;
-  height:80vh;
+  height: 95dvh;
   background-color: #111;
   color: white;
   transition: left 0.3s ease;
@@ -47,6 +47,7 @@ transition: all 0.5s ease;
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
+  opacity: 0;
 }
 .side-navbar img{
   width: 60px;
@@ -64,7 +65,7 @@ transition: all 0.5s ease;
   background: none;
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: #ffffff;
   opacity: 1;
   transition: opacity 0.3s;
   font-family: orbitron;
@@ -97,17 +98,18 @@ color: white !important;
 }
 
 .side-navbar ul li a {
-  color: rgb(185, 185, 185);
+  color: rgb(255, 255, 255);
   font-size: 12px;
   text-decoration: none;
   gap: 10px;
   font-family: montserrat;
   display: flex;
   align-items: center;
-  opacity: 0.6;
+  opacity: 1;
   background-color: rgb(26, 26, 26);
   padding: 5px 10px;
   border-radius: 5px;
+  font-weight: 200;
 }
 
 
@@ -220,4 +222,33 @@ font-size: 10px;
 font-family: montserrat;
 align-content: center;
 align-items: center;
+}
+
+
+.data-sidenavbar-text-container {
+  position: fixed;
+  top: 100px;
+  right: -100px;
+  width: auto;
+  text-align: left;
+  padding: 10px;
+  font-size: 12px;
+  display: flex;
+  z-index: 1000;
+  transform: rotate(90deg);
+
+}
+
+.data-sidenavbar-text-container a{
+font-family: montserrat;
+color: white;
+text-decoration: none;
+opacity: 0.8;
+font-weight: 300;
+}
+.data-sidenavbar-text-container h1{
+font-family: zendots;
+color: white;
+text-decoration: none;
+font-size: 3em;
 }

@@ -109,20 +109,29 @@ font-family: montserrat;
 color: #d73a3a;
 transition: all 0.3s ease-in-out;
 text-decoration: none;
+display: inline-flex;
+justify-content: center;
+align-items: center;
 position: relative;
 }
 .section-container-text-content a::after {
 content: '';
 position: absolute;
 left: 0;
-bottom: 2px;
-width: 0;
-height: 1px;
+right: 32px;
+bottom: -2px;
+height: .5px;
 background: rgb(218, 52, 52);
 transition: width 0.2s ease;
+width: 0;
 }
 .section-container-text-content a:hover::after {
-width: 90%; 
+width: calc(100% - 12px); 
+}
+.section-container-text-content a span{
+color: white;
+display: inline;
+font-size: 1em;
 }
 
 .section-container-text-content li {

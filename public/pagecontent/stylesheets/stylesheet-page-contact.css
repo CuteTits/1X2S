@@ -66,25 +66,29 @@ font-size: .8em;
   font-size: .9em;
   transition: all 0.5s ease;
   text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact-point a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 1px;
-  background: rgb(218, 52, 52);
-  transition: width 0.2s ease;
+content: '';
+position: absolute;
+left: 0;
+right: 32px;
+bottom: -2px;
+height: 1px;
+background: rgb(218, 52, 52);
+transition: width 0.2s ease;
+width: 0;
 }
 .contact-point a:hover::after {
-  width: 90%; 
+width: calc(100% - 12px); 
 }
 .contact-point a span{
 color: white;
 display: inline;
-font-size: .9em;
+font-size: 1em;
 }
 
 

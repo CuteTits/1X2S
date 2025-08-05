@@ -260,11 +260,13 @@ font-weight: 600;
 color: #a5a5a5;
 }
 .b-text a{
-font-family: orbitron;
+font-family: montserrat;
 font-size: 7px;
 font-weight: 600;
 color:#9b9b9b;
 opacity: .5;
+width: 70%;
+display: flex;
 }
 .b-odds{
 position: absolute;
