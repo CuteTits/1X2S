@@ -47,9 +47,9 @@ width: 100%;
 height: auto;
 position: fixed;
 top: 50%;
-opacity: 8%;
+opacity: 100%;
 left: 50%;
-transform: translate(-50%, -50%) scale(1.2);
+transform: translate(-50%, -50%) scale(1);
 will-change: transform;
 z-index: 1;
 }
@@ -110,7 +110,7 @@ flex-direction: column;
 line-height: 1;
 }
 .section1-parent-title-container a{
-font-size:.7em;
+font-size:.6em;
 font-family: orbitron;
 font-weight: 600;
 }
