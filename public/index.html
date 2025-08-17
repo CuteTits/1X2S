@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="/pagecontent/stylesheets/index.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400" rel="stylesheet" />
+
 
 <script>
   document.documentElement.classList.add('js');
@@ -71,41 +73,39 @@
 
     <section id="section1">
     <div class="section-1-front-image">
-      <!--
     <script>
 document.addEventListener("DOMContentLoaded", () => {
   const img = document.querySelector(".section-1-front-image img");
   const frontImage = document.querySelector(".section-1-front-image");
-  let latestScrollY = 0;
-  let ticking = false;
+  let targetScrollY = 0;
+  let currentScrollY = 0;
+
+  function lerp(start, end, amt) {
+    return (1 - amt) * start + amt * end;
+  }
 
   function updateEffects() {
-          img.style.transform = `translate(-50%, calc(-50% + ${latestScrollY * 0.5}px)) scale(1)`;
+    // Smoothly interpolate currentScrollY towards targetScrollY
+    currentScrollY = lerp(currentScrollY, targetScrollY, 0.08);
 
-          if (latestScrollY > 20) {
-            frontImage.style.filter = "blur(0px)";
-          } else {
-            frontImage.style.filter = "none";
-          }
+    img.style.transform = `translate(-50%, calc(-50% + ${currentScrollY * 0.5}px)) scale(1)`;
+    frontImage.style.transform = `translateY(${currentScrollY * 0.2}px)`;
+    frontImage.style.opacity = 1 - currentScrollY / 1000;
 
-          ticking = false;
-        }
+    requestAnimationFrame(updateEffects);
+  }
 
-        window.addEventListener("scroll", () => {
-          latestScrollY = window.scrollY;
-          if (!ticking) {
-            window.requestAnimationFrame(updateEffects);
-            ticking = true;
-          }
-        });
-      });
+  window.addEventListener("scroll", () => {
+    targetScrollY = window.scrollY;
+  });
 
-    </script>
-    -->
-    <img src="/pagecontent/resources/images/image-city-celebration-limited-png.png.png" alt="frontpageimg">
+  updateEffects(); // Start the animation loop
+});
+</script>
+    <img src="/pagecontent/resources/images/frontpageimage.png" alt="frontpageimg">
     </div>
             <div class="section1-parent-container1">
-                    <h2 style="font-family: zendots; opacity: 1; color: black;">1X2S</h2>
+                    <img src="/pagecontent/resources/images/vultrlogo.png" alt="Logo" class="logo">
           <div class="section1-parent-title-container">
                 <h1 style="margin: 0;">Game <a>is</a><span style="color: rgb(255, 56, 56);"> Game</span></h1>
                 <h2>Advanced AI Pipeline Built for Sports Integration and Analytics.</h2>
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="section2-parent-container-flex-0">
             <div class="section2-content-container-block-0">
               <div class="section2-content-container-child-0">
-                <img src="/pagecontent/resources/images/search_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+                <span class="material-symbols-outlined">search</span>
               </div>
               <div class="section2-content-container-child-0">
                 <h1>Extensive Sourcing</h1>
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="section2-content-container-block-0">
               <div class="section2-content-container-child-0">
-                <img src="/pagecontent/resources/images/equalizer_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" width="50px">
+                <span class="material-symbols-outlined">bar_chart</span>
               </div>
               <div class="section2-content-container-child-0">
                 <h1>Data Driven</h1>
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="section2-content-container-block-0">
               <div class="section2-content-container-child-0">
-                <img src="/pagecontent/resources/images/trophy_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+                <span class="material-symbols-outlined">code_blocks</span>
               </div>
               <div class="section2-content-container-child-0">
                 <h1>Match Picks</h1>
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             <div class="section2-content-container-block-0">
               <div class="section2-content-container-child-0">
-                <img src="/pagecontent/resources/images/automation_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" width="50px">
+                <span class="material-symbols-outlined">automation</span>
               </div>
               <div class="section2-content-container-child-0">
                 <h1>AI Analysis</h1>
