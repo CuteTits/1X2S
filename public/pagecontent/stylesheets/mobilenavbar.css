@@ -234,7 +234,7 @@ align-items: center;
 }
 
 
-.data-sidenavbar-text-container {
+.data-sidenavbar-text-container{
   position: fixed;
   top: 100px;
   right: -100px;
@@ -245,7 +245,7 @@ align-items: center;
   display: flex;
   z-index: 1000;
   transform: rotate(90deg);
-
+  display: none; /* Initially hidden */
 }
 
 .data-sidenavbar-text-container a{

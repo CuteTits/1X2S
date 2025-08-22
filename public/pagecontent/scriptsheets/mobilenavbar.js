@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
           closeButton.style.display = 'block';
           toggleButton.style.display = 'none';
           document.getElementById('overlay').style.display = 'block';
+          const dataTextContainer = document.querySelector('.data-sidenavbar-text-container');
+          if (dataTextContainer) dataTextContainer.style.display = 'block';
           document.body.style.overflow = 'hidden';
           document.documentElement.style.overflow = 'hidden';
         }
@@ -38,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('overlay').style.display = 'none';
           document.body.style.overflow = '';
           document.documentElement.style.overflow = '';
+          const dataTextContainer = document.querySelector('.data-sidenavbar-text-container');
+          if (dataTextContainer) dataTextContainer.style.display = 'none';
         }
 
         if (toggleButton) toggleButton.addEventListener('click', openNavbar);
@@ -74,5 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.error('Error loading navbar:', error));
   } else {
     console.error('Error: Element with ID "mobilenavbar" not found.');
+  }
+
+  const dataTextContainer = document.querySelector('.data-sidenavbar-text-container');
+  if (dataTextContainer) {
+    dataTextContainer.style.display = 'none';
   }
 });
