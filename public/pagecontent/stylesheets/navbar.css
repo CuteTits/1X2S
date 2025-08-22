@@ -78,8 +78,8 @@ height: 100%;
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a {
 color: white; 
 text-decoration: none; 
-font-family: montserrat;
-font-weight: 200;
+font-family: orbitron;
+font-weight: 600;
 font-size: 1em;
 position: relative;
 margin: 2px;
@@ -89,10 +89,8 @@ align-items: center;
 transition: all 1s ease;    
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li span a{
-color: rgb(0, 0, 0); 
-background: RGBA(255, 69, 69, 1);
-background: RGBA(255, 69, 69, 1);
-background: RGBA(255, 69, 69, 1);
+color: rgb(255, 255, 255); 
+
 background: RGBA(255, 69, 69, 1);
 background: linear-gradient(131deg, rgba(255, 69, 69, 1) 0%, rgba(255, 69, 69, 1) 54%, rgba(255, 224, 224, 1) 54%, rgba(255, 224, 224, 1) 58%, rgba(255, 69, 69, 1) 58%, rgba(255, 69, 69, 1) 61%, rgba(255, 224, 224, 1) 61%, rgba(255, 224, 224, 1) 68%, rgba(255, 69, 69, 1) 68%, rgba(255, 69, 69, 1) 100%);
 background-size: 300% 100%;
@@ -112,7 +110,8 @@ border: solid 1px rgb(255, 187, 187);
   }
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li span a:hover{
-color: white;
+color: rgb(26, 26, 26);
+background: white;
 }
 
 

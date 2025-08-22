@@ -38,21 +38,29 @@ transition: all 0.5s ease;
   position: fixed;
   top: 0;
   left: -400px;
-  width: 170px;
-  height: 95dvh;
-  background-color: #111;
+  width: 180px;
+  height: 100dvh;
   color: white;
   transition: left 0.3s ease;
   z-index: 1000;
   padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
   opacity: 0;
+  background-color: rgba(0, 0, 0, 0.436);
+  backdrop-filter: blur(2px);
+  box-shadow: #d73a3a 0px 0px 10px 0px;
+}
+
+.side-navbar-header-enclosed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 .side-navbar img{
   width: 60px;
   height: auto;
-  margin: 10px auto;
+  margin: 0 auto;
   display: flex;
 }
 
@@ -106,10 +114,11 @@ color: white !important;
   display: flex;
   align-items: center;
   opacity: 1;
-  background-color: rgb(26, 26, 26);
+  background-color: rgba(15, 15, 15, 0.507);
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: 200;
+  backdrop-filter: blur(2px);
 }
 
 

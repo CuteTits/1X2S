@@ -4,7 +4,7 @@
 footer {
 position:relative ;
 bottom: 0%; 
-width: 100%; 
+width: 100dvw; 
 background-color: #080808;
 z-index: 99;
 height: 400px;

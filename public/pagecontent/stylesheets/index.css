@@ -33,27 +33,46 @@ box-sizing: border-box;
 
 
 
+
 .section-1-front-image {
 height: 100dvh;
 overflow: hidden;
 width: 100vw;
 z-index: 0;
+position: fixed;
+top: 0;
+left: 0;
 }
 .section-1-front-image {
 transition: all 0.3s ease-in-out;
 }
 .section-1-front-image img {
-width: 100%;
-height: 100vh;
-position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  position: absolute;
+  object-fit: cover;
+  opacity: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform;
+  z-index: 1;
+}
+.section-1-front-image svg {
+width: 100vw;
+height: auto;
 top: 50%;
-object-fit: cover;
+position: absolute;
+object-fit: contain;
 opacity: 100%;
 left: 50%;
 transform: translate(-50%, -50%) scale(1);
-will-change: transform;
 z-index: 1;
 }
+
+
+
+
 @media (prefers-reduced-motion: no-preference) {
 .section-1-front-image img {
 transition: transform 0.1s linear;
@@ -68,7 +87,10 @@ content: url('/pagecontent/resources/images/frontpageimage2.png');
 opacity: .1;
 }
 }
-
+.section1-parent-container1 .parallax-img {
+transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+will-change: transform;
+}
 
 
 .section1-parent-container1 {
@@ -83,28 +105,6 @@ text-align: left;
 .section1-parent-container1 img{
 width: 120px;
 }
-
-
-
-
-.section1-parent-container2{
-position: absolute;
-bottom: 5%;
-left: 5%;
-color: white;
-}
-.section1-parent-container2 h3{
-font-family: montserrat;
-font-weight: 600;
-margin: 0;
-}
-
-.section1-parent-title-container{
-width: 100%;
-
-}
-
-
 
 
 .section1-parent-title-container h1{
@@ -129,8 +129,78 @@ font-weight: 300;
 padding: 2px;
 color: rgb(242, 242, 242);
 margin: 10px 0;
-
 }
+
+
+.section1-parent-container2{
+position: absolute;
+top: 50%;
+left: 75%;
+color: white;
+transform: translate(-50%, -100%);
+overflow: hidden;
+backdrop-filter: blur(2px);
+}
+.section1-parent-button-container{
+display: block;
+flex-direction: row;
+align-items: center;
+gap: 10px;
+overflow: hidden;
+}
+.section1-parent-button-container h2{
+font-size: 1.5em;
+font-family: orbitron;
+font-weight: 600;
+color: rgb(255, 57, 57);
+margin: 0;
+}
+.button-container{
+display: flex;
+flex-direction: row;
+gap: 25px;
+margin: 20px 0;
+}
+.button-container a{
+position: relative;
+font-size: 16px;
+font-family: montserrat;
+color: white;
+font-weight: 200;
+display: flex;
+gap: 5px;
+cursor: pointer;
+transition: all 0.5s ease;
+text-decoration: none;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+}
+.button-container a .material-symbols-outlined{
+font-size: 16px;
+}
+.button-container a::after {
+content: '';
+position: absolute;
+left: 0;
+right: 32px;
+bottom: -2px;
+height: 1px;
+background: rgb(218, 52, 52);
+transition: width 0.2s ease;
+width: 0;
+}
+.button-container a:hover::after {
+width: calc(100% - 20px); 
+}
+@media screen and (max-width: 1080px) {
+.section1-parent-container2{
+display: none;
+}
+}
+
+
+
 
 
 @media screen and (max-width: 600px) {
@@ -144,6 +214,8 @@ font-size: 1em;
 
 
 
+
+/* Section 1 Subtitle */
 
 
 .section-1-subtitle-content-container-flex-1{
@@ -490,16 +562,18 @@ z-index: 500;
 position: absolute;
 left: 0;
 top: 70dvh;
+
 }
 #section3{
-background-color:transparent ;
-height: 300dvh;
+height: 200dvh;
 width: 100vw;
 z-index: 10;
 position: relative;
 align-items: center;
 display: flex;
 justify-content: center;
+background: #000000;
+background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 83%, rgba(0, 0, 0, 0.81) 88%, rgba(0, 0, 0, 0.59) 94%, rgba(0, 0, 0, 0) 100%);
 }
 .section4{
 background-color:#050505 ;
@@ -507,7 +581,6 @@ height: 100dvh;
 width: 100vw;
 z-index: 5;
 position: relative;
-border-top: solid 1px #1a1a1a;
 display: flex;
 justify-content: center;
 flex-direction: column;
@@ -544,7 +617,7 @@ position: absolute;
 z-index: 10;
 width: 50vw !important;
 left: -6vw !important;
-top: 130vh !important;
+top: 75vh !important;
 }
 #sticky-value{
 font-size: 5em;
@@ -584,7 +657,7 @@ width: 25%;
 height: 90%;              
 display: flex;
 flex-direction: column;     
-justify-content: space-evenly; 
+gap: 10%;
 }
 
 .b-client-vGhIx17 {
@@ -691,6 +764,8 @@ font-family: orbitron;
 width: 40%;
 } 
 }
+
+
 
 
 
