@@ -69,7 +69,19 @@ left: 50%;
 transform: translate(-50%, -50%) scale(1);
 z-index: 1;
 }
-
+@media screen and (max-width: 800px) {
+.section-1-front-image svg {
+width: auto;
+height: 70vh;
+top: 50%;
+position: absolute;
+object-fit: contain;
+opacity: 100%;
+left: 50%;
+transform: translate(-50%, -50%) scale(1);
+z-index: 1;
+}
+}
 
 
 
