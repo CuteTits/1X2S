@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<title>1X2S</title>
+<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/css-archived.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/index-webkit-mobile.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+</head>
+
+
+<body>
+
+<page class="page-content-on-load-true">
+
+
+
+
+
+
+<nav>
+    <!-- Navbar / for pc devices -->
+    <div id="navbar"></div>
+    <script src="/pagecontent/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+</nav>
+<mobilenav>
+    <!-- Navbar / for mobile devices -->
+    <div id="mobilenavbar"></div>
+    <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+</mobilenav>  
+
+
+
+<section id="section1">
+
+
+</section>
+
+
+<section id="section3">
+
+  <content class="section3-content">
+
+  <div class="section3-side-bar">
+    <div class="section3-side-bar-content">
+      <ul>
+        <h1>Leagues and Competitions</h1>
+        <li class=""><img src="/pagecontent/resources/images/league-icons/cwc.png" alt=""><a href="/insights/1x2s">FIFA Club World Cup</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/champions-league.png" alt=""><a href="/insights/uefa-champions-league">UEFA Champions League</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/uel.png" alt=""><a href="/insights/1x2s/1x2s-betslip">UEFA Europa League</a></li>
+        <li><img src="/pagecontent/resources/images/league-icons/uecl.png" alt=""><a href="/insights/1x2s/1x2s-odds">UEFA Conference League</a></li>
+        <h1>General</h1>
+        <li><span class="material-symbols-outlined">calendar_month</span><img src="/pagecontent/resources/images/league-icons/1x2s.png" alt=""><a href="/insights/weekly">Weekly Insights</a></li>
+      </ul> 
+    </div>
+
+
+
+  </div>
+
+
+
+  <contentcolumn class="section3-content-column align-right"
+  
+  <div class="b-section-dynamic-content-slider-container">
+
+
+  <label>
+    <input type="checkbox" id="toggleSwitch">
+    <div class="g-switch-container">
+      <div class="g-switch-fill"></div>
+      <div class="g-switch-content">
+        <div class="g-switch-side left">
+            <span class="material-symbols-outlined">
+            decimal_increase
+            </span>
+          <span>European Decimal</span>
+        </div>
+        <div class="g-switch-side right">
+          <span class="material-symbols-outlined">
+          exposure_plus_1
+          </span>
+          <span>American Moneyline</span>
+        </div>
+      </div>
+    </div>
+  </label>
+
+  <button class="b-slider-nav bnav-left" onclick="bscrolldynamicslider(-1)">❮</button>
+  <div class="b-slider-track" id="b-sliderTrack">
+
+
+  </div>
+  <button class="b-slider-nav bnav-right" onclick="bscrolldynamicslider(1)">❯</button>
+</div>
+<link rel="stylesheet" href="/pagecontent/stylesheets/insight-class-style.css">
+<script>
+  //b-cards
+  async function fetchCards() {
+    try {
+      const response = await fetch('/api/cards');
+      const cardsData = await response.json();
+      return cardsData; // Array of card file paths
+    } catch (error) {
+      console.error('Failed to fetch card list:', error);
+      return [];
+    }
+  }
+
+  // Fetch and load the content for each card
+  async function loadCardContent(cardElement, data) {
+    try {
+      const res = await fetch(data.src); // Load the content of each JSON card
+      const cardData = await res.json();  // Parse the JSON response
+      const styleClass = cardData.style ? cardData.style.toLowerCase() : '';
+
+
+      console.log('Card data:', cardData); // Log the card data
+
+      // Insert the content into the card element
+      cardElement.innerHTML = `
+        <div class="b-slider-card-inner ${styleClass}">
+          <div class="b-slider-card-image1">
+            <img src="${cardData.image}" alt="${cardData.title}" />
+            <h3>${cardData.title}</h3>
+          </div>
+          <p>${Array.isArray(cardData.description) ? cardData.description.join(', ') : cardData.description}</p>
+          <div class="b-slider-card-icon">
+            <dataclass class="b-text"><a>${cardData.context}</a></dataclass>
+            <dataclass class="b-odds"><a>${
+              useMoneyline ? decimalToMoneyline(cardData.odds) : cardData.odds
+            }</a></dataclass>
+          </div>
+        </div>
+          <div class="b-slider-card-background">
+            <img src="${cardData.background}" alt="${cardData.title} Logo" />
+          </div>
+      `;
+    } catch (err) {
+      console.error('Failed to load card content:', err);
+      cardElement.innerHTML = `<p>Error loading content</p>`;
+    }
+  }
+
+  // Create the card element and load its content
+  function createCardElement(data) {
+    const card = document.createElement('div');
+    card.classList.add('b-slider-card');
+    loadCardContent(card, data); // Load content for this card
+    return card;
+  }
+
+  // Initialize the slider by fetching card data
+  async function initSlider() {
+    const track = document.getElementById('b-sliderTrack');
+    const cardsData = await fetchCards();
+
+    if (cardsData.length === 0) {
+      track.innerHTML = '<p>No cards available</p>';
+      return;
+    }
+
+    // Clear existing cards (if any)
+    track.innerHTML = '';
+
+    // Create and append each card element
+    cardsData.forEach(cardData => {
+      const cardElement = createCardElement(cardData);
+      track.appendChild(cardElement);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initSlider();
+  });
+
+  // Function to scroll through the cards
+  function bscrolldynamicslider(direction) {
+    const track = document.getElementById('b-sliderTrack');
+    const cardWidth = track.querySelector('.b-slider-card') ? track.querySelector('.b-slider-card').offsetWidth + 1 : 0;
+    track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  }
+
+
+
+  let useMoneyline = false;
+
+  // Convert decimal odds to moneyline
+  function decimalToMoneyline(decimal) {
+    const dec = parseFloat(decimal);
+    if (isNaN(dec)) return decimal;
+    if (dec >= 2) {
+      return `+${Math.round((dec - 1) * 100)}`;
+    } else {
+      return `${Math.round(-100 / (dec - 1))}`;
+    }
+  }
+
+  // Toggle logic
+  const toggleSwitch = document.getElementById('toggleSwitch');
+  if (toggleSwitch) {
+    toggleSwitch.addEventListener('change', () => {
+      useMoneyline = toggleSwitch.checked;
+      initSlider(); // Re-render cards with new odds format
+    });
+  }
+</script>
+
+
+
+
+
+
+<div class="section-dynamic-content-slider-container">
+    <button class="a-slider-nav nav-left" onclick="scrolldynamicsliderA(-1)">❮</button>
+    <div class="a-slider-track" id="a-sliderTrack">
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-1.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-2.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-3.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-4.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-5.json"></div>
+        <div class="a-slider-card" data-src="/page&card-2/&content-card-a2-6.json"></div>
+    </div>
+    <button class="a-slider-nav nav-right" onclick="scrolldynamicsliderA(1)">❯</button>
+</div>
+
+</contentcolumn>
+
+
+<script>
+  // Function to scroll the 'A' slider
+  function scrolldynamicsliderA(direction) {
+    const track = document.getElementById('a-sliderTrack');
+    const cardWidth = track.querySelector('.a-slider-card').offsetWidth + 1; 
+    track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  }
+
+  // Center the selected card in 'A' slider
+  function centerCardA(card) {
+    const track = document.getElementById('a-sliderTrack');
+    const trackRect = track.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const offset = cardRect.left - trackRect.left - (trackRect.width / 2) + (cardRect.width / 2);
+    track.scrollBy({ left: offset, behavior: 'smooth' });
+  }
+
+  // Load card content for the 'A' slider
+async function loadCardContentA(card) {
+  const src = card.dataset.src;
+  try {
+    const res = await fetch(src);
+    const data = await res.json();
+    const detailsHTML = data.details?.map(item => `<li><a>${item}</a></li>`).join('') || '';
+
+    // Assign the ID from the JSON to the card element
+    if (data.id) {
+      card.id = data.id;
+    }
+
+    card.innerHTML = `
+      <div class="a-slider-card-inner">
+        <div class="a-slider-card-image1"><img src="${data.image}" alt="${data.title}"/></div>
+        <h3>${data.title}</h3>
+        <h2>${data.name1}</h2>
+        <h2>${data.name2}</h2> 
+        <ul style="text-align:left; padding-left:1.2rem; margin-top:0.5rem; width:auto;">${detailsHTML}</ul>
+        <div class="a-slider-card-image2"><img src="/pagecontent/resources/images/logo2.png"></div>
+
+        <!-- Image button -->
+        <button class="save-png-button">
+          <box-icon name='download' color='#ffffff'></box-icon>
+        </button>
+      </div>
+    `;
+
+    const button = card.querySelector('.save-png-button');
+    button.addEventListener('click', () => saveCardAsImageA(card));
+
+  } catch (err) {
+    card.innerHTML = `<p style="color:red; font-family:orbitron;font-size:1em; text-align:center; margin-top:50%;">No Upcoming...</p>`;
+    console.error(`Failed to load ${src}`, err);
+  }
+}
+
+
+  // Save card as an image for 'A' slider
+  function saveCardAsImageA(card) {
+    const button = card.querySelector('.save-png-button');
+    button.style.visibility = 'hidden';
+
+    html2canvas(card, {
+      useCORS: true,
+      scale: 2
+    }).then(canvas => {
+      button.style.visibility = 'visible';
+      const link = document.createElement('a');
+      link.download = '1X2S-Betslip.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }
+
+  // Initialize the 'A' slider
+  window.addEventListener('DOMContentLoaded', async () => {
+    const cards = document.querySelectorAll('.a-slider-card');
+    for (let card of cards) {
+      await loadCardContentA(card);
+      card.addEventListener('click', () => centerCardA(card));
+    }
+  });
+</script>
+
+</content>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+  <div id="footer-container"></div>
+  <script src="/pagecontent/scriptsheets/global-footer.js"></script>
+  <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+
+
+
+</page>
+
+
+
+
+<script>
+function enableDragScroll(selector) {
+  const slider = document.querySelector(selector);
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// Enable drag scroll for both tracks
+enableDragScroll('.a-slider-track');
+enableDragScroll('.b-slider-track');
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
