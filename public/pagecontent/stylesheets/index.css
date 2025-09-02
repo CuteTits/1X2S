@@ -152,66 +152,93 @@ left: 50%;
 color: white;
 transform: translate(-50%, -100%);
 overflow: hidden;
-}
-.section1-parent-button-container{
-display: block;
-flex-direction: row;
-align-items: center;
-gap: 10px;
-overflow: hidden;
-}
-.button-container{
 display: flex;
 flex-direction: row;
-gap: 25px;
-margin: 20px 0;
 }
-.button-container a{
+.section1-parent-button-container{
+display: flex;
+flex-direction: row;
+gap: 2px;
+}
+
+
+.btn1{
+background: rgb(255, 255, 255);
+padding: 5px 15px;
+overflow: hidden;
+border: solid 1px white;
+position: relative; /* Add this */
+margin-right: 10px;  /* Optional: space between buttons */
+}
+.btn1 a{
 position: relative;
-font-size: 14px;
+font-size: 12px;
 font-family: montserrat;
-font-weight: 500;
+font-weight: 400;
 display: flex;
 gap: 5px;
 cursor: pointer;
 transition: all 0.5s ease;
 text-decoration: none;
-display: inline-flex;
 justify-content: center;
 align-items: center;
+color: rgb(0, 0, 0);
 }
-.button-container a .material-symbols-outlined{
-font-size: 16px;
+.btn1::before{
+width: 0%;
+height: 100%;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+background: rgb(255, 53, 53);
+z-index: 0;
+transition: all 0.5s ease;
 }
-@media screen and (max-width: 1080px) {
-.section1-parent-container2{
-display: none;
-}
-}
-.btn1{
-background-color: rgb(255, 255, 255);
-color: black;
-padding: 5px;
-border: solid 1px transparent;
+.btn1:hover::before{
+width: 100%;
 }
 .btn1 span{
-font-size: 20px;
-color: black;
+color: #000000;
 }
+
 .btn2{
+background: rgba(255, 255, 255, 0);
+padding: 5px 15px;
+color: rgb(0, 0, 0);
+overflow: hidden;
 border: solid 1px white;
-padding: 5px;
+position: relative; /* Add this */
+margin-right: 10px;  /* Optional: space between buttons */
+}
+.btn2 a{
+position: relative;
+font-size: 12px;
+font-family: montserrat;
+font-weight: 400;
+display: flex;
+gap: 5px;
+cursor: pointer;
+transition: all 0.5s ease;
+text-decoration: none;
+justify-content: center;
+align-items: center;
 color: white;
 }
-.btn1:hover,
-.btn2:hover{
-transition: all 0.3s ease-in-out;
-opacity: 0.2;
+.btn2::before{
+width: 0%;
+height: 100%;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+background: rgb(255, 59, 59);
+z-index: 0;
+transition: all 0.5s ease;
 }
-
-
-
-
+.btn2:hover::before{
+width: 100%;
+}
 
 
 @media screen and (max-width: 600px) {
