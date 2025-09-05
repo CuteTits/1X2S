@@ -341,103 +341,6 @@ font-size: 12px;
 
 
 
-.section2-parent-container-flex-0 {
-display: flex;
-justify-content: space-between;  
-width: 80%;                     
-margin: 0 auto;                  
-gap: 20px;                       
-padding: 10px;                  
-overflow: hidden;                
-}
-@media screen and (max-width: 1080px) {
-.section2-parent-container-flex-0 {
-width: 90vw;
-display: grid;
-justify-content: center;
-align-items: center;
-gap: 0;
-justify-items: center;
-}
-.section2-parent-container-flex-0 > *:not(:last-child)::before {
-display:  none;
-}
-}
-.section2-parent-container-flex-0 > * {
-position: relative;
-padding: 10px;
-}
-.section2-parent-container-flex-0 > *:not(:last-child)::before {
-content: "";
-position: absolute;
-right: -10%;
-top: 5%;
-width: 1px;
-height: 90%;
-background-color: rgb(43, 42, 42);
-}
-
-.section2-content-container-block-0{
-display: block;
-width: 20%;
-transition: all 0.5s ease-in-out;
-}
-@media screen and (max-width: 1080px) {
-.section2-content-container-block-0 {
-display: flex;
-flex-direction: row;
-align-items: center; 
-justify-content: flex-start; 
-gap: 10px; 
-}
-}
-
-@media screen and (max-width: 1080px) {
-.section2-content-container-block-0 {
-width: 90%;
-text-align: center;
-justify-content: center;
-background-color: #0c0c0c;
-border-radius: 15px;
-margin: 5px 0 0 0;
-}
-}
-.section2-content-container-block-0 a{
-font-size: 12px;
-color: #ffffff;
-font-family: montserrat;
-}
-.section2-content-container-block-0 h1{
-font-size: 17px;
-padding: 0;
-margin: 0;
-color: #ff3a3a;
-font-family: orbitron;
-}
-@media screen and (max-width: 1080px) {
-.section2-content-container-block-0 a {
-font-size: 80%;
-}
-}
-@media screen and (max-width: 1080px) {
-.section2-content-container-block-0 h1 {
-font-size: 100%;
-}
-}
-.section2-content-container-child-0{
-display: block;
-}
-.material-symbols-outlined{
-font-size: 3em;
-color: #f8f4f4;
-}
-
-@media screen and (max-width: 1080px) {
-.section2-content-container-child-0{
-text-align: left;
-}
-}
-
 
 
 
@@ -584,18 +487,6 @@ width: 100vw;
 display: flex;
 z-index: 5;
 position: relative;
-
-}
-#section2{
-background-color:transparent ;
-display: block;
-height: auto;
-width: 100vw;
-align-items: center;
-z-index: 500;
-position: absolute;
-left: 0;
-top: 75dvh;
 
 }
 #section3{
