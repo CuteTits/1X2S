@@ -191,12 +191,16 @@ content: '';
 position: absolute;
 top: 0;
 left: 0;
-background: rgb(255, 53, 53);
+background: rgb(15, 15, 15);
 z-index: 0;
 transition: all 0.5s ease;
 }
 .btn1:hover::before{
 width: 100%;
+}
+.btn1:hover span {
+color: white !important;
+transition: all 1s ease;
 }
 .btn1 span{
 color: #000000;
