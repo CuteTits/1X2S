@@ -7,8 +7,8 @@ font-family: 'micro';
 src: url('/fonts/Micro5-Regular.ttf') format('truetype');
 }
 @font-face {
-font-family: 'Inter';
-src: url('/public/fonts/') format('truetype');
+font-family: 'inter';
+src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
 }
 
 

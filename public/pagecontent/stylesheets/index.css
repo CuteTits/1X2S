@@ -136,19 +136,19 @@ font-weight: 600;
 }
 .section1-parent-title-container h2{
 font-size:1.3em;
-font-family: montserrat;
+font-family: inter;
 width: 60%;
-font-weight: 300;
+font-weight: 200;
 padding: 2px;
-color: rgb(242, 242, 242);
+color: rgb(165, 165, 165);
 margin: 10px 0;
 }
 
 
 .section1-parent-container2{
 position: absolute;
-top: 70%;
-left: 50%;
+top: 60%;
+left: 65%;
 color: white;
 transform: translate(-50%, -100%);
 overflow: hidden;
