@@ -118,7 +118,11 @@ color: white;
 font-size: 18px !important;
 font-weight: 200;
 }
-
+@media screen and (max-width: 1080px) {
+.s2-side-bar-content{
+display: none;
+}   
+}
 
 
 /* */
@@ -296,7 +300,11 @@ color: rgb(169, 168, 168);
 font-family: montserrat;
 font-weight: 400;
 }
-
+@media screen and (max-width: 800px) {
+.s2-card-container{
+width: 90%;
+}
+}
 
 
 
