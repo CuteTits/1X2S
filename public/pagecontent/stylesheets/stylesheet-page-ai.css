@@ -105,7 +105,7 @@ font-variation-settings:
 
 
 #section2 {
-background-color: #000000;
+background-color: #0B0B0B;
 min-height: 100vh; 
 height: auto;
 justify-content: center;
@@ -114,7 +114,7 @@ align-items: center;
 }
 
 #section3 {
-background-color: #0f0f0f;
+background-color: #0B0B0B;
 min-height: 40vh; 
 height: auto;
 justify-content: center;
@@ -130,3 +130,79 @@ position: relative;
 
 
 
+.s2-grid{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+width: 90%;
+padding: 20px;
+box-sizing: border-box;
+height: auto;
+}
+.s2-grid-item{
+cursor: pointer;
+background-color: #0f0f0f;
+padding: 0;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+color: white;
+font-family: montserrat;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+position: relative; /* Add this */
+overflow: hidden;   /* Add this to clip the overlay */
+height: auto;
+min-height: 350px;
+}
+.s2-grid-item h2{
+font-family: montserrat;
+font-size: 24px;
+font-weight: 600;
+margin: 15px 0;
+z-index: 100;
+}
+.s2-grid-item img{
+width: 100%;
+height: auto;
+border-radius: 10px;
+margin-bottom: 15px;
+position: absolute;
+top: 0;
+}
+
+.s2-grid-item-show-more {
+position: absolute;      /* Overlay */
+left: 0;
+top: 10%;
+width: 100%;
+max-height: 0;
+opacity: 0;
+overflow: hidden;
+color: #fff;
+padding: 30px 20px 20px 20px;
+box-sizing: border-box;
+border-radius: 10px 10px 0 0;
+transition: all 0.5s;
+margin-top: 0;
+z-index: 2;
+height: auto;
+}
+.s2-grid-item-show-more p {
+font-family: inter;
+font-size: 14px;
+line-height: 1.5;
+margin: 0;
+}
+.s2-grid-item:hover .s2-grid-item-show-more {
+max-height: 500px;
+opacity: 1;
+margin-top: 0;
+pointer-events: auto;
+transition: all 0.5s;
+}
+.s2-grid-item:hover .s2-grid-img {
+content: url("/pagecontent/resources/images/illustration-04.png");
+transition: all 0.5s;
+}
