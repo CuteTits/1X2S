@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<title>Login Page</title>
+<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-loginpage.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
+    </head>
+
+
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <title>Signup</title>
+</head>
+<body>
+
+
+    <nav>
+        <div id="navbar"></div>
+        <script src="/pagecontent/scriptsheets/navbar.js"></script>
+        <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+    </nav>
+    <mobilenav>
+        <div id="mobilenavbar"></div>
+        <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
+        <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+    </mobilenav>  
+
+
+
+<section id="section1">
+        
+  <div class="s1-background">
+    <img src="/pagecontent/resources/images/illustration-flat-img.png" alt="">
+  </div>
+
+  <div id="notice"></div>
+
+  <div class="form-container">
+    <div class="form-title" id="formTitle">Let's Get You Started!</div>
+    <form id="signupForm">
+      <input type="text" placeholder="Name" required id="nameInput">
+      <input type="email" placeholder="Email" required id="emailInput">
+      <input type="password" placeholder="Password" required id="passwordInput">
+      <button type="submit">
+        Create Account
+        <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.2em;">arrow_right_alt</span>
+      </button>
+    </form>
+    <form id="loginForm" style="display:none;">
+      <input type="email" placeholder="Email" required id="loginEmail">
+      <input type="password" placeholder="Password" required id="loginPassword">
+      <button type="submit">
+        Log In
+        <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.2em;">arrow_right_alt</span>
+      </button>
+    </form>
+    <button class="switch-btn" id="switchBtn">Already have an account? Login</button>
+  </div>
+
+  </section>    
+
+  <script>
+    // Country restriction logic
+    fetch('/signup-country')
+      .then(res => res.json())
+      .then(data => {
+        if(data.blocked) {
+          const notice = document.getElementById('notice');
+          notice.innerHTML = `⚠️ Signup from your country (${data.country}) is restricted. Read More <a href="/terms-of-services" target="_blank">here</a>.`;
+          // Disable form
+          document.getElementById('signupForm').querySelector('button[type="submit"]').disabled = true;
+        }
+      });
+
+    // Switch between signup and login forms
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.getElementById('loginForm');
+    const switchBtn = document.getElementById('switchBtn');
+    const formTitle = document.getElementById('formTitle');
+
+    let isSignup = true;
+    switchBtn.addEventListener('click', () => {
+      isSignup = !isSignup;
+      if(isSignup) {
+        signupForm.style.display = '';
+        loginForm.style.display = 'none';
+        switchBtn.textContent = 'Already have an account? Login';
+        formTitle.textContent = 'Lets Get You Started!';
+      } else {
+        signupForm.style.display = 'none';
+        loginForm.style.display = '';
+        switchBtn.textContent = 'Not a member? Sign Up';
+        formTitle.textContent = 'Welcome Back! Login';
+      }
+    });
+
+    // Form submission handling
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value;
+      const email = document.getElementById('emailInput').value;
+      const password = document.getElementById('passwordInput').value;
+
+      // Simple client-side validation
+      if(!name || !email || !password) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Submit to server
+      fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.success) {
+          alert('Signup successful! Please check your email to verify your account.');
+          // Optionally, redirect or switch to login
+        } else {
+          alert(`Signup failed: ${data.message}`);
+        }
+      })
+      .catch(err => {
+        console.error('Error during signup:', err);
+        alert('An error occurred. Please try again later.');
+      });
+    });
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      // Simple client-side validation
+      if(!email || !password) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Submit to server
+      fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.success) {
+          alert('Login successful!');
+          // Redirect to dashboard or another page
+          window.location.href = '/dashboard';
+        } else {
+          alert(`Login failed: ${data.message}`);
+        }
+      })
+      .catch(err => {
+        console.error('Error during login:', err);
+        alert('An error occurred. Please try again later.');
+      });
+    });
+  </script>
+
+
+
+
+
+
+<button id="scrollToTopBtn">Back to Top</button>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
+<script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
+
+
+
+
+<div id="footer-container"></div>
+<script src="/pagecontent/scriptsheets/global-footer.js"></script>
+<link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+
+
+
+
+
+
+</body>
+</html>
