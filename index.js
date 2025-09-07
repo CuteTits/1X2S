@@ -1,47 +1,72 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import fetch from 'node-fetch';
+
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Blocked countries (ISO codes)
+const blockedCountries = ['CN', 'RU', 'NG', 'SE'];
+
+// Middleware to parse JSON
+app.use(express.json());
+
+// Middleware to detect country via Cloudflare
+app.use((req, res, next) => {
+  // Cloudflare header
+  const userCountry = req.headers['cf-ipcountry'] || 'Unknown';
+  req.country = userCountry;
+  next();
+});
 
 // Serve static files
 app.use(express.static('public'));
 
-// Get card list
-app.get('/api/cards', (req, res) => {
-  const cardsDirectory = path.join(__dirname, 'public', 'page-card-1');
-  console.log('Reading from:', cardsDirectory);
-
-  if (!fs.existsSync(cardsDirectory)) {
-    console.error('Directory missing:', cardsDirectory);
-    return res.status(500).send('Cards directory does not exist');
-  }
-
-  fs.readdir(cardsDirectory, (err, files) => {
-    if (err) {
-      console.error('Error reading cards:', err);
-      return res.status(500).send('Error reading the cards directory');
-    }
-
-    const jsonFiles = files
-      .filter(file => file.endsWith('.json'))
-      .map(file => ({
-        src: `/page-card-1/${file}`
-      }));
-
-    console.log('Serving card list:', jsonFiles);
-    res.json(jsonFiles);
-  });
-});
-
 // Serve navbar.html
 app.get('/navbar.html', (req, res) => {
   fs.readFile('public/navbar.html', 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).send('Error reading navbar file');
-    }
+    if (err) return res.status(500).send('Error reading navbar file');
     res.send(data);
   });
+});
+
+// Signup page route
+app.get('/signup/index.html', (req, res) => {
+  res.sendFile(path.join('public', 'signup', 'index.html'), (err) => {
+    if (err) res.status(500).send('Error loading signup page');
+  });
+});
+
+// Endpoint to send country info to client-side
+app.get('/signup-country', (req, res) => {
+  const isBlocked = blockedCountries.includes(req.country);
+  res.json({ country: req.country, blocked: isBlocked });
+});
+
+// Chatbot endpoint
+app.post('/chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    const response = await fetch('http://localhost:11434/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'mistral',
+        prompt: message,
+        stream: false
+      })
+    });
+
+    const data = await response.json();
+    console.log('Ollama API returned:', data);
+
+    res.json({ reply: data.response });
+  } catch (err) {
+    console.error('Error contacting Mistral:', err);
+    res.status(500).json({ reply: 'Sorry, the AI is not available right now.' });
+  }
 });
 
 // Start server

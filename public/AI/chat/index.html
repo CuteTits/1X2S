@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sports Chatbot</title>
+<style>
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: #1db954;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #1db954;
+  }
+
+  #chat {
+    width: 100%;
+    max-width: 700px;
+    min-height: 400px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0,255,0,0.2);
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .message {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+  }
+
+  .user {
+    color: #ffffff;
+  }
+
+  .bot {
+    color: #1db954;
+    display: inline-block;
+  }
+
+  input {
+    width: 60%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    margin-right: 0.5rem;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #1db954;
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #14a14f;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Blinking cursor */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    background-color: #1db954;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: bottom;
+  }
+
+  @keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Sports Chatbot</h1>
+<div>
+  <input id="msg" placeholder="Type your message...">
+  <button onclick="send()">Send</button>
+</div>
+<div id="chat"></div>
+
+<script>
+  async function send() {
+    const input = document.getElementById("msg");
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = "";
+
+    // Display user message
+    const userMsg = document.createElement("p");
+    userMsg.className = "message user";
+    userMsg.textContent = msg;
+    document.getElementById("chat").appendChild(userMsg);
+    userMsg.scrollIntoView({ behavior: "smooth" });
+
+    // Placeholder for bot response
+    const botMsg = document.createElement("p");
+    botMsg.className = "message bot";
+    const cursor = document.createElement("span");
+    cursor.className = "cursor";
+    botMsg.appendChild(cursor);
+    document.getElementById("chat").appendChild(botMsg);
+    botMsg.scrollIntoView({ behavior: "smooth" });
+
+    // Fetch bot response
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg })
+    });
+    const data = await res.json();
+    const text = data.reply;
+
+    // Typing effect
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        botMsg.textContent += text[i];
+        botMsg.appendChild(cursor); // keep cursor at end
+        i++;
+        botMsg.scrollIntoView({ behavior: "smooth" });
+        setTimeout(type, 20);
+      } else {
+        botMsg.removeChild(cursor); // remove cursor after typing
+      }
+    }
+    type();
+  }
+</script>
+
+</body>
+</html>

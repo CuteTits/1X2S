@@ -9,6 +9,7 @@ background-color: #0f0f0f;
 #section1 {
 background-color: #0f0f0f;
 min-height: 100vh; 
+overflow-x: hidden;
 }
 .section1-container-parent{
 position: absolute;
@@ -17,6 +18,7 @@ display: flex;
 top: 15%;
 width: 50%;
 left: 20%;
+overflow: hidden;
 }
 .section-container-content{
 z-index: 100;
@@ -43,13 +45,19 @@ margin-right: 10px;
 
 
 .h-section-content-container{
-display: flex;
+grid-row: 3;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));    
+align-items: center;
 justify-content: space-evenly;
-width: 100%;
+width: 80%;
 }
 .i-section-container{
 display: block;
-width: 20%;
+width: 90%;
+margin: 20px auto;
+text-align: left;
+padding: 10px;
 }
 .i-section-container h1{
 color: white;
@@ -110,8 +118,10 @@ min-height: 100vh;
 height: auto;
 justify-content: center;
 display: flex;
+flex-direction: column;
 align-items: center;
 }
+
 
 #section3 {
 background-color: #0B0B0B;
@@ -129,7 +139,19 @@ position: relative;
 
 
 
-
+#section2 h1{
+font-family: inter;
+font-size: 2.5em;
+font-weight: 600;
+margin: 20px 0;
+padding: 2px;
+display: flex;
+justify-items: center;
+background: linear-gradient(to left, rgb(73, 73, 73), rgb(238, 238, 238));
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
 .s2-grid{
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
