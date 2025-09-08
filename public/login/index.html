@@ -95,6 +95,12 @@
         }
       });
 
+    // Helper to get query parameter
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
     // Switch between signup and login forms
     const signupForm = document.getElementById('signupForm');
     const loginForm = document.getElementById('loginForm');
@@ -102,6 +108,23 @@
     const formTitle = document.getElementById('formTitle');
 
     let isSignup = true;
+
+    // Check URL for mode
+    const mode = getQueryParam('mode');
+    if (mode === 'login') {
+      isSignup = false;
+      signupForm.style.display = 'none';
+      loginForm.style.display = '';
+      switchBtn.textContent = 'Not a member? Sign Up';
+      formTitle.textContent = 'Welcome Back!';
+    } else if (mode === 'signup') {
+      isSignup = true;
+      signupForm.style.display = '';
+      loginForm.style.display = 'none';
+      switchBtn.textContent = 'Already have an account? Log In';
+      formTitle.textContent = "Lets Get You Started!";
+    }
+
     switchBtn.addEventListener('click', () => {
       isSignup = !isSignup;
       if(isSignup) {
@@ -109,11 +132,13 @@
         loginForm.style.display = 'none';
         switchBtn.textContent = 'Already have an account? Log In';
         formTitle.textContent = 'Lets Get You Started!';
+        history.replaceState(null, '', '?mode=signup');
       } else {
         signupForm.style.display = 'none';
         loginForm.style.display = '';
         switchBtn.textContent = 'Not a member? Sign Up';
         formTitle.textContent = 'Welcome Back!';
+        history.replaceState(null, '', '?mode=login');
       }
     });
 
