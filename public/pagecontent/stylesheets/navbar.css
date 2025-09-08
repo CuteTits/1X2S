@@ -278,3 +278,32 @@ width: 0%;
 z-index: 1000;
 transition: width 0.2s ease-out;
 }
+
+#backtoPrevious {
+position: absolute;
+top: 70px;
+left: 50px;
+background: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 8px 12px;
+border-radius: 5px;
+font-size: 0.9em;
+cursor: pointer;
+z-index: 7000;
+transition: all 0.3s ease;
+}
+#backtoPrevious a {
+text-decoration: none;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+transition: all 0.3s ease;
+font-family: montserrat;
+}
+#backtoPrevious:hover a{
+color:#f75454 !important;
+transition: all 0.3s ease;
+}

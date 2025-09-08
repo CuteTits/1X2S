@@ -29,12 +29,18 @@
         <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
     </mobilenav>  
 
+  <button id="backtoPrevious">
+  <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+    <a href="/"><span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.5em;">arrow_back_ios</span> Back </a>
+    <script>
+      document.getElementById('backtoPrevious').addEventListener('click', function() {
+        window.history.back();
+      });
+    </script>
+  </button>
 
 
-<master class="master">
-
-
-    <section id="section1">
+<section id="section1">
     
         <div class="section1-container-parent">
 
@@ -183,7 +189,6 @@
 
 
 
-</master>
 
     </body>
     </html>
