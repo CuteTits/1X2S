@@ -4,7 +4,13 @@ padding: 0;
 margin: 0;
 background-color: #0f0f0f;
 }
-
+html.js body {
+opacity: 0;
+transition: opacity 1s ease-in;
+}
+html.js body.fade-in {
+opacity: 1;
+}
 
 #section1 {
 background-color: #0f0f0f;

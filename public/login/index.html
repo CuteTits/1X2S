@@ -12,8 +12,14 @@
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
+<script>
+  document.documentElement.classList.add('js');
+  window.addEventListener('load', function () {
+    document.body.classList.add('fade-in');
+  });
+</script>
 
-    </head>
+</head>
 
 
 
@@ -47,14 +53,16 @@
     <img src="/pagecontent/resources/images/illustration-flat-img.png" alt="">
   </div>
 
-  <div id="notice"></div>
+  <div id="notice" class="notice;"></div>
 
   <div class="form-container">
-    <div class="form-title" id="formTitle">Let's Get You Started!</div>
+    <img src="/pagecontent/resources/images/vultrlogo.png" alt="Logo" class="form-logo" style="width: 100px;">
+    <div class="form-title" id="formTitle">Let's Get Started!</div>
     <form id="signupForm">
       <input type="text" placeholder="Name" required id="nameInput">
       <input type="email" placeholder="Email" required id="emailInput">
       <input type="password" placeholder="Password" required id="passwordInput">
+            <a>By creating an account you agree to our terms of services</a>
       <button type="submit">
         Create Account
         <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.2em;">arrow_right_alt</span>
@@ -80,8 +88,8 @@
       .then(data => {
         if(data.blocked) {
           const notice = document.getElementById('notice');
-          notice.innerHTML = `⚠️ Signup from your country (${data.country}) is restricted. Read More <a href="/terms-of-services" target="_blank">here</a>.`;
-          // Disable form
+          notice.className = 'notice'; // Add this line
+          notice.innerHTML = `<span class="material-symbols-outlined" style="vertical-align:middle;font-size:1.2em;color:#f75454;">warning</span> Signup from your country (${data.country}) is restricted. Read More <a href="/terms-of-services#Account-Creation" target="">here</a>.`;          // Disable form
           document.getElementById('signupForm').querySelector('button[type="submit"]').disabled = true;
         }
       });
@@ -98,13 +106,13 @@
       if(isSignup) {
         signupForm.style.display = '';
         loginForm.style.display = 'none';
-        switchBtn.textContent = 'Already have an account? Login';
+        switchBtn.textContent = 'Already have an account? Log In';
         formTitle.textContent = 'Lets Get You Started!';
       } else {
         signupForm.style.display = 'none';
         loginForm.style.display = '';
         switchBtn.textContent = 'Not a member? Sign Up';
-        formTitle.textContent = 'Welcome Back! Login';
+        formTitle.textContent = 'Welcome Back!';
       }
     });
 
