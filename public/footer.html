@@ -73,33 +73,35 @@
             </p>
         </div>
         <script>
-            // Generate a unique session ID (UUID v4)
-            function generateSessionId() {
-                return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-                    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-                );
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    // Generate a unique session ID (UUID v4)
+    function generateSessionId() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
 
-            // Store session ID in sessionStorage to persist for the session
-            let sessionId = sessionStorage.getItem('sessionId');
-            if (!sessionId) {
-                sessionId = generateSessionId();
-                sessionStorage.setItem('sessionId', sessionId);
-            }
-            document.getElementById('session-id-value').textContent = sessionId;
+    // Store session ID in sessionStorage to persist for the session
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = generateSessionId();
+        sessionStorage.setItem('sessionId', sessionId);
+    }
+    document.getElementById('session-id-value').textContent = sessionId;
 
-            // Fetch IP and country using ipapi.co
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('user-ip').textContent = data.ip || 'N/A';
-                    document.getElementById('user-country').textContent = data.country_name || 'N/A';
-                })
-                .catch(() => {
-                    document.getElementById('user-ip').textContent = 'N/A';
-                    document.getElementById('user-country').textContent = 'N/A';
-                });
-        </script>
+    // Fetch IP and country using ipapi.co
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('user-ip').textContent = data.ip || 'N/A';
+            document.getElementById('user-country').textContent = data.country_name || 'N/A';
+        })
+        .catch(() => {
+            document.getElementById('user-ip').textContent = 'N/A';
+            document.getElementById('user-country').textContent = 'N/A';
+        });
+});
+</script>
     
     </div>  
 </div>
