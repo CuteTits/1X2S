@@ -64,6 +64,23 @@
             <p>&copy; 2023 1X2S. All rights reserved.</p>
             <a href="/disclaimer" target="_self">Disclaimer</a><a href="/privacy-policy" target="_self">Privacy Policy</a><a href="/terms-of-services" target="_self">Terms of Service</a>
         </div>
+
+        <div class="session-id">
+            <p>Session ID: <span id="session-id-value">ABC123XYZ</span></p>
+        </div>
+        <script>
+            // Function to generate a random session ID
+            function generateSessionId(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+            document.getElementById('session-id-value').textContent = generateSessionId(12);
+        </script>
+
     </div>  
 </div>
 
