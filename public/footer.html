@@ -65,20 +65,23 @@
             <a href="/disclaimer" target="_self">Disclaimer</a><a href="/privacy-policy" target="_self">Privacy Policy</a><a href="/terms-of-services" target="_self">Terms of Service</a>
         </div>
 
-        <div class="session-id">
-            <p style="font-size: 0.75em; color: #888;">
-                Session ID: <span id="session-id-value"></span><br>
-                IP: <span id="user-ip"></span><br>
-                <span id="user-country"></span>
-            </p>
-        </div>
-        <script>
+<div class="session-id">
+    <p style="font-size: 0.75em; color: #888;">
+        Session ID: <span id="session-id-value"></span><br>
+        IP: <span id="user-ip"></span><br>
+        <span id="user-country"></span>
+    </p>
+</div>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     // Generate a unique session ID (UUID v4)
     function generateSessionId() {
-        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-        );
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 
     // Store session ID in sessionStorage to persist for the session
@@ -102,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 </script>
+
     
     </div>  
 </div>
