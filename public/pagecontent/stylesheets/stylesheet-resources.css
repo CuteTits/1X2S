@@ -173,3 +173,21 @@ transform 0.5s cubic-bezier(.4,0,.2,1),
 opacity 0.4s cubic-bezier(.4,0,.2,1),
 visibility 0.4s cubic-bezier(.4,0,.2,1);
 }
+
+
+.card-div ul li a{
+text-decoration: none;
+color: #f75454;
+font-family: 'Montserrat', sans-serif;
+font-size: 1em;
+align-items: center;
+display: flex;
+gap: 5px;
+}
+.card-div ul li a:hover{
+text-decoration: underline;
+}
+.card-div span{
+font-size: 16px;
+color: #f75454;
+}
