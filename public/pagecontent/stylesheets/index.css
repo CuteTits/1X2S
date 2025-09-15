@@ -57,32 +57,8 @@ left: 50%;
 transform: translate(-50%, -50%) scale(1);
 will-change: transform;
 z-index: 1;
+stroke: none;
 }
-.section-1-front-image svg {
-width: 100vw;
-height: auto;
-top: 50%;
-position: absolute;
-object-fit: contain;
-opacity: 100%;
-left: 50%;
-transform: translate(-50%, -50%) scale(1);
-z-index: 1;
-}
-@media screen and (max-width: 800px) {
-.section-1-front-image svg {
-width: auto;
-height: 70vh;
-top: 50%;
-position: absolute;
-object-fit: contain;
-opacity: 100%;
-left: 50%;
-transform: translate(-50%, -50%) scale(1);
-z-index: 1;
-}
-}
-
 
 
 @media (prefers-reduced-motion: no-preference) {
@@ -147,102 +123,70 @@ margin: 10px 0;
 
 .section1-parent-container2{
 position: absolute;
-top: 60%;
-left: 65%;
+top: 95%;
+left: 50%;
 color: white;
 transform: translate(-50%, -100%);
 overflow: hidden;
 display: flex;
-flex-direction: row;
+flex-direction: column;
+align-items: center;
+z-index: 10;
 }
 .section1-parent-button-container{
 display: flex;
 flex-direction: row;
 gap: 2px;
+margin-bottom: 20px;
 }
 
-
-.btn1{
-background: rgb(255, 255, 255);
-padding: 5px 15px;
-overflow: hidden;
-border: solid 1px white;
-position: relative; /* Add this */
-margin-right: 10px;  /* Optional: space between buttons */
+.hide-on-scroll {
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.4s;
 }
-.btn1 a{
-position: relative;
-font-size: 12px;
-font-family: montserrat;
-font-weight: 400;
-display: flex;
-gap: 5px;
+.section1-parent-container2 svg{
+width: 40px;
+height: 40px;
 cursor: pointer;
-transition: all 0.5s ease;
+z-index: 10;
+}
+svg path {
+animation: fillAnimation 1s forwards;
+animation-iteration-count: infinite;
+animation-direction: alternate;
+}
+svg path:nth-of-type(1) { animation-delay: 0s; }
+svg path:nth-of-type(2) { animation-delay: 0.15s; }
+@keyframes fillAnimation {
+from { fill: transparent; stroke: none; }
+to { fill: #ffffff;   }
+}
+svg:hover path {
+animation-play-state: paused;
+}
+.section1-parent-button-container p{
+color: gray;
+font-family: montserrat;
+font-size: 1em;
 text-decoration: none;
-justify-content: center;
-align-items: center;
-color: rgb(0, 0, 0);
+padding: 5px;
 }
-.btn1::before{
-width: 0%;
-height: 100%;
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-background: rgb(15, 15, 15);
-z-index: 0;
-transition: all 0.5s ease;
+.section1-parent-button-container a{
+color: gray;
+font-family: montserrat;
+font-size: 1em;
+text-decoration: none;
+padding: 5px;
+transition: all 0.3s ease-in-out;
 }
-.btn1:hover::before{
-width: 100%;
-}
-.btn1:hover span {
-color: white !important;
-transition: all 1s ease;
-}
-.btn1 span{
-color: #000000;
+.section1-parent-button-container a:hover{
+color: rgb(255, 255, 255);
+transition: all 0.3s ease-in-out;
 }
 
-.btn2{
-background: rgba(255, 255, 255, 0);
-padding: 5px 15px;
-color: rgb(0, 0, 0);
-overflow: hidden;
-border: solid 1px white;
-position: relative; /* Add this */
-margin-right: 10px;  /* Optional: space between buttons */
-}
-.btn2 a{
-position: relative;
-font-size: 12px;
-font-family: montserrat;
-font-weight: 400;
-display: flex;
-gap: 5px;
-cursor: pointer;
-transition: all 0.5s ease;
-text-decoration: none;
-justify-content: center;
-align-items: center;
-color: white;
-}
-.btn2::before{
-width: 0%;
-height: 100%;
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-background: rgb(255, 59, 59);
-z-index: 0;
-transition: all 0.5s ease;
-}
-.btn2:hover::before{
-width: 100%;
-}
+
+
 
 
 @media screen and (max-width: 600px) {
@@ -580,19 +524,19 @@ transition: all 0.2s ease-in-out;
 
 .a-client-vGhIx17 {
 position: absolute;
-top: 10%;
+top: 20%;
 left: 20%;
 width: 25%;
 height: 90%;              
 display: flex;
 flex-direction: column;     
-gap: 10%;
+gap: 7%;
 }
 
 .b-client-vGhIx17 {
 color: white;
-padding: 20px;
-opacity: 25%;
+padding: 10px;
+opacity: .1;
 border-radius: 15px;
 transition: all 0.6s ease-in-out;
 box-sizing: border-box;
@@ -600,19 +544,32 @@ box-sizing: border-box;
 .b-client-vGhIx17.is-visible {
 opacity: 1;
 transform: scale(1.1);
-border: solid 1px #292929;
-box-shadow: 0 0 10px 3px #f75454; 
-background: #292929;
-background: linear-gradient(148deg, rgba(41, 41, 41, 1) 0%, rgba(13, 13, 13, 1) 19%);
 }
+.b-client-vGhIx17::before{
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0;
+height: 2px;
+background: rgb(255, 48, 48);
+z-index: 1;
+transition: width 0.5s ease-in-out;
+}
+.b-client-vGhIx17.is-visible::before {
+width: 100%;
+transition: width 0.5s ease-in-out;
+}
+
+
 
 
 .b-client-vGhIx17 h1{
-font-size: 1em;
+font-size: 2em;
 font-family: montserrat;
 }
 .b-client-vGhIx17 p{
-font-size: .7em;
+font-size: 1em;
 font-family: montserrat;
 }
 

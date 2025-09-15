@@ -28,18 +28,27 @@ overflow: hidden;
 }
 .section-container-content{
 z-index: 100;
+width: 100%;
 line-height: 1;
+/* Add perspective to parent */
+perspective: 600px;
 }
 .section-container-content h1{
 color: white;
 font-family: montserrat;
-font-size: 3em;
-font-weight: 200;
+font-size: 6em;
+font-weight: 600;
 margin: 0;
-padding: 2px;
+padding: 10px;
 display: flex;
 justify-items: center;
+/* 3D transform: tilt backwards and rotate slightly to the right */
+transform: rotateX(45deg) rotateY(0deg);
+backface-visibility: hidden;
+will-change: transform;
 }
+
+
 .bx-i{
 margin-right: 10px;
 }

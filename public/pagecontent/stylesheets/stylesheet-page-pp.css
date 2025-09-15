@@ -96,9 +96,16 @@ font-size: .8em;
 color: white;
 font-family: montserrat;
 }
-.section-container-text-content ul li{
+.section-container-text-content ul {
+margin: 10px 0;
+padding: 0 10px;
+}
+.section-container-text-content li {
 color: white;
 font-family: montserrat;
+list-style: none;
+border-left: solid 2px white;
+padding-left: 10px;
 }
 .section-container-text-content p{
 color: white;
@@ -138,8 +145,35 @@ display: inline;
 font-size: 1em;
 }
 
-.section-container-text-content li {
-list-style: none;
+
+
+.contact-us-section {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+margin-top: 20px;
+}
+.contact-us-section a {
+color: #d73a3a;
+transition: all 0.3s ease-in-out;
+text-decoration: none;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+position: relative;
+margin: 5px 0;
+font-family: montserrat;
+font-size: 1em;
+
+}
+
+.inlinesymbol span {
+color: white;
+display: inline;
+align-items: center;
+font-size: 1.5em;
+position: relative;
 }
 
 

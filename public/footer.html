@@ -9,7 +9,7 @@
     <div class="footer-content-row">
             <div class="footer-logo-container">
                 <h1 style="font-family: zendots; color: white;">1X2S</h1>
-                <a>1X2S SA</a>
+                <a>Vultr Financial Holdings plc</a>
                 <a>186 Quai du Port, 13002 Marseille</a>
                 <a>Provence-Alpes-Côte d'Azur, France</a>
                 <a>AVX-092-2025-01-27</a>
@@ -62,49 +62,10 @@
         </div>
         <div class="footer-end">
             <p>&copy; 2023 1X2S. All rights reserved.</p>
-            <a href="/disclaimer" target="_self">Disclaimer</a><a href="/privacy-policy" target="_self">Privacy Policy</a><a href="/terms-of-services" target="_self">Terms of Service</a>
+            <a href="/privacy-policy" target="_self">Privacy Policy</a><a href="/terms-of-services" target="_self">Terms of Service</a>
         </div>
 
-<div class="session-id">
-    <p style="font-size: 0.75em; color: #888;">
-        Session ID: <span id="session-id-value"></span><br>
-        IP: <span id="user-ip"></span><br>
-        <span id="user-country"></span>
-    </p>
-</div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Generate a unique session ID (UUID v4)
-    function generateSessionId() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
-            const v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
-
-    // Store session ID in sessionStorage to persist for the session
-    let sessionId = sessionStorage.getItem('sessionId');
-    if (!sessionId) {
-        sessionId = generateSessionId();
-        sessionStorage.setItem('sessionId', sessionId);
-    }
-    document.getElementById('session-id-value').textContent = sessionId;
-
-    // Fetch IP and country using ipapi.co
-    fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('user-ip').textContent = data.ip || 'N/A';
-            document.getElementById('user-country').textContent = data.country_name || 'N/A';
-        })
-        .catch(() => {
-            document.getElementById('user-ip').textContent = 'N/A';
-            document.getElementById('user-country').textContent = 'N/A';
-        });
-});
-</script>
 
     
     </div>  
