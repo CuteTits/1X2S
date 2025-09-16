@@ -75,10 +75,6 @@ content: url('/pagecontent/resources/images/frontpageimage2.png');
 opacity: .1;
 }
 }
-.section1-parent-container1 .parallax-img {
-transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-will-change: transform;
-}
 
 
 .section1-parent-container1 {
