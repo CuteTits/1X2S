@@ -2,6 +2,11 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
+import { fileURLToPath } from 'url';
+
+// Fix __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +19,6 @@ app.use(express.json());
 
 // Middleware to detect country via Cloudflare
 app.use((req, res, next) => {
-  // Cloudflare header
   const userCountry = req.headers['cf-ipcountry'] || 'Unknown';
   req.country = userCountry;
   next();
@@ -33,7 +37,7 @@ app.get('/navbar.html', (req, res) => {
 
 // Signup page route
 app.get('/signup/index.html', (req, res) => {
-  res.sendFile(path.join('public', 'signup', 'index.html'), (err) => {
+  res.sendFile(path.join(__dirname, 'public', 'signup', 'index.html'), (err) => {
     if (err) res.status(500).send('Error loading signup page');
   });
 });
@@ -45,7 +49,7 @@ app.get('/signup-country', (req, res) => {
 });
 
 // Chatbot endpoint
-app.post('/chat', async (req, res) => {
+app.post('/chat', async (req, res, next) => {
   try {
     const { message } = req.body;
 
@@ -65,8 +69,23 @@ app.post('/chat', async (req, res) => {
     res.json({ reply: data.response });
   } catch (err) {
     console.error('Error contacting Mistral:', err);
-    res.status(500).json({ reply: 'Sorry, the AI is not available right now.' });
+    next(err); // Pass error to Express error handler
   }
+});
+
+//
+// --- ERROR HANDLING ---
+//
+
+// 404 handler (must be after all routes)
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
+// General error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).sendFile(path.join(__dirname, 'public', '500.html'));
 });
 
 // Start server
