@@ -185,4 +185,17 @@ width: 100%;
 .s2-container {
 width: 90%;
 }
+
+.s2-container ul li {
+flex-direction: column;
+align-items: flex-start;
+height: auto;
+justify-content: center;
+gap: 10px;
+}
+.s2-container .site-actions {
+width: 100%;
+justify-content: flex-end;
+gap: 5px;
+}
 }
