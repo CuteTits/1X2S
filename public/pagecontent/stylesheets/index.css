@@ -61,11 +61,8 @@ stroke: none;
 }
 
 
-@media (prefers-reduced-motion: no-preference) {
-.section-1-front-image img {
-transition: transform 0.1s linear;
-}
-}
+
+
 @media screen and (max-width: 1080px) {
 .section-1-front-image img {
 height: 100dvh;
