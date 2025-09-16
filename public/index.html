@@ -52,29 +52,37 @@
 
 
 
-    <div class="temporary-notice">
-      <div class="temporary-notice-text">
-        <p>This site is currently under development. Some features may not be fully functional.</p>
-        <p>1X2S was recently acquired by Vultr Financial Holdings plc, this acquisition will not affect
-          you as a user.</p>
-        <p>Click <a href="/acquisitionnotice">here</a> to learn more about the acquisition.</p>
-      </div>
-    <button>x</button>
-    </div>
+<div class="temporary-notice">
+  <div class="temporary-notice-text">
+    <p>This site is currently under development. Some features may not be fully functional.</p>
+    <p>1X2S was recently acquired by Vultr Financial Holdings plc, this acquisition will not affect
+      you as a user.</p>
+    <p>Click <a href="/acquisitionnotice">here</a> to learn more about the acquisition.</p>
+  </div>
+  <button>x</button>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const notice = document.querySelector('.temporary-notice');
   const button = notice.querySelector('button');
 
+  // Only show the notice if it hasn't been shown in this tab session
+  if (sessionStorage.getItem("noticeDismissed") === "true") {
+    notice.style.display = 'none';
+  }
+
   button.addEventListener('click', function () {
     notice.classList.add('hide-left');
     setTimeout(() => {
       notice.style.display = 'none';
-    }, 500); // Match the CSS transition duration
+      // Remember that user dismissed it (only for this tab session)
+      sessionStorage.setItem("noticeDismissed", "true");
+    }, 500); // Match CSS transition duration
   });
 });
 </script>
+
 
 
 <section id="section1">
