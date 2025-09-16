@@ -58,8 +58,8 @@ stroke: none;
 }
 @media screen and (max-width: 1080px) {
 .section-1-front-image img {
-height: 100dvh;
-width: 100vw;
+height: 100%;
+width: 100%;
 object-fit: cover;
 content: url('/pagecontent/resources/images/frontpageimage2.png'); 
 opacity: .1;
