@@ -102,27 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     </div>
-      <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const parallaxImg = document.querySelector('.section-1-front-image img');
-  const section1 = document.getElementById('section1');
-
-  if (!parallaxImg || !section1) return;
-
-  function parallaxEffect() {
-    const rect = section1.getBoundingClientRect();
-    if (rect.bottom > 0 && rect.top < window.innerHeight) {
-      // Subtle effect: adjust multiplier as needed
-      const offset = rect.top * 0.15;
-      parallaxImg.style.transform = `translate(-50%, calc(-50% + ${offset}px)) scale(1)`;
-    }
-  }
-
-  window.addEventListener('scroll', parallaxEffect);
-  window.addEventListener('resize', parallaxEffect);
-  parallaxEffect();
-});
-      </script>
 
 
 
