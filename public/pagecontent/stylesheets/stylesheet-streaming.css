@@ -38,7 +38,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 gap: 10px;
-
+width: 90%;
 color: white;
 font-family: montserrat;
 font-size: 15px;
@@ -59,12 +59,12 @@ gap: 20px;
 .notice{
 font-size: 16px;
 vertical-align: middle;
-background-color: black;
-border: solid 1px firebrick;
+background-color: rgb(45, 2, 2);
+border: solid 1px rgb(255, 38, 38);
 border-radius: 5px;
 }
 .notice p{
-color: white;
+color: rgb(255, 179, 179);
 text-decoration: none;
 font-family: inter;
 margin: 10px;
@@ -101,7 +101,7 @@ gap: 10px;
 text-decoration: none;
 color: white;
 font-family: inter;
-font-size: 18px;
+font-size: 15px;
 display: flex;
 align-items: center;
 gap: 10px;
@@ -147,15 +147,16 @@ font-family: montserrat;
 
 .open-link-btn,
 .copy-link-btn {
-    font-size: 15px;
-    padding: 6px 12px;
-    border-radius: 3px;
-    border: none;
-    background: #222;
-    color: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
+font-size: 15px;
+font-family: montserrat;
+padding: 6px 12px;
+border-radius: 3px;
+border: none;
+background: #222;
+color: #fff;
+cursor: pointer;
+text-decoration: none;
+transition: background 0.2s;
 }
 
 .open-link-btn:hover,
@@ -172,4 +173,16 @@ font-family: montserrat;
 
 .copy-link-btn {
     background: #222;
+}
+
+
+
+@media (max-width: 1080px) {
+
+.s2-container ul {
+width: 100%;
+}
+.s2-container {
+width: 90%;
+}
 }
