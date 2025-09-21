@@ -79,22 +79,24 @@ width: 25%;
 list-style: none;
 }
 .footer-content-container ul li h1 {
-color: rgb(154, 154, 154);
-font-size: 9px;
+color: rgb(255, 255, 255);
+font-size: 12px;
 font-family: montserrat;
 }
 .footer-content-container ul li a {
   position: relative; 
-  color: white;
+  opacity: 0.5;
+  color: rgb(255, 255, 255);
   font-size: 11px;
   font-family: montserrat;
+  font-weight: 200;
   list-style: none;
   text-decoration: none;
   line-height: 1.8; 
   transition: all 0.5s ease;
 }
 .footer-content-container a:hover {
-  color: rgb(158, 158, 158);
+  opacity: 1;
   transition: all 0.5s ease;
 }
 .footer-content-container ul li a::after {
@@ -112,12 +114,6 @@ font-family: montserrat;
 }
 
 
-.footer-content-container a1{
-color: white;
-font-size: 12px;
-font-family: montserrat;
-font-weight: 200;
-}
 
 #divider{
 border-bottom: solid 1px rgb(78, 78, 78);

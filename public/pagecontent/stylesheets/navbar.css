@@ -79,7 +79,7 @@ height: 100%;
 color: white; 
 text-decoration: none; 
 font-family: orbitron;
-font-weight: 600;
+font-weight: 1000;
 font-size: 1em;
 position: relative;
 margin: 2px;
@@ -89,17 +89,17 @@ align-items: center;
 transition: all 1s ease;    
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li span a{
-color: rgb(255, 255, 255); 
-
-background: RGBA(255, 69, 69, 1);
-background: linear-gradient(131deg, rgba(255, 69, 69, 1) 0%, rgba(255, 69, 69, 1) 54%, rgba(255, 224, 224, 1) 54%, rgba(255, 224, 224, 1) 58%, rgba(255, 69, 69, 1) 58%, rgba(255, 69, 69, 1) 61%, rgba(255, 224, 224, 1) 61%, rgba(255, 224, 224, 1) 68%, rgba(255, 69, 69, 1) 68%, rgba(255, 69, 69, 1) 100%);
+background: #ffffff;
+background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 18%, rgba(64, 64, 64, 1) 49%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 1) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
 background-size: 300% 100%;
 background-position: -100% center;
 animation: moveGradient 3s linear infinite;
 padding: 0 20px;
 border-radius: 5px;
 transition: all 1s ease;
-border: solid 1px rgb(255, 187, 187);
 }
 @keyframes moveGradient {
   0% {
@@ -110,8 +110,7 @@ border: solid 1px rgb(255, 187, 187);
   }
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li span a:hover{
-color: rgb(26, 26, 26);
-background: white;
+color: white;
 }
 
 

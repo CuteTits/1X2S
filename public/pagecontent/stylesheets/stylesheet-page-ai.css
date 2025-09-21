@@ -258,3 +258,26 @@ transition: all 0.5s;
 
 
 
+.section1-background-image{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.section1-background-image h1{
+position: absolute;
+top: 40%;
+left: -10%;
+margin: 0;
+padding: 0;
+rotate: -90deg;
+font-size: 10em;
+color: rgba(255, 255, 255, 0.05);
+font-family: zendots;
+font-weight: 800;
+z-index: 1;
+pointer-events: none;
+user-select: none;
+border-bottom: rgba(255, 255, 255, 0.05) solid 5px;
+}
