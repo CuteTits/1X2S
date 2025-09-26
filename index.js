@@ -4,20 +4,6 @@ import path from 'path';
 import fetch from 'node-fetch';
 import { fileURLToPath } from 'url';
 
-
-app.use('/pagecontent/resources/css', express.static('pagecontent/resources/css', { // Disable caching for CSS files
-  etag: false,
-  maxAge: 0,
-  setHeaders: (res) => {
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-  }
-}));
-// --- SETUP ---
-
-
-
 // Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,12 +24,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files
-app.use(express.static('public'));
+// ✅ Serve CSS with no-cache headers
+app.use('/pagecontent/resources/css', express.static(path.join(__dirname, 'public/pagecontent/resources/css'), {
+  etag: false,
+  maxAge: 0,
+  setHeaders: (res) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+}));
+
+// ✅ Serve all other static files normally
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve navbar.html
 app.get('/navbar.html', (req, res) => {
-  fs.readFile('public/navbar.html', 'utf-8', (err, data) => {
+  fs.readFile(path.join(__dirname, 'public', 'navbar.html'), 'utf-8', (err, data) => {
     if (err) return res.status(500).send('Error reading navbar file');
     res.send(data);
   });
@@ -83,7 +80,7 @@ app.post('/chat', async (req, res, next) => {
     res.json({ reply: data.response });
   } catch (err) {
     console.error('Error contacting Mistral:', err);
-    next(err); // Pass error to Express error handler
+    next(err);
   }
 });
 
