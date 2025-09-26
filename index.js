@@ -25,8 +25,8 @@ app.use((req, res, next) => {
 });
 
 // ✅ Serve CSS with no-cache headers
-app.use('/pagecontent/resources/css', express.static(path.join(__dirname, 'public/pagecontent/resources/css'), {
-  etag: false,
+app.use('/pagecontent/stylesheets', express.static(path.join(__dirname, 'public', 'pagecontent', 'stylesheets'), {
+  etag: false, 
   maxAge: 0,
   setHeaders: (res) => {
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
