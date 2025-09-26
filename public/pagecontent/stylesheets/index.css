@@ -39,7 +39,7 @@ height: 100%;
 overflow: hidden;
 width: 100%;
 z-index: 0;
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 }
@@ -56,15 +56,7 @@ will-change: transform;
 z-index: 1;
 stroke: none;
 }
-@media screen and (max-width: 1080px) {
-.section-1-front-image img {
-height: 100%;
-width: 100%;
-object-fit: cover;
-content: url('/pagecontent/resources/images/frontpageimage2.png'); 
-opacity: .1;
-}
-}
+
 
 
 .section1-parent-container1 {
