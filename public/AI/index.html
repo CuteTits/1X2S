@@ -48,7 +48,7 @@
             <div class="section-container-content">
                 <img src="/pagecontent/resources/images/vultrlogo.png" alt="Vultr Logo" style="width: 150px;">
                 <h1>Static 2</h1>
-                <h3>Beta</h3>
+                <h3>v 1.0.3 Sierra</h3>
             </div>
         </div>
 
@@ -61,6 +61,7 @@ position: absolute;
 color: white;
 top: 20%;
 left: 50%;
+overflow: hidden;
 }
 .text {
 position:absolute;
@@ -136,10 +137,49 @@ transform: translateY(0);
     });
 </script>
 
+</section>
 
 
+<section id="section1-5">
+<h1>Streamlined News Feed</h1>
+<h3>Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
+Showing the latest news articles, blog posts, and updates from across the web.
+With Built-in <span>AI Summary</span> for Quick Insights.
+</h3>
+
+<div class="carousel-wrapper">
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
+      <img src="/pagecontent/resources/images/frame140.png" alt="Image 4">
+      <img src="/pagecontent/resources/images/frame141.png" alt="Image 5">
+      <img src="/pagecontent/resources/images/frame142.png" alt="Image 6">
+    </div>
+  </div>
+</div>
+
+<script>
+const carousel = document.getElementById('carousel');
+const speedFactor = 2; // >1 = faster, <1 = slower
+
+window.addEventListener('scroll', () => {
+  const rect = carousel.getBoundingClientRect();
+
+  // Only move if carousel is visible
+  if (rect.bottom > 0 && rect.top < window.innerHeight) {
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    let scrollFraction = window.scrollY / maxScroll; // 0 to 1
+    scrollFraction *= speedFactor; // make it move faster
+
+    const maxTranslate = carousel.scrollWidth - window.innerWidth;
+    carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
+  }
+});
+
+
+</script>
 
 </section>
+
 
 
 <section id="section2">
