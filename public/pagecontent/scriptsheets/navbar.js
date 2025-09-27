@@ -6,6 +6,8 @@ function initializeNavbar() {
         if (window.scrollY > 50) {
             mainNav.style.backdropFilter = 'blur(5px)';
             mainNav.style.webkitBackdropFilter = 'blur(5px)';
+            mainNav.style.backgroundColor = 'rgba(0, 0, 0, 0.41)';
+
         } else {
             mainNav.style.backgroundColor = 'transparent';
             mainNav.style.webkitBackdropFilter = 'blur(0px)';
@@ -17,6 +19,90 @@ function initializeNavbar() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ navbar.js loaded");
+
+  fetch("/api/session")
+    .then(res => res.json())
+    .then(data => {
+      console.log("Session response:", data);
+
+      const loginBtn = document.querySelector(".loginbtn");
+      const signupBtn = document.querySelector(".signupbtn");
+      const userOptions = document.querySelector(".navigation-menu-desktop-buttons-user-options");
+
+      console.log("loginBtn:", loginBtn);
+      console.log("signupBtn:", signupBtn);
+      console.log("userOptions:", userOptions);
+
+if (data.loggedIn) {
+    console.log("User is logged in → swapping buttons");
+
+    if (loginBtn) loginBtn.remove();
+    if (signupBtn) signupBtn.remove();
+
+    // Create dropdown container
+    const dropdownDiv = document.createElement("div");
+    dropdownDiv.classList.add("user-dropdown");
+
+    // Main username button
+    const usernameButton = document.createElement("div");
+    usernameButton.classList.add("dropdown-btn");
+    usernameButton.textContent = "Loading...";
+
+    // Dropdown content
+    const dropdownContent = document.createElement("div");
+    dropdownContent.classList.add("dropdown-content");
+    dropdownContent.innerHTML = `
+        <a href="/account">Account</a>
+        <a href="/dashboard">Dashboard</a>
+        <span class"logout"><a href="/api/logout" id="logout-link-dropdown"><span class="material-symbols-outlined">logout</span>Logout</a></span>
+    `;
+    
+
+    dropdownDiv.appendChild(usernameButton);
+    dropdownDiv.appendChild(dropdownContent);
+    userOptions.appendChild(dropdownDiv);
+
+    // Fetch account info
+    fetch('/api/account', { credentials: 'include' })
+        .then(res => {
+            if (!res.ok) throw new Error('Failed to load account info');
+            return res.json();
+        })
+        .then(account => {
+        usernameButton.innerHTML = `
+        <span class="material-symbols-outlined profile-icon">account_circle</span>
+        Hello, ${account.name}
+        `;
+        })
+        .catch(err => {
+            console.error('Account fetch error:', err);
+            usernameButton.textContent = "Logged in";
+        });
+
+    // Logout link works normally
+    document.getElementById("logout-link-dropdown").addEventListener("click", (e) => {
+        e.preventDefault();
+        fetch("/api/logout", { method: "POST" })
+            .then(() => window.location.href = "/");
+    });
+}
+
+
+    else {
+            console.log("User not logged in → keeping login/register");
+        }
+        })
+        .catch(err => console.error("Session check failed:", err));
+    });
+
+
+
 
 // Load navbar.html and initialize everything after it's inserted
 fetch('/navbar.html')
@@ -48,3 +134,7 @@ fetch('/navbar.html')
         window.scrollTo(0, 0);
     })
     .catch(error => console.error('Error loading navbar:', error));
+
+
+
+

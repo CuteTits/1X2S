@@ -38,7 +38,7 @@ transition: all 0.5s ease;
   position: fixed;
   top: 0;
   left: -400px;
-  width: 180px;
+  width: 280px;
   height: 100dvh;
   color: white;
   transition: left 0.3s ease;
@@ -47,7 +47,6 @@ transition: all 0.5s ease;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.436);
   backdrop-filter: blur(2px);
-  box-shadow: #d73a3a 0px 0px 10px 0px;
 }
 
 .side-navbar-header-enclosed {

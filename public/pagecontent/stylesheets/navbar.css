@@ -22,6 +22,7 @@ backdrop-filter: none;
 justify-content: center;
 text-align: center;
 align-content: center;
+
 }
 
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
@@ -78,7 +79,7 @@ height: 100%;
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a {
 color: white; 
 text-decoration: none; 
-font-family: zendots;
+font-family: montserrat;
 font-weight: 200;
 font-size: 1em;
 position: relative;
@@ -87,6 +88,7 @@ display: flex;
 justify-content: center;   
 align-items: center;        
 transition: all 1s ease;    
+padding: 12px 0;
 }
 .Navigational-header-bar-style-top-aligned-flex-0 ul li span a{
 background: #ffffff;
@@ -240,10 +242,6 @@ opacity: 0.5;
 transition: all 1s ease;
 background-color: transparent;
 }
-
-
-
-
 .signupbtn:hover a{
 transition: all 1s ease;
 color: white;
@@ -263,14 +261,95 @@ width: 2vw;
 
 
 
+.user-dropdown {
+position: relative;
+display: inline-block;
+margin: 0 50px;
+}
+.dropdown-btn {
+cursor: pointer;
+color: #fff;
+font-size: 0.9rem;
+padding: 5px 10px;
+background: none;
+border: none;
+font-family: montserrat;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+.dropdown-content {
+max-height: 0;
+overflow: hidden;
+height: auto;
+position: absolute;
+top: 100%; /* right below parent */
+left: 0;
+background-color: rgba(0, 0, 0, 0.41);
+backdrop-filter: blur(1px);
+min-width: 180px;
+list-style: none;
+border-radius: 5px;
+text-align: left;
+z-index: 9999;
+display: block;
+transition: all 0.3s ease;
+}
+.dropdown-content a {
+color: #fff;
+padding: 5px 12px;
+text-decoration: none;
+display: block;
+font-size: 0.9rem;
+font-family: montserrat;
+border: solid 1px transparent;
+display: flex;
+align-items: center;
+}
+.dropdown-content a:hover {
+box-shadow:  #dd3131 0 0 5px 1px ;
+color: white;
+background-color: rgb(13, 13, 13);
+border-radius: 2px;
+border: solid 1px rgb(26, 26, 26);
+}
+
+.user-dropdown:hover .dropdown-content {
+max-height: 200px;
+transition: all 0.3s ease;
+padding: 10px ;
+border: solid 1px rgb(19, 19, 19);
+}
+#logout-link-dropdown{
+color: #ea4040 !important;
+}
+
+
+
+#logout-link{
+text-decoration: none;
+color: white;
+font-family: montserrat;
+align-items: center;
+display: flex;
+transition: all 0.3s ease-in-out;
+}
+#logout-link:hover{
+opacity: .5;
+transition: all 0.3s ease-in-out;
+}
+
+
+
+
 
 
 
 #progress-bar {
-position: relative;
+position: absolute;
 top: 0%;
 left: 0;
-height: 1px;
+height: 3px;
 box-shadow: 0 0 8px 1px #f75454;
 background-color: #dd3131; 
 width: 0%;
@@ -285,7 +364,7 @@ left: 50px;
 background: rgba(0, 0, 0, 0.5);
 color: white;
 border: none;
-padding: 8px 12px;
+padding: 8px 15px;
 border-radius: 5px;
 font-size: 0.9em;
 cursor: pointer;
@@ -306,3 +385,71 @@ font-family: montserrat;
 color:#f75454 !important;
 transition: all 0.3s ease;
 }
+
+
+
+
+
+
+
+
+
+/* Dropdown Container */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.dropdown {
+position: relative;
+text-align: left;
+justify-items: left;
+justify-content: left;
+}
+
+/* Hide dropdown menu by default */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li .dropdown-menu {
+max-height: 0;
+overflow: hidden;
+height: auto;
+position: absolute;
+top: 100%; /* right below parent */
+left: 0;
+background-color: rgba(0, 0, 0, 0.41);
+backdrop-filter: blur(1px);
+min-width: 180px;
+list-style: none;
+border-radius: 5px;
+text-align: left;
+z-index: 9999;
+display: block;
+transition: all 0.3s ease;
+
+}
+
+/* Dropdown items */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li .dropdown-menu li a {
+padding: 5px 15px;
+max-height: 100px;
+color: white;
+font-size: 0.9em;
+text-decoration: none;
+transition: background 0.3s ease;
+text-align: left;   /* make links align left */
+justify-content: flex-start; /* align link text properly */
+border: solid 1px transparent;
+}
+
+/* Hover styles */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li .dropdown-menu li a:hover {
+box-shadow:  #dd3131 0 0 5px 1px ;
+color: white;
+background-color: rgb(13, 13, 13);
+border-radius: 2px;
+border: solid 1px rgb(26, 26, 26);
+}
+
+/* Show menu on hover */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.dropdown:hover .dropdown-menu {
+max-height: 200px;
+transition: all 0.3s ease;
+padding: 10px ;
+border: solid 1px rgb(19, 19, 19);
+}
+
+

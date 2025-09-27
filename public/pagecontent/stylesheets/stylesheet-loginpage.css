@@ -124,7 +124,7 @@ border: 1.5px solid #f75454;
 outline: none;
 background: #23242a;
 }
-form a{
+.form-notice{
 font-size: .7em;
 color: #555555;
 margin-bottom: 10px;
@@ -206,4 +206,18 @@ text-align: center;
 a {
 color: #f75454;
 text-decoration: underline;
+}
+
+
+#applyType{
+position: relative;
+background: #252525;
+margin: 0 0 5px 0;
+transform: translate(-200%, 0);
+color: white;
+border-radius: 5px;
+font-size: 12px;
+padding: 10px;
+font-family: montserrat;
+border: none;
 }
