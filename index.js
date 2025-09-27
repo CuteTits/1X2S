@@ -32,8 +32,8 @@ async function initDB() {
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       ssl: {
-      ca: fs.readFileSync(process.env.DB_SSL_CA)
-      },
+      ca: fs.readFileSync(process.env.DB_SSL_CA || '/etc/secrets/ca.pem')
+     },
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0
