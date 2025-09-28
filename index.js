@@ -206,8 +206,13 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
 
-    // ✅ Store minimal user info in session
-    req.session.user = { id: user.id, name: user.name, email: user.email };
+    // ✅ Store minimal user info in session, including user_uid
+    req.session.user = { 
+      id: user.id,         // optional, your internal auto-increment ID
+      user_uid: user.user_uid,  // this is what you want to display
+      name: user.name, 
+      email: user.email 
+    };
 
     res.json({ success: true, message: 'Login successful' });
   } catch (err) {
@@ -216,16 +221,43 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+
   
 
 // Return account info
-app.get('/api/account', (req, res) => {
-  if (!req.session.user) return res.status(401).json({ error: 'Not logged in' });
-  res.json({
-    name: req.session.user.name,
-    email: req.session.user.email
-  });
+app.get('/api/account', async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ error: 'Not logged in' });
+  }
+
+  console.log("🔍 Session user:", req.session.user);
+
+  try {
+    const [rows] = await db.query(
+      'SELECT user_uid, name, email FROM users WHERE user_uid = ?',
+      [req.session.user.user_uid]
+    );
+
+    console.log("✅ DB result:", rows);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const user = rows[0];
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      user_uid: user.user_uid
+    });
+
+  } catch (err) {
+    console.error("❌ SQL Error:", err);
+    return res.status(500).json({ error: 'Server error', details: err.message });
+  }
 });
+
 
 // Logout (destroy session)
 app.post('/api/logout', (req, res) => {
@@ -236,16 +268,96 @@ app.post('/api/logout', (req, res) => {
   });
 });
 
-// Delete account
-app.delete('/api/delete-account', async (req, res) => {
-  if (!req.session.user) return res.status(401).json({ error: 'Not logged in' });
 
-  await db.query('DELETE FROM users WHERE id = ?', [req.session.user.id]);
-  req.session.destroy(() => {
-    res.clearCookie('connect.sid');
-    res.json({ success: true });
-  });
+
+// Change password endpoint
+app.post('/api/change-password', async (req, res) => {
+  // 1️⃣ Make sure user is logged in
+  if (!req.session.user) {
+    return res.status(401).json({ success: false, error: 'Not logged in' });
+  }
+
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+
+  // 2️⃣ Validate inputs
+  if (!oldPassword || !newPassword || !confirmPassword) {
+    return res.status(400).json({ success: false, error: 'All fields are required' });
+  }
+
+  if (newPassword !== confirmPassword) {
+    return res.status(400).json({ success: false, error: 'New passwords do not match' });
+  }
+
+  try {
+    // 3️⃣ Fetch current password from DB
+    const [rows] = await db.query('SELECT password FROM users WHERE id = ?', [req.session.user.id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    const user = rows[0];
+
+    // 4️⃣ Verify old password
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, error: 'Current password is incorrect' });
+    }
+
+    // 5️⃣ Hash new password
+    const hashedNew = await bcrypt.hash(newPassword, 10);
+
+    // 6️⃣ Update DB
+    await db.query('UPDATE users SET password = ? WHERE id = ?', [hashedNew, req.session.user.id]);
+
+    res.json({ success: true, message: 'Password changed successfully' });
+  } catch (err) {
+    console.error('Change password error:', err);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
 });
+
+
+
+
+// Delete account (requires password)
+app.delete('/api/delete-account', async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ error: 'Not logged in' });
+  }
+
+  const { password } = req.body;
+  if (!password) {
+    return res.status(400).json({ error: 'Password required' });
+  }
+
+  try {
+    // Fetch the user’s stored password hash
+    const [rows] = await db.query('SELECT password FROM users WHERE id = ?', [req.session.user.id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const user = rows[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+
+    // ✅ Password correct → delete account
+    await db.query('DELETE FROM users WHERE id = ?', [req.session.user.id]);
+
+    // Destroy session
+    req.session.destroy(() => {
+      res.clearCookie('sid');
+      res.json({ success: true, message: 'Account deleted successfully' });
+    });
+
+  } catch (err) {
+    console.error('Delete account error:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 //

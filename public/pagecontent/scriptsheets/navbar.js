@@ -47,20 +47,20 @@ if (data.loggedIn) {
 
     // Create dropdown container
     const dropdownDiv = document.createElement("div");
-    dropdownDiv.classList.add("user-dropdown");
+    dropdownDiv.classList.add("user-nav-dropdown");
 
     // Main username button
     const usernameButton = document.createElement("div");
-    usernameButton.classList.add("dropdown-btn");
+    usernameButton.classList.add("nav-dropdown-btn");
     usernameButton.textContent = "Loading...";
 
     // Dropdown content
     const dropdownContent = document.createElement("div");
-    dropdownContent.classList.add("dropdown-content");
+    dropdownContent.classList.add("nav-dropdown-content");
     dropdownContent.innerHTML = `
         <a href="/account">Account</a>
         <a href="/dashboard">Dashboard</a>
-        <span class"logout"><a href="/api/logout" id="logout-link-dropdown"><span class="material-symbols-outlined">logout</span>Logout</a></span>
+        <span class"logout"><a href="/api/logout" id="logout-link-nav-dropdown"><span class="material-symbols-outlined">logout</span>Logout</a></span>
     `;
     
 
@@ -86,7 +86,7 @@ if (data.loggedIn) {
         });
 
     // Logout link works normally
-    document.getElementById("logout-link-dropdown").addEventListener("click", (e) => {
+    document.getElementById("logout-link-nav-dropdown").addEventListener("click", (e) => {
         e.preventDefault();
         fetch("/api/logout", { method: "POST" })
             .then(() => window.location.href = "/");

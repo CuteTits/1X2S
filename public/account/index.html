@@ -7,7 +7,8 @@
 <title>1X2S</title>
 <link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
+<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-account.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
 
 <script>
   document.documentElement.classList.add('js');
@@ -20,176 +21,6 @@
  
  
  
- <style>
-body {
-font-family: Arial, sans-serif;
-background: #0b0b0b;
-margin: 0;
-padding: 0;
-}
-.container {
-max-width: 500px;
-margin: 50px auto;
-background: #181818;
-padding: 20px;
-border-radius: 12px;
-height: auto;
-min-height: 100px;
-position: relative;
-display: flex;
-flex-direction: column;
-}
-.container h2 {
-margin-top: 0;
-text-align: center;
-}
-.container h1{
-color: white;
-font-size: 1em;
-font-family: montserrat;
-display: flex;
-align-items: center;
-gap: 5px;
-}
-.container a{
-color: gray;
-font-size: 12px;
-font-family: inter;
-}
-.info {
-margin: 15px 0;
-padding: 10px;
-background: #0b0b0b;
-border-radius: 8px;
-color: white;
-}
-button {
-display: block;
-width: 100%;
-margin: 10px 0;
-padding: 12px;
-font-size: 16px;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-}
-.logout {
-background: #007bff;
-color: #fff;
-}
-
-.encase{
-position: relative;
-height: 100%;
-z-index: 0;
-}
-.delete {
-border-radius: 5px;
-font-size: .8em;
-padding: 8px;
-background: none;
-color: crimson;
-border: solid 1px crimson;
-transition: all 0.7s ease-in-out;
-z-index: 0;
-
-}
-.delete::before{
-content: '';
-position: absolute;
-top: 0;
-right: 100%; 
-height: 100%;
-width: 100%;
-background: crimson;
-z-index: -1;
-transition: all 0.7s ease-in-out;
-margin: 0;
-border-radius: 5px;
-}
-.delete:hover::before{
-right: 0;
-border-radius: 5px;
-border-radius: 5px;
-}
-.delete:hover{
-color: rgb(31, 31, 31);
-transition: all 0.7s ease-in-out;
-border-radius: 5px;
-
-}
-
-
-.dropdown {
-position: relative;
-display: inline-block;
-}
-.dropdown-btn {
-padding: 10px 15px;
-cursor: pointer;
-color: white;
-border: none;
-border-radius: 6px;
-}
-.container-dropdown {
-display: block;
-max-height: 0;
-background: none;
-position: relative;
-min-width: 160px;
-border-radius: 6px;
-z-index: 1;
-transition: all 0.3s ease-in-out;
-overflow: hidden;
-}
-.container-dropdown.active {
-max-height: 200px;
-position: relative;
-transition: all 0.3s ease-in-out;
-}
-.container-dropdown a {
-display: block;
-padding: 10px 12px;
-text-decoration: none;
-color: #333;
-}
-
-.api-display{
-display: flex;
-flex-direction: row;
-gap: 10px;
-align-items: center;
-}
-.unhide, .copy{
-background-color: #333;
-color: #767676;
-width: auto;
-font-size: 10px;
-display: flex;
-align-items: center;
-padding: 5px;
-}
-.api-key{
-font-size: 1em;
-width: 100%;
-color: rgb(138, 138, 138);
-font-family: inter;
-background-color: #333;
-padding: 5px;
-display: flex;
-align-items: center;
-}
-.newapi{
-font-family: montserrat;
-font-size: .8em;
-padding: 5px;
-display: flex;
-align-items: center;
-gap: 20px;
-text-align: center;
-justify-content: center;
-}
-  </style>
 </head>
 <body>
 
@@ -207,7 +38,9 @@ justify-content: center;
 
 
 
-
+<div class="fixedBackground">
+  <img src="/pagecontent/resources/images/illustration-04.png">
+</div>
 
 
 
@@ -217,21 +50,35 @@ justify-content: center;
 
 
     <div class="info">
-      <p><strong>Name:</strong> <span id="name">Loading...</span></p>
-      <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-      <p><strong>User ID:</strong> <span id="userid">Loading...</span></p>
+      <a>Username</a>
+      <p><span id="name">Loading...</span></p>
+      <a>email</a>
+      <p><span id="email">Loading...</span></p>
+      <a>User ID (UID)</a>
+      <p><span id="userid">Loading...</span></p>
     </div>
   </div>
 
 <div class="container">
 <div class="key-actions">
-      <p>Your /API key</p>
+    <h1><span class="material-symbols-outlined">key</span>API Keys</h1>
 
-    <div class="api-display">
-      <span class="api-key" data-key="q9S9g-Pj78gs-9AD89j-klK98qQ">🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷</span>
-      <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
-      <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+<div class="dropdown">
+  <button id="dropdownBtnApikey" class="dropdown-btn">Manage API Key</button>
+    <div id="dropdownApikey" class="container-dropdown">
+    <a>This is your unique API key, it can be replaced at any time. Store it safely and avoid showing it to anyone.</a>
+    <a>To manage API settings and API usage, visit the dashboard.</a>
+      <div class="api-display">
+        <span class="api-key" data-key="VG-7K9Q-R2H4-1Z8X-M5N0-P3T6-B4V9-S2Y1">••••••••••••••••••</span>
+        <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
+        <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+      </div>
+      <button class="newapi"><span class="material-symbols-outlined">key</span>Request New Key</button>
+      <a>Generating a new API key will result in the permament deletion of your current one.</a>
+      </div>
     </div>
+  </div>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -242,11 +89,11 @@ justify-content: center;
 
     // Toggle hide/unhide
     unhideBtn.addEventListener("click", () => {
-      if (keySpan.textContent.includes("🞷")) {
+      if (keySpan.textContent.includes("•")) {
         keySpan.textContent = keySpan.dataset.key; // show real key
         unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility</span>';
       } else {
-        keySpan.textContent = "🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷"; // mask it again
+        keySpan.textContent = "••••••••••••••••••"; // mask it again
         unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility_off</span>';
       }
     });
@@ -263,101 +110,228 @@ justify-content: center;
 </script>
 
 
-      <button class="newapi" onclick="logout()"><span class="material-symbols-outlined">key</span>Request New Key</button>
-      <a>Generating a new API key will result in the permament deletion of your current one.</a>
-</div>
-</div>  
 
 
-  <div class="container">
-    <div class="security-actions">
-      <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
+
+<div class="container">
+  <div class="security-actions">
+    <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
 
 <div class="dropdown">
+  <button id="dropdownBtnPass" class="dropdown-btn">Change Password</button>
+  <div id="dropdownMenuPass" class="container-dropdown">
+    <a>Enter Your Current Password</a>
+    <div class="currentPass">
+      <input 
+        type="password" 
+        placeholder="This Action Requires Your Current Password" 
+        required 
+        id="currentPassword"
+      >
+    </div>
+    <a>New Password</a>
+    <div class="newPassDiv">
+      <input 
+        type="password" 
+        placeholder="Enter Your New Password" 
+        required 
+        id="newPassword"
+      >
+    </div>
+    <div class="confirmNewPassDiv">
+      <input 
+        type="password" 
+        placeholder="Reenter Your New Password" 
+        required 
+        id="confirmNewPassword"
+      >
+    </div>
 
-  <h2>Enable 2FA</h2>
-  <button id="dropdownBtn" class="dropdown-btn">Delete Account</button>
-  <div id="dropdownMenu" class="container-dropdown">
-        <a>Deleting your account will terminate your account along with all its data.</a>
-      <div class="encase">
-        <button class="delete" onclick="deleteAccount()">Delete Account</button>
-      </div>
+    <div class="encase">
+      <button id="changepassBtn" class="change" disabled onclick="changePassword()">Confirm Change</button>
+    </div>
   </div>
 </div>
 
+<script>
+const currentPass = document.getElementById("currentPassword");
+const newPass = document.getElementById("newPassword");
+const confirmNewPass = document.getElementById("confirmNewPassword");
+const changeBtn = document.getElementById("changepassBtn");
+
+changeBtn.addEventListener("click", async () => {
+  const oldPassword = currentPass.value.trim();
+  const newPassword = newPass.value.trim();
+  const confirmPassword = confirmNewPass.value.trim();
+
+  if (!oldPassword || !newPassword || !confirmPassword) {
+    alert("⚠️ All fields are required");
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/change-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert("✅ " + data.message);
+      currentPass.value = newPass.value = confirmNewPass.value = "";
+      changeBtn.disabled = true;
+     changepassBtn.style.opacity = "10%";
+    } else {
+      alert("❌ " + data.error);
+    }
+  } catch (err) {
+    alert("⚠️ Server error: " + err.message);
+  }
+});
+
+// Enable button only when all fields are filled
+[currentPass, newPass, confirmNewPass].forEach(input => {
+  input.addEventListener("input", () => {
+    changeBtn.disabled = !(currentPass.value && newPass.value && confirmNewPass.value);
+    changepassBtn.style.opacity = "100%";
+  });
+});
+
+</script>
+
+
+    
+
+    <div class="dropdown">
+      <button id="dropdownBtn" class="dropdown-btn" style="color: crimson;">Delete Account</button>
+      <div id="dropdownMenu" class="container-dropdown">
+        <a>Deleting your account will terminate your account along with all its data. 
+        Financial transactions will be saved to comply with legal obligations.
+        </a>
+        <div class="hidden">
+          <form id="password-enforcement-form">
+            <input 
+              type="password" 
+              placeholder="This action requires your password" 
+              required 
+              id="loginPassword">
+          </form>
+        </div>
+        <div class="encase">
+          <button id="deleteBtn" class="delete" disabled onclick="deleteAccount()">Delete Account</button>
+        </div>
+      </div>
     </div>
+
   </div>
+</div>
+
+
 
 
 
 <div class="container">
 <div class="session-actions">
-  <h1>Session</h1>
+    <h1><span class="material-symbols-outlined">desktop_windows</span>Session</h1>
+      <a>This will log you out on this device.</a>
       <button class="logout" onclick="logout()">Logout</button>
 </div>
 </div>  
 
 
 
-  <script>
+<script>
+  // dropdown handler
+ function setupDropdown(buttonId, menuId) {
+  const btn = document.getElementById(buttonId);
+  const menu = document.getElementById(menuId);
 
-//dropdown handler
-document.addEventListener("DOMContentLoaded", () => {
-  const dropdownBtn = document.getElementById("dropdownBtn");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-  // Toggle dropdown on button click
-  dropdownBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent closing immediately
-    dropdownMenu.classList.toggle("active");
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent immediate close
+    menu.classList.toggle("active");
   });
 
-  // Close dropdown if clicked outside
-  window.addEventListener("click", (e) => {
-    if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
-      dropdownMenu.classList.remove("active");
+
+}
+
+// Initialize both dropdowns
+setupDropdown("dropdownBtnApikey", "dropdownApikey"); // Api Key Management
+setupDropdown("dropdownBtn", "dropdownMenu"); // Delete account
+setupDropdown("dropdownBtnPass", "dropdownMenuPass"); // Change password
+
+
+
+
+  const passwordInput = document.getElementById("loginPassword");
+  const deleteBtn = document.getElementById("deleteBtn");
+
+  // Disable delete until password is typed
+  passwordInput.addEventListener("input", () => {
+    deleteBtn.disabled = passwordInput.value.trim() === "";
+    deleteBtn.style.pointerEvents = "auto"; // enable click
+    deleteBtn.style.userSelect = "all";    // disable text selection
+    deleteBtn.style.opacity = "100%";
+  });
+
+  // 🔑 Delete account with password enforcement
+  async function deleteAccount() {
+    const password = passwordInput.value.trim();
+
+    if (!password) {
+      alert("Please enter your password.");
+      return;
     }
-  });
-});
 
+    if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+      return;
+    }
 
+    try {
+      const response = await fetch("/api/delete-account", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ password })
+      });
 
-
-
-    // Fetch account info from server
-    async function loadAccount() {
-      try {
-        const res = await fetch('/api/account', { credentials: 'include' });
-        if (!res.ok) throw new Error("Not logged in");
-        const data = await res.json();
-        document.getElementById('name').textContent = data.name;
-        document.getElementById('userid').textContent = data.id;
-        document.getElementById('email').textContent = data.email;
-        document.getElementById('greeting').textContent = data.name;
-      } catch (err) {
-        window.location.href = '/login'; // redirect if not logged in
+      const result = await response.json();
+      if (result.success) {
+        alert("✅ Your account has been deleted.");
+        window.location.href = "/login?mode=login";
+      } else {
+        alert("❌ " + (result.error || "Failed to delete account."));
       }
+    } catch (err) {
+      alert("⚠️ Server error: " + err.message);
     }
+  }
 
-    async function logout() {
-      await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+
+
+  // Load account info
+  async function loadAccount() {
+    try {
+      const res = await fetch('/api/account', { credentials: 'include' });
+      if (!res.ok) throw new Error("Not logged in");
+      const data = await res.json();
+      document.getElementById('name').textContent = data.name;
+      document.getElementById('userid').textContent = data.user_uid || "N/A";
+      document.getElementById('email').textContent = data.email;
+      document.getElementById('greeting').textContent = data.name;
+    } catch (err) {
       window.location.href = '/login';
     }
+  }
 
-    async function deleteAccount() {
-      if (confirm("Are you sure you want to delete your account? This cannot be undone.")) {
-        await fetch('/api/delete-account', { method: 'DELETE', credentials: 'include' });
-        window.location.href = '/signup';
-      }
-    }
+  async function logout() {
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    window.location.href = '/login?mode=login';
+  }
 
-    loadAccount();
+  loadAccount();
+</script>
 
-
-
-
-
-
-  </script>
 </body>
 </html>
