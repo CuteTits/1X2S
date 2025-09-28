@@ -188,6 +188,7 @@ border: none;
 background:none;
 margin: 0;
 text-align: left;
+font-size: 1em;
 }
 .container-dropdown {
 display: flex;
