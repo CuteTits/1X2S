@@ -11,6 +11,8 @@ background: #131313;
 position: fixed;
 height: 100vw;
 width: 100vw;
+top: 0;
+left: 0;
 }
 .container {
 max-width: 500px;
@@ -249,4 +251,5 @@ text-align: center;
 justify-content: center;
 border-radius: 5px;
 border: none;
+color: black;
 }
