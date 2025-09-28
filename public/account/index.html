@@ -7,7 +7,7 @@
 <title>1X2S</title>
 <link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
 
 <script>
   document.documentElement.classList.add('js');
@@ -21,48 +21,174 @@
  
  
  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b0b0b;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top: 0;
-      text-align: center;
-    }
-    .info {
-      margin: 15px 0;
-      padding: 10px;
-      background: #f0f0f0;
-      border-radius: 8px;
-    }
-    button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .logout {
-      background: #007bff;
-      color: #fff;
-    }
-    .delete {
-      background: #dc3545;
-      color: #fff;
-    }
+body {
+font-family: Arial, sans-serif;
+background: #0b0b0b;
+margin: 0;
+padding: 0;
+}
+.container {
+max-width: 500px;
+margin: 50px auto;
+background: #181818;
+padding: 20px;
+border-radius: 12px;
+height: auto;
+min-height: 100px;
+position: relative;
+display: flex;
+flex-direction: column;
+}
+.container h2 {
+margin-top: 0;
+text-align: center;
+}
+.container h1{
+color: white;
+font-size: 1em;
+font-family: montserrat;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+.container a{
+color: gray;
+font-size: 12px;
+font-family: inter;
+}
+.info {
+margin: 15px 0;
+padding: 10px;
+background: #0b0b0b;
+border-radius: 8px;
+color: white;
+}
+button {
+display: block;
+width: 100%;
+margin: 10px 0;
+padding: 12px;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+}
+.logout {
+background: #007bff;
+color: #fff;
+}
+
+.encase{
+position: relative;
+height: 100%;
+z-index: 0;
+}
+.delete {
+border-radius: 5px;
+font-size: .8em;
+padding: 8px;
+background: none;
+color: crimson;
+border: solid 1px crimson;
+transition: all 0.7s ease-in-out;
+z-index: 0;
+
+}
+.delete::before{
+content: '';
+position: absolute;
+top: 0;
+right: 100%; 
+height: 100%;
+width: 100%;
+background: crimson;
+z-index: -1;
+transition: all 0.7s ease-in-out;
+margin: 0;
+border-radius: 5px;
+}
+.delete:hover::before{
+right: 0;
+border-radius: 5px;
+border-radius: 5px;
+}
+.delete:hover{
+color: rgb(31, 31, 31);
+transition: all 0.7s ease-in-out;
+border-radius: 5px;
+
+}
+
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+.dropdown-btn {
+padding: 10px 15px;
+cursor: pointer;
+color: white;
+border: none;
+border-radius: 6px;
+}
+.container-dropdown {
+display: block;
+max-height: 0;
+background: none;
+position: relative;
+min-width: 160px;
+border-radius: 6px;
+z-index: 1;
+transition: all 0.3s ease-in-out;
+overflow: hidden;
+}
+.container-dropdown.active {
+max-height: 200px;
+position: relative;
+transition: all 0.3s ease-in-out;
+}
+.container-dropdown a {
+display: block;
+padding: 10px 12px;
+text-decoration: none;
+color: #333;
+}
+
+.api-display{
+display: flex;
+flex-direction: row;
+gap: 10px;
+align-items: center;
+}
+.unhide, .copy{
+background-color: #333;
+color: #767676;
+width: auto;
+font-size: 10px;
+display: flex;
+align-items: center;
+padding: 5px;
+}
+.api-key{
+font-size: 1em;
+width: 100%;
+color: rgb(138, 138, 138);
+font-family: inter;
+background-color: #333;
+padding: 5px;
+display: flex;
+align-items: center;
+}
+.newapi{
+font-family: montserrat;
+font-size: .8em;
+padding: 5px;
+display: flex;
+align-items: center;
+gap: 20px;
+text-align: center;
+justify-content: center;
+}
   </style>
 </head>
 <body>
@@ -86,18 +212,118 @@
 
 
   <div class="container">
-    <h2>My Account</h2>
+    <h2>Hello, <strong id="greeting"></strong> </h2>
+
+
 
     <div class="info">
       <p><strong>Name:</strong> <span id="name">Loading...</span></p>
       <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+      <p><strong>User ID:</strong> <span id="userid">Loading...</span></p>
     </div>
-
-    <button class="logout" onclick="logout()">Logout</button>
-    <button class="delete" onclick="deleteAccount()">Delete Account</button>
   </div>
 
+<div class="container">
+<div class="key-actions">
+      <p>Your /API key</p>
+
+    <div class="api-display">
+      <span class="api-key" data-key="q9S9g-Pj78gs-9AD89j-klK98qQ">🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷</span>
+      <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
+      <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+    </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const display = document.querySelector(".api-display");
+    const keySpan = display.querySelector(".api-key");
+    const unhideBtn = display.querySelector(".unhide");
+    const copyBtn = display.querySelector(".copy");
+
+    // Toggle hide/unhide
+    unhideBtn.addEventListener("click", () => {
+      if (keySpan.textContent.includes("🞷")) {
+        keySpan.textContent = keySpan.dataset.key; // show real key
+        unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility</span>';
+      } else {
+        keySpan.textContent = "🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷🞷"; // mask it again
+        unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility_off</span>';
+      }
+    });
+
+    // Copy to clipboard
+    copyBtn.addEventListener("click", () => {
+      const apiKey = keySpan.dataset.key;
+      navigator.clipboard.writeText(apiKey).then(() => {
+        copyBtn.innerHTML = '<span class="material-symbols-outlined">library_add_check</span>';
+        setTimeout(() => (copyBtn.innerHTML = '<span class="material-symbols-outlined">content_copy</span>'), 1500);
+      });
+    });
+  });
+</script>
+
+
+      <button class="newapi" onclick="logout()"><span class="material-symbols-outlined">key</span>Request New Key</button>
+      <a>Generating a new API key will result in the permament deletion of your current one.</a>
+</div>
+</div>  
+
+
+  <div class="container">
+    <div class="security-actions">
+      <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
+
+<div class="dropdown">
+
+  <h2>Enable 2FA</h2>
+  <button id="dropdownBtn" class="dropdown-btn">Delete Account</button>
+  <div id="dropdownMenu" class="container-dropdown">
+        <a>Deleting your account will terminate your account along with all its data.</a>
+      <div class="encase">
+        <button class="delete" onclick="deleteAccount()">Delete Account</button>
+      </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+
+
+<div class="container">
+<div class="session-actions">
+  <h1>Session</h1>
+      <button class="logout" onclick="logout()">Logout</button>
+</div>
+</div>  
+
+
+
   <script>
+
+//dropdown handler
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdownBtn = document.getElementById("dropdownBtn");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+
+  // Toggle dropdown on button click
+  dropdownBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent closing immediately
+    dropdownMenu.classList.toggle("active");
+  });
+
+  // Close dropdown if clicked outside
+  window.addEventListener("click", (e) => {
+    if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+      dropdownMenu.classList.remove("active");
+    }
+  });
+});
+
+
+
+
+
     // Fetch account info from server
     async function loadAccount() {
       try {
@@ -105,7 +331,9 @@
         if (!res.ok) throw new Error("Not logged in");
         const data = await res.json();
         document.getElementById('name').textContent = data.name;
+        document.getElementById('userid').textContent = data.id;
         document.getElementById('email').textContent = data.email;
+        document.getElementById('greeting').textContent = data.name;
       } catch (err) {
         window.location.href = '/login'; // redirect if not logged in
       }
@@ -124,6 +352,12 @@
     }
 
     loadAccount();
+
+
+
+
+
+
   </script>
 </body>
 </html>
