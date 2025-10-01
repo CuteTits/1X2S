@@ -15,6 +15,8 @@
   window.addEventListener('load', function () {
     document.body.classList.add('fade-in');
   });
+
+  
 </script>
 
 </head>
@@ -42,20 +44,19 @@
   <img src="/pagecontent/resources/images/illustration-04.png">
 </div>
 
-
+  <div class="pageheader">
+  <h2>Hello, <strong id="greeting">Loading...</strong> </h2>
+  </div>
 
   <div class="container">
-    <h2>Hello, <strong id="greeting"></strong> </h2>
-
-
 
     <div class="info">
-      <a>Username</a>
-      <p><span id="name">Loading...</span></p>
-      <a>email</a>
-      <p><span id="email">Loading...</span></p>
-      <a>User ID (UID)</a>
-      <p><span id="userid">Loading...</span></p>
+      <h1><span id="name">Loading...</span></h1>
+      <h2><span id="email">Loading...</span></h2>
+        <div class="container-uid">
+        <a>UID </a>
+        <a><span id="userid"> Loading...</span></a>
+        </div>
     </div>
   </div>
 
@@ -116,6 +117,15 @@
 <div class="container">
   <div class="security-actions">
     <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
+
+<div class="dropdown">
+  <button id="dropdownBtn2FA" class="dropdown-btn">Manage 2FA</button>
+  <div id="dropdownMenu2FA" class="container-dropdown">
+    <a>Enabling Two-Factor Authentication will require you to confirm your identification using a dynamic security code for each login.</a>
+    <a>2FA is currently not enabled on this account</a>
+  </div>
+</div>
+
 
 <div class="dropdown">
   <button id="dropdownBtnPass" class="dropdown-btn">Change Password</button>
@@ -185,9 +195,11 @@ changeBtn.addEventListener("click", async () => {
      changepassBtn.style.opacity = "10%";
     } else {
       alert("❌ " + data.error);
+         changepassBtn.style.opacity = "10%";
     }
   } catch (err) {
     alert("⚠️ Server error: " + err.message);
+       changepassBtn.style.opacity = "10%";
   }
 });
 
@@ -235,7 +247,7 @@ changeBtn.addEventListener("click", async () => {
 <div class="container">
 <div class="session-actions">
     <h1><span class="material-symbols-outlined">desktop_windows</span>Session</h1>
-      <a>This will log you out on this device.</a>
+      <a style="color: gray; font-family: montserrat; font-size: 12px;">This will log you out on this device.</a>
       <button class="logout" onclick="logout()">Logout</button>
 </div>
 </div>  
@@ -252,14 +264,13 @@ changeBtn.addEventListener("click", async () => {
     e.stopPropagation(); // prevent immediate close
     menu.classList.toggle("active");
   });
-
-
 }
 
 // Initialize both dropdowns
 setupDropdown("dropdownBtnApikey", "dropdownApikey"); // Api Key Management
 setupDropdown("dropdownBtn", "dropdownMenu"); // Delete account
 setupDropdown("dropdownBtnPass", "dropdownMenuPass"); // Change password
+setupDropdown("dropdownBtn2FA", "dropdownMenu2FA"); // Manage 2FA
 
 
 
@@ -332,6 +343,55 @@ setupDropdown("dropdownBtnPass", "dropdownMenuPass"); // Change password
 
   loadAccount();
 </script>
+
+<script>
+  // Load account info initially
+  async function loadAccount() {
+    try {
+      const res = await fetch('/api/account', { credentials: 'include' });
+      if (!res.ok) throw new Error("Not logged in");
+      const data = await res.json();
+      document.getElementById('name').textContent = data.name;
+      document.getElementById('userid').textContent = data.user_uid || "N/A";
+      document.getElementById('email').textContent = data.email;
+      document.getElementById('greeting').textContent = data.name;
+    } catch (err) {
+      // kick if not logged in
+      window.location.href = '/login?mode=login';
+    }
+  }
+
+  // Force logout (button action)
+  async function logout() {
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    window.location.href = '/login?mode=login';
+  }
+
+  // Call once when page loads
+  loadAccount();
+
+  // 🔄 Actively check session every 60 seconds
+  setInterval(async () => {
+    try {
+      const res = await fetch('/api/account', { credentials: 'include' });
+      if (!res.ok) {
+        window.location.href = '/login?mode=login';
+      }
+    } catch {
+      window.location.href = '/login?mode=login';
+    }
+  }, 30000); // 30s
+</script>
+
+
+
+      <div id="footer-container"></div>
+      <script src="/pagecontent/scriptsheets/global-footer.js"></script>
+      <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+
+
+
+
 
 </body>
 </html>

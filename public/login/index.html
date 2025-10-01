@@ -20,6 +20,8 @@
 </head>
 <body>
 
+
+
 <!-- Back button -->
 <button id="backtoPrevious">
   <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
@@ -37,6 +39,7 @@
   </div>
 
   <div id="notice" class="notice;"></div>
+    <div id="notifications-container"></div>
 
   <div class="form-container">
     <img src="/pagecontent/resources/images/vultrlogo.png" alt="Logo" class="form-logo" style="width: 100px;">
@@ -73,45 +76,44 @@
 </section>    
 
 <script>
-  // Country restriction logic
-  fetch('/signup-country')
-    .then(res => res.json())
-    .then(data => {
-      if(data.blocked) {
-        const notice = document.getElementById('notice');
-        notice.className = 'notice';
-        notice.innerHTML = `<span class="material-symbols-outlined" style="vertical-align:middle;font-size:1.2em;color:#f75454;">warning</span> Signup from your country (${data.country}) is restricted. Read More <a href="/terms-of-services#Account-Creation" target="">here</a>.`;          
-        document.getElementById('applyForm').querySelector('button[type="submit"]').disabled = true;
-      }
-    });
-
-  // Switch between apply and login
-  const applyForm = document.getElementById('applyForm');
-  const loginForm = document.getElementById('loginForm');
-  const switchBtn = document.getElementById('switchBtn');
-  const formTitle = document.getElementById('formTitle');
-
-  let isApply = true;
-
-  switchBtn.addEventListener('click', () => {
-    isApply = !isApply;
-    if(isApply) {
-      applyForm.style.display = '';
-      loginForm.style.display = 'none';
-      switchBtn.textContent = 'Already have an account? Login';
-      formTitle.textContent = 'Apply for Access';
-      history.replaceState(null, '', '?mode=apply');
-    } else {
-      applyForm.style.display = 'none';
-      loginForm.style.display = '';
-      switchBtn.textContent = 'Need access? Apply';
-      formTitle.textContent = 'Welcome Back!';
-      history.replaceState(null, '', '?mode=login');
+// Country restriction logic
+fetch('/signup-country')
+  .then(res => res.json())
+  .then(data => {
+    if(data.blocked) {
+      const notice = document.getElementById('notice');
+      notice.className = 'notice';
+      notice.innerHTML = `<span class="material-symbols-outlined" style="vertical-align:middle;font-size:1.2em;color:#f75454;">warning</span> Signup from your country (${data.country}) is restricted. Read More <a href="/terms-of-services#Account-Creation" target="">here</a>.`;          
+      document.getElementById('applyForm').querySelector('button[type="submit"]').disabled = true;
     }
   });
 
+// Switch between apply and login
+const applyForm = document.getElementById('applyForm');
+const loginForm = document.getElementById('loginForm');
+const switchBtn = document.getElementById('switchBtn');
+const formTitle = document.getElementById('formTitle');
 
-  // Check URL on page load
+let isApply = true;
+
+switchBtn.addEventListener('click', () => {
+  isApply = !isApply;
+  if(isApply) {
+    applyForm.style.display = '';
+    loginForm.style.display = 'none';
+    switchBtn.textContent = 'Already have an account? Login';
+    formTitle.textContent = 'Apply for Access';
+    history.replaceState(null, '', '?mode=apply');
+  } else {
+    applyForm.style.display = 'none';
+    loginForm.style.display = '';
+    switchBtn.textContent = 'Need access? Apply';
+    formTitle.textContent = 'Welcome Back!';
+    history.replaceState(null, '', '?mode=login');
+  }
+});
+
+// Check URL on page load
 const urlParams = new URLSearchParams(window.location.search);
 const mode = urlParams.get("mode");
 
@@ -122,7 +124,6 @@ if (mode === "login") {
   switchBtn.textContent = "Need access? Apply";
   formTitle.textContent = "Welcome Back!";
 } else {
-  // default to apply mode
   isApply = true;
   applyForm.style.display = "";
   loginForm.style.display = "none";
@@ -130,68 +131,83 @@ if (mode === "login") {
   formTitle.textContent = "Apply for Access";
 }
 
+// Handle Apply form submission
+applyForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('applyName').value;
+  const email = document.getElementById('applyEmail').value;
+  const type = document.getElementById('applyType').value;
 
-  // Handle Apply form submission
-  applyForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('applyName').value;
-    const email = document.getElementById('applyEmail').value;
-    const type = document.getElementById('applyType').value;
+  if(!name || !email || !type) {
+    showNotification('Please fill in all fields.', 'error');
+    return;
+  }
 
-    if(!name || !email || !type) {
-      alert('Please fill in all fields.');
-      return;
+  fetch('/api/apply', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, type })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      showNotification('Application submitted! We’ll get back to you soon.', 'success');
+      applyForm.reset();
+    } else {
+      showNotification(`Application failed: ${data.message}`, 'error');
     }
-
-    fetch('/api/apply', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, type })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.success) {
-        alert('Application submitted! We’ll get back to you soon.');
-        applyForm.reset();
-      } else {
-        alert(`Application failed: ${data.message}`);
-      }
-    })
-    .catch(err => {
-      console.error('Error during application:', err);
-      alert('An error occurred. Please try again later.');
-    });
+  })
+  .catch(err => {
+    console.error('Error during application:', err);
+    showNotification('An error occurred. Please try again later.', 'error');
   });
+});
 
-  // Handle Login form submission
-  loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+// Handle Login form submission
+loginForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
 
-    if(!email || !password) {
-      alert('Please fill in all fields.');
-      return;
+  if(!email || !password) {
+    showNotification('Please fill in all fields.', 'error');
+    return;
+  }
+
+  fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success) {
+      window.location.href = '/account';
+    } else {
+      showNotification(`Login failed: ${data.message}`, 'error');
     }
-
-    fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.success) {
-        window.location.href = '/account';
-      } else {
-        alert(`Login failed: ${data.message}`);
-      }
-    })
-    .catch(err => {
-      console.error('Error during login:', err);
-      alert('An error occurred. Please try again later.');
-    });
+  })
+  .catch(err => {
+    console.error('Error during login:', err);
+    showNotification('An error occurred. Please try again later.', 'error');
   });
+});
+
+
+
+function showNotification(message, type = 'info', duration = 4000) {
+  const container = document.getElementById('notifications-container');
+  const notif = document.createElement('div');
+  notif.className = `notification ${type}`;
+  notif.textContent = message;
+  container.appendChild(notif);
+
+  // Remove after duration
+  setTimeout(() => {
+    notif.remove();
+  }, duration);
+}
+
 </script>
 
 <button id="scrollToTopBtn">Back to Top</button>

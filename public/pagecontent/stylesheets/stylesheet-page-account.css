@@ -6,6 +6,11 @@ padding: 0;
 overflow-x: hidden;
 margin: 0;
 }
+
+
+
+
+
 .fixedBackground{
 background: #131313;
 position: fixed;
@@ -29,7 +34,6 @@ flex-direction: column;
 }
 .container h2 {
 margin-top: 0;
-text-align: center;
 color: white;
 font-family: montserrat;
 font-weight: 200;
@@ -43,31 +47,59 @@ align-items: center;
 gap: 5px;
 margin-bottom: 20px;
 }
-.container a{
-color: gray;
-font-size: 12px;
-font-family: inter;
+
+.pageheader{
+position: relative;
+display: flex;
+flex-direction: column;
+color: white;
+width: 100%;
+z-index: 99;
+text-align: center;
+top: 50px;
+margin-bottom: 50px;
+}
+.pageheader h2{
+color: white;
+font-size: 3em;
+font-weight: 200;
+font-family: montserrat;
 }
 
 
 .info {
-margin: 5px 5px 10px 5px;
-border-left: solid 1px white;
 padding: 20px;
-background: #06060657;
+display: flex;
+flex-direction: column;
 }
 .info span{
 color: white;
 font-family: montserrat;
-margin: 0 0 5px 0;
 }
-.info p{
-margin: 0 0 5px 0;
+.info h1{
+margin:0;
+font-size: 2em;
 }
-.info a{
+.info h2{
 font-weight: 200;
+margin: 0;
+padding: 0;
+font-size: 1em;
 }
-
+.container-uid{
+display: flex;
+align-self: flex-end;
+position: relative;
+}
+.container-uid a{
+font-size: 12px;
+font-family: montserrat;
+color: gray;
+margin: 2px;
+}
+.container-uid a span{
+color: gray;
+}
 
 .logout {
 width: 100%;
@@ -201,6 +233,7 @@ transition: all 0.3s ease-in-out;
 overflow: hidden;
 }
 .container-dropdown.active {
+padding: 25px 0;
 max-height: 500px;
 position: relative;
 transition: all 0.3s ease-in-out;
@@ -210,6 +243,7 @@ display: block;
 padding: 5px 12px;
 text-decoration: none;
 color: #777777;
+font-size: 12px;
 }
 
 .api-display{
