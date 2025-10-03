@@ -1,5 +1,5 @@
 body{
-background-color: rgb(10, 10, 10);
+background-color: #0a0a0a;
 padding: 0;
 margin: 0;
 overflow-x: hidden;
@@ -191,3 +191,7 @@ text-decoration: underline;
 font-size: 16px;
 color: #f75454;
 }
+
+
+
+

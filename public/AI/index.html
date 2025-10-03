@@ -146,6 +146,115 @@ transform: translateY(0);
 </section>
 
 
+
+
+
+
+<section id="section1-2">
+
+<div class="s1-2-parent-container">
+  <div class="display-textbox">
+    <div class="scrollTypingContainer" id="scrollTypingContainer">
+      <!-- Original content (editable in HTML) -->
+        <div class="typing-content">
+          <p>Give me todays predictions for <span>FC Barcelona</span> vs <span>Bayern Munich</span>.</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined">send</span>
+    </div>
+</div>
+      <div class="scrollDropdown" id="scrollDropdown">
+        <span id="ag1">Match summary...</span>
+        <span id="ag2">Pre-match injury forecast...</span>
+        <span id="ag3">Summarize top news headlines...</span>
+        <span id="ag4">Check latest tranfers...</span>
+      </div>
+
+<div class="s1-2-text-container">
+  <h1>...Ask anything</h1>
+  <p>Get match summaries, daily predictions, injury updates, and transfer news, by chatting directly with Static 2.0.</p>
+
+</div>
+
+
+<script>
+// ===== Scroll Typing Container =====
+const container = document.getElementById('scrollTypingContainer');
+const originalContent = container.querySelector('.typing-content').innerHTML;
+container.innerHTML = ':';
+
+function parseHTMLToChars(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  const chars = [];
+  function traverse(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      node.textContent.split('').forEach(c => chars.push(c));
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const openTag = `<${node.tagName.toLowerCase()}${[...node.attributes].map(a => ` ${a.name}="${a.value}"`).join('')}>`;
+      chars.push(openTag);
+      node.childNodes.forEach(traverse);
+      const closeTag = `</${node.tagName.toLowerCase()}>`;
+      chars.push(closeTag);
+    }
+  }
+  div.childNodes.forEach(traverse);
+  return chars;
+}
+
+const chars = parseHTMLToChars(originalContent);
+
+// ===== Dropdown =====
+const dropdown = document.getElementById('scrollDropdown');
+const dropdownItems = dropdown.querySelectorAll('span');
+
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top <= window.innerHeight && rect.bottom >= 0;
+}
+
+function updateScrollEffects() {
+  // --- Scroll typing ---
+  if (isInViewport(container)) {
+    const rect = container.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const visiblePart = Math.min(windowHeight, windowHeight - rect.top);
+    let progress = Math.max(0, visiblePart / (rect.height + windowHeight));
+    progress = Math.min(1, progress * 1.15); // change speed
+    const charsToShow = Math.floor(progress * chars.length);
+    container.innerHTML = chars.slice(0, charsToShow).join('');
+  }
+
+  // --- Staggered dropdown ---
+  if (isInViewport(dropdown)) {
+    const rect = dropdown.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const startOffset = 400; // px delay before first item starts
+    const scrollRange = 200; // px total scroll range for all items
+
+    let progress = (windowHeight - rect.top - startOffset) / scrollRange;
+    progress = Math.max(0, Math.min(1, progress));
+
+    const itemsToShow = Math.floor(progress * dropdownItems.length);
+    dropdownItems.forEach((item, i) => {
+      if (i < itemsToShow) item.classList.add('visible');
+      else item.classList.remove('visible');
+    });
+  }
+}
+
+window.addEventListener('scroll', updateScrollEffects);
+window.addEventListener('resize', updateScrollEffects);
+updateScrollEffects();
+</script>
+
+
+
+
+</section>
+
+
+
 <section id="section1-5">
 
 <div class="background-image-wrapper">
@@ -171,24 +280,35 @@ With Built-in <span>AI Summary</span> for Quick Insights.
 
 <script>
 const carousel = document.getElementById('carousel');
-const speedFactor = 2; // >1 = faster, <1 = slower
+const speedFactor = 1.5; // >1 = faster, <1 = slower
+let carouselActivated = false; // flag to run once
 
-window.addEventListener('scroll', () => {
-  const rect = carousel.getBoundingClientRect();
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.bottom > 0 && rect.top < window.innerHeight;
+}
 
-  // Only move if carousel is visible
-  if (rect.bottom > 0 && rect.top < window.innerHeight) {
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
-    let scrollFraction = window.scrollY / maxScroll; // 0 to 1
-    scrollFraction *= speedFactor; // make it move faster
+function handleCarouselScroll() {
+  if (!carouselActivated && isInViewport(carousel)) {
+    carouselActivated = true; // mark as activated
 
-    const maxTranslate = carousel.scrollWidth - window.innerWidth;
-    carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
+    // Attach scroll listener that moves carousel
+    window.addEventListener('scroll', () => {
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      let scrollFraction = window.scrollY / maxScroll; // 0 to 1
+      scrollFraction *= speedFactor;
+
+      const maxTranslate = carousel.scrollWidth - window.innerWidth;
+      carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
+    });
   }
-});
+}
 
-
+// Check once on scroll and on page load
+window.addEventListener('scroll', handleCarouselScroll);
+window.addEventListener('load', handleCarouselScroll);
 </script>
+
 
 </section>
 
@@ -196,14 +316,14 @@ window.addEventListener('scroll', () => {
 
 <section id="section2">
 
-    <h1>Core Features</h1>
+    <h1>Raw Features</h1>
         
 <div class="s2-grid">
 
 <div class="s2-grid-item">
     <h2>Always Learning</h2>
     <div class="s2-grid-item-show-more">
-        <p>Powered by over 12B parameters trained on historical sports data.
+        <p>Powered by over 7B parameters of pretrained data continuously reinforced with new knowledge and data.
         Continuously analyzes, studies, and breaks down real-time stats and live match footage.</p>
     </div>
     <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-03.png" alt="AI Image 1">
@@ -240,6 +360,47 @@ window.addEventListener('scroll', () => {
 </section>
 
 
+<section id="section2-1">
+
+  <div class="s2-1-parent-container">
+    <div class="s2-1-content">
+      <span class="tag"><span class="material-symbols-outlined">eco</span>Sustainability</span>
+      <h1>100% Performance, 0% Footprint</h1>
+      <p>Static 2.0, Built on Mistral 7B is a compact, performance-oriented language model designed around MoE (Mixture of Experts) architecture, 
+        which allows it to deliver high computational efficiency while remaining lightweight. 
+        Its architecture is optimized for applications where speed, responsiveness, and resource efficiency are critical.</p>
+
+      <p>To further enhance its capabilities, we fine-tune Mistral using QLoRA (Low-Rank Adaptation). This approach significantly 
+        reduces compute requirements during training while maintaining or even improving model performance, 
+        making it an environmentally friendly choice without compromising on output quality.</p>
+
+      <p>Our models are hosted on AWS servers, and we operate with a strong commitment to sustainability. 
+        By leveraging cloud infrastructure with carbon-neutral initiatives, we ensure that the environmental footprint of running advanced AI models is minimized.</p>
+
+      <p>Digital doesn't always mean environmentally friendly, but together we work towards net-zero operations.</p>
+    </div>
+  </div>
+
+
+    <div class="element-content-card-container">
+
+    <div class="element-content-card">
+      <a href="https://aws.amazon.com/energy-utilities/sustainability/" target="_blank"><img src="/pagecontent/resources/images/rainforest.png">
+      <h1>Explore AWS Sustainable Energy</h1>
+      <span class="material-symbols-outlined">arrow_outward</span>
+      </a>
+    </div>
+
+    <div class="element-content-card">
+      <a href="https://aws.amazon.com/energy-utilities/sustainability/" target="_blank"><img src="/pagecontent/resources/images/topographicmap.png">
+      <h1>Our Commitment: Net-Zero AI</h1>
+      <span class="material-symbols-outlined">arrow_outward</span>
+      </a>
+    </div>
+  </div>
+
+
+</section>
 
 
 
@@ -254,16 +415,17 @@ window.addEventListener('scroll', () => {
             </div>
             <div class="i-section-container">
                 <h1>Mistral</h1>
-                <p>Documentation for Mistral 7b can be found here.</p>
+                <p>Documentation for Mistral 7B can be found here.</p>
                 <a href="https://mistral.ai/news/announcing-mistral-7b" target="_blank">Mistral AI<span class="material-symbols-outlined"">arrow_outward</span></a>
             </div>
             <div class="i-section-container">
-                <h1>Documentation</h1>
-                <p>Our Docs can be found on Github and Codepen.</p>
-                <box-icon name='github' type='logo' color='#ffff' ></box-icon>
-                <box-icon name='codepen' type='logo' color='#ffffff' ></box-icon>
+                <h1>More Models</h1>
+                <p>Explore more open-source AI models here.</p>
+                <a href="https://ollama.com/search" target="_blank">ollama index<span class="material-symbols-outlined"">arrow_outward</span></a>
             </div>
     </div>
+
+
 
 </section>
 

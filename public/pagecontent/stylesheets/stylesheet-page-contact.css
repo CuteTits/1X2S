@@ -4,14 +4,25 @@ padding: 0;
 margin: 0;
 }
 
+.fixedBackground{
+background: #131313;
+position: fixed;
+height: 100vw;
+width: 100vw;
+top: 0;
+left: 0;
+z-index: 0;
+}
+
 
 #section1 {
-background-color: #0f0f0f;
+background:none;
 min-height: 100vh; 
 height: auto;
 justify-content: center;
 display: flex;
 align-items: center;
+z-index: 2;
 }
 
 .section1-container-parent{
@@ -19,6 +30,7 @@ display: block;
 width: 80%;
 justify-content: center;
 align-content: center;
+z-index: 10;
 }
 
 
@@ -101,7 +113,6 @@ font-size: .8em;
 
 
 .j-section-box-container{
-padding-bottom: 50px;
 width: 60%;
 }
 
@@ -127,7 +138,7 @@ width: 100%;
 }
 .av-mobile {
 width: 100%;
-padding: 5px;
+padding: 10px;
 border-radius: 5px;
 border: solid 1px #262626;
 }
