@@ -20,7 +20,7 @@ overflow-x: hidden;
 
 #section1-2{
 position: relative;
-height: 80vh;
+height: 100vh;
 background-color: transparent;
 width: 100%;
 }
@@ -34,6 +34,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 z-index: 2;
+padding-top: 25vh;
 }
 #section2 {
 position: relative;
@@ -244,12 +245,14 @@ position: relative; /* Add this */
 overflow: hidden;   /* Add this to clip the overlay */
 height: auto;
 min-height: 400px;
+gap: 20px;
 }
 .s2-grid-item h2{
+position: relative;
 font-family: montserrat;
 font-size: 24px;
 font-weight: 600;
-margin: 15px 0;
+margin: 25px 0;
 z-index: 100;
 }
 .s2-grid-item img{
@@ -264,7 +267,7 @@ top: 0;
 .s2-grid-item-show-more {
 position: absolute;      /* Overlay */
 left: 0;
-top: 10%;
+top: 15%;
 width: 100%;
 max-height: 0;
 opacity: 0;
@@ -297,34 +300,21 @@ transition: all 0.5s;
 }
 
 
+
 .s1-2-parent-container{
 display: flex;
 align-items: center;
 width: 100%;
 align-content: center;
 flex-direction: column;
+gap: 20px;
 }
 .s1-2-text-container{
-position: absolute;
+position: relative;
 display: flex;
 width: 25%;
 flex-direction: column;
-top: 15%;
-text-align: right;
-right: 15%;
-}
-@media screen and (max-width: 1300px) {
-.s1-2-text-container{
-position: absolute;
-top: 50%;     
-left: 50%;       
-transform: translate(-50%, -50%); 
-width: 90%;
 text-align: center;
-align-items: center;
-display: flex;
-flex-direction: column;
-}
 }
 .s1-2-text-container h1{
 font-family: montserrat;
@@ -360,51 +350,61 @@ left: 0;
 margin: 5px;
 max-height: 0;
 overflow: hidden;
-background-color: #121212;
 border-radius: 15px;
 font-family: montserrat;
 color: #fff;
-box-shadow: 0 0px 6px #ff23238a;
+box-shadow: 0 5px 6px #ff23238a;
 padding: 0px 15px;
 cursor: pointer;
 transform: translateY(-10px);
 transition: all 0.3s ease-in-out;
 }
-.scrollDropdown span.visible {
+.scrollDropdown span.visible {  /* animation only to play when scrolling down */
 max-height: 300px;
 padding: 10px 15px;
 animation: bounceIn 0.5s ease forwards;
-
+transition: all 0.3s ease-in-out;
 }
 @keyframes bounceIn {
-  0%   { transform: translateY(-20px) scale(var(--scale, 1)); }
-  60%  { transform: translateY(5px) scale(var(--scale, 1)); }
-  80%  { transform: translateY(-2px) scale(var(--scale, 1)); }
-  100% { transform: translateY(0) scale(var(--scale, 1)); }
+0%   { transform: translateY(-20px) scale(var(--scale, 1)); }
+60%  { transform: translateY(5px) scale(var(--scale, 1)); }
+80%  { transform: translateY(-2px) scale(var(--scale, 1)); }
+100% { transform: translateY(0) scale(var(--scale, 1)); }
 }
 
 #ag1 {
   --scale: 1;
   opacity: 1;
+  transition: all 0.3s ease-in-out;
 }
 #ag2 {
   --scale: 0.97;
   opacity: .5;
+  transition: all 0.3s ease-in-out;
 }
 #ag3 {
   --scale: 0.95;
   opacity: .25;
+  transition: all 0.3s ease-in-out;
 }
 #ag4 {
   --scale: 0.9;
   opacity: .1;
+  transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 1300px) {
+.s1-2-text-container{
+width: 90%;
+}
+.scrollDropdown {
+margin: 0;
+width: 80%;
+}
+.s1-2-content{
+
+}
 }
 
-.scrollDropdown span:hover{
-opacity: 1 !important;
-transform: scale(1.01) !important;
-transition: all 0.3s ease-in-out;
-}
 
 .typing-text{
 color: white;

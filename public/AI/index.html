@@ -152,7 +152,14 @@ transform: translateY(0);
 
 <section id="section1-2">
 
+<div class="s1-2-content">
 <div class="s1-2-parent-container">
+
+<div class="s1-2-text-container">
+  <h1>...Ask anything</h1>
+  <p>Get match summaries, daily predictions, injury updates, and transfer news, by chatting directly with Static 2.0.</p>
+</div>
+
   <div class="display-textbox">
     <div class="scrollTypingContainer" id="scrollTypingContainer">
       <!-- Original content (editable in HTML) -->
@@ -162,7 +169,7 @@ transform: translateY(0);
       </div>
       <span class="material-symbols-outlined">send</span>
     </div>
-</div>
+  </div>
       <div class="scrollDropdown" id="scrollDropdown">
         <span id="ag1">Match summary...</span>
         <span id="ag2">Pre-match injury forecast...</span>
@@ -170,18 +177,13 @@ transform: translateY(0);
         <span id="ag4">Check latest tranfers...</span>
       </div>
 
-<div class="s1-2-text-container">
-  <h1>...Ask anything</h1>
-  <p>Get match summaries, daily predictions, injury updates, and transfer news, by chatting directly with Static 2.0.</p>
-
-</div>
 
 
 <script>
 // ===== Scroll Typing Container =====
 const container = document.getElementById('scrollTypingContainer');
 const originalContent = container.querySelector('.typing-content').innerHTML;
-container.innerHTML = ':';
+container.innerHTML = '';
 
 function parseHTMLToChars(html) {
   const div = document.createElement('div');
@@ -213,37 +215,51 @@ function isInViewport(el) {
   return rect.top <= window.innerHeight && rect.bottom >= 0;
 }
 
+// ...existing code...
+
 function updateScrollEffects() {
+  // Get section and scroll position
+  const section = document.getElementById('section1-2');
+  const sectionRect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
   // --- Scroll typing ---
-  if (isInViewport(container)) {
-    const rect = container.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const visiblePart = Math.min(windowHeight, windowHeight - rect.top);
-    let progress = Math.max(0, visiblePart / (rect.height + windowHeight));
-    progress = Math.min(1, progress * 1.15); // change speed
+  let progress = 0;
+  if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
+    const scrolledPx = Math.max(0, windowHeight - sectionRect.top);
+    progress = Math.min(1, scrolledPx / (sectionRect.height + windowHeight));
+    progress = Math.min(2, progress * 1.2); // change speed
     const charsToShow = Math.floor(progress * chars.length);
     container.innerHTML = '<span class="typing-text">' 
-    + chars.slice(0, charsToShow).join('') 
-    + '</span>';
-
-
+      + chars.slice(0, charsToShow).join('') 
+      + '</span>';
   }
 
   // --- Staggered dropdown ---
-  if (isInViewport(dropdown)) {
-    const rect = dropdown.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const startOffset = 400; // px delay before first item starts
-    const scrollRange = 200; // px total scroll range for all items
+  const dropdown = document.getElementById('scrollDropdown');
+  const dropdownItems = dropdown.querySelectorAll('span');
+  const startOffset = 1000; // px delay before first item starts
+  const scrollRange = 200; // px total scroll range for all items
 
-    let progress = (windowHeight - rect.top - startOffset) / scrollRange;
-    progress = Math.max(0, Math.min(1, progress));
-
-    const itemsToShow = Math.floor(progress * dropdownItems.length);
+  let dropdownProgress = 0;
+  if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
+    dropdownProgress = (windowHeight - sectionRect.top - startOffset) / scrollRange;
+    dropdownProgress = Math.max(0, Math.min(1, dropdownProgress));
+    const itemsToShow = Math.floor(dropdownProgress * dropdownItems.length);
     dropdownItems.forEach((item, i) => {
       if (i < itemsToShow) item.classList.add('visible');
       else item.classList.remove('visible');
     });
+  }
+
+  // --- Expand textbox on scroll ---
+  const textbox = document.querySelector('.display-textbox');
+  if (textbox) {
+    if (!textbox.classList.contains('expanded') && window.scrollY > 50) {
+      textbox.classList.add('expanded');
+    } else if (textbox.classList.contains('expanded') && window.scrollY <= 50) {
+      textbox.classList.remove('expanded');
+    }
   }
 }
 
@@ -251,29 +267,11 @@ window.addEventListener('scroll', updateScrollEffects);
 window.addEventListener('resize', updateScrollEffects);
 updateScrollEffects();
 
-// ===== Expand textbox on scroll =====
-const textbox = document.querySelector('.display-textbox');
-
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return rect.top <= window.innerHeight && rect.bottom >= 0;
-}
-
-function handleScroll() {
-  if (isInViewport(textbox)) {
-    textbox.classList.add('expanded');
-  } else {
-    textbox.classList.remove('expanded');
-  }
-}
-
-window.addEventListener('scroll', handleScroll);
-window.addEventListener('resize', handleScroll);
-handleScroll();
-
+// ...existing code...
 </script>
 
 
+</div>
 
 
 </section>
@@ -455,6 +453,63 @@ window.addEventListener('load', handleCarouselScroll);
 
 
 
+<script>
+
+// ===== Sticky .s1-2-content =====
+const s1_2_section = document.getElementById('section1-2');
+const s1_2_content = document.querySelector('.s1-2-content');
+
+// Change these values to set how many px into the section before sticky activates/releases
+const stickyActivationOffset = -200; // px after section1-2 top to activate sticky
+const stickyReleaseOffset = 200;    // px before section1-2 bottom to release sticky
+
+function handleStickyS12Content() {
+  const contentHeight = s1_2_content.offsetHeight;
+  const sectionTop = s1_2_section.offsetTop;
+  const sectionBottom = sectionTop + s1_2_section.offsetHeight;
+  const scrollY = window.scrollY;
+
+  // Activate sticky after scrolling stickyActivationOffset px into section1-2
+  // Release sticky stickyReleaseOffset px before section1-2 bottom
+  if (
+    scrollY >= sectionTop + stickyActivationOffset &&
+    scrollY < sectionBottom - contentHeight - stickyReleaseOffset
+  ) {
+    s1_2_content.style.position = 'fixed';
+    s1_2_content.style.top = '200px'; // adjust for navbar height
+    s1_2_content.style.left = '50%';
+    s1_2_content.style.transform = 'translateX(-50%)';
+    s1_2_content.style.width = '100%';
+    s1_2_content.style.zIndex = '1000';
+  }
+  // When scrolled past the release point, make it absolute at the bottom of section1-2
+  else if (scrollY >= sectionBottom - contentHeight - stickyReleaseOffset) {
+    s1_2_content.style.position = 'absolute';
+    s1_2_content.style.top = (sectionBottom - contentHeight - sectionTop) + 'px';
+    s1_2_content.style.left = '0';
+    s1_2_content.style.transform = '';
+    s1_2_content.style.width = '100%';
+    s1_2_content.style.zIndex = '1000';
+  }
+  // Otherwise, reset to default
+  else {
+    s1_2_content.style.position = '';
+    s1_2_content.style.top = '';
+    s1_2_content.style.left = '';
+    s1_2_content.style.transform = '';
+    s1_2_content.style.width = '';
+    s1_2_content.style.zIndex = '';
+  }
+}
+
+window.addEventListener('scroll', handleStickyS12Content);
+window.addEventListener('resize', handleStickyS12Content);
+handleStickyS12Content();
+
+
+</script>
+
+
     <button id="scrollToTopBtn">Back to Top</button>
             <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
       <script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
@@ -468,10 +523,6 @@ window.addEventListener('load', handleCarouselScroll);
     </body>
     </html>
 
-</master>
-
-    </body>
-    </html>
 
 
 
