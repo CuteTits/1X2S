@@ -222,7 +222,11 @@ function updateScrollEffects() {
     let progress = Math.max(0, visiblePart / (rect.height + windowHeight));
     progress = Math.min(1, progress * 1.15); // change speed
     const charsToShow = Math.floor(progress * chars.length);
-    container.innerHTML = chars.slice(0, charsToShow).join('');
+    container.innerHTML = '<span class="typing-text">' 
+    + chars.slice(0, charsToShow).join('') 
+    + '</span>';
+
+
   }
 
   // --- Staggered dropdown ---
@@ -246,6 +250,27 @@ function updateScrollEffects() {
 window.addEventListener('scroll', updateScrollEffects);
 window.addEventListener('resize', updateScrollEffects);
 updateScrollEffects();
+
+// ===== Expand textbox on scroll =====
+const textbox = document.querySelector('.display-textbox');
+
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top <= window.innerHeight && rect.bottom >= 0;
+}
+
+function handleScroll() {
+  if (isInViewport(textbox)) {
+    textbox.classList.add('expanded');
+  } else {
+    textbox.classList.remove('expanded');
+  }
+}
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('resize', handleScroll);
+handleScroll();
+
 </script>
 
 
@@ -364,7 +389,6 @@ window.addEventListener('load', handleCarouselScroll);
 
   <div class="s2-1-parent-container">
     <div class="s2-1-content">
-      <span class="tag"><span class="material-symbols-outlined">eco</span>Sustainability</span>
       <h1>100% Performance, 0% Footprint</h1>
       <p>Static 2.0, Built on Mistral 7B is a compact, performance-oriented language model designed around MoE (Mixture of Experts) architecture, 
         which allows it to deliver high computational efficiency while remaining lightweight. 
