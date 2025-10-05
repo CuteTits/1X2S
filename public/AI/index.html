@@ -224,16 +224,22 @@ function updateScrollEffects() {
   const windowHeight = window.innerHeight;
 
   // --- Scroll typing ---
-  let progress = 0;
-  if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
-    const scrolledPx = Math.max(0, windowHeight - sectionRect.top);
+let progress = 0;
+if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
+  // --- Add a 200px delay before triggering ---
+  const delay = 700; // pixels
+  const scrolledPx = Math.max(0, windowHeight - sectionRect.top - delay);
+
+  if (scrolledPx > 0) { // only start after 200px is reached
     progress = Math.min(1, scrolledPx / (sectionRect.height + windowHeight));
-    progress = Math.min(2, progress * 1.2); // change speed
+    progress = Math.min(1, progress * 2.2); // change speed
     const charsToShow = Math.floor(progress * chars.length);
-    container.innerHTML = '<span class="typing-text">' 
-      + chars.slice(0, charsToShow).join('') 
-      + '</span>';
+    container.innerHTML =
+      '<span class="typing-text">' +
+      chars.slice(0, charsToShow).join('') +
+      '</span>';
   }
+}
 
   // --- Staggered dropdown ---
   const dropdown = document.getElementById('scrollDropdown');
