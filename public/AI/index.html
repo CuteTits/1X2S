@@ -227,7 +227,7 @@ function updateScrollEffects() {
 let progress = 0;
 if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
   // --- Add a 200px delay before triggering ---
-  const delay = 700; // pixels
+  const delay = 500; // pixels
   const scrolledPx = Math.max(0, windowHeight - sectionRect.top - delay);
 
   if (scrolledPx > 0) { // only start after 200px is reached
