@@ -12,8 +12,10 @@ html.js body.fade-in {
 opacity: 1;
 }
 
+
+
 #section1 {
-background-color: #0B0B0B;
+background-color: #0e0e0e;
 min-height: 100vh; 
 overflow-x: hidden;
 }
@@ -21,7 +23,7 @@ overflow-x: hidden;
 #section1-2{
 position: relative;
 height: 150vh;
-background-color: transparent;
+background: linear-gradient(to top, #0B0B0B, #0e0e0e);
 width: 100%;
 }
 #section1-5 {
@@ -75,35 +77,42 @@ backdrop-filter: blur(5px);
 
 
 
-.s1-background-image{
-position: fixed;
-z-index: 0;
-}
-.s1-background-image img{
-object-fit:fill;
-opacity: .2;
-}
+
 
 .section1-container-parent{
 position: absolute;
 z-index: 100;
-top: 15%;
 width: auto;
 left: 50%;
 transform: translate(-50%, 50%);
 overflow: hidden;
+padding: 20px;
+
+border: 2px solid transparent;
+background:
+  linear-gradient(#0e0e0e, #0e0e0e) padding-box,
+  linear-gradient(137deg,#0e0e0e 0%, #0e0e0e 25%, #2c2c2c 50%, #0e0e0e 75%, #0e0e0e 100%) border-box;
+background-size: 100% 100%, 200% 100%;
+background-position: 0 0, 200% 50%;
+animation: shine 5s linear infinite;
 }
+
+@keyframes shine {
+  0%   { background-position: 0 0, 200% 50%; }
+  100% { background-position: 0 0, 0% 50%; }
+}
+
 .section-container-content{
 z-index: 100;
 width: 100%;
 line-height: 1;
-perspective: 600px;
 display: flex;
 flex-direction: column;
+text-align: left;
 }
 .section-container-content h1{
 font-family: inter;
-font-size: clamp(4rem, 10vw, 8rem);
+font-size: clamp(1rem, 5vw, 2rem);
 font-weight: 600;
 margin: 0;
 padding: 0;
@@ -114,15 +123,23 @@ background: linear-gradient(to left, rgb(73, 73, 73), rgb(238, 238, 238));
 background-clip: text;
 color: transparent;
 }
-.section-container-content h3{
-color: rgb(255, 63, 63);
-border: rgb(255, 47, 47) solid 1px;
+.section-container-content h2{
+color: rgb(255, 255, 255);
 font-family: montserrat;
-font-size: 1em;
-font-weight: 600;
+font-size: 2em;
+font-weight: 400;
 margin: 0;
-padding: 0 20px;
 width: fit-content;
+padding: 5px;
+}
+.section-container-content h3{
+color: rgb(130, 130, 130);
+font-family: montserrat;
+font-size: 1.8em;
+font-weight: 200;
+margin: 0;
+width: fit-content;
+padding: 5px;
 }
 
 .bx-i{
@@ -142,6 +159,7 @@ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 align-items: center;
 justify-content: space-evenly;
 width: 80%;
+
 }
 .i-section-container{
 display: block;
@@ -431,14 +449,21 @@ animation: blink 1s steps(2, start) infinite;
 
 
 .display-textbox {
-background-color: #171717;
-border: solid #303030 1px;
+background:
+linear-gradient(rgb(16, 16, 16), rgb(16, 16, 16)) padding-box,
+linear-gradient(45deg, #575757, #3e3e3e, #2e2e2e) border-box;
+background-size: 100% 100%, 200% 100%;
+background-position: 0 0, 100% 50%;
+animation: shine 2s linear infinite;
+border: 2px solid transparent;
 border-radius: 50px;
 display: inline-flex;
 align-items: center;
 justify-content: space-between;
 transition: all 0.5s ease;   
+box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.146);
 }
+
 .display-textbox.expanded {
 animation: bounceExpand 0.6s ease forwards;
 }
@@ -697,3 +722,8 @@ transition: all 0.5s ease-in-out;
 transform: scale(1.1);
 transition: all 0.3s ease;
 }
+
+
+
+
+

@@ -38,110 +38,26 @@
 
 <section id="section1">
 
-        <div class="s1-background-image">
-          <img src="/pagecontent/resources/images/illustration-04.png">
-        </div>
 
         
         <div class="section1-container-parent">
             <div class="section-container-content">
                 <img src="/pagecontent/resources/images/vultrlogo.png" alt="Vultr Logo" style="width: 150px;">
                 <h1>Static 2</h1>
-                <h3>v 1.0.3 Sierra</h3>
-                <div class="textbox" id="textbox"><span class="alt">Powered By </span></div>
+                <divider class="divider" style="height: 1px; width: 5%; background: white; margin: 20px;"></divider>
+                <h2>Redefining probability using AI</h2>
+                <h3>A fine-tuned AI model built on Mistral 7B, optimized for analytical reasoning, 
+                  statistical processing, and data-driven insights. 
+                  Enhanced with real-time search capabilities, 
+                  it seamlessly integrates live information retrieval with deep logical analysis: ideal for handling complex queries, 
+                  performance evaluations, 
+                  and evidence-based decision making. Always ahead.</h3>
             </div>
         </div>
 
-  <style>
-.textbox {
-font-size:1.5rem;
-min-width:300px;
-color: white;
-height: 100px;
-overflow: hidden;
-z-index: 2;
-font-family: orbitron;
-padding: 10px 0;
-gap: 10px;
-}
-.text {
-position:absolute;
-width:100%;
-opacity:0;
-transform: translateY(2px);
-transition: all 0.5s ease;
-margin: 0 5px;
-}
-.alt{
-font-family: montserrat;
-font-size: 12px;
-vertical-align: top;
-color: gray;
-}
-.text.active {
-opacity:1;
-transform: translateY(0);
-    }
-  </style>
 
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const texts = [
-        "IBM Granite ",
-        "OpenAI GPT-4 ",
-        "Google Gemini ",
-        "NVIDIA NeMo ",
-        "Meta Llama 3 ",
-        "Cohere Command ",
-        "Anthropic Claude ",
-        "Deepseek-R1",
-        "Qwen 7B",
-        "Mistral 7B",
-        "Imsys Vicuna-7B",
-        "X Grok 7B",
-        "IBM Granite ",
-        "OpenAI GPT-4 ",
-        "Google Gemini ",
-        "NVIDIA NeMo ",
-        "Meta Llama 3 ",
-        "Cohere Command ",
-        "Anthropic Claude ",
-        "Deepseek-R1",
-        "Qwen 7B",
-        "Mistral 7B",
-        "Imsys Vicuna-7B",
-        "Mixtral 8x7B",
-
-      ];
-
-      const targetIndex = texts.length - 1; // stop on last one
-      const container = document.getElementById("textbox");
-
-      // Create span elements for each text
-      texts.forEach((txt, idx) => {
-        const span = document.createElement("span");
-        span.classList.add("text");
-        span.textContent = txt;
-        if (idx === 0) span.classList.add("active");
-        container.appendChild(span);
-      });
-
-      const spans = container.querySelectorAll(".text");
-      let i = 0;
-
-      const interval = setInterval(() => {
-        spans[i].classList.remove("active");
-        i++;
-        if (i > targetIndex) {
-          clearInterval(interval);
-          i = targetIndex; // make sure the target stays visible
-        }
-        spans[i].classList.add("active");
-      }, 100); // slower interval = smoother transition
-    });
-</script>
 
 </section>
 
