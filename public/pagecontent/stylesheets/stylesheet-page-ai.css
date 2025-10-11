@@ -100,7 +100,7 @@ gap: 20px;
 .section1-container-parent{
 width: 90%;
 transform: translate(-50%, 25%);
-
+}
 }
 .section-container-content{
 z-index: 100;
@@ -517,7 +517,7 @@ text-shadow: 0 0 8px rgb(255, 54, 54);
 font-size: .8em;
 }
 .display-textbox.expanded {
-width: 90vw;
+width: 90%;
 animation: none;
 }
 }
