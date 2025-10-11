@@ -517,7 +517,7 @@ text-shadow: 0 0 8px rgb(255, 54, 54);
 font-size: .8em;
 }
 .display-textbox.expanded {
-width: 90%;
+width: 90vw;
 animation: none;
 }
 }
