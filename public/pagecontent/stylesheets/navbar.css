@@ -452,3 +452,14 @@ padding: 10px ;
 border: solid 1px rgb(19, 19, 19);
 }
 
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown a span {
+transform: rotate(0deg);
+transition: all 0.3s ease;
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown:hover a span {
+transform: rotate(-180deg);
+transition: all 0.3s ease;
+}
+

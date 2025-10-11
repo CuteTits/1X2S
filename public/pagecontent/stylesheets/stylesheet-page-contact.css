@@ -4,15 +4,7 @@ padding: 0;
 margin: 0;
 }
 
-.fixedBackground{
-background: #131313;
-position: fixed;
-height: 100vw;
-width: 100vw;
-top: 0;
-left: 0;
-z-index: 0;
-}
+
 
 
 #section1 {
@@ -23,6 +15,7 @@ justify-content: center;
 display: flex;
 align-items: center;
 z-index: 2;
+background: #0e0e0e;
 }
 
 .section1-container-parent{
@@ -35,13 +28,21 @@ z-index: 10;
 
 
 .h-section1-content-container{
-display:  flex;
+display:  grid;
+grid-template-columns: 1fr 1fr 1fr ;
+grid-gap: 40px;
+width: 100%;
+margin-top: 70px;
+justify-content: center;
+align-content: center;
+z-index: 10;
 }
 
 .i-section-div-container{
 width: 100%;
 text-align: left;
 justify-content: center;
+padding: 10px;
 }
 
 
