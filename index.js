@@ -7,11 +7,13 @@ import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import session from 'express-session';
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Import Gemini API
 
 
 
 // Load environment variables from .env file
 dotenv.config();
+console.log("Gemini API Key:", process.env.GEMINI_API_KEY);
 
 // Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -114,15 +116,7 @@ app.get('/db-test', async (req, res) => {
 // Example signup endpoint (store email + password)
 // Signup endpoint (store name, email + hashed password)
 
-
-
-
-
-
-
-
 // --- session endpoint ---
-
 app.use(session({
   name: 'sid', // 👈 shorter cookie name
   secret: process.env.SESSION_SECRET || 'supersecretkey',
@@ -130,8 +124,6 @@ app.use(session({
   saveUninitialized: false,
   cookie: { httpOnly: true, secure: false, maxAge: 1000 * 60 * 60 }
 }));
-
-
 
 // --- Session status ---
 app.get('/api/session', (req, res) => {
@@ -149,15 +141,7 @@ app.get('/api/session', (req, res) => {
   }
 });
 
-
-
-
-
 // --- Signup endpoint ---
-
-
-
-
 app.post('/api/signup', async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
@@ -185,7 +169,6 @@ app.post('/api/signup', async (req, res) => {
     res.status(500).json({ success: false, message: 'Database insert failed' });
   }
 });
-
 
 // --- Login endpoint ---
 app.post('/api/login', async (req, res) => {
@@ -221,9 +204,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
-  
-
 // Return account info
 app.get('/api/account', async (req, res) => {
   if (!req.session.user) {
@@ -258,17 +238,13 @@ app.get('/api/account', async (req, res) => {
   }
 });
 
-
 // Logout (destroy session)
 app.post('/api/logout', (req, res) => {
   req.session.destroy(() => {
     res.clearCookie('sid');
-    res.json({ success: true });
-    
+    res.json({ success: true });    
   });
 });
-
-
 
 // Change password endpoint
 app.post('/api/change-password', async (req, res) => {
@@ -316,9 +292,6 @@ app.post('/api/change-password', async (req, res) => {
   }
 });
 
-
-
-
 // Delete account (requires password)
 app.delete('/api/delete-account', async (req, res) => {
   if (!req.session.user) {
@@ -358,6 +331,26 @@ app.delete('/api/delete-account', async (req, res) => {
   }
 });
 
+
+// --- Google API (Gemini 2.5 Flash) ---
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY); // Access the API key from .env
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+
+app.post("/api/gemini", async (req, res) => {
+    const prompt = req.body.prompt; // Get the prompt from the request body
+    if (!prompt) {
+        return res.status(400).json({ error: "Prompt is required" });
+    }
+    try {
+        const geminiResponse = await model.generateContent(prompt);
+        const text = geminiResponse.response.text();
+        res.json({ response: text }); // Send the response back to the frontend
+    } catch (error) {
+        console.error("Error calling Gemini API:", error);
+        res.status(500).json({ error: "Error getting response from Gemini API" }); // Handle errors
+    }
+});
 
 
 //
