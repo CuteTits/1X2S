@@ -402,6 +402,10 @@ gap: 10px;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 margin: 20px;
+background-color: #0e0e0e;
+padding: 20px;
+border: solid 1px rgb(47, 47, 47);
+border-radius: 5px;
 }
 .grid-list ul li{
 display: flex;

@@ -97,8 +97,8 @@ cursor: help;
         </div>
         <h1>Overview</h1>
         <p>LiteWS is an AI-powered web scraping and data extraction tool designed to streamline the process of gathering and analyzing online information. 
-            Built with Python, LiteWS integrates advanced AI models to enhance its scraping capabilities, allowing users to extract structured data from a variety of web sources efficiently.
-            The tool supports multiple AI providers, including Google GenAI, OpenAI, Anthropic, and AI21 Labs, enabling users to leverage state-of-the-art language models for data summarization and analysis.
+            Built with Python, LiteWS integrates advanced AI models and NLPs to enhance its scraping capabilities, allowing users to extract structured data from a variety of web sources efficiently.
+            The tool supports multiple AI providers, enabling users to leverage state-of-the-art language models for data summarization and analysis.
             LiteWS is ideal for researchers, analysts, and developers looking to automate data collection tasks while ensuring high-quality outputs through AI-driven insights.
         </p>
         <div class="list-container">
@@ -142,10 +142,14 @@ cursor: help;
                 <a>Data output</a>
                 <li>Structured JSON, CSV formats</li>
                 <li>Summarized reports using optional AI integration</li>
-
-
             </ul>
         </div>
+        
+        <h2>Architecture</h2>
+        <pre><code>query/input → Input Normalization/parsing → keyword filtering → source fetch (DDGS, RSS, WikiAPI, OpenHtml) → 
+        Result cleaning/Source Ranking → IEC Crawling, top results → Text extraction (Html, Json, JS) → Parsing → AI Layer → Json output, summarization    
+        </code></pre>
+
     </div>
 </div>
 
@@ -170,7 +174,16 @@ cursor: help;
         <a>System Requirements: >8GB RAM, >500MB Available Storage</a>
 
         <h3>Install Required Libraries</h3>
-        <a>Use pip to install the necessary libraries:</a>
+        <a>Within the file package there is a requirements.txt file which contains all the required libraries as a package. 
+        Run the following string in the terminal to download the requirements package with all the libraries.
+        </a>
+        <pre>
+            <code>pip install requirements.txt -r</code>
+            <button class="copy-button" onclick="copyToClipboard('pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs', this)">
+                <span class="material-symbols-outlined">content_copy</span>
+            </button>
+        </pre>
+        <a>Or optionally, use pip to install the necessary libraries manually:</a>
         <pre>
             <code>pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs</code>
             <button class="copy-button" onclick="copyToClipboard('pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs', this)">
@@ -252,14 +265,12 @@ cursor: help;
         </a>
         <div class="column-list">
         <ul>
-            <li><a>OpenAI</a></li>
+            <li><a href="https://platform.openai.com/account/api-keys">OpenAI API</a></li>
             <li><a href="https://ai.google.dev/gemini-api/docs/api-key">Google AI</a></li>
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li>
+            <li><a href="https://iamistral.com/api/">Mistral API</a></li>
+            <li><a href="https://api-docs.deepseek.com/">DeepSeek API</a></li>
+            <li><a href="https://huggingface.co/docs/hub/api">Hugging Face APi</a></li>
+            <li><a href="https://x.ai/api">xAI Grok API</a></li>
         </ul>
         </div>
 
@@ -332,9 +343,9 @@ cursor: help;
                 <a href="/resources" target="_self">Resources<span class="material-symbols-outlined"">arrow_outward</span></a>
             </div>
             <div class="i-section-container">
-                <h1>Mistral</h1>
-                <p>Documentation for Mistral 7B can be found here.</p>
-                <a href="https://mistral.ai/news/announcing-mistral-7b" target="_blank">Mistral AI<span class="material-symbols-outlined"">arrow_outward</span></a>
+                <h1>Docs</h1>
+                <p>Full documentation can be found here.</p>
+                <a href="/#" target="_blank">Documentation<span class="material-symbols-outlined"">arrow_outward</span></a>
             </div>
             <div class="i-section-container">
                 <h1>More Models</h1>
