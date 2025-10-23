@@ -63,17 +63,7 @@ align-items: center;
 z-index: 2;
 backdrop-filter: blur(5px);
 }
-#section3 {
-position: relative;
-min-height: 40vh; 
-height: auto;
-justify-content: center;
-display: flex;
-align-items: center;
-flex-direction: column;
-z-index: 2;
-backdrop-filter: blur(5px);
-}
+
 
 
 
@@ -155,77 +145,6 @@ margin-right: 10px;
 
 
 
-.h-section-content-container{
-grid-row: 3;
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));    
-align-items: center;
-justify-content: space-evenly;
-width: 80%;
-
-}
-.i-section-container{
-display: block;
-width: 90%;
-margin: 20px auto;
-text-align: left;
-padding: 10px;
-}
-.i-section-container h1{
-color: white;
-font-family: montserrat;
-font-size: .9em;
-}
-.i-section-container p{
-color: white;
-font-family: montserrat;
-font-size: .8em;
-}
-.i-section-container a {
-position: relative;
-cursor: pointer;
-color: rgb(239, 57, 57);
-font-family: montserrat;
-font-size: .9em;
-transition: all 0.5s ease;
-text-decoration: none;
-}
-.i-section-container a::after {
-content: '';
-position: absolute;
-left: 0;
-bottom: -2px;
-width: 0;
-height: 1px;
-background: rgb(218, 52, 52);
-transition: width 0.2s ease;
-}
-.i-section-container a:hover::after {
-width: 90%; 
-}
-
-.i-section-container span{
-color: white;
-display: inline;
-align-items: center;
-font-size: 1em;
-bottom: -2px;
-position: relative;
-}
-.material-symbols-outlined {
-font-variation-settings:
-'FILL' 0,
-'wght' 100,
-'GRAD' 0,
-'opsz' 16 !important;
-}
-
-
-
-
-
-
-
 
 
 #section2 h1{
@@ -265,7 +184,7 @@ text-align: center;
 position: relative; /* Add this */
 overflow: hidden;   /* Add this to clip the overlay */
 height: auto;
-min-height: 400px;
+min-height: 300px;
 gap: 20px;
 }
 .s2-grid-item h2{
@@ -462,7 +381,7 @@ border-radius: 50px;
 border: 2px solid transparent;
 background:
 linear-gradient(#0e0e0ed3) padding-box,
-linear-gradient(137deg, #0e0e0e00 45%, #72727292 50%, #0e0e0e00 55%) border-box;
+linear-gradient(137deg, #1a1a1a 45%, #72727292 50%, #0e0e0e00 55%) border-box;
 background-size: 100% 100%, 200% 100%;
 background-position: 0 0, 200% 50%;
 box-shadow: #0000006e 5px 5px 20px 5px;
@@ -482,7 +401,7 @@ animation: bounceExpand 0.6s ease forwards;
 .display-textbox .material-symbols-outlined{
 color: rgb(255, 57, 57);
 text-shadow: 0 0 50px rgb(255, 54, 54);
-margin: 16px 20px;
+margin: 12px 20px;
 font-size: 2.2em;
 cursor: pointer;
 transition: all 0.3s ease-in-out;
