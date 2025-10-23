@@ -21,7 +21,7 @@ padding: 0;
 width: fit-content;
 display: flex;
 justify-items: center;
-background: linear-gradient(to left, rgb(100, 100, 100), rgb(186, 186, 186));
+background: linear-gradient(to left, rgb(52, 52, 52), rgb(236, 236, 236));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
@@ -34,7 +34,7 @@ padding: 0;
 width: fit-content;
 display: flex;
 justify-items: center;
-background: linear-gradient(to left, rgb(100, 100, 100), rgb(186, 186, 186));
+background: linear-gradient(to left, rgb(58, 58, 58), rgb(217, 217, 217));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
@@ -43,7 +43,25 @@ h3{
 font-family: inter;
 font-size: clamp(1.1rem, 5vw, 1.1rem);
 font-weight: 600;
-padding: 10px;
+padding: 5px 10px;
+width: fit-content;
+display: flex;
+justify-items: center;
+align-items: center;
+color: white;
+margin-top: 50px;
+}
+h3::before{
+font-family: inter;
+font-size: clamp(1.1rem, 5vw, 1.1rem);
+font-weight: 600;
+content: "〉";
+color: white;
+}
+h4{
+font-family: montserrat;
+font-size: clamp(.8rem, 5vw, .8rem);
+font-weight: 600;
 width: fit-content;
 display: flex;
 justify-items: center;
@@ -51,8 +69,7 @@ background: linear-gradient(to left, rgb(100, 100, 100), rgb(186, 186, 186));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
-margin-top: 50px;
-border-left:  solid 2px white;
+margin: 0;
 }
 a{
 font-family: inter;
@@ -72,8 +89,8 @@ width: 50%;
 
 #section1 {
 background: #242424;
-background: linear-gradient(137deg, rgba(36, 36, 36, 1) 0%, rgba(14, 14, 14, 1) 26%, rgba(14, 14, 14, 1) 100%);
-min-height: 100vh; 
+background: linear-gradient(137deg, rgb(44, 44, 44) 0%, rgba(14, 14, 14, 1) 30%, rgba(14, 14, 14, 1) 100%);
+min-height: 90vh; 
 overflow-x: hidden;
 display: flex;
 flex-direction: column;
@@ -81,7 +98,7 @@ align-items: center;
 justify-content: center;
 text-align: center;
 }
-#section1-container-parent h1{
+#section-container-parent h1{
 font-family: inter;
 font-size: clamp(1rem, 5vw, 2rem);
 font-weight: 600;
@@ -96,10 +113,11 @@ background-clip: text;
 color: transparent;
 }
 
-.section1-container-parent{
+.section-container-parent{
 display: flex;
 flex-direction: column;
 align-items: center;
+width: 100%;
 }
 .section-container-content{
 display: flex;
@@ -107,7 +125,7 @@ flex-direction: column;
 padding: 50px;
 gap: 10px;
 width: 60%;
-
+height: auto;   
 }
 
 
@@ -151,6 +169,7 @@ text-align: left;
 
 
 .cx-divider{
+position: relative;
 height: auto;
 min-height: 200px; 
 border-left: dashed 1px rgb(79, 79, 79);

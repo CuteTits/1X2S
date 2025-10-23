@@ -7,7 +7,7 @@
 <title>1X2S</title>
 <link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
 <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-ai-models.css">
+<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-litews.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -82,10 +82,9 @@ cursor: help;
 
 <section id="section1">
         
-<div class="section1-container-parent">
-    <div class="section-container-content">
-</div>
+<div class="section-container-parent">
         <div class="model-card" onclick="location.href='#'">
+            <h4>1X2S API</h4>
             <h2>LiteWS</h2>
             <p>A python-based AI web intelligence pipeline that automatically searches, scrapes, 
                 and summarizes online information into structured, reliable reports.
@@ -94,8 +93,18 @@ cursor: help;
             <div class="btn-container">
                 <a href="#">Download<span class="material-symbols-outlined">arrow_outward</span></a>
             </div>
-        </div>
+    </div>
+</div>
+
+</section>
+<div class="cx-divider"></div>
+
+<section id="section1-2">
+<div class="section-container-parent">
+<div class="section-container-content">
         <h1>Overview</h1>
+<div class="divider-container">
+<div class="divider"></div></div>
         <p>LiteWS is an AI-powered web scraping and data extraction tool designed to streamline the process of gathering and analyzing online information. 
             Built with Python, LiteWS integrates advanced AI models and NLPs to enhance its scraping capabilities, allowing users to extract structured data from a variety of web sources efficiently.
             The tool supports multiple AI providers, enabling users to leverage state-of-the-art language models for data summarization and analysis.
@@ -145,21 +154,43 @@ cursor: help;
             </ul>
         </div>
         
-        <h2>Architecture</h2>
-        <pre><code>query/input → Input Normalization/parsing → keyword filtering → source fetch (DDGS, RSS, WikiAPI, OpenHtml) → 
-        Result cleaning/Source Ranking → IEC Crawling, top results → Text extraction (Html, Json, JS) → Parsing → AI Layer → Json output, summarization    
+        <h1>Architecture</h1>
+        <pre><code>
+        Query/Input
+            ↓
+        Input Normalization/parsing (Re, String, nltk)
+            ↓ 
+        keyword filtering (nltk, spaCy)
+            ↓
+        source fetch (DDGS, RSS, WikiAPI, OpenHtml) (aiohttp, feedparser, requests_html)
+            ↓ 
+        Result cleaning/Source Ranking (Framework)
+            ↓
+        IEC Crawling, top results (aiohttp, playwright)
+            ↓
+        Text extraction - JSON, or JS-rendered data (Bs4, lxml, re)
+            ↓
+        Parsing to AI Layer JSON (transformers, sentence-transformers, torch, nltk)
+            ↓
+        Json output, summarization (Integrated NPLs)   
         </code></pre>
 
+        </div>
     </div>
+</div>
 </div>
 
 </section>
 
+
 <section id="section2">
 
-    <div class="section1-container-parent">
+    <div class="section-container-parent">
     <div class="section-container-content">
-        <div class="cx-divider"></div>
+
+
+
+<div class="cx-divider"></div>
         <h1>Getting Started</h1>
 
 <div class="divider-container">
