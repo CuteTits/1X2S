@@ -21,7 +21,7 @@ padding: 0;
 width: fit-content;
 display: flex;
 justify-items: center;
-background: linear-gradient(to left, rgb(52, 52, 52), rgb(236, 236, 236));
+background: linear-gradient(to left, rgb(103, 102, 102), rgb(236, 236, 236));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
@@ -34,7 +34,7 @@ padding: 0;
 width: fit-content;
 display: flex;
 justify-items: center;
-background: linear-gradient(to left, rgb(58, 58, 58), rgb(217, 217, 217));
+background: linear-gradient(to left, rgb(96, 96, 96), rgb(217, 217, 217));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
@@ -65,7 +65,7 @@ font-weight: 600;
 width: fit-content;
 display: flex;
 justify-items: center;
-background: linear-gradient(to left, rgb(100, 100, 100), rgb(186, 186, 186));
+background: linear-gradient(to left, rgb(139, 139, 139), rgb(186, 186, 186));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
@@ -333,7 +333,9 @@ color: white;
 font-family: montserrat;
 font-size: .8em;
 }
-.i-section-container a {
+
+
+.linkSpan a{
 position: relative;
 cursor: pointer;
 color: rgb(239, 57, 57);
@@ -342,7 +344,7 @@ font-size: .9em;
 transition: all 0.5s ease;
 text-decoration: none;
 }
-.i-section-container a::after {
+.linkSpan a::after {
 content: '';
 position: absolute;
 left: 0;
@@ -352,11 +354,11 @@ height: 1px;
 background: rgb(218, 52, 52);
 transition: width 0.2s ease;
 }
-.i-section-container a:hover::after {
-width: 90%; 
+.linkSpan a:hover::after {
+width: calc(100% - 16px); 
 }
 
-.i-section-container span{
+.linkSpan span{
 color: white;
 display: inline;
 align-items: center;
@@ -364,6 +366,8 @@ font-size: 1em;
 bottom: -2px;
 position: relative;
 }
+
+
 
 .embedLink a{
 color: rgb(239, 57, 57);
@@ -448,22 +452,11 @@ height: 16px;
 list-style: none;
 gap: 10px;
 margin: 20px;
+line-height: 2;
 }
 .column-list ul li{
-display: flex;
-flex-direction: row;
-align-items: center;
-color: rgb(173, 173, 173);
-gap: 5px;
-font-family: inter;
-font-weight: 300;
-font-size: .8em;
-}
-.column-list ul li img{
-width: 16px;
-height: 16px;
-}
 
+}
 
 
 .divider-container {

@@ -22,6 +22,10 @@
 <body>  
 
 
+
+
+
+
     <nav>
         <div id="navbar"></div>
         <script src="/pagecontent/scriptsheets/navbar.js"></script>
@@ -34,6 +38,39 @@
     </mobilenav>  
 
 
+    <div class="fixed-background-video">
+        <video autoplay muted loop id="background-video">
+            <source src="/pagecontent/resources/videos/3176053-hd_1920_1080_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <!-- Make video play on scroll, stop when user is not scrolling. stay paused by default. Reverse video if user is scrolling the other way -->
+    <script>
+      let lastScrollTop = 0;
+      let isScrolling;
+      const video = document.getElementById('background-video');
+      video.pause(); // Start paused
+      window.addEventListener('scroll', function() {
+        clearTimeout(isScrolling);
+        const st = window.pageYOffset || document.documentElement.scrollTop;
+        if (st > lastScrollTop){
+          // Scrolling down
+          video.playbackRate = 1.0;
+        } else {
+          // Scrolling up
+          video.playbackRate = -1.0;
+        }
+        video.play();
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+        // Set a timeout to pause the video after scrolling stops
+        isScrolling = setTimeout(function() {
+          video.pause();
+        }, 150); // Pause after 150ms of no scroll
+      }, false);
+
+      
+    </script>
 
 
 <section id="section1">
@@ -66,7 +103,6 @@
 
 <div class="s1-2-content">
 <div class="s1-2-parent-container">
-
 <div class="s1-2-text-container">
   <h1>...Ask anything</h1>
   <p>Get match summaries, daily predictions, injury updates, and transfer news, by chatting directly with Static 2.0.</p>
@@ -88,6 +124,7 @@
         <span id="ag3">Summarize top news headlines...</span>
         <span id="ag4">Check latest tranfers...</span>
       </div>
+</div>
 
 
 
@@ -189,7 +226,6 @@ updateScrollEffects();
 </script>
 
 
-</div>
 
 
 </section>
@@ -271,7 +307,7 @@ window.addEventListener('load', handleCarouselScroll);
 </div>
 
 <div class="s2-grid-item">
-    <h2>Probability is Key</h2>
+    <h2>Engineered for Data </h2>
     <div class="s2-grid-item-show-more">
         <p>Engineered to process terabytes of data with advanced probability modeling, logical reasoning, and pattern recognition.</p>
     </div>
@@ -279,7 +315,7 @@ window.addEventListener('load', handleCarouselScroll);
 </div>
 
 <div class="s2-grid-item">
-    <h2>Against the Odds</h2>
+    <h2>Beating Odds</h2>
     <div class="s2-grid-item-show-more">
         <p>Built to challenge conventional predictions and uncover high-value outcomes that defy expectations.</p>
     </div>

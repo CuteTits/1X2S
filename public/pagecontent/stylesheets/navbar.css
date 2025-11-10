@@ -7,14 +7,50 @@ display: none;
 }
 
 
+#top-banner{
+position:relative;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+background-color: #ea4040;
+z-index: 1000000;
+border: solid 1px rgb(152, 7, 7);
+}
+#close-banner{
+pointer-events: all;
+cursor: pointer;
+}
+.banner-content{
+position:relative;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+}
+.banner-content a{
+font-family: montserrat;
+text-decoration: none;
+color: black;
+font-size: .8em;
+font-weight: 300;
+}
+.banner-content a span{
+text-decoration: underline;
+}
 
 
-.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+#content-wrapper{
 position: fixed;
-top: 0;
-left: 0;
 width: 100%;
 z-index: 6000;
+top: 0;
+left: 0;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+top: 0;
+left: 0;
 transition: background-color 0.3s ease;
 color: white;
 backdrop-filter: none; 
@@ -22,7 +58,7 @@ backdrop-filter: none;
 justify-content: center;
 text-align: center;
 align-content: center;
-
+position: relative;
 }
 
 .navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
@@ -77,10 +113,10 @@ height: 100%;
 }
 
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a {
-color: white; 
+color: rgb(104, 104, 104); 
 text-decoration: none; 
 font-family: montserrat;
-font-weight: 200;
+font-weight: 400;
 font-size: 1em;
 position: relative;
 margin: 2px;
@@ -120,7 +156,7 @@ color: white;
 
 
 .Navigational-header-bar-style-top-aligned-flex-0 ul li a:hover {
-color: red; 
+color: rgb(255, 255, 255); 
 transition: all 1s ease;
 }
 
