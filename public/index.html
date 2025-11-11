@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-index.css">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script>
   document.documentElement.classList.add('js');
   window.addEventListener('load', function () {
@@ -22,7 +24,9 @@
 <body>  
 
 
-
+<script>
+  AOS.init();
+</script>
 
 
 
@@ -40,36 +44,43 @@
 
     <div class="fixed-background-video">
         <video autoplay muted loop id="background-video">
-            <source src="/pagecontent/resources/videos/3176053-hd_1920_1080_25fps.mp4" type="video/mp4">
+            <source src="/pagecontent/resources/videos/7094565-uhd_3840_2160_25fps.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <!-- Make video play on scroll, stop when user is not scrolling. stay paused by default. Reverse video if user is scrolling the other way -->
     <script>
-      let lastScrollTop = 0;
-      let isScrolling;
-      const video = document.getElementById('background-video');
-      video.pause(); // Start paused
-      window.addEventListener('scroll', function() {
-        clearTimeout(isScrolling);
-        const st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > lastScrollTop){
-          // Scrolling down
-          video.playbackRate = 1.0;
-        } else {
-          // Scrolling up
-          video.playbackRate = -1.0;
-        }
-        video.play();
-        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+let lastScrollTop = 0;
+let isScrolling;
+const video = document.getElementById('background-video');
+video.pause(); // Start paused
+video.currentTime = 0;
 
-        // Set a timeout to pause the video after scrolling stops
-        isScrolling = setTimeout(function() {
-          video.pause();
-        }, 150); // Pause after 150ms of no scroll
-      }, false);
+window.addEventListener('scroll', function() {
+  clearTimeout(isScrolling);
 
-      
+  const st = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollDiff = st - lastScrollTop;
+
+  if (scrollDiff > 0) {
+    // Scrolling down
+    video.play();
+    video.playbackRate = 1.0;
+  } else if (scrollDiff < 0) {
+    // Scrolling up - reverse manually
+    video.pause();
+    const step = 0.03; // Adjust speed here
+    video.currentTime = Math.max(0, video.currentTime - step);
+  }
+
+  lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+  // Pause after scrolling stops
+  isScrolling = setTimeout(function() {
+    video.pause();
+  }, 150);
+});
+
     </script>
 
 
@@ -103,7 +114,7 @@
 
 <div class="s1-2-content">
 <div class="s1-2-parent-container">
-<div class="s1-2-text-container">
+<div class="s1-2-text-container" data-aos="fade-up">
   <h1>...Ask anything</h1>
   <p>Get match summaries, daily predictions, injury updates, and transfer news, by chatting directly with Static 2.0.</p>
 </div>
@@ -238,13 +249,13 @@ updateScrollEffects();
   <img src="/pagecontent/resources/images/element-pattern-dot.png" alt="background patterned image">
 </div>
 
-<h1>Streamlined News Feed</h1>
-<h3>Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
+<h1 data-aos="fade-up">Streamlined News Feed</h1>
+<h3 data-aos="fade-up">Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
 Showing the latest news articles, blog posts, and updates from across the web.
 With Built-in <span>AI Summary</span> for Quick Insights.
 </h3>
 
-<div class="carousel-wrapper">
+<div class="carousel-wrapper" data-aos="fade-up">
   <div class="carousel-container">
     <div class="carousel" id="carousel">
       <img src="/pagecontent/resources/images/frame140.png" alt="Image 4">
@@ -293,9 +304,9 @@ window.addEventListener('load', handleCarouselScroll);
 
 <section id="section2">
 
-    <h1>Raw Features</h1>
+    <h1 data-aos="fade-up">Raw Features</h1>
         
-<div class="s2-grid">
+<div class="s2-grid" data-aos="fade-up">
 
 <div class="s2-grid-item">
     <h2>Always Learning</h2>
@@ -348,9 +359,6 @@ window.addEventListener('load', handleCarouselScroll);
       <p>To further enhance its capabilities, we fine-tune Mistral using QLoRA (Low-Rank Adaptation). This approach significantly 
         reduces compute requirements during training while maintaining or even improving model performance, 
         making it an environmentally friendly choice without compromising on output quality.</p>
-
-      <p>Our models are hosted on AWS servers, and we operate with a strong commitment to sustainability. 
-        By leveraging cloud infrastructure with carbon-neutral initiatives, we ensure that the environmental footprint of running advanced AI models is minimized.</p>
 
       <p>Digital doesn't always mean environmentally friendly, but together we work towards net-zero operations.</p>
     </div>
