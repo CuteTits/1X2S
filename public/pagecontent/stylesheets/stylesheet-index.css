@@ -156,8 +156,11 @@ z-index: 1;
 pointer-events: none;
 opacity: .2;
 }
-
-
+.fixed-background-video video{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
 
 
 
