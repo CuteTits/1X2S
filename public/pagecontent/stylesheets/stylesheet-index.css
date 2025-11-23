@@ -267,13 +267,14 @@ z-index: 100;
 
 
 .s2-grid{
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+display: flex;
 gap: 25px;
 width: 90%;
 padding: 20px;
 box-sizing: border-box;
 height: auto;
+justify-content: center;
+align-items: center;
 }
 .s2-grid-item{
 cursor: pointer;
@@ -287,8 +288,8 @@ align-items: center;
 text-align: center;
 position: relative; /* Add this */
 overflow: hidden;   /* Add this to clip the overlay */
-height: 350px;
-width: 350px;
+height: 250px;
+width: 250px;
 gap: 20px;
 border-radius: 20px;
 border: 1px solid transparent;
@@ -850,18 +851,21 @@ flex-direction: column;
 align-items: center;
 justify-content: left;
 }
-
+.datahandler h1{
+color: white;
+font-family: montserrat;
+}
 .json-section {
 color: #dcdcdc;
 font-family: Consolas, Monaco, "Courier New", monospace;
 line-height: 1.5;
 overflow-x: hidden;
-font-size: 14px;
+font-size: 12px;
 width: 60%;
 padding: none;
 margin: none;
 height: auto;
-opacity: .7;
+opacity: 1;
 transform: scale(1);
 transition: all 0.3s ease-in-out;
 display: flex;
@@ -885,12 +889,3 @@ color: #ffd700;
 margin-bottom: 5px;
 }
 
-.focused {
-border-right: 2px solid #ffffff;
-padding: none;
-margin: none;
-opacity: 1;
-transform: scale(1);
-transition: all 0.3s ease-in-out;
-
-}

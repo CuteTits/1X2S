@@ -171,9 +171,6 @@ window.addEventListener('scroll', () => {
   <p data-aos="fade-up" data-aos-delay="1000">
    Easily obtain streamlined web results or summarized outputs by entering search queries or parseable prompts. 
   </p>
-    <a data-aos="fade-up" data-aos-delay="1200" style="font-family: montserrat; color: rgb(59, 59, 59); font-size: 14px;">
-    Advanced query-handling allows for natural language input 
-    </a>
 </div>
 
   <div class="display-textbox">
@@ -189,6 +186,7 @@ window.addEventListener('scroll', () => {
       <div class="example r1">
         <h1>Keyword Filtering</h1>
         <a>Analyzes the query, identifies key terms, topics and filters the scraped content to deliver accurate and relevant results.</a>
+        <a>Advanced query-handling allows for natural language input.</a>
       </div>
       <div class="example r2">
         <h1>Relevancy Sorting</h1>
@@ -327,11 +325,11 @@ updateScrollEffects();
 <section style="height: 2.5vh;"></section>
 
 
-<section id="section1-3" class="dynamicsection vh100">
+<section id="section1-3" class="dynamicsection vh150">
 
 <div class="datahandler"  data-aos="fade-down" data-aos-delay="100" style="width: 100%;" >
 
-
+      <h1>Easy to Use Metadata</h1>
 <div class="json-section focused" data-json='{
   "query": "List Arsenal´s Current Injuries.",
   "identified_keywords": "Arsenal, Injuries",
@@ -342,12 +340,14 @@ updateScrollEffects();
   "model": "gemini-3-pro",
   "results_count": 3,
   "thought_for_ms": 187
-}'></div>
-
+}'>
+</div>
+      <h1>Integrated AI summaries</h1>
 <div class="json-section" data-json='{
   "summary": "Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include:\nBukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.\nKai Havertz - Knee injury, expected to be back in January.\nGabriel Magalhaes - Thigh injury, expected to be back by February 2026.\nRiccardo Calafiori - Calf injury, will be back by the end of November.\nNoni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.\n\nViktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."
-}'></div>
-
+}'>
+</div>
+      <h1>Extensive Source Compilation</h1>
 <div class="json-section" data-json='{
   "sources": [
     {
@@ -375,7 +375,8 @@ updateScrollEffects();
       "recency":"Two days ago"
     }
   ]
-}'></div>
+}'>
+</div>
 
 <script>
 function syntaxHighlight(json) {
@@ -400,34 +401,8 @@ document.querySelectorAll('.json-section').forEach(section => {
   `;
 });
 
-const jsonSections = document.querySelectorAll('.json-section');
-const parentSection = document.getElementById('section1-3');
 
-const percentageInterval = 1 / jsonSections.length;
 
-window.addEventListener('scroll', () => {
-  const rect = parentSection.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  // If section is on screen at all
-  if (rect.bottom > 0 && rect.top < windowHeight) {
-
-    // Normalize scroll percentage inside section
-    const scrollPercent =
-      Math.min(1, Math.max(0, (windowHeight - rect.top) / (rect.height + windowHeight)));
-
-    jsonSections.forEach((section, index) => {
-      const lower = index * percentageInterval;
-      const upper = (index + 1) * percentageInterval;
-
-      if (scrollPercent >= lower && scrollPercent < upper) {
-        section.classList.add("focused");
-      } else {
-        section.classList.remove("focused");
-      }
-    });
-  }
-});
 
 
 </script>
