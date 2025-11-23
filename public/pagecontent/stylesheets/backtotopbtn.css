@@ -4,6 +4,8 @@
 
 #scrollToTopBtn {
 font-family: orbitron;
+font-size: clamp(0.5rem, 2vw, .8rem);
+font-weight: 600;
 position: fixed;
 background: white;
 padding: 10px;
