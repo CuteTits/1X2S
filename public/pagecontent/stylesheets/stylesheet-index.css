@@ -99,6 +99,7 @@ flex-direction: column;
 align-items: center;
 z-index: 2;
 backdrop-filter: blur(5px);
+
 }
 
 
@@ -142,16 +143,20 @@ background-size: 200% 200%;
 .section-absolute-title a{
 color: rgb(72, 72, 72);
 font-family: montserrat;
+font-weight: 400;
+margin: 0;
+margin: 0;
+text-decoration: none;
+}
+.section-absolute-title p{
+color: rgb(72, 72, 72);
+font-family: montserrat;
 font-size: .8em;
 font-weight: 400;
 margin: 0;
-width: fit-content;
 padding: 5px;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: row;
-text-decoration: none;
+display: inline;
+width: 100%;
 }
 .section-absolute-title a span{
 color: rgb(46, 46, 46);
@@ -164,6 +169,8 @@ transition: all 0.3s ease-in-out;
 transform: translatex(5px);
 transition: all 0.3s ease-in-out;
 }
+
+
 
 .section1-container-parent{
 position: absolute;
@@ -256,7 +263,7 @@ object-fit: cover;
 
 .section-absolute-title{
 position: relative;
-width: 100%;
+width: 60%;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -584,7 +591,7 @@ padding: 0;
 display: flex;
 justify-items: center;
 }
-.example a{
+.example p{
 font-family: montserrat;
 font-size: clamp(0.6rem, 2vw, .8rem);
 font-weight: 200;
@@ -594,6 +601,8 @@ display: flex;
 align-items: center;
 justify-content: center;
 gap: 10px;
+margin: 0;
+padding: 0;
 }
 
 .example.visible {
@@ -889,3 +898,8 @@ color: #ffd700;
 margin-bottom: 5px;
 }
 
+
+
+.p-red-li{
+color: rgb(255, 46, 46);
+}

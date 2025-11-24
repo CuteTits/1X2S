@@ -90,8 +90,6 @@ window.addEventListener('scroll', function() {
         
 <div class="section1-container-parent">
     <div class="section-container-content">
-        <img src="/pagecontent/resources/images/vultrlogo.png" alt="Vultr Logo" style="width: 150px;">
-        <divider class="divider" style="height: 1px; width: 5%; background: white; margin: 20px;"></divider>
         <h2>Redefining the Web Using AI</h2>
         <h3>Advanced Pipelines for Web Scaling, AI Integration and Sports Data Analytics. 
         </h3>
@@ -185,19 +183,19 @@ window.addEventListener('scroll', () => {
       <div id="arrow"></div>
       <div class="example r1">
         <h1>Keyword Filtering</h1>
-        <a>Analyzes the query, identifies key terms, topics and filters the scraped content to deliver accurate and relevant results.</a>
-        <a>Advanced query-handling allows for natural language input.</a>
+        <p>Analyzes the query, identifies key terms, topics and filters the scraped content to deliver accurate and relevant results.</p>
+        <p>Advanced query-handling allows for natural language input.</p>
       </div>
       <div class="example r2">
         <h1>Relevancy Sorting</h1>
-        <a>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</a>
+        <p>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</p>
       </div>
       <div class="example r3">
         <h1>Data Extraction</h1>
-        <a>
+        <p>
           Combines full-query parsing with keyword-based searches to efficiently crawl the web for high-relevance content.
           Engineered for broad data coverage and optimized for large-scale data extraction.
-        </a>
+        </p>
       </div>
   </div>
 <script>
@@ -431,8 +429,11 @@ document.querySelectorAll('.json-section').forEach(section => {
     Showing the latest news articles, blog posts, and updates from across the web.
     With Built-in <span>AI Summary</span> for Quick Insights.
     </h3>
-    <a href="/user/dashboard">Available through your user dashboard<span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span></a>
-  </div>
+
+    <a href="/user/dashboard" style="display: flex; justify-items: center; align-items: center; text-decoration: none;">
+    Available through your user dashboard
+    <span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span></a>
+</div>
 
 <div class="carousel-wrapper" data-aos="fade-up">
   <div class="carousel-container">
@@ -555,17 +556,41 @@ window.addEventListener('load', handleCarouselScroll);
 
 <section id="section2-1" class="vh80 bg-0b0b0b">
 
-<div class="dynamic-container-rx">
   <div class="section-absolute-title">
-      <h1 data-aos="fade-up">Sustainability</h1>
-      <h3 data-aos="fade-up">
-        Committed to Sustainable Practices in AI Development and Deployment.
-        Leveraging Renewable Energy Sources and Optimizing Resource Efficiency to Minimize Environmental Impact.
+      <h1 data-aos="fade-up">Secure Endpoints</h1>
+      <p data-aos="fade-up">
+        Our API endpoints are secured using industry-leading providers, employing TLS 1.3 and HTTPS to protect both users and our infrastructure. 
+        We leverage industry-standard security solutions like CrowdStrike and Akamai to safeguard API operations without compromising efficiency or performance.
+      </p>
+      
+      <div class="flex-bound-container" style="width: 100%;
+      display: flex; opacity: .3;
+      flex-direction: row; border-top: solid 1px rgb(255, 255, 255);
+      gap: 20px; align-items: center; justify-content: right;
+      ">
+      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
+      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
+      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
 
-        Our providers, including AWS, prioritize sustainability in their operations, helping us deliver eco-friendly AI solutions.
-      </h3>
+      </div>
+
   </div>
-</div>
+
+  <div class="section-absolute-title">
+      <h1 data-aos="fade-up">Total Privacy</h1>
+      <p data-aos="fade-up">
+        User API calls are <span class="p-red-li">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information, 
+        and user inputs are <span class="p-red-li">never</span> logged.
+      </p>
+      <p data-aos="fade-up">
+        If you choose to integrate the Google Gemini API in your projects, their logging policy applies, which may include API request logging, 
+        AI training, and abuse monitoring in accordance with their API usage guidelines.
+      </p>
+      <p data-aos="fade-up">
+        We follow strict privacy codes and will never share user data unless explicitly
+        required by law or uniquely specified in our <a href="/privacy-policy" style="color: rgb(255, 46, 46);">Privacy Policy</a>. 
+      </p>
+  </div>
 
 
 
