@@ -103,7 +103,16 @@ backdrop-filter: blur(5px);
 }
 
 
-
+#p-s-10{
+position: relative;
+justify-content: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+z-index: 2;
+background: #0B0B0B;
+background: linear-gradient(180deg, rgba(11, 11, 11, 1) 50%, rgb(30, 30, 30) 100%);
+}
 
 
 .section-absolute-title h1{
@@ -118,6 +127,7 @@ background: linear-gradient(to left, rgb(73, 73, 73), rgb(238, 238, 238));
 -webkit-background-clip: text;
 background-clip: text;
 color: transparent;
+text-align: center;
 }
 .section-absolute-title h3{
 font-family: montserrat;
@@ -140,32 +150,54 @@ font-weight: 600;
 animation: gradientAnimation 5s ease infinite;
 background-size: 200% 200%;
 }
-.section-absolute-title a{
+.section-absolute-title-ml-link a{
 color: rgb(72, 72, 72);
 font-family: montserrat;
 font-weight: 400;
+font-size: clamp(.5rem, 4vw, 1rem);
 margin: 0;
 margin: 0;
 text-decoration: none;
 }
-.section-absolute-title p{
-color: rgb(72, 72, 72);
-font-family: montserrat;
-font-size: .8em;
-font-weight: 400;
-margin: 0;
-padding: 5px;
-display: inline;
-width: 100%;
+.section-absolute-title-sx-paragraph p {
+  color: rgb(72, 72, 72);
+  font-family: Montserrat, sans-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin: 0;
+  padding: 5px 0;
+  display: block;   /* block allows width to work */
+  width: 100%;
 }
-.section-absolute-title a span{
+
+.section-absolute-title-sx-paragraph a {
+  color: rgb(255, 46, 46);
+  font-family: Montserrat, sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;  /* keeps text + icon together */
+  align-items: center;   /* vertical center for span */
+  gap: 0.2em;            /* spacing between text and arrow */
+}
+
+.section-absolute-title-sx-paragraph a span {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+
+.section-absolute-title-ml-link a span{
+color: red;
+}
+.section-absolute-title-ml-link a span{
 color: rgb(46, 46, 46);
 font-size: 1.2em;
 font-weight: 400;
 cursor: pointer;
 transition: all 0.3s ease-in-out;
 }
-.section-absolute-title a:hover span{
+.section-absolute-title-ml-link a:hover span{
 transform: translatex(5px);
 transition: all 0.3s ease-in-out;
 }
@@ -274,8 +306,9 @@ z-index: 100;
 
 
 .s2-grid{
-display: flex;
-gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* dynamic columns */
+gap: 10px;
 width: 90%;
 padding: 20px;
 box-sizing: border-box;
@@ -574,10 +607,24 @@ font-size: 1.5rem;
 padding: 0;
 transition: all 0.3s ease;;
 width: fit-content;
-max-width: 25%;
+max-width: 30%;
 transition: all 0.3s ease;
 margin: 35px 0;
 }
+.example.visible {
+display: flex; 
+align-items: center;
+gap: 10px;
+transition: all 0.3s ease;
+justify-content: center;
+flex-direction: column;
+}
+@media screen and (max-width: 750px) {
+.example{
+max-width: 60%;
+}
+}
+
 .example h1{
 font-family: montserrat;
 font-size: clamp(0.8rem, 2vw, 1.2rem);
@@ -605,14 +652,7 @@ margin: 0;
 padding: 0;
 }
 
-.example.visible {
-display: flex; 
-align-items: center;
-gap: 10px;
-transition: all 0.3s ease;
-justify-content: center;
-flex-direction: column;
-}
+
 
 #arrow {
 position: absolute;
@@ -863,6 +903,11 @@ justify-content: left;
 .datahandler h1{
 color: white;
 font-family: montserrat;
+align-items: center;
+justify-content: center;
+text-align: center;
+display: flex;
+flex-direction: row;
 }
 .json-section {
 color: #dcdcdc;
@@ -902,4 +947,35 @@ margin-bottom: 5px;
 
 .p-red-li{
 color: rgb(255, 46, 46);
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+.section-absolute-title{
+width: 90%;
+}
+
+}
+
+
+
+
+.container-flex-row {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 40px;
+}
+@media screen and (max-width: 1080px) {
+.container-flex-row {
+display: flex;
+flex-direction: column;
+gap: 10px;
+} 
+.section-card-v{
+width: 80%;
+}
 }

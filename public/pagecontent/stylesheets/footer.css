@@ -11,7 +11,7 @@ height: 250px;
 overflow-y: hidden;
 display: flex;
 flex-direction: column;
-
+box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -57,11 +57,7 @@ font-family: montserrat;
 font-weight: 300;
 font-size: 12px
 }
-@media screen and (max-width: 800px) {
-.footer-logo-container{
-display: none;
-}
-}
+
 
 
 .footer-content-container{
@@ -185,13 +181,16 @@ transition: all 0.5s ease;
 
 
 
-.fa-xl{
-width: 20px; height: 20px;
-}
-
-
 @media screen and (max-width: 800px) {
 .hidden-mobile{
 display: none;
 }
+.footer-content-row, .footer-end{
+width: 80%;
 }
+.footer-end{
+flex-direction: column;
+}
+}
+
+
