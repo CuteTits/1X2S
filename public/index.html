@@ -1,945 +1,902 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="/pagecontent/resources/images/logo.png">
-<title>1X2S</title>
-<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-index.css">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script>
-  document.documentElement.classList.add('js');
-  window.addEventListener('load', function () {
-    document.body.classList.add('fade-in');
-  });
-</script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="/pagecontent/resources/images/logo.png">
+  <title>1X2S</title>
+  <link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
+  <link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
+  <link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add('js');
+    window.addEventListener('load', function () {
+      document.body.classList.add('fade-in');
+    });
+  </script>
 </head>
 
-<body>  
+<body>
+  <script>
+    AOS.init();
+  </script>
 
+  <nav>
+    <div id="navbar"></div>
+    <script src="/pagecontent/scriptsheets/navbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+  </nav>
+  <mobilenav>
+    <div id="mobilenavbar"></div>
+    <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
+    <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+  </mobilenav>
 
-<script>
-  AOS.init();
-</script>
-
-
-
-    <nav>
-        <div id="navbar"></div>
-        <script src="/pagecontent/scriptsheets/navbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
-    </nav>
-    <mobilenav>
-        <div id="mobilenavbar"></div>
-        <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
-    </mobilenav>  
-
-
-    <div class="fixed-background-video">
-        <video autoplay muted loop id="background-video">
-            <source src="/pagecontent/resources/videos/7094565-ix-uhd_3840_2160_25fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <!-- Make video play on scroll, stop when user is not scrolling. stay paused by default. Reverse video if user is scrolling the other way -->
-    <script>
-let lastScrollTop = 0;
-let isScrolling;
-const video = document.getElementById('background-video');
-video.pause(); // Start paused
-video.currentTime = 0;
-
-window.addEventListener('scroll', function() {
-  clearTimeout(isScrolling);
-
-  const st = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollDiff = st - lastScrollTop;
-
-  if (scrollDiff > 0) {
-    // Scrolling down
-    video.play();
-    video.playbackRate = 1.0;
-  } else if (scrollDiff < 0) {
-    // Scrolling up - reverse manually
-    video.pause();
-    const step = 0.03; // Adjust speed here
-    video.currentTime = Math.max(0, video.currentTime - step);
-  }
-
-  lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-
-  // Pause after scrolling stops
-  isScrolling = setTimeout(function() {
-    video.pause();
-  }, 150);
-});
-
-    </script>
-
-
-<section id="section1">
-
-
-        
-<div class="section1-container-parent">
-    <div class="section-container-content">
-        <h2>Redefining the Web Using AI</h2>
-        <h3>Advanced Pipelines for Web Scaling, AI Integration and Sports Data Analytics. 
-        </h3>
-    </div>
-    <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">LiteWS version 1.2.0.6 Chrome</p>
-</div>
-
-
-
-
-
-</section>
-
-
-
-
-
-<section id="section1-2" class="dynamicsection vh500" >
-
-<div class="dynamic-container">
-<div class="s1-2-parent-container">
-<div class="s1-2-text-container">
-  <h4 data-aos="fade-up">Scale the Web</h4>
-  <h1  data-aos="fade-up" id="dynamic" class="dynamic-text" style="margin-bottom: 25px;">...Ask anything</h1>
-
-
-<script>
-const dynamicText = document.getElementById('dynamic');
-const section1_2 = document.getElementById('section1-2');
-
-const startPhrase = '...Ask anything';
-const phrases = [
-  'Sports Insights',
-  'World News',
-  'Reddit Threads',
-  'Stock Updates',
-  'Match Lineups',
-  'Tech Trends',
-  'ECom Data',
-  'Health News',
-];
-
-const startDelay = 0.3; 
-let toggled = false;
-
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return rect.top < window.innerHeight && rect.bottom > 0;
-}
-
-function getScrollPercent(el) {
-  const rect = el.getBoundingClientRect();
-  const totalHeight = rect.height + window.innerHeight;
-  const scrollY = window.innerHeight - rect.top;
-  return Math.min(Math.max(scrollY / totalHeight, 0), 1);
-}
-
-function startToggling() {
-  if (toggled) return;
-  toggled = true;
-
-  let index = 0;
-  dynamicText.textContent = phrases[index];
-
-  const interval = setInterval(() => {
-    index = (index + 1) % phrases.length;
-    dynamicText.textContent = phrases[index];
-  }, 1500); // change phrase every 2s
-}
-
-window.addEventListener('scroll', () => {
-  if (isInViewport(section1_2) && getScrollPercent(section1_2) >= startDelay) {
-    startToggling();
-  }
-});
-</script>
-  <p data-aos="fade-up" data-aos-delay="1000">
-   Easily obtain streamlined web results or summarized outputs by entering search queries or parseable prompts. 
-  </p>
-</div>
-
-  <div class="display-textbox">
-    <div class="scrollTypingContainer" id="scrollTypingContainer">
-        <div class="typing-content">
-          <p>List <span>Arsenal's Current Injuries</span>.</p>
-        </div>
-      </div>
-      <span class="material-symbols-outlined">send</span>
-    </div>
-  <div class="inboundcontainer" data-aos="flip-down" data-aos-delay="1200">
-      <div id="arrow"></div>
-      <div class="example r1">
-        <h1>Keyword Filtering</h1>
-        <p>Analyzes the query, identifies key terms, topics and filters the scraped content to deliver accurate and relevant results.</p>
-        <p>Advanced query-handling allows for natural language input.</p>
-      </div>
-      <div class="example r2">
-        <h1>Relevancy Sorting</h1>
-        <p>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</p>
-      </div>
-      <div class="example r3">
-        <h1>Data Extraction</h1>
-        <p>
-          Combines full-query parsing with keyword-based searches to efficiently crawl the web for high-relevance content.
-          Engineered for broad data coverage and optimized for large-scale data extraction.
-        </p>
-      </div>
+  <div class="fixed-background-video">
+    <video autoplay muted loop id="background-video">
+      <source src="/pagecontent/resources/videos/7094565-ix-uhd_3840_2160_25fps.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
-<script>
-const section = document.getElementById('section1-2');
-const examples = Array.from(section.querySelectorAll('.example'));
-const arrow = document.getElementById('arrow');
+  <!-- Make video play on scroll, stop when user is not scrolling. stay paused by default. Reverse video if user is scrolling the other way -->
+  <script>
+    let lastScrollTop = 0;
+    let isScrolling;
+    const video = document.getElementById('background-video');
+    video.pause(); // Start paused
+    video.currentTime = 0;
 
-// Define custom widths for each example (in vw)
-const arrowWidths = [25, 17, 0]; // <-- editable intervals, one per example
+    window.addEventListener('scroll', function() {
+      clearTimeout(isScrolling);
 
-window.addEventListener('scroll', () => {
-  const rect = section.getBoundingClientRect();
-  const sectionTop = window.scrollY + rect.top;
-  const sectionHeight = rect.height;
-  const scrollY = window.scrollY;
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollDiff = st - lastScrollTop;
 
-  if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
-    const scrollInSection = scrollY - sectionTop;
-    const scrollPercent = scrollInSection / sectionHeight;
-
-    // Determine visible example
-    const index = Math.min(examples.length - 1, Math.floor(scrollPercent * examples.length));
-
-    examples.forEach((el, i) => {
-      if (i === index) {
-        el.classList.add('visible');
-
-        // Update arrow position
-        const elRect = el.getBoundingClientRect();
-        const elCenter = elRect.left + elRect.width / 2 + window.scrollX;
-
-        // Align right edge to center of element
-        arrow.style.right = (window.innerWidth - elCenter) + 'px';
-
-        // Apply custom width from array
-        arrow.style.width = arrowWidths[i] + 'vw';
-      } else {
-        el.classList.remove('visible');
+      if (scrollDiff > 0) {
+        // Scrolling down
+        video.play();
+        video.playbackRate = 1.0;
+      } else if (scrollDiff < 0) {
+        // Scrolling up - reverse manually
+        video.pause();
+        const step = 0.03; // Adjust speed here
+        video.currentTime = Math.max(0, video.currentTime - step);
       }
+
+      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+
+      // Pause after scrolling stops
+      isScrolling = setTimeout(function() {
+        video.pause();
+      }, 150);
     });
-  } else {
-    examples.forEach(el => el.classList.remove('visible'));
-  }
-});
+  </script>
 
-</script>
-
-  </div>
-</div>
-
-
-
-<script>
-const container = document.getElementById('scrollTypingContainer');
-const originalContent = container.querySelector('.typing-content').innerHTML;
-container.innerHTML = '';
-
-function parseHTMLToChars(html) {
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  const chars = [];
-  function traverse(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      node.textContent.split('').forEach(c => chars.push(c));
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      const openTag = `<${node.tagName.toLowerCase()}${[...node.attributes].map(a => ` ${a.name}="${a.value}"`).join('')}>`;
-      chars.push(openTag);
-      node.childNodes.forEach(traverse);
-      const closeTag = `</${node.tagName.toLowerCase()}>`;
-      chars.push(closeTag);
-    }
-  }
-  div.childNodes.forEach(traverse);
-  return chars;
-}
-
-const chars = parseHTMLToChars(originalContent);
-
-
-function updateScrollEffects() {
-  // Get section and scroll position
-  const section = document.getElementById('section1-2');
-  const sectionRect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  // --- Scroll typing ---
-let progress = 0;
-if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
-  const delay = 500; // pixels
-  const scrolledPx = Math.max(0, windowHeight - sectionRect.top - delay);
-
-  if (scrolledPx > 0) { // only start after 200px is reached
-    progress = Math.min(1, scrolledPx / (sectionRect.height + windowHeight));
-    progress = Math.min(1, progress * 5); // change speed
-    const charsToShow = Math.floor(progress * chars.length);
-    container.innerHTML =
-      '<span class="typing-text">' +
-      chars.slice(0, charsToShow).join('') +
-      '</span>';
-  }
-}
-
-
-  // --- Expand textbox on scroll ---
-  const textbox = document.querySelector('.display-textbox');
-  if (textbox) {
-    if (!textbox.classList.contains('expanded') && window.scrollY > 50) {
-      textbox.classList.add('expanded');
-    } else if (textbox.classList.contains('expanded') && window.scrollY <= 50) {
-      textbox.classList.remove('expanded');
-    }
-  }
-}
-
-window.addEventListener('scroll', updateScrollEffects);
-window.addEventListener('resize', updateScrollEffects);
-updateScrollEffects();
-
-</script>
-
-
-</section>
-
-
-<section style="height: 2.5vh;"></section>
-
-
-<section id="section1-3" class="dynamicsection vh300">
-
-<div class="dynamic-container">
-
-<div class="s-1-3-parent">
-
-<div class="s-1-3-child" style="padding: 20px;">
-    <h1>Result Summaries | <span>✦ Gemini API</span></h1>
-
-<div class="tag-container">
-  <span>Arsenal</span><span>Football</span><span>Sports</span><span>Injuries</span><span>Updates</span><span>News</span>
-  <span>Now</span><span>Report</span>
-</div>
-  <div class="progressive-text-container">
-
-  <p>Arsenal currently face several injury concerns as of 11-20-2025.</p>
-  <P>Key injuries include:</P>
-    <ul>
-      <li>Gabriel Jesus (Forward) - Hamstring injury, expected return in 2 weeks.</li>
-      <li>Martin Ødegaard (Midfielder) - Ankle sprain, out for 3 weeks.</li>
-      <li>Ben White (Defender) - Muscle strain, likely to miss 1 week.</li>
-      <li>Takehiro Tomiyasu (Defender) - Knee injury, under evaluation for return date.</li>
-    </ul>
-    <p>The team is managing these injuries with a focus on recovery and rehabilitation to ensure</p>
-    <p>players return to full fitness as soon as possible.</p>
-    <p>The players will be unlikely to participate in the upcoming fixture</p>
-    <p>against Manchester United on 11-25-2025.</p>
-  </div>
-
-  <h2>Pre-Integrated Result Summaries via Google Gemini API</h2>
-
-</div>
-
-
-<div class="divider-vertical-light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
-
-
-<div class="s-1-3-child dvc-mob">
-
-  <h1  style="margin: 20px 0 0 20px;">JSON</h1>
-  <a style="margin-left: 20px;"><span>●</span> online</a>
-
-<section class="scroll-sync-section" id="scroll-sec">
-  <div class="scroll-inner">
-
-  <div class="inner-container">
-    <div class="json-section" data-json="{
-      &quot;query&quot;: &quot;List Arsenal´s Current Injuries.&quot;,
-      &quot;identified_keywords&quot;: &quot;Arsenal, Injuries&quot;,
-      &quot;enhanced_filter&quot;: &quot;football, sport, news, premier league, players&quot;,
-      &quot;relevancy&quot;: &quot;now:11/20/2025&quot;,
-      &quot;location&quot;: &quot;United Kingdom&quot;,
-      &quot;google_gemini&quot;: true,
-      &quot;model&quot;: &quot;gemini-3-pro&quot;,
-      &quot;results_count&quot;: 3,
-      &quot;thought_for_ms&quot;: 187
-    }">
-    <pre class="json-container"><code>{
-      <span class="json-key">"query":</span> <span class="json-string">"List Arsenal´s Current Injuries."</span>,
-      <span class="json-key">"identified_keywords":</span> <span class="json-string">"Arsenal, Injuries"</span>,
-      <span class="json-key">"enhanced_filter":</span> <span class="json-string">"football, sport, news, premier league, players"</span>,
-      <span class="json-key">"relevancy":</span> <span class="json-string">"now:11/20/2025"</span>,
-      <span class="json-key">"location":</span> <span class="json-string">"United Kingdom"</span>,
-      <span class="json-key">"google_gemini":</span> <span class="json-boolean">true</span>,
-      <span class="json-key">"model":</span> <span class="json-string">"gemini-3-pro"</span>,
-      <span class="json-key">"results_count":</span> <span class="json-number">3</span>,
-      <span class="json-key">"thought_for_ms":</span> <span class="json-number">187</span>
-    }</code></pre>
+  <section id="section1">
+    <div class="section1-container-parent">
+      <div class="section-container-content">
+        <h2>Redefining the Web Using AI</h2>
+        <h3>Advanced Pipelines for Web Scaling, AI Integration and Sports Data Analytics.</h3>
+      </div>
+      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">LiteWS version 1.2.0.6 Chrome</p>
     </div>
-      <div class="inner-container-arrow var-1">
-        <div class="line"></div>
-        <h1>Detailed Metadata</h1>
-        <p>Smart metadata handling for quick and easy integration.</p>
-      </div>
-  </div>
+  </section>
 
-  <div class="inner-container">
-      <div class="json-section" data-json="{
-      &quot;summary&quot;: &quot;Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include:\nBukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.\nKai Havertz - Knee injury, expected to be back in January.\nGabriel Magalhaes - Thigh injury, expected to be back by February 2026.\nRiccardo Calafiori - Calf injury, will be back by the end of November.\nNoni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.\n\nViktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley.&quot;
-    }">
-        <pre class="json-container"><code>{
-      <span class="json-key">"summary":</span> <span class="json-string">"Arsenal currently face several injury concerns as of 11-20-2025.<br>Key injuries include:<br>Bukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.<br>Kai Havertz - Knee injury, expected to be back in January.<br>Gabriel Magalhaes - Thigh injury, expected to be back by February 2026.<br>Riccardo Calafiori - Calf injury, will be back by the end of November.<br>Noni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.<br><br>Viktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."</span>
-    }</code></pre>
-      </div>
-      <div class="inner-container-arrow var-2">
-        <div class="line"></div>
-          <div class="actual-text">
-            <h1>Integratable Summary</h1>
-            <p>AI-based unified source summary for seamless integration.</p>
-          </div>
-      </div>
-  </div>
+  <section id="section1-2" class="dynamicsection vh500">
+    <div class="dynamic-container">
+      <div class="s1-2-parent-container">
+        <div class="s1-2-text-container">
+          <h4 data-aos="fade-up">Scale the Web</h4>
+          <h1 data-aos="fade-up" id="dynamic" class="dynamic-text" style="margin-bottom: 25px;">...Ask anything</h1>
+          <script>
+            const dynamicText = document.getElementById('dynamic');
+            const section1_2 = document.getElementById('section1-2');
 
-  
-  <div class="inner-container">
-    <pre class="json-container"><code>{
-        <span class="json-key">"sources":</span> [
-          {
-            <span class="json-key">"title":</span> <span class="json-string">"Arsenal Injury Update — Key Players Assessed"</span>,
-            <span class="json-key">"link":</span> <span class="json-string">"https://www.bbc.co.uk/sport/epl/arsenal/arsenal-injury-update"</span>,
-            <span class="json-key">"snippet":</span> <span class="json-string">"Arsenal face several injury doubts as multiple key players undergo evaluations..."</span>,
-            <span class="json-key">"published":</span> <span class="json-string">"2025-11-18T12:10:00Z"</span>,
-            <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-            <span class="json-key">"recency":</span> <span class="json-string">"Today - 3 minutes ago"</span>
-          },
-          {
-            <span class="json-key">"title":</span> <span class="json-string">"Arsenal Latest Injury Report"</span>,
-            <span class="json-key">"link":</span> <span class="json-string">"https://arsenal.com/players/injuries"</span>,
-            <span class="json-key">"snippet":</span> <span class="json-string">"Latest player injuries listed"</span>,
-            <span class="json-key">"published":</span> <span class="json-string">"2025-11-18T09:45:00Z"</span>,
-            <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-            <span class="json-key">"recency":</span> <span class="json-string">"Yesterday - 18 hours ago"</span>
-          },
-          {
-            <span class="json-key">"title":</span> <span class="json-string">"Premier League Latest Injury News – Club by Club Updates"</span>,
-            <span class="json-key">"link":</span> <span class="json-string">"https://www.premierleague.com/en/latest-player-injuries"</span>,
-            <span class="json-key">"snippet":</span> <span class="json-string">"Latest Injury News"</span>,
-            <span class="json-key">"published":</span> <span class="json-string">"2025-11-17T18:20:00Z"</span>,
-            <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-            <span class="json-key">"recency":</span> <span class="json-string">"Two days ago"</span>
-          }
-        ]
-      }</code></pre>
-      </div>
-        <div class="inner-container-text-box" style="position: relative;">
-          <h2>Source References</h2>
-          <p>Includes titles, links, snippets, and publication timestamps for traceability.</p>
-          <p>Facilitates verification and further exploration of summarized content.</p>
-          <p>Allows for easier source attribution and credibility assessment as well as enhanced crawling and indexing capabilities.</p>
+            const startPhrase = '...Ask anything';
+            const phrases = [
+              'Sports Insights',
+              'World News',
+              'Reddit Threads',
+              'Stock Updates',
+              'Match Lineups',
+              'Tech Trends',
+              'ECom Data',
+              'Health News',
+            ];
+
+            const startDelay = 0.3;
+            let toggled = false;
+
+            function isInViewport(el) {
+              const rect = el.getBoundingClientRect();
+              return rect.top < window.innerHeight && rect.bottom > 0;
+            }
+
+            function getScrollPercent(el) {
+              const rect = el.getBoundingClientRect();
+              const totalHeight = rect.height + window.innerHeight;
+              const scrollY = window.innerHeight - rect.top;
+              return Math.min(Math.max(scrollY / totalHeight, 0), 1);
+            }
+
+            function startToggling() {
+              if (toggled) return;
+              toggled = true;
+
+              let index = 0;
+              dynamicText.textContent = phrases[index];
+
+              const interval = setInterval(() => {
+                index = (index + 1) % phrases.length;
+                dynamicText.textContent = phrases[index];
+              }, 1500); // change phrase every 2s
+            }
+
+            window.addEventListener('scroll', () => {
+              if (isInViewport(section1_2) && getScrollPercent(section1_2) >= startDelay) {
+                startToggling();
+              }
+            });
+          </script>
+            <div class="icon-container-flex" style="display: flex; flex-direction: row; gap: 20px;">
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="200" >
+                <span class="material-symbols-outlined">search</span>
+                <p>Web Crawling</p>
+              </div>
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="400">
+                <span class="material-symbols-outlined">auto_mode</span>
+                <p>AI Integration</p>
+              </div>
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="600">
+                <span class="material-symbols-outlined">sports_soccer</span>
+                <p>Sports Data</p>
+              </div>
+            </div>
         </div>
+
+        <div class="display-textbox">
+          <div class="scrollTypingContainer" id="scrollTypingContainer">
+            <div class="typing-content">
+              <p>List <span>Arsenal's Current Injuries</span>.</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined">send</span>
+        </div>
+        <div class="inboundcontainer" data-aos="flip-down" data-aos-delay="1200">
+          <div id="arrow"></div>
+          <div class="example r1">
+            <h1>Keyword Filtering</h1>
+            <p>Analyzes the query, identifies key terms, topics and filters the scraped content to deliver accurate and relevant results.</p>
+            <p>Advanced query-handling allows for natural language input.</p>
+          </div>
+          <div class="example r2">
+            <h1>Relevancy Sorting</h1>
+            <p>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</p>
+          </div>
+          <div class="example r3">
+            <h1>Data Extraction</h1>
+            <p>
+              Combines full-query parsing with keyword-based searches to efficiently crawl the web for high-relevance content.
+              Engineered for broad data coverage and optimized for large-scale data extraction.
+            </p>
+          </div>
+        </div>
+        <script>
+          const section = document.getElementById('section1-2');
+          const examples = Array.from(section.querySelectorAll('.example'));
+          const arrow = document.getElementById('arrow');
+
+          // Define custom widths for each example (in vw)
+          const arrowWidths = [25, 17, 0]; // <-- editable intervals, one per example
+
+          window.addEventListener('scroll', () => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = window.scrollY + rect.top;
+            const sectionHeight = rect.height;
+            const scrollY = window.scrollY;
+
+            if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
+              const scrollInSection = scrollY - sectionTop;
+              const scrollPercent = scrollInSection / sectionHeight;
+
+              // Determine visible example
+              const index = Math.min(examples.length - 1, Math.floor(scrollPercent * examples.length));
+
+              examples.forEach((el, i) => {
+                if (i === index) {
+                  el.classList.add('visible');
+
+                  // Update arrow position
+                  const elRect = el.getBoundingClientRect();
+                  const elCenter = elRect.left + elRect.width / 2 + window.scrollX;
+
+                  // Align right edge to center of element
+                  arrow.style.right = (window.innerWidth - elCenter) + 'px';
+
+                  // Apply custom width from array
+                  arrow.style.width = arrowWidths[i] + 'vw';
+                } else {
+                  el.classList.remove('visible');
+                }
+              });
+            } else {
+              examples.forEach(el => el.classList.remove('visible'));
+            }
+          });
+        </script>
       </div>
-  </div>
-  <div class="mask"></div>
+    </div>
 
-</div>
+    <script>
+      const container = document.getElementById('scrollTypingContainer');
+      const originalContent = container.querySelector('.typing-content').innerHTML;
+      container.innerHTML = '';
+
+      function parseHTMLToChars(html) {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        const chars = [];
+        function traverse(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent.split('').forEach(c => chars.push(c));
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const openTag = `<${node.tagName.toLowerCase()}${[...node.attributes].map(a => ` ${a.name}="${a.value}"`).join('')}>`;
+            chars.push(openTag);
+            node.childNodes.forEach(traverse);
+            const closeTag = `</${node.tagName.toLowerCase()}>`;
+            chars.push(closeTag);
+          }
+        }
+        div.childNodes.forEach(traverse);
+        return chars;
+      }
+
+      const chars = parseHTMLToChars(originalContent);
+
+      function updateScrollEffects() {
+        // Get section and scroll position
+        const section = document.getElementById('section1-2');
+        const sectionRect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // --- Scroll typing ---
+        let progress = 0;
+        if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
+          const delay = 500; // pixels
+          const scrolledPx = Math.max(0, windowHeight - sectionRect.top - delay);
+
+          if (scrolledPx > 0) { // only start after 200px is reached
+            progress = Math.min(1, scrolledPx / (sectionRect.height + windowHeight));
+            progress = Math.min(1, progress * 5); // change speed
+            const charsToShow = Math.floor(progress * chars.length);
+            container.innerHTML =
+              '<span class="typing-text">' +
+              chars.slice(0, charsToShow).join('') +
+              '</span>';
+          }
+        }
+
+        // --- Expand textbox on scroll ---
+        const textbox = document.querySelector('.display-textbox');
+        if (textbox) {
+          if (!textbox.classList.contains('expanded') && window.scrollY > 50) {
+            textbox.classList.add('expanded');
+          } else if (textbox.classList.contains('expanded') && window.scrollY <= 50) {
+            textbox.classList.remove('expanded');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateScrollEffects);
+      window.addEventListener('resize', updateScrollEffects);
+      updateScrollEffects();
+    </script>
+  </section>
+
+  <section style="height: 2.5vh;"></section>
+
+  <section id="section1-3" class="dynamicsection vh300">
+    <div class="dynamic-container">
+      <div class="s-1-3-parent">
+        <div class="s-1-3-child" style="padding: 20px;">
+          <h1>Result Summaries | <span>✦ Gemini API</span></h1>
+          <div class="tag-container">
+            <span>Arsenal</span><span>Football</span><span>Sports</span><span>Injuries</span><span>Updates</span><span>News</span>
+            <span>Now</span><span>Report</span>
+          </div>
+          <div class="progressive-text-container">
+            <p>Arsenal currently face several injury concerns as of 11-20-2025.</p>
+            <P>Key injuries include:</P>
+            <ul>
+              <li>Gabriel Jesus (Forward) - Hamstring injury, expected return in 2 weeks.</li>
+              <li>Martin Ødegaard (Midfielder) - Ankle sprain, out for 3 weeks.</li>
+              <li>Ben White (Defender) - Muscle strain, likely to miss 1 week.</li>
+              <li>Takehiro Tomiyasu (Defender) - Knee injury, under evaluation for return date.</li>
+            </ul>
+            <p>The team is managing these injuries with a focus on recovery and rehabilitation to ensure</p>
+            <p>players return to full fitness as soon as possible.</p>
+            <p>The players will be unlikely to participate in the upcoming fixture</p>
+            <p>against Manchester United on 11-25-2025.</p>
+          </div>
+          <h2>Pre-Integrated Result Summaries via Google Gemini API</h2>
+        </div>
+
+        <div class="divider-vertical-light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
+
+        <div class="s-1-3-child dvc-mob">
+          <h1 style="margin: 20px 0 0 20px;">JSON</h1>
+          <a style="margin-left: 20px;"><span>●</span> online</a>
+          <section class="scroll-sync-section" id="scroll-sec">
+            <div class="scroll-inner">
+              <div class="inner-container">
+                <div class="json-section" data-json="{
+                  &quot;query&quot;: &quot;List Arsenal´s Current Injuries.&quot;,
+                  &quot;identified_keywords&quot;: &quot;Arsenal, Injuries&quot;,
+                  &quot;enhanced_filter&quot;: &quot;football, sport, news, premier league, players&quot;,
+                  &quot;relevancy&quot;: &quot;now:11/20/2025&quot;,
+                  &quot;location&quot;: &quot;United Kingdom&quot;,
+                  &quot;google_gemini&quot;: true,
+                  &quot;model&quot;: &quot;gemini-3-pro&quot;,
+                  &quot;results_count&quot;: 3,
+                  &quot;thought_for_ms&quot;: 187
+                }">
+                  <pre class="json-container"><code>{
+                    <span class="json-key">"query":</span> <span class="json-string">"List Arsenal´s Current Injuries."</span>,
+                    <span class="json-key">"identified_keywords":</span> <span class="json-string">"Arsenal, Injuries"</span>,
+                    <span class="json-key">"enhanced_filter":</span> <span class="json-string">"football, sport, news, premier league, players"</span>,
+                    <span class="json-key">"relevancy":</span> <span class="json-string">"now:11/20/2025"</span>,
+                    <span class="json-key">"location":</span> <span class="json-string">"United Kingdom"</span>,
+                    <span class="json-key">"google_gemini":</span> <span class="json-boolean">true</span>,
+                    <span class="json-key">"model":</span> <span class="json-string">"gemini-3-pro"</span>,
+                    <span class="json-key">"results_count":</span> <span class="json-number">3</span>,
+                    <span class="json-key">"thought_for_ms":</span> <span class="json-number">187</span>
+                  }</code></pre>
+                </div>
+                <div class="inner-container-arrow var-1">
+                  <div class="line"></div>
+                  <h1>Detailed Metadata</h1>
+                  <p>Smart metadata handling for quick and easy integration.</p>
+                </div>
+              </div>
+
+              <div class="inner-container">
+                <div class="json-section" data-json="{
+                  &quot;summary&quot;: &quot;Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include:\nBukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.\nKai Havertz - Knee injury, expected to be back in January.\nGabriel Magalhaes - Thigh injury, expected to be back by February 2026.\nRiccardo Calafiori - Calf injury, will be back by the end of November.\nNoni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.\n\nViktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley.&quot;
+                }">
+                  <pre class="json-container"><code>{
+                    <span class="json-key">"summary":</span> <span class="json-string">"Arsenal currently face several injury concerns as of 11-20-2025.<br>Key injuries include:<br>Bukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.<br>Kai Havertz - Knee injury, expected to be back in January.<br>Gabriel Magalhaes - Thigh injury, expected to be back by February 2026.<br>Riccardo Calafiori - Calf injury, will be back by the end of November.<br>Noni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.<br><br>Viktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."</span>
+                  }</code></pre>
+                </div>
+                <div class="inner-container-arrow var-2">
+                  <div class="line"></div>
+                  <div class="actual-text">
+                    <h1>Integratable Summary</h1>
+                    <p>AI-based unified source summary for seamless integration.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="inner-container">
+                <pre class="json-container"><code>{
+                  <span class="json-key">"sources":</span> [
+                    {
+                      <span class="json-key">"title":</span> <span class="json-string">"Arsenal Injury Update — Key Players Assessed"</span>,
+                      <span class="json-key">"link":</span> <span class="json-string">"https://www.bbc.co.uk/sport/epl/arsenal/arsenal-injury-update"</span>,
+                      <span class="json-key">"snippet":</span> <span class="json-string">"Arsenal face several injury doubts as multiple key players undergo evaluations..."</span>,
+                      <span class="json-key">"published":</span> <span class="json-string">"2025-11-18T12:10:00Z"</span>,
+                      <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
+                      <span class="json-key">"recency":</span> <span class="json-string">"Today - 3 minutes ago"</span>
+                    },
+                    {
+                      <span class="json-key">"title":</span> <span class="json-string">"Arsenal Latest Injury Report"</span>,
+                      <span class="json-key">"link":</span> <span class="json-string">"https://arsenal.com/players/injuries"</span>,
+                      <span class="json-key">"snippet":</span> <span class="json-string">"Latest player injuries listed"</span>,
+                      <span class="json-key">"published":</span> <span class="json-string">"2025-11-18T09:45:00Z"</span>,
+                      <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
+                      <span class="json-key">"recency":</span> <span class="json-string">"Yesterday - 18 hours ago"</span>
+                    },
+                    {
+                      <span class="json-key">"title":</span> <span class="json-string">"Premier League Latest Injury News – Club by Club Updates"</span>,
+                      <span class="json-key">"link":</span> <span class="json-string">"https://www.premierleague.com/en/latest-player-injuries"</span>,
+                      <span class="json-key">"snippet":</span> <span class="json-string">"Latest Injury News"</span>,
+                      <span class="json-key">"published":</span> <span class="json-string">"2025-11-17T18:20:00Z"</span>,
+                      <span class="json-key">"timestamp_utc":</span> <span class="json-string">"2025-11-20T15:33:12Z"</span>,
+                      <span class="json-key">"recency":</span> <span class="json-string">"Two days ago"</span>
+                    }
+                  ]
+                }</code></pre>
+              </div>
+              <div class="inner-container-text-box">
+                  <h2>Source References</h2>
+                  <p>Includes titles, links, snippets, and publication timestamps for traceability.</p>
+                  <p>Facilitates verification and further exploration of summarized content.</p>
+                  <p>Allows for easier source attribution and credibility assessment as well as enhanced crawling and indexing capabilities.</p>
+                  <div class="inner-container-text-box-icon-container">
+                    <div class="inner-container-text-box-icon">
+                      <span class="material-symbols-outlined">source</span>
+                      <p>Sources</p>
+                    </div>
+                    <div class="inner-container-text-box-icon">
+                      <span class="material-symbols-outlined">link</span>
+                      <p>Links</p>
+                    </div>
+                    <div class="inner-container-text-box-icon">
+                      <span class="material-symbols-outlined">description</span>
+                      <p>Snippets</p>
+                    </div>
+                   </div>
 
 
-</section>
-
+                    <div class="inner-container-text-box-logo-container">
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-ddgs.png" alt="DuckDuckGo Logo">
+                      <p>DuckDuckGo</p>
+                    </div>
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-wiki.png" alt="Wikipedia Logo">
+                      <p>Wikipedia</p>
+                    </div>
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-searx.png" alt="SearXNG Logo">
+                      <p>SearXNG</p>
+                    </div>
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-gdelt.png" alt="GDELT Logo">
+                      <p>GDELT</p>
+                    </div>
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-statsbomb.png" alt="StatsBomb Logo">
+                      <p>StatsBomb</p>
+                    </div>
+                    <div class="inner-container-text-box-logo">
+                      <img src="/pagecontent/resources/images/logo-espn.png" alt="ESPN Logo">
+                      <p>ESPN</p>
+                    </div>
 
 <script>
-const parentSection = document.querySelector('#section1-3');
-const innerContainers = parentSection.querySelectorAll('.inner-container');
+  // Configurable speed (pixels per second)
+  const carouselSpeed = 60; // Change this value for speed
 
-const intervalPx = 800; // show arrow every 250px
-const showDuration = 800; // hide arrow after 100px
+  const logocarousel = document.querySelector('.inner-container-text-box-logo-carousel');
+  let direction = 1;
+  let position = 0;
 
-window.addEventListener('scroll', () => {
-  const rect = parentSection.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+  function animateCarousel() {
+    const wrapper = document.querySelector('.inner-container-text-box-logo-carousel-wrapper');
+    const maxOffset = carousel.scrollWidth - wrapper.offsetWidth;
+    position += direction * (carouselSpeed / 60); // 60fps
 
-  // Only run if section is in viewport
-  if (rect.top < windowHeight && rect.bottom > 0) {
-    const sectionHeight = rect.height;
-    const scrollIntoSection = windowHeight - rect.top; // how much we've scrolled into section
-
-    const triggerPx = sectionHeight * 0.30; // start after 10% scroll
-    if (scrollIntoSection >= triggerPx) {
-      const scrolledSinceTrigger = scrollIntoSection - triggerPx;
-
-      innerContainers.forEach((container, i) => {
-        const arrow = container.querySelector('.inner-container-arrow');
-        if (!arrow) return;
-
-        const intervalStart = i * intervalPx;
-        const intervalEnd = intervalStart + showDuration;
-
-        if (scrolledSinceTrigger >= intervalStart && scrolledSinceTrigger < intervalEnd) {
-          arrow.classList.add('agshow');
-          arrow.classList.remove('aghidden');
-        } else {
-          arrow.classList.add('aghidden');
-          arrow.classList.remove('agshow');
-        }
-      });
+    if (position > maxOffset) {
+      direction = -1;
+      position = maxOffset;
+    } else if (position < 0) {
+      direction = 1;
+      position = 0;
     }
-  }
-});
 
-
-
-
-
-
-const sectioncontrol = document.querySelector('#section1-3');
-const inner = document.querySelector('.scroll-inner');
-
-const startAt = 0.1; // start effect after 50% scrolled into the section
-
-window.addEventListener('scroll', () => {
-  const sectionTop = sectioncontrol.offsetTop;
-  const sectionHeight = sectioncontrol.offsetHeight;
-  const innerHeight = inner.offsetHeight;
-
-  // How far scrolled into the section (0 = top, 1 = bottom)
-  let scrollIntoSection = (window.scrollY - sectionTop) / sectionHeight;
-
-  // Only start effect after startAt
-  if (scrollIntoSection < startAt) {
-    inner.style.transform = `translateY(0px)`; // reset to start
-    return;
+    carousel.style.transform = `translateX(-${position}px)`;
+    requestAnimationFrame(animateCarousel);
   }
 
-  // Limit to maximum scrollable distance
-  const maxOffset = innerHeight - sectionHeight;
-  
-  // Offset proportional to section scroll
-  let progress = (scrollIntoSection - startAt) / (1 - startAt);
-  if (progress > 1) progress = 1;
-
-  // Reversed translation
-  let offset = progress * maxOffset;
-
-  inner.style.transform = `translateY(${offset}px)`;
-});
-
-
-
-//
-
-
-
-
-function syntaxHighlight(json) {
-  json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // Replace newline characters inside strings with <br>
-  json = json.replace(/\\n/g, "<br>");
-
-  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?)/g, match => {
-    let cls = "json-number";
-    if (/^"/.test(match)) cls = /:$/.test(match) ? "json-key" : "json-string";
-    else if (/true|false/.test(match)) cls = "json-boolean";
-    else if (/null/.test(match)) cls = "json-null";
-    return `<span class="${cls}">${match}</span>`;
-  });
-}
-document.querySelectorAll('.json-section').forEach(section => {
-  const rawJson = section.getAttribute('data-json');
-  const formattedJson = syntaxHighlight(JSON.stringify(JSON.parse(rawJson), null, 2));
-  section.innerHTML = `
-    <pre class="json-container"><code>${formattedJson}</code></pre>
-  `;
-});
+  if (carousel) animateCarousel();
 </script>
 
+                  </div>  
+              </div>
+            </div>
+          </section>
 
+          <script>
+            const parentSection = document.querySelector('#section1-3');
+            const innerContainers = parentSection.querySelectorAll('.inner-container');
 
-</div>
+            const intervalPx = 800; // show arrow every 250px
+            const showDuration = 800; // hide arrow after 100px
 
-</div>
+            window.addEventListener('scroll', () => {
+              const rect = parentSection.getBoundingClientRect();
+              const windowHeight = window.innerHeight;
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".progressive-text-container");
-    let lines = [];
+              // Only run if section is in viewport
+              if (rect.top < windowHeight && rect.bottom > 0) {
+                const sectionHeight = rect.height;
+                const scrollIntoSection = windowHeight - rect.top; // how much we've scrolled into section
 
-    Array.from(container.children).forEach(child => {
-        if (child.tagName === "UL") {
-            lines = lines.concat(Array.from(child.children).filter(li => li.tagName !== "SPAN"));
-        } else if (child.tagName !== "SPAN") {
-            lines.push(child);
-        }
-    });
+                const triggerPx = sectionHeight * 0.30; // start after 10% scroll
+                if (scrollIntoSection >= triggerPx) {
+                  const scrolledSinceTrigger = scrollIntoSection - triggerPx;
 
-    let typingSpeed = 100; // ms per line
-    let index = 0;
-    let hasPlayed = false;
+                  innerContainers.forEach((container, i) => {
+                    const arrow = container.querySelector('.inner-container-arrow');
+                    if (!arrow) return;
 
-    // Hide all lines initially
-    lines.forEach(line => {
-        line.style.opacity = "0";
-        line.style.transition = "opacity 1s ease-in-out";
-    });
+                    const intervalStart = i * intervalPx;
+                    const intervalEnd = intervalStart + showDuration;
 
-    const revealLines = () => {
-        if (index < lines.length) {
-            setTimeout(() => {
+                    if (scrolledSinceTrigger >= intervalStart && scrolledSinceTrigger < intervalEnd) {
+                      arrow.classList.add('agshow');
+                      arrow.classList.remove('aghidden');
+                    } else {
+                      arrow.classList.add('aghidden');
+                      arrow.classList.remove('agshow');
+                    }
+                  });
+                }
+              }
+            });
+
+            const sectioncontrol = document.querySelector('#section1-3');
+            const inner = document.querySelector('.scroll-inner');
+
+            const startAt = 0.1; // start effect after 50% scrolled into the section
+
+            window.addEventListener('scroll', () => {
+              const sectionTop = sectioncontrol.offsetTop;
+              const sectionHeight = sectioncontrol.offsetHeight;
+              const innerHeight = inner.offsetHeight;
+
+              // How far scrolled into the section (0 = top, 1 = bottom)
+              let scrollIntoSection = (window.scrollY - sectionTop) / sectionHeight;
+
+              // Only start effect after startAt
+              if (scrollIntoSection < startAt) {
+                inner.style.transform = `translateY(0px)`; // reset to start
+                return;
+              }
+
+              // Limit to maximum scrollable distance
+              const maxOffset = innerHeight - sectionHeight;
+
+              // Offset proportional to section scroll
+              let progress = (scrollIntoSection - startAt) / (1 - startAt);
+              if (progress > 1) progress = 1;
+
+              // Reversed translation
+              let offset = progress * maxOffset;
+
+              inner.style.transform = `translateY(${offset}px)`;
+            });
+
+            function syntaxHighlight(json) {
+              json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+              // Replace newline characters inside strings with <br>
+              json = json.replace(/\\n/g, "<br>");
+
+              return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?)/g, match => {
+                let cls = "json-number";
+                if (/^"/.test(match)) cls = /:$/.test(match) ? "json-key" : "json-string";
+                else if (/true|false/.test(match)) cls = "json-boolean";
+                else if (/null/.test(match)) cls = "json-null";
+                return `<span class="${cls}">${match}</span>`;
+              });
+            }
+            document.querySelectorAll('.json-section').forEach(section => {
+              const rawJson = section.getAttribute('data-json');
+              const formattedJson = syntaxHighlight(JSON.stringify(JSON.parse(rawJson), null, 2));
+              section.innerHTML = `
+                <pre class="json-container"><code>${formattedJson}</code></pre>
+              `;
+            });
+          </script>
+        </div>
+                          <div class="mask"></div>
+
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const container = document.querySelector(".progressive-text-container");
+          let lines = [];
+
+          Array.from(container.children).forEach(child => {
+            if (child.tagName === "UL") {
+              lines = lines.concat(Array.from(child.children).filter(li => li.tagName !== "SPAN"));
+            } else if (child.tagName !== "SPAN") {
+              lines.push(child);
+            }
+          });
+
+          let typingSpeed = 100; // ms per line
+          let index = 0;
+          let hasPlayed = false;
+
+          // Hide all lines initially
+          lines.forEach(line => {
+            line.style.opacity = "0";
+            line.style.transition = "opacity 1s ease-in-out";
+          });
+
+          const revealLines = () => {
+            if (index < lines.length) {
+              setTimeout(() => {
                 lines[index].style.opacity = "1";
                 lines[index].style.backgroundColor = "transparent";
-            }, 10);
-            index++;
-            setTimeout(revealLines, typingSpeed);
-        }
-    };
+              }, 10);
+              index++;
+              setTimeout(revealLines, typingSpeed);
+            }
+          };
 
-    function checkScrollStart() {
-        const section = document.getElementById('section1-3');
-        const rect = section.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const sectionHeight = rect.height;
-        const scrolledPx = windowHeight - rect.top;
-        const scrollPercent = scrolledPx / sectionHeight;
+          function checkScrollStart() {
+            const section = document.getElementById('section1-3');
+            const rect = section.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const sectionHeight = rect.height;
+            const scrolledPx = windowHeight - rect.top;
+            const scrollPercent = scrolledPx / sectionHeight;
 
-        if (scrollPercent >= 0.2 && !hasPlayed && rect.bottom > 0 && rect.top < windowHeight) {
-            hasPlayed = true;
-            revealLines();
-        }
-    }
+            if (scrollPercent >= 0.2 && !hasPlayed && rect.bottom > 0 && rect.top < windowHeight) {
+              hasPlayed = true;
+              revealLines();
+            }
+          }
 
-    window.addEventListener('scroll', checkScrollStart);
-    window.addEventListener('resize', checkScrollStart);
-    checkScrollStart();
-});
-
-</script>
-
-</section>
-
-
-
-
-
-<section id="section1-5" class="vh100">
-
-<div class="background-image-wrapper">
-  <img src="/pagecontent/resources/images/element-pattern-dot.png" alt="background patterned image">
-</div>
-  <div class="section-absolute-title">
-    <h1 data-aos="fade-up">Streamlined News Feed</h1>
-    <h3 data-aos="fade-up">Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
-    Showing the latest news articles, blog posts, and updates from across the web.
-    With Built-in <span>AI Summary</span> for Quick Insights.
-    </h3>
-
-    <div class="section-absolute-title-ml-link">
-      <a href="/user/dashboard" style="display: flex; justify-items: center; align-items: center; text-decoration: none;">
-      Available through your user dashboard
-      <span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span></a>
+          window.addEventListener('scroll', checkScrollStart);
+          window.addEventListener('resize', checkScrollStart);
+          checkScrollStart();
+        });
+      </script>
     </div>
-</div>
+  </section>
 
-<div class="carousel-wrapper" data-aos="fade-up">
-  <div class="carousel-container">
-    <div class="carousel" id="carousel">
-      <img src="/pagecontent/resources/images/frame140.png" alt="Image 4">
-      <img src="/pagecontent/resources/images/frame141.png" alt="Image 5">
-      <img src="/pagecontent/resources/images/frame142.png" alt="Image 6">
-      <img src="/pagecontent/resources/images/frame143.png" alt="Image 7">
+  <section id="section1-5" class="vh100">
+    <div class="background-image-wrapper">
+      <img src="/pagecontent/resources/images/element-pattern-dot.png" alt="background patterned image">
     </div>
-  </div>
-</div>
-
-<script>
-const carousel = document.getElementById('carousel');
-const speedFactor = 1.5; // >1 = faster, <1 = slower
-let carouselActivated = false; // flag to run once
-
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return rect.bottom > 0 && rect.top < window.innerHeight;
-}
-
-function handleCarouselScroll() {
-  if (!carouselActivated && isInViewport(carousel)) {
-    carouselActivated = true; // mark as activated
-
-    // Attach scroll listener that moves carousel
-    window.addEventListener('scroll', () => {
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      let scrollFraction = window.scrollY / maxScroll; // 0 to 1
-      scrollFraction *= speedFactor;
-
-      const maxTranslate = carousel.scrollWidth - window.innerWidth;
-      carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
-    });
-  }
-}
-
-// Check once on scroll and on page load
-window.addEventListener('scroll', handleCarouselScroll);
-window.addEventListener('load', handleCarouselScroll);
-</script>
-
-
-</section>
-
-
-
-<section id="section2" class="vhauto bg-0b0b0b">
-
-
-<div class="section-absolute-title">
-    <h1 data-aos="fade-up">Raw Features</h1>
-    <h3 data-aos="fade-up">
-     LiteWS is built with efficiency, precision, and scalability in mind. With ready-to-integrate AI capabilities and advanced data-collection features, 
-     it delivers a robust yet lightweight Python scraping solution designed for seamless integration into existing systems and infrastructure.
-    </h3>
-</div> 
-    
-<div class="s2-grid" data-aos="fade-up">
-
-<div class="s2-grid-item">
-  <div class="s2-grid-item-title">
-    <h2>Smooth Deployment</h2>
-    <h3>API First</h3>
-  </div>
-    <div class="s2-grid-item-show-more">
-        <p>
-            Easy integration with existing systems through RESTful APIs and SDKs.
-        </p>
+    <div class="section-absolute-title">
+      <h1 data-aos="fade-up">Streamlined News Feed</h1>
+      <h3 data-aos="fade-up">Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
+        Showing the latest news articles, blog posts, and updates from across the web.
+        With Built-in <span>AI Summary</span> for Quick Insights.
+      </h3>
+      <div class="section-absolute-title-ml-link">
+        <a href="/user/dashboard" style="display: flex; justify-items: center; align-items: center; text-decoration: none;">
+          Available through your user dashboard
+          <span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span>
+        </a>
+      </div>
     </div>
-    <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-03.png" alt="AI Image 1">
-</div>
-
-<div class="s2-grid-item">
-  <div class="s2-grid-item-title">
-    <h2>Scalable</h2>
-    <h3>Cloud-Native</h3>
-  </div>
-    <div class="s2-grid-item-show-more">
-        <p>
-            Easily handles increasing workloads with minimal latency. Supports direct integration into existing systems, projects and infrastructure.
-        </p>
-    </div>
-    <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-02.png" alt="AI Image 1">
-</div>
-
-<div class="s2-grid-item">
-  <div class="s2-grid-item-title">
-    <h2>Customizable</h2>
-    <h3>Self-Hosted</h3>
-  </div>
-    <div class="s2-grid-item-show-more">
-        <p>
-          Self-hosted options available for tailored deployments to meet specific business needs.
-        </p>
-    </div>
-    <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-01.png" alt="AI Image 1">
-</div>
-
-<div class="s2-grid-item">
-  <div class="s2-grid-item-title">
-    <h2>Lightweight</h2>
-    <h3>Python Architecture</h3>
-  </div>
-    <div class="s2-grid-item-show-more">
-        <p>
-            Minimal resource consumption, optimized for performance on modest hardware.
-        </p>
-    </div>
-    <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-05.png" alt="AI Image 1">
-</div>
-
+    <div class="carousel-wrapper" data-aos="fade-up">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel">
+          <img src="/pagecontent/resources/images/frame140.png" alt="Image 4">
+          <img src="/pagecontent/resources/images/frame141.png" alt="Image 5">
+          <img src="/pagecontent/resources/images/frame142.png" alt="Image 6">
+          <img src="/pagecontent/resources/images/frame143.png" alt="Image 7">
         </div>
+      </div>
     </div>
+    <script>
+      const carousel = document.getElementById('carousel');
+      const speedFactor = 1.5; // >1 = faster, <1 = slower
+      let carouselActivated = false; // flag to run once
 
+      function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.bottom > 0 && rect.top < window.innerHeight;
+      }
 
-</section>
+      function handleCarouselScroll() {
+        if (!carouselActivated && isInViewport(carousel)) {
+          carouselActivated = true; // mark as activated
 
+          // Attach scroll listener that moves carousel
+          window.addEventListener('scroll', () => {
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            let scrollFraction = window.scrollY / maxScroll; // 0 to 1
+            scrollFraction *= speedFactor;
 
-<section id="section2-1" class="vh80 bg-0b0b0b">
+            const maxTranslate = carousel.scrollWidth - window.innerWidth;
+            carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
+          });
+        }
+      }
 
-  <div class="section-absolute-title">
-      <h1 data-aos="fade-up">Secure Endpoints</h1>
-        <div class="section-absolute-title-sx-paragraph">
-          <p data-aos="fade-up">
-            Our API endpoints are secured using industry-leading providers, employing TLS 1.3 and HTTPS to protect both users and our infrastructure. 
-            We leverage industry-standard security solutions to safeguard API operations without compromising efficiency or performance.
+      // Check once on scroll and on page load
+      window.addEventListener('scroll', handleCarouselScroll);
+      window.addEventListener('load', handleCarouselScroll);
+    </script>
+  </section>
+
+  <section id="section2" class="vhauto bg-0b0b0b">
+    <div class="section-absolute-title">
+      <h1 data-aos="fade-up">Raw Features</h1>
+      <h3 data-aos="fade-up">
+        LiteWS is built with efficiency, precision, and scalability in mind. With ready-to-integrate AI capabilities and advanced data-collection features,
+        it delivers a robust yet lightweight Python scraping solution designed for seamless integration into existing systems and infrastructure.
+      </h3>
+    </div>
+    <div class="s2-grid" data-aos="fade-up">
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
+          <h2>Smooth Deployment</h2>
+          <h3>API First</h3>
+        </div>
+        <div class="s2-grid-item-show-more">
+          <p>
+            Easy integration with existing systems through RESTful APIs and SDKs.
           </p>
         </div>
-      <div class="flex-bound-container" style="width: 100%;
-      display: flex; opacity: .3; margin: 10px 0;
-      flex-direction: row; border-top: solid 1px rgb(255, 255, 255);
-      gap: 20px; align-items: center; justify-content: right;
-      ">
-      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
-      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
-      <img class="s2-grid-img" src="/pagecontent/resources/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
-
+        <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-03.png" alt="AI Image 1">
       </div>
-  </div>
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
+          <h2>Scalable</h2>
+          <h3>Cloud-Native</h3>
+        </div>
+        <div class="s2-grid-item-show-more">
+          <p>
+            Easily handles increasing workloads with minimal latency. Supports direct integration into existing systems, projects and infrastructure.
+          </p>
+        </div>
+        <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-02.png" alt="AI Image 1">
+      </div>
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
+          <h2>Customizable</h2>
+          <h3>Self-Hosted</h3>
+        </div>
+        <div class="s2-grid-item-show-more">
+          <p>
+            Self-hosted options available for tailored deployments to meet specific business needs.
+          </p>
+        </div>
+        <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-01.png" alt="AI Image 1">
+      </div>
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
+          <h2>Lightweight</h2>
+          <h3>Python Architecture</h3>
+        </div>
+        <div class="s2-grid-item-show-more">
+          <p>
+            Minimal resource consumption, optimized for performance on modest hardware.
+          </p>
+        </div>
+        <img class="s2-grid-img" src="/pagecontent/resources/images/illustration-05.png" alt="AI Image 1">
+      </div>
+    </div>
+  </section>
 
-  <div class="section-absolute-title">
+  <section id="section2-1" class="vh80 bg-0b0b0b">
+    <div class="section-absolute-title">
+      <h1 data-aos="fade-up">Secure Endpoints</h1>
+      <div class="section-absolute-title-sx-paragraph">
+        <p data-aos="fade-up">
+          Our API endpoints are secured using industry-leading providers, employing TLS 1.3 and HTTPS to protect both users and our infrastructure.
+          We leverage industry-standard security solutions to safeguard API operations without compromising efficiency or performance.
+        </p>
+      </div>
+      <div class="flex-bound-container" style="width: 100%;
+        display: flex; opacity: .3; margin: 10px 0;
+        flex-direction: row; border-top: solid 1px rgb(255, 255, 255);
+        gap: 20px; align-items: center; justify-content: right;">
+        <img class="s2-grid-img" src="/pagecontent/resources/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
+        <img class="s2-grid-img" src="/pagecontent/resources/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
+        <img class="s2-grid-img" src="/pagecontent/resources/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
+      </div>
+    </div>
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Total Privacy</h1>
       <div class="section-absolute-title-sx-paragraph">
         <p data-aos="fade-up">
-          User API calls are <span class="p-red-li">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information, 
+          User API calls are <span class="p-red-li">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information,
           and user inputs are <span class="p-red-li">never</span> logged.
         </p>
         <p data-aos="fade-up">
-          If you choose to integrate the Google Gemini API in your projects, their logging policy applies, which may include API request logging, 
+          If you choose to integrate the Google Gemini API in your projects, their logging policy applies, which may include API request logging,
           AI training, and abuse monitoring in accordance with their API usage guidelines.
         </p>
         <p data-aos="fade-up">
           We follow strict privacy codes and will never share user data unless explicitly
           required by law or uniquely specified in our
-          <a href="/privacy-policy">Privacy Policy<span class="material-symbols-outlined">arrow_outward</span></a>. 
+          <a href="/privacy-policy">Privacy Policy<span class="material-symbols-outlined">arrow_outward</span></a>.
         </p>
       </div>
-  </div>
-
-
-
-
-</section>
-
-
-<section class="vh80" id="p-s-10">
-
-
-      <div class="section-absolute-title">
-        <h1 data-aos="fade-up">Get Started</h1>
     </div>
+  </section>
 
-<div class="container-flex-row" data-aos="fade-up">
-  
-    <div class="section-card-v">
-      <h2>LiteWS</h2>
-      <p>Access on-demand web results and site content through DuckDuckGo as structured, ready-to-use JSON, or receive AI-generated summaries using Google Gemini</p>
-            <div class="btn-container">
-                <a href="/login/?mode=login"><button>Log in to access</button></a>
-                <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
-            </div>
+  <section class="vh80" id="p-s-10">
+    <div class="section-absolute-title">
+      <h1 data-aos="fade-up">Get Started</h1>
     </div>
-
-<div class="divider-vertical"></div>
-
-    <div class="section-card-v">
-      <h2>LiteWS Sport</h2>
-      <p>A sport-focused web scraper with native API integration for efficient sports data extraction and news collection</p>
-              <div class="btn-container">
-                <a href="/login/?mode=login"><button>Log in to access</button></a>
-                <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
-            </div>
+    <div class="container-flex-row" data-aos="fade-up">
+      <div class="section-card-v">
+        <h2>LiteWS</h2>
+        <p>Access on-demand web results and site content through DuckDuckGo as structured, ready-to-use JSON, or receive AI-generated summaries using Google Gemini</p>
+        <div class="btn-container">
+          <a href="/login/?mode=login"><button>Log in to access</button></a>
+          <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
+        </div>
+      </div>
+      <div class="divider-vertical"></div>
+      <div class="section-card-v">
+        <h2>LiteWS Sport</h2>
+        <p>A sport-focused web scraper with native API integration for efficient sports data extraction and news collection</p>
+        <div class="btn-container">
+          <a href="/login/?mode=login"><button>Log in to access</button></a>
+          <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
+        </div>
+      </div>
     </div>
+  </section>
 
-</div>
+  <script>
+    // Add all section IDs you want sticky behavior for
+    const stickySections = [
+      'section1-1',
+      'section1-2',
+      'section1-3'
+    ];
 
-</section>
+    // Sticky config
+    const stickyActivationOffset = -150;
+    const stickyReleaseOffset = 150;
 
+    function handleStickyContent() {
+      const scrollY = window.scrollY;
 
+      stickySections.forEach(sectionID => {
+        const section = document.getElementById(sectionID);
+        if (!section) return;
 
+        const dynamic_container = section.querySelector('.dynamic-container');
+        if (!dynamic_container) return;
 
-<script>
+        const contentHeight = dynamic_container.offsetHeight;
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
 
-// Add all section IDs you want sticky behavior for
-const stickySections = [
-  'section1-1',
-  'section1-2',
-  'section1-3'
-];
+        // Activate sticky
+        if (
+          scrollY >= sectionTop + stickyActivationOffset &&
+          scrollY < sectionBottom - contentHeight - stickyReleaseOffset
+        ) {
+          dynamic_container.style.position = 'fixed';
+          dynamic_container.style.top = '150px';
+          dynamic_container.style.left = '50%';
+          dynamic_container.style.transform = 'translateX(-50%)';
+          dynamic_container.style.width = '100%';
+          dynamic_container.style.zIndex = '1000';
+        }
 
-// Sticky config
-const stickyActivationOffset = -150;
-const stickyReleaseOffset = 150;
+        // Release — lock to bottom
+        else if (scrollY >= sectionBottom - contentHeight - stickyReleaseOffset) {
+          dynamic_container.style.position = 'absolute';
+          dynamic_container.style.top = (sectionBottom - contentHeight - sectionTop) + 'px';
+          dynamic_container.style.left = '0';
+          dynamic_container.style.transform = '';
+          dynamic_container.style.width = '100%';
+          dynamic_container.style.zIndex = '1000';
+        }
 
-function handleStickyContent() {
-  const scrollY = window.scrollY;
-
-  stickySections.forEach(sectionID => {
-    const section = document.getElementById(sectionID);
-    if (!section) return;
-
-    const dynamic_container = section.querySelector('.dynamic-container');
-    if (!dynamic_container) return;
-
-    const contentHeight = dynamic_container.offsetHeight;
-    const sectionTop = section.offsetTop;
-    const sectionBottom = sectionTop + section.offsetHeight;
-
-    // Activate sticky
-    if (
-      scrollY >= sectionTop + stickyActivationOffset &&
-      scrollY < sectionBottom - contentHeight - stickyReleaseOffset
-    ) {
-      dynamic_container.style.position = 'fixed';
-      dynamic_container.style.top = '150px'; 
-      dynamic_container.style.left = '50%';
-      dynamic_container.style.transform = 'translateX(-50%)';
-      dynamic_container.style.width = '100%';
-      dynamic_container.style.zIndex = '1000';
+        // Reset
+        else {
+          dynamic_container.style.position = '';
+          dynamic_container.style.top = '';
+          dynamic_container.style.left = '';
+          dynamic_container.style.transform = '';
+          dynamic_container.style.width = '';
+          dynamic_container.style.zIndex = '';
+        }
+      });
     }
 
-    // Release — lock to bottom
-    else if (scrollY >= sectionBottom - contentHeight - stickyReleaseOffset) {
-      dynamic_container.style.position = 'absolute';
-      dynamic_container.style.top = (sectionBottom - contentHeight - sectionTop) + 'px';
-      dynamic_container.style.left = '0';
-      dynamic_container.style.transform = '';
-      dynamic_container.style.width = '100%';
-      dynamic_container.style.zIndex = '1000';
-    }
+    window.addEventListener('scroll', handleStickyContent);
+    window.addEventListener('resize', handleStickyContent);
+    handleStickyContent();
+  </script>
 
-    // Reset
-    else {
-      dynamic_container.style.position = '';
-      dynamic_container.style.top = '';
-      dynamic_container.style.left = '';
-      dynamic_container.style.transform = '';
-      dynamic_container.style.width = '';
-      dynamic_container.style.zIndex = '';
-    }
-  });
-}
+  <button id="scrollToTopBtn">Back to Top</button>
+  <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
+  <script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
 
-window.addEventListener('scroll', handleStickyContent);
-window.addEventListener('resize', handleStickyContent);
-handleStickyContent();
-
-
-</script>
-
-
-    <button id="scrollToTopBtn">Back to Top</button>
-            <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
-      <script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
-
-
-
-
-      <div id="footer-container"></div>
-      <script src="/pagecontent/scriptsheets/global-footer.js"></script>
-      <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
-    </body>
-    </html>
-
-
-
-
+  <div id="footer-container"></div>
+  <script src="/pagecontent/scriptsheets/global-footer.js"></script>
+  <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+</body>
+</html>
