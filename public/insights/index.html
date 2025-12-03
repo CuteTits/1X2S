@@ -18,8 +18,6 @@
 
 <body>
 
-<page class="page-content-on-load-true">
-
 
 
 
@@ -41,24 +39,7 @@
 
 <section id="section1">
 
-
-
-    <div class="s1-title">
   <h1>Weekly Insights</h1>
-    <p>Latest Insights and Archived Past Insights</p>
-  </div>
-
-
-  <div class="s1-stats-container">
-    <div class="s1-stats-card">
-      <h1>12/17</h1>
-      <p>Bets Won</p>
-    </div>
-    <div class="s1-stats-card">
-      <h1>17%</h1>
-      <p>Weekly ROI</p>
-    </div>
-  </div>
 
 
 </section>  
@@ -69,195 +50,6 @@
 <section id="section2">
 
 
-
-
-<div class="s2-container">
-
-  <div class="s2-card-container">
-  <div class="s2-title">
-    <h1>Live Insights</h1>
-    <a>Contains External Third-Party Links</a>
-    <a>Leagues and Competitions are Separate</a>
-  
-  <div class="divider" style="margin:20px 0; border-top: rgb(75, 75, 75) solid 1px; width: 80%;"></div>
-
-  </div>
-    <div class="s2-card"><a href="https://docs.google.com/spreadsheets/d/1pSAHDyZaX3sBc0o4uU3Kb1yl-ArjfwqpHFKQB7OuW0s/edit?usp=sharing" target="_blank"><span class="material-symbols-outlined">table</span>W39 UEFA Europa League | Round 1<span class="material-symbols-outlined">arrow_forward_ios</span></a><p>google sheets</p></div>
-
-  </div>
-
-<!-- Archived Insights with Search and Filter -->
-
-
-
-
-
-
-
-<!-- Archived Insights -->
-
-<!-- Active filter tags -->
-
-<!-- Archived card container (filter will target ONLY this one) -->
-<div id="archivedCards" class="s2-card-container" style="margin-top:15px;">
-    <div class="s2-title">
-      <h1>Archived Insights</h1>
-    </div>
-  
-    
-
-<div>
-  <!-- Search -->
-<!-- Search input with icon -->
-<div style="position:relative; display:inline-flex; align-items:center;">
-  <span class="material-symbols-outlined" 
-        style="position:absolute; left:5px; color:#ffffff; pointer-events:none; top: 5px;">
-    search
-  </span>
-  <input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Search by keyword..." 
-    onkeyup="filterCards()" 
-    style="padding:8px 8px 8px 32px; color: white;"
-  >
-</div>  
-  <!-- Dropdown filter -->
-  <div style="position:relative; display:inline-block;">
-    <button onclick="toggleDropdown()" 
-            style="padding:8px; margin-left:10px; cursor:pointer; color: rgb(255, 255, 255);background-color: #060606; border: none; border-radius: 50px; font-family: inter; font-size: 10px;">
-      Filter By ▼
-    </button>
-
-    <div id="filterDropdown" 
-         style="display:none; position:absolute; z-index:100; max-height:200px; overflow-y:auto;">
-      <label><input type="checkbox" value="UEFA" onchange="updateFilterTags()"> UEFA Competitions</label>
-      <label><input type="checkbox" value="FIFA" onchange="updateFilterTags()"> FIFA Competitions</label>
-      <label><input type="checkbox" value="Weekly Leagues" onchange="updateFilterTags()"> Weekly Leagues</label>
-
-    </div>
-  </div>
-</div>
-
-<div id="activeFilters" style="margin-top:10px;"></div>
-
-
-<div class="divider" style="margin:20px 0; border-top: rgb(75, 75, 75) solid 1px; width: 80%;"></div>
-
-<!-- <div class="s2-card"><a href="/"><span class="material-symbols-outlined">table</span>W38 UEFA Champions League<span class="material-symbols-outlined">arrow_forward_ios</span></a><p>google sheets</p></div> --> 
-
-</div>
-
-
-<script>
-function toggleDropdown() {
-  const dropdown = document.getElementById("filterDropdown");
-  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-}
-
-// Close dropdown when clicking outside
-window.onclick = function(event) {
-  if (!event.target.matches('button')) {
-    const dropdown = document.getElementById("filterDropdown");
-    if (dropdown.style.display === "block") {
-      dropdown.style.display = "none";
-    }
-  }
-}
-
-function updateFilterTags() {
-  const container = document.getElementById("activeFilters");
-  container.innerHTML = ""; // reset tags
-
-  const checkedFilters = Array.from(
-    document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')
-  );
-
-  checkedFilters.forEach(cb => {
-    const tag = document.createElement("button");
-    tag.textContent = cb.value + " ✕";
-    tag.style.cursor = "pointer";
-    tag.style.marginRight = "5px";
-    tag.style.padding = "5px 10px";
-    tag.style.border = "none";
-    tag.style.borderRadius = "15px";
-    tag.style.backgroundColor = "#060606";
-    tag.style.color = "#fff";
-    tag.style.fontSize = "12px";
-    tag.style.fontFamily = "orbitron";
-    tag.style.display = "inline-flex";
-    tag.style.alignItems = "center";
-    tag.style.gap = "5px";
-    tag.style.textTransform = "none";
-    tag.style.fontWeight = "400";
-    tag.style.transition = "background-color 0.3s ease";
-    tag.onmouseover = () => tag.style.backgroundColor = "#555";
-    tag.onmouseout = () => tag.style.backgroundColor = "#333";
-
-    // Clicking removes the filter
-    tag.onclick = () => {
-      cb.checked = false;
-      updateFilterTags();
-    };
-
-    container.appendChild(tag);
-  });
-
-  filterCards();
-}
-
-function filterCards() {
-  const searchInput = document.getElementById("searchInput").value.toLowerCase();
-
-  const checkedFilters = Array.from(
-    document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')
-  ).map(cb => cb.value.toLowerCase());
-
-  const cards = document.querySelectorAll("#archivedCards .s2-card");
-
-  cards.forEach(card => {
-    const cardText = card.innerText.toLowerCase();
-    const matchesSearch = cardText.includes(searchInput);
-    const matchesFilter =
-      checkedFilters.length === 0 || checkedFilters.some(f => cardText.includes(f));
-
-    if (matchesSearch && matchesFilter) {
-      card.classList.remove("hide");
-    } else {
-      card.classList.add("hide");
-    }
-  });
-
-  // Smoothly adjust parent container
-  const section = document.getElementById("archivedCards");
-  section.style.height = section.scrollHeight + "px";
-  setTimeout(() => (section.style.height = "auto"), 400);
-}
-
-</script>
-
-
-</div>
-
-
-
-
-  <div class="s2-side-bar">
-    <div class="s2-side-bar-content">
-      <ul>
-        <h1>Leagues and Competitions</h1>
-        <li class=""><img src="/pagecontent/resources/images/league-icons/fifa-wc-26.png" alt=""><a href="/insights/1x2s">FIFA World Cup 2026</a></li>
-        <li class=""><img src="/pagecontent/resources/images/league-icons/cwc.png" alt=""><a href="/insights/1x2s">FIFA Club World Cup</a></li>
-        <li><img src="/pagecontent/resources/images/league-icons/champions-league.png" alt=""><a href="/insights/uefa-champions-league">UEFA Champions League</a></li>
-        <li><img src="/pagecontent/resources/images/league-icons/uel.png" alt=""><a href="/insights/1x2s/1x2s-betslip">UEFA Europa League</a></li>
-        <li><img src="/pagecontent/resources/images/league-icons/uecl.png" alt=""><a href="/insights/1x2s/1x2s-odds">UEFA Conference League</a></li>
-        <h1>General</h1>
-        <li><span class="material-symbols-outlined">calendar_month</span><img src="/pagecontent/resources/images/league-icons/1x2s.png" alt=""><a href="/insights/weekly">Weekly Leagues</a></li>
-      </ul> 
-    </div>
-  </div>
-
-  </content>
 </section>
 
 
@@ -265,14 +57,6 @@ function filterCards() {
   <div id="footer-container"></div>
   <script src="/pagecontent/scriptsheets/global-footer.js"></script>
   <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
-
-
-
-</page>
-
-
-
-
 
 
 
