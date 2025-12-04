@@ -40,7 +40,7 @@
 <section id="section1">
 
   <h1>Weekly Insights</h1>
-
+  <h3><span class="material-symbols-outlined">bolt</span>Powered by <b>LiteWS Sport</b> and Google <span>Gemini</span></h3>
 
 </section>  
 
@@ -50,7 +50,166 @@
 <section id="section2">
 
 
+  <div class="section-content-body">
+
+<div class="button-carousel-wrapper">
+  <div class="button-carousel" id="button-carousel">
+
+    <button class="card-button active" data-card="0">2025 Week 50</button>
+    <button class="card-button" data-card="1">2025 Week 51</button>
+    <button class="card-button" data-card="2">2025 Week 52</button>
+    <button class="card-button" data-card="3">2026 Week 1</button>
+    <button class="card-button" data-card="4">2026 Week 2</button>
+    <button class="card-button" data-card="5">2026 Week 3</button>
+
+  </div>
+</div>
+
+<script>
+function centerButton(btn) {
+  const wrapper = document.querySelector('.button-carousel-wrapper');
+  const btnRect = btn.getBoundingClientRect();
+  const wrapperRect = wrapper.getBoundingClientRect();
+  const btnCenter = btnRect.left + btnRect.width / 2;
+  const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+  const scrollOffset = btnCenter - wrapperCenter;
+  wrapper.scrollBy({
+    left: scrollOffset,
+    behavior: "smooth"
+  });
+  document.querySelectorAll('.card-button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll('.card-button');
+  const cards = document.querySelectorAll('.carousel-card');
+  const activebydefault = 0 // Change this to set which button/card is active on load (0-indexed)
+  // Make button 3 active and center it on load
+  if (buttons[0]) {
+    buttons.forEach(b => b.classList.remove('active')); 
+    buttons[activebydefault].classList.add('active');
+    centerButton(buttons[activebydefault]);
+    if (cards[activebydefault]) centerCard(cards[activebydefault]);
+  }
+  buttons.forEach((btn, idx) => {
+    btn.addEventListener('click', function() {
+      centerButton(btn);
+      if (cards[idx]) centerCard(cards[idx]);
+    });
+  });
+});
+</script>
+<!-- ...existing code... -->
+
+
+
+
+<div class="carousel-container" id="carousel-container">
+  <div class="carousel" id="carousel">
+
+    <div class="carousel-card">
+      <h3>Featured Competitions</h3>
+      <div class="horizontal-league-list">
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/en-premierleague.png" alt="Premier League Icon">Premier League</div>
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/es-laliga.png" alt="La Liga Icon">La Liga</div>
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/it-seriea.png" alt="Serie A Icon">Serie A</div>
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/de-bundesliga.png" alt="Bundesliga Icon">Bundesliga</div>
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/fr-ligue1.png" alt="Ligue 1 Icon">Ligue 1</div>
+        <div class="league-item"><img src="/pagecontent/resources/images/league-icons/uefa-champions-league.png" alt="UEFA Champions League Icon">UEFA Champions League</div>
+      </div>
+
+<a href="https://sheets.google.com/placeholder-link/redirect=?/" target="_blank" class="data-link-button ">
+  <span class="material-symbols-rounded">lists</span>
+  <span>View Full Insights</span>
+  <span class="material-symbols-rounded">open_in_new</span>
+</a>
+      
+  </div>
+
+    <div class="carousel-card">
+      <h1>Placeholder</h1>
+    </div>
+
+    <div class="carousel-card">
+      <h1>Placeholder</h1>
+    </div>
+
+    <div class="carousel-card">
+      <h1>Placeholder</h1>
+    </div>
+
+    <div class="carousel-card">
+      <h1>Placeholder</h1>
+    </div>
+
+    <div class="carousel-card">
+      <h1>Placeholder</h1>
+    </div>
+
+
+  </div>
+</div>
+</div>
+
+
+<script>
+function centerCard(card) {
+  const container = document.getElementById("carousel-container");
+  const cardRect = card.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const cardCenter = cardRect.left + cardRect.width / 2;
+  const containerCenter = containerRect.left + containerRect.width / 2;
+
+  const scrollOffset = cardCenter - containerCenter;
+
+  container.scrollBy({
+    left: scrollOffset,
+    behavior: "smooth"
+  });
+
+  // Highlight the centered card
+  document.querySelectorAll('.carousel-card').forEach(c => c.classList.remove('centered'));
+  card.classList.add('centered');
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var centeredCard = document.querySelector('.carousel-card.centered');
+  if (centeredCard) {
+    centerCard(centeredCard);
+  }
+  setupDropdowns();
+});
+</script>
+
 </section>
+
+
+<section id="section3">
+
+  <h3>Proprietary Datasets</h3>
+  <p>Our insights are generated using a combination of proprietary datasets from LiteWS Sport and advanced AI models developed by Google Gemini. This unique blend of data sources allows us to provide accurate and timely sports insights.</p>
+     <ul>
+        <li>OPTA StatsPerform API</li>
+        <li>SportsRadar API</li>
+        <li>Google Gemini AI Models</li>
+        <li>LiteWS Sport Proprietary Data</li>
+        <li>Live Web News Feeds</li>
+      </ul>
+
+</section>
+
+
+
+<section id="section4">
+
+  <p>Under the discretion of bookmakers, all insights provided are for informational purposes only. 1X2S holds no responsibility for any betting decisions made based on the insights presented on this platform.</p>
+  <p>Bookmaker odds and/or markets may vary and are subject to change without notice. Displayed odds are correct at the time of publication but may change subsequently.</p>
+
+</section>  
+
 
 
 

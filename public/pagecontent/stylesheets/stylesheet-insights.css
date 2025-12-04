@@ -56,8 +56,33 @@ align-items: center;
 padding-bottom: 20vh;
 scroll-behavior: smooth;
 transition: all 0.4s ease-in-out;
-
 }
+
+#section3{
+position: relative;
+width: 100%;
+height: 100vh;
+z-index: 10;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+scroll-behavior: smooth;
+transition: all 0.4s ease-in-out;
+}
+#section4{
+position: relative;
+width: 100%;
+height: 25vh;
+z-index: 10;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+scroll-behavior: smooth;
+transition: all 0.4s ease-in-out;
+}
+
 
 
 
@@ -66,7 +91,228 @@ font-size: 4rem;
 font-family: 'Montserrat', sans-serif;
 text-align: center;
 margin: 0;
-background: linear-gradient(90deg, #ff2525, #0B0B0B);
+background: linear-gradient(90deg, #ff2525, #ff7272);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
+}
+#section1 h3{
+font-size: 1rem;
+font-family: 'Montserrat', sans-serif;
+text-align: left;
+font-weight: 300;
+margin: 0;
+color: #888;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#section1 h3 span{
+margin: 0 5px;
+background: linear-gradient(90deg, rgb(255, 159, 140) 0%, rgba(255, 153, 253, 1) 49%, rgba(116, 106, 252, 1) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+b{
+font-weight: 600;
+margin: 0 5px;
+}
+
+#section4 p{
+font-size: .6rem;
+font-family: 'Montserrat', sans-serif;
+text-align: center;
+margin: 0 20px;
+color: #888;
+}   
+
+
+
+
+
+.section-content-body{
+font-family: montserrat;
+font-size: 16px;    
+font-weight: 300;
+color: white;
+align-items: center;
+justify-content: center;
+display: flex;
+flex-direction: column;
+}
+
+/* buttons */
+
+.button-carousel-wrapper {
+overflow-x: auto;
+width: 25vw;
+margin-bottom: 24px;
+scroll-behavior: smooth;
+border-left: solid 1px #333333;
+border-right: solid 1px #333333;
+}
+.button-carousel-wrapper::-webkit-scrollbar {
+display: none;
+}
+.button-carousel {
+display: flex;
+gap: 5px;
+padding: 8px 0;
+min-width: max-content;
+padding: 0 10vw;
+}
+
+.card-button {
+font-family: montserrat, sans-serif;
+color: white;
+min-width: 120px;
+padding: 10px 18px;
+font-size: 12px;
+border: none;
+cursor: pointer;
+background: none;
+position: relative;
+transition: background 0.2s;
+opacity: 0.6;
+}
+.card-button.active {
+font-weight: bold;
+opacity: 1;
+}
+.card-button::before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 0%;
+  bottom: 0;
+  left: 0;
+  background: #ff5252;
+  transition:
+    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.card-button.active::before {
+  width: 100%;
+  left: 0;
+  transition:
+    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    right 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-button:not(.active)::before {
+  width: 0%;
+  left: 100%;
+  transition:
+    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Carousel Container */
+
+.carousel-container {
+width: 100vw;
+overflow-x: scroll;
+overflow-y: hidden;
+height: auto;
+padding: 20px;
+display: flex;
+align-items: flex-start;
+}
+.carousel-container::-webkit-scrollbar {
+display: none;
+}   
+.carousel {
+display: flex;
+gap: 50px;
+overflow-y: show;
+height: auto;
+width: max-content;
+padding: 0px 50vw 0px 50vw; /* Center the carousel */ 
+scroll-snap-type: x mandatory;
+}
+
+.carousel-card {
+flex: 0 0 650px;
+height: auto;
+z-index: 1;
+opacity: 0;
+padding: 20px;
+transition: all 0.3s ease-in-out;
+}
+.carousel-card.centered {
+background: #121212;
+transform: scale(1.2);
+opacity: 1;
+z-index: 2;
+transition: all 0.3s ease-in-out;
+}
+
+.carousel-card h3{
+color: rgb(119, 119, 119);
+font-family: 'Montserrat', sans-serif;
+font-size: .6rem;
+font-weight: 400;
+text-align: left;
+padding: 0;
+margin: 0;
+}
+
+
+
+
+.horizontal-league-list {
+display: grid;
+grid-auto-flow: column;
+grid-auto-columns: max-content;
+gap: 10px;
+overflow-x: auto;
+padding: 10px;
+scroll-behavior: smooth;
+}
+.league-item {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+gap: 5px;
+font-family: inter, sans-serif;
+color: white;
+font-size: 10px;
+border-radius: 50px;
+border: solid 1px #333333;
+background-color: #1a1a1a;
+padding: 2px 5px;
+}
+.league-item img {
+width: 15px;
+height: 15px;
+}
+
+
+
+
+
+
+
+/* Add to your stylesheet-insights.css */
+.data-link-button {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: none;
+border: solid 1px #1b1b1b;
+color: #fff;
+font-family: 'Montserrat', sans-serif;
+font-weight: 400;
+font-size: .6rem;
+padding: 5px 10px;
+border-radius: 5px;
+text-decoration: none;
+cursor: pointer;
+position: relative;
+}
+.data-link-button span.material-symbols-rounded {
+font-size: .8rem;
 }
