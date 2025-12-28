@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<link rel="icon" href="/assets/images/logo.png">
 <title>1X2S</title>
-<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-account.css">
+<link rel="stylesheet" href="/assets/css/core/global.css">
+<link rel="stylesheet" href="/assets/css/core/fonts.css">
+<link rel="stylesheet" href="/assets/css/pages/page-account.css">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
 
 <script>
@@ -29,20 +29,17 @@
 
     <nav>
         <div id="navbar"></div>
-        <script src="/pagecontent/scriptsheets/navbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+        <script src="/assets/js/components/navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/navbar.css">
     </nav>
     <mobilenav>
         <div id="mobilenavbar"></div>
-        <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+        <script src="/assets/js/components/mobile-navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
     </mobilenav>  
 
 
 
-<div class="fixedBackground">
-  <img src="/pagecontent/resources/images/illustration-04.png">
-</div>
 
   <div class="pageheader">
   <h2>Hello, <strong id="greeting">Loading...</strong> </h2>
@@ -65,19 +62,40 @@
     <h1><span class="material-symbols-outlined">key</span>API Keys</h1>
 
 <div class="dropdown">
-  <button id="dropdownBtnApikey" class="dropdown-btn">Manage API Key</button>
+  <button id="dropdownBtnApikey" class="dropdown-btn">Manage API Keys</button>
     <div id="dropdownApikey" class="container-dropdown">
-    <a>This is your unique API key, it can be replaced at any time. Store it safely and avoid showing it to anyone.</a>
-    <a>To manage API settings and API usage, visit the dashboard.</a>
+    <p>To manage API settings and API usage, visit the dashboard.</p>
+    <p>Usage and quotas are monitored in the dashboard.</p>
+
       <div class="api-display">
+        <h1><span>*</span> LiteWS API Key</h1>
+
+        <div class="api-key-container">
         <span class="api-key" data-key="VG-7K9Q-R2H4-1Z8X-M5N0-P3T6-B4V9-S2Y1">••••••••••••••••••</span>
-        <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
-        <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+        <div class="button-container">
+          <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
+          <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+        </div>
+        </div>
+
+        <div class="api-options-container">
+          <button class="api-options"><span class="material-symbols-outlined">more_vert</span></button>
+          <div class="api-options-menu">
+            <button class="regenerate">Regenerate Key</button>
+            <button class="revoke">Revoke Key</button>
+          </div>
+        </div>
+        
       </div>
-      <button class="newapi"><span class="material-symbols-outlined">key</span>Request New Key</button>
-      <a>Generating a new API key will result in the permament deletion of your current one.</a>
+      <p>This is your primary API key for accessing LiteWS services. Keep it secure and do not share it publicly.
+      Your primary key cannot be deleted, but you can regenerate it if compromised.
+      </p>
+
+
       </div>
     </div>
+
+
   </div>
 </div>
 
@@ -121,8 +139,8 @@
 <div class="dropdown">
   <button id="dropdownBtn2FA" class="dropdown-btn">Manage 2FA</button>
   <div id="dropdownMenu2FA" class="container-dropdown">
-    <a>Enabling Two-Factor Authentication will require you to confirm your identification using a dynamic security code for each login.</a>
-    <a>2FA is currently not enabled on this account</a>
+    <p>Enabling Two-Factor Authentication will require you to confirm your identification using a dynamic security code for each login.</p>
+    <p>2FA is currently not enabled on this account</p>
   </div>
 </div>
 
@@ -130,7 +148,7 @@
 <div class="dropdown">
   <button id="dropdownBtnPass" class="dropdown-btn">Change Password</button>
   <div id="dropdownMenuPass" class="container-dropdown">
-    <a>Enter Your Current Password</a>
+    <p>Enter Your Current Password</p>
     <div class="currentPass">
       <input 
         type="password" 
@@ -139,7 +157,7 @@
         id="currentPassword"
       >
     </div>
-    <a>New Password</a>
+    <p>New Password</p>
     <div class="newPassDiv">
       <input 
         type="password" 
@@ -219,9 +237,9 @@ changeBtn.addEventListener("click", async () => {
     <div class="dropdown">
       <button id="dropdownBtn" class="dropdown-btn" style="color: crimson;">Delete Account</button>
       <div id="dropdownMenu" class="container-dropdown">
-        <a>Deleting your account will terminate your account along with all its data. 
+        <p>Deleting your account will terminate your account along with all its data. 
         Financial transactions will be saved to comply with legal obligations.
-        </a>
+        </p>
         <div class="hidden">
           <form id="password-enforcement-form">
             <input 
@@ -382,12 +400,25 @@ setupDropdown("dropdownBtn2FA", "dropdownMenu2FA"); // Manage 2FA
     }
   }, 30000); // 30s
 </script>
+<script>
+  const optionsBtn = document.querySelector('.api-options');
+  const optionsMenu = document.querySelector('.api-options-menu');
 
+  optionsBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent immediate close
+    optionsMenu.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', () => {
+    optionsMenu.classList.remove('active');
+  });
+</script>
 
 
       <div id="footer-container"></div>
-      <script src="/pagecontent/scriptsheets/global-footer.js"></script>
-      <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+      <script src="/assets/js/components/footer.js"></script>
+      <link rel="stylesheet" href="/assets/css/components/footer.css">
 
 
 

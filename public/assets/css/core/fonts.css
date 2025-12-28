@@ -1,0 +1,37 @@
+@font-face {
+font-family: 'Zendots';
+src: url('/assets/fonts/ZenDots-Regular.ttf') format('truetype');
+}
+@font-face {
+font-family: 'micro';
+src: url('/assets/fonts/Micro5-Regular.ttf') format('truetype');
+}
+@font-face {
+font-family: 'inter';
+src: url('/assets/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+
+
+@font-face {
+font-family: 'Tektur';
+src: url('/') format('truetype');
+}
+
+
+
+@font-face {
+font-family: 'Montserrat';
+src: url('/assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+
+@font-face {
+font-family: 'Orbitron';
+src: url('/assets/fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+font-family: 'JetBrainsMono';
+src: url('/assets/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+}

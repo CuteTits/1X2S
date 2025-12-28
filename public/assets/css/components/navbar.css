@@ -1,0 +1,569 @@
+/*----- Navbar -----*/
+
+@media screen and (max-width: 770px) {
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+display: none;
+}
+}
+
+
+#top-banner{
+position:relative;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+background-color: #ea4040;
+z-index: 1000000;
+border: solid 1px rgb(152, 7, 7);
+}
+#close-banner{
+pointer-events: all;
+cursor: pointer;
+}
+.banner-content{
+position:relative;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 20px;
+}
+.banner-content a{
+font-family: montserrat;
+text-decoration: none;
+color: black;
+font-size: .8em;
+font-weight: 300;
+}
+.banner-content a span{
+text-decoration: underline;
+}
+
+
+#content-wrapper{
+position: fixed;
+width: 100%;
+z-index: 6000;
+top: 0;
+left: 0;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080 {
+top: 0;
+left: 0;
+transition: background-color 0.3s ease;
+color: white;
+backdrop-filter: none; 
+-webkit-backdrop-filter: none; 
+justify-content: center;
+text-align: center;
+align-content: center;
+position: relative;
+}
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content-container {
+margin: 0 auto;
+text-align: center;
+display: flex;
+justify-content: center; 
+align-items: center;     
+height: 50px;           
+}
+
+
+
+
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content  {
+position: absolute;
+left: 5%;
+top: 5%;
+display: flex;
+align-items: center;
+gap: 10px;
+flex-direction: row;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content img{
+width: 42px;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content h1 span{
+font-size: 1em;
+font-family: zendots;
+color: white;
+font-weight: 400;
+}
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content h1{
+font-size: 1em;
+font-family: montserrat;
+color: white;
+font-weight: 200;
+}
+@media screen and (max-width: 1300px) {
+.navigation-menu-bar-header-top-dynamic-0-desktop-1080-content h1{
+display: none;
+}
+}
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 {
+display: grid;
+justify-content: center; /* Center children horizontally */
+align-items: center;     /* Center children vertically */
+width: 25%;
+}
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul {
+list-style-type: none; 
+display: flex; 
+justify-content: center;   
+align-items: center;       
+gap: 10%;                  
+text-align: center;
+padding: 0;
+width: 100%;
+height: 100%;               
+}
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a {
+color: rgb(104, 104, 104); 
+text-decoration: none; 
+font-family: montserrat;
+font-weight: 400;
+font-size: 1em;
+position: relative;
+margin: 2px;
+display: flex;             
+justify-content: center;   
+align-items: center;        
+transition: all 1s ease;    
+padding: 12px 0;
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li span a{
+background: #ffffff;
+background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 18%, rgba(64, 64, 64, 1) 49%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 1) 100%);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+background-size: 300% 100%;
+background-position: -100% center;
+animation: moveGradient 3s linear infinite;
+padding: 0 20px;
+border-radius: 5px;
+transition: all 1s ease;
+}
+@keyframes moveGradient {
+  0% {
+    background-position: right ;
+  }
+  100% {
+    background-position: left ;
+  }
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li span a:hover{
+color: white;
+}
+
+
+
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li a:hover {
+color: rgb(255, 255, 255); 
+transition: all 1s ease;
+}
+
+
+
+
+
+
+
+
+.navigation-menu-desktop-buttons-user-options {
+position: absolute;
+right: 5%;
+top: 20%;
+display: flex;
+gap: 15px;
+justify-content: center;
+align-items: center;
+}
+
+.loginbtn img, .signupbtn img {
+width: 1.2vw;
+display: block; 
+}
+.signupbtn {
+padding: 5px 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: Montserrat, sans-serif;
+font-size: 0.8em;
+border-radius: 5px;
+transition: all 0.3s ease;
+}
+.loginbtn {
+padding: 5px 5px 5px 0px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: Montserrat, sans-serif;
+font-size: 0.8em;
+transition: all 0.3s ease;
+background: transparent;
+border: 1px solid transparent;
+color: white;
+transition: all 0.3s ease;
+overflow: hidden;
+position: relative;
+}
+.loginbtn::before {
+content: '';
+position: absolute;
+bottom: 0;
+right: 100%; 
+height: 2px;
+width: 100%;
+background: rgb(224, 37, 37);
+z-index: -1;
+transition: right 0.4s ease;
+}
+.loginbtn:hover::before {
+right: 0; 
+}
+.loginbtn:hover {
+color: white;
+}
+
+
+.signupbtn {
+  position: relative;
+  background: white;
+  border: 1px solid white;
+  color: rgb(19, 19, 19);
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+.signupbtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 100%; 
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.623);
+  z-index: -1;
+  transition: right 0.4s ease;
+}
+.signupbtn:hover::before {
+  right: 0; 
+}
+.signupbtn:hover {
+  color: white;
+}
+
+
+
+.loginbtn a, .signupbtn a {
+display: flex;
+align-items: center; 
+justify-content: center; 
+text-decoration: none;
+color: inherit;
+gap: 8px; 
+}
+
+
+
+
+
+
+
+
+.loginbtn:hover{
+transition: all 1s ease;
+opacity: 0.5;
+}
+.signupbtn:hover{
+transition: all 1s ease;
+background-color: transparent;
+}
+.signupbtn:hover a{
+transition: all 1s ease;
+color: white;
+}
+
+
+@media  (max-width: 880px) {
+.navigation-menu-desktop-buttons-user-options{
+gap: 0;
+right: 2%;
+}
+.loginbtn img, .signupbtn img {
+width: 2vw;
+}
+}
+
+
+
+
+
+
+
+
+
+
+#progress-bar {
+position: absolute;
+top: 0%;
+left: 0;
+height: 3px;
+box-shadow: 0 0 8px 1px #f75454;
+background-color: #dd3131; 
+width: 0%;
+z-index: 1000;
+transition: width 0.2s ease-out;
+}
+
+#backtoPrevious {
+position: absolute;
+top: 70px;
+left: 50px;
+background: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 8px 15px;
+border-radius: 5px;
+font-size: 0.9em;
+cursor: pointer;
+z-index: 7000;
+transition: all 0.3s ease;
+}
+#backtoPrevious a {
+text-decoration: none;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+transition: all 0.3s ease;
+font-family: montserrat;
+}
+#backtoPrevious:hover a{
+color:#f75454 !important;
+transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+/* Dropdown Container */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown {
+position: relative;
+text-align: left;
+justify-items: left;
+justify-content: left;
+}
+
+/* Hide dropdown menu by default */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li .nav-dropdown-menu {
+max-height: 0;
+overflow: hidden;
+height: auto;
+position: absolute;
+top: 100%; /* right below parent */
+left: 0;
+background-color: rgba(0, 0, 0, 0.41);
+backdrop-filter: blur(1px);
+min-width: 180px;
+list-style: none;
+border-radius: 5px;
+text-align: left;
+z-index: 9999;
+display: block;
+transition: all 0.3s ease;
+}
+
+/* Dropdown items */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li .nav-dropdown-menu li a {
+padding: 5px 15px;
+max-height: 100px;
+color: white;
+font-size: 0.9em;
+text-decoration: none;
+transition: background 0.3s ease;
+text-align: left;   /* make links align left */
+justify-content: flex-start; /* align link text properly */
+border: solid 1px transparent;
+}
+
+.nav-dropdown-menu li a:hover {
+box-shadow:  #dd3131 0 0 5px 1px ;
+color: white;
+background-color: rgb(13, 13, 13);
+border-radius: 2px;
+border: solid 1px rgb(26, 26, 26);
+}
+
+/* Show menu on hover */
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown:hover .nav-dropdown-menu {
+max-height: 200px;
+transition: all 0.3s ease;
+padding: 10px ;
+border: solid 1px rgb(19, 19, 19);
+}
+
+
+
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown a span {
+transform: rotate(0deg);
+transition: all 0.3s ease;
+}
+.Navigational-header-bar-style-top-aligned-flex-0 ul li.nav-dropdown:hover a span {
+transform: rotate(-180deg);
+transition: all 0.3s ease;
+}
+
+
+
+
+
+
+.navigation-menu-desktop-buttons-user-options-logged-in-true {
+position: absolute;
+right: 5%;
+top: 20%;
+display: flex;
+align-items: center;
+gap: 10px;
+z-index: 10001;
+}
+
+.user-profile-icon {
+display: flex;
+align-items: center;
+gap: 8px;
+cursor: pointer;
+color: white;
+font-family: montserrat;
+font-size: 1em;
+position: relative;
+padding: 12px 0;
+border-radius: 5px;
+transition: background 0.2s;
+}
+
+.user-profile-icon:hover,
+.navigation-menu-desktop-buttons-user-options-logged-in-true.active .user-profile-icon {
+background: rgba(0,0,0,0.18);
+}
+
+.user-options-dropdown-menu {
+display: flex;
+position: absolute;
+top: 100%;
+left: 0;
+background-color: rgba(0, 0, 0, 0.41);
+backdrop-filter: blur(1px);
+border-radius: 5px;
+box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+z-index: 10002;
+padding: 0;
+font-family: montserrat;
+transition: all 0.3s ease;
+border: none;
+max-height: 0;
+overflow: hidden;
+width: 150px;
+}
+
+.user-options-dropdown-menu ul {
+list-style: none;
+margin: 0;
+padding: 0;
+flex-direction: column;
+width: 100%;
+}
+.user-options-dropdown-menu ul li {
+width: 100%;
+display: block;
+}
+.user-options-dropdown-menu ul li a {
+width: 100%;
+display: flex;
+align-items: center;
+flex-direction: row;
+padding: 5px 15px;
+max-height: 100px;
+color: white;
+font-size: 0.9em;
+text-decoration: none;
+transition: background 0.3s ease;
+text-align: left;   /* make links align left */
+justify-content: flex-start; /* align link text properly */
+border: solid 1px transparent;
+overflow: hidden;        
+text-overflow: ellipsis;    
+white-space: nowrap;       
+box-sizing: border-box;    
+}
+
+.user-options-dropdown-menu ul li a:hover {
+box-shadow:  #dd3131 0 0 5px 1px ;
+color: white;
+background-color: rgb(13, 13, 13);
+border-radius: 2px;
+border: solid 1px rgb(26, 26, 26);
+}
+
+
+
+.user-options-dropdown-menu ul li:last-child a {
+color: #ea4040;
+font-weight: 600;
+cursor: pointer;
+border: none;
+box-shadow: none;
+}
+.user-options-dropdown-menu ul li:last-child a:hover {
+background: none;
+color: #ea4040;
+border: none;
+box-shadow: none;
+}
+
+
+
+/* Show dropdown when parent has .active */
+.navigation-menu-desktop-buttons-user-options-logged-in-true.active .user-options-dropdown-menu {
+max-height: 200px;
+transition: all 0.3s ease;
+padding: 10px ;
+border: solid 1px rgb(19, 19, 19);
+}
+
+/* Responsive fix */
+@media (max-width: 880px) {
+.navigation-menu-desktop-buttons-user-options-logged-in-true {
+  right: 2%;
+}
+}
+
+.navigation-menu-desktop-buttons-user-options-logged-in-true.active .user-options-dropdown-menu,
+.navigation-menu-desktop-buttons-user-options-logged-in-true:hover .user-options-dropdown-menu {
+max-height: 200px;
+transition: all 0.3s ease;
+padding: 10px ;
+border: solid 1px rgb(19, 19, 19);
+}
+.navigation-menu-desktop-buttons-user-options-logged-in-true:hover .user-profile-icon {
+background: rgba(0,0,0,0.18);
+}
+

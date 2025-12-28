@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<link rel="icon" href="/assets/images/logo.png">
 <title>1X2S</title>
-<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-page-litews.css">
+<link rel="stylesheet" href="/assets/css/core/global.css">
+<link rel="stylesheet" href="/assets/css/core/fonts.css">
+<link rel="stylesheet" href="/assets/css/pages/page-lite-scores.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -68,298 +68,305 @@ cursor: help;
 
     <nav>
         <div id="navbar"></div>
-        <script src="/pagecontent/scriptsheets/navbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+        <script src="/assets/js/components/navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/navbar.css">
     </nav>
     <mobilenav>
         <div id="mobilenavbar"></div>
-        <script src="/pagecontent/scriptsheets/mobilenavbar.js"></script>
-        <link rel="stylesheet" href="/pagecontent/stylesheets/mobilenavbar.css">
+        <script src="/assets/js/components/mobile-navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
     </mobilenav>  
 
 
 
 
-<section id="section1">
+<section id="litews-hero">
         
-<div class="section-container-parent">
-        <div class="model-card" onclick="location.href='#'">
-            <h4>1X2S API</h4>
+<div class="litews-hero__container">
+        <div class="litews-card" onclick="location.href='#'">
             <h2>LiteWS</h2>
-            <p>A python-based AI web intelligence pipeline that automatically searches, scrapes, 
-                and summarizes online information into structured, reliable reports.
-                Built as a unified callable pipeline with AI integration for enhanced data extraction and analysis.
+            <p>
+              Beyond just search results.
             </p>
-            <div class="btn-container">
+            <div class="litews-card__buttons">
                 <a href="#">Download<span class="material-symbols-outlined">arrow_outward</span></a>
             </div>
     </div>
 </div>
 
 </section>
-<div class="cx-divider"></div>
 
-<section id="section1-2">
-<div class="section-container-parent">
-<div class="section-container-content">
-        <h1>Overview</h1>
-<div class="divider-container">
-<div class="divider"></div></div>
-        <p>LiteWS is an AI-powered web scraping and data extraction tool designed to streamline the process of gathering and analyzing online information. 
-            Built with Python, LiteWS integrates advanced AI models and NLPs to enhance its scraping capabilities, allowing users to extract structured data from a variety of web sources efficiently.
-            The tool supports multiple AI providers, enabling users to leverage state-of-the-art language models for data summarization and analysis.
-            LiteWS is ideal for researchers, analysts, and developers looking to automate data collection tasks while ensuring high-quality outputs through AI-driven insights.
-        </p>
-        <div class="list-container">
-
-            <h1>Fact Sheet</h1>
-            <ul>
-                <a>Language</a>
-                <li>Python 3.12 <span> Latest</span></li>
-
-                <a>Release Date</a>
-                <li>Oct 2025</li>
-
-                <a>Price</a>
-                <li>Free</li>
-                <li>API usage may incur costs based on provider rates.</li>
-
-                <a>License</a>
-                <li>Apache 2.0</li>
-                <li>You are free to use, modify, and distribute this code with attribution.</li>
-
-                <a>Scope</a>
-                <li>Web Scraping, Data Extraction, AI Integration</li>
-
-                <a>Input/Output</a>
-                <li>URL input, structured data output (JSON, CSV)</li>
-
-                <a>AI Models</a>
-                <li>Supports integration with Google GenAI, OpenAI, Anthropic, AI21 Labs</li>
-
-                <a>Sources and Dependencies</a>
-                <li>User Prompt</li>
-                <li>URLs/Links</li>
-                <li>DDGS</li>
-
-                <a>Data Scraping</a>
-                <li>HTML Content</li>
-                <li>Javascript</li>
-                <li>Single-page applications</li>
-                <li>JSON Meta Data</li>
-
-                <a>Data output</a>
-                <li>Structured JSON, CSV formats</li>
-                <li>Summarized reports using optional AI integration</li>
-            </ul>
-        </div>
-        
-        <h1>Architecture</h1>
-        <pre><code>
-        Query/Input
-            ↓
-        Input Normalization/parsing (Re, String, nltk)
-            ↓ 
-        keyword filtering (nltk, spaCy)
-            ↓
-        source fetch (DDGS, RSS, WikiAPI, OpenHtml) (aiohttp, feedparser, requests_html)
-            ↓ 
-        Result cleaning/Source Ranking (Framework)
-            ↓
-        IEC Crawling, top results (aiohttp, playwright)
-            ↓
-        Text extraction - JSON, or JS-rendered data (Bs4, lxml, re)
-            ↓
-        Parsing to AI Layer JSON (transformers, sentence-transformers, torch, nltk)
-            ↓
-        Json output, summarization (Integrated NPLs)   
-        </code></pre>
-
-        </div>
-    </div>
-</div>
-</div>
-
+<section id="litews-secondary">
+  
 </section>
 
 
-<section id="section2">
-
-    <div class="section-container-parent">
-    <div class="section-container-content">
-
-
-
-<div class="cx-divider"></div>
-        <h1>Getting Started</h1>
-
-<div class="divider-container">
-<div class="divider"></div>
-</div>
-
-        <h2>Installation</h2>
-
-        <h3>Prerequisites</h3>
-        <a>Ensure you have Python 3.12 or higher installed. You can download it from <span class="embedLink"><a href="https://www.python.org/downloads/" target="_blank">python.org</a></span></a>
-        <a>Download the LiteWS package from <span>Github</span></a>
-        <a>System Requirements: >8GB RAM, >500MB Available Storage</a>
-
-        <h3>Install Required Libraries</h3>
-        <a>Within the file package there is a requirements.txt file which contains all the required libraries as a package. 
-        Run the following string in the terminal to download the requirements package with all the libraries.
-        </a>
-        <pre>
-            <code>pip install requirements.txt -r</code>
-            <button class="copy-button" onclick="copyToClipboard('pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs', this)">
-                <span class="material-symbols-outlined">content_copy</span>
-            </button>
-        </pre>
-        <a>Or optionally, use pip to install the necessary libraries manually:</a>
-        <pre>
-            <code>pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs</code>
-            <button class="copy-button" onclick="copyToClipboard('pip install aiohttp playwright requests beautifulsoup4 pydantic google-genai python-dotenv ddgs', this)">
-                <span class="material-symbols-outlined">content_copy</span>
-            </button>
-        </pre>
-
-        <h3>Playwright Setup</h3>
-        <a>After installing Playwright, run the following command to install the necessary browser binaries:</a>
-        <pre>
-        <code id="command">playwright install</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-            <span class="material-symbols-outlined">content_copy</span>
-        </button>
-        </pre>
-
-        <script>
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                const icon = button.querySelector('span');
-                icon.textContent = 'check';
-                icon.style.color = 'green';
-
+    <div class="cards-section">
+        <div class="cards-section__container">
+            <!-- Card 1 -->
+            <div class="expandable-card expandable-card--1 expandable-card--active">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h1>Design Principles</h1>
+                </div>
+                <div class="card-content">
+                    <p>Focus on clean, minimalist design with subtle animations that enhance user experience without overwhelming the interface.</p>
+                    <p>Every transition is carefully timed to feel natural and responsive, creating a seamless interaction flow.</p>
+                    <button class="card-button">View Details</button>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">add</span>
+                    <span class="material-icon collapse-icon">remove</span>
+                </div>
+            </div>
             
+            <!-- Card 2 -->
+            <div class="expandable-card expandable-card--2">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h1>Development</h1>
+                </div>
+                <div class="card-content">
+                    <p>Optimized code structure with efficient animations using CSS transitions with refined timing functions.</p>
+                    <p>Performance-focused implementation ensures smooth animations across all modern browsers and devices.</p>
+                    <button class="card-button">See Code</button>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="expandable-card expandable-card--3">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h1>User Experience</h1>
+                </div>
+                <div class="card-content">
+                    <p>Intuitive interactions with subtle visual feedback that guides users without distracting from the content.</p>
+                    <p>Accessibility considerations ensure the experience works well for all users regardless of ability or device.</p>
+                    <button class="card-button">Learn More</button>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">expand_more</span>
+                    <span class="material-icon collapse-icon">expand_less</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                // revert back after 1.5 seconds
-                setTimeout(() => {
-                    icon.textContent = 'content_copy';
-                    icon.style.color = '';
-                    copiedText.remove();
-                }, 1500);
-            }).catch(err => {
-                console.error('Failed to copy:', err);
-            });
+    <div class="instructions">
+        <h3>Icon Transformation</h3>
+        <p>Each card has two Material Symbols icons layered on top of each other. When collapsed, the "expand" icon is visible. When expanded, it fades out and the "collapse" icon fades in with a smooth scaling animation.</p>
+    </div>
+
+    <div class="card-footer">
+        <p>Material Symbols with smooth icon transitions</p>
+    </div>
+
+    <script>
+        // Set first card as active with correct icon state
+        const firstCard = document.querySelector('.expandable-card--active');
+        if (firstCard) {
+            const expandIcon = firstCard.querySelector('.expand-icon');
+            const collapseIcon = firstCard.querySelector('.collapse-icon');
+            
+            // Initially, collapse icon should be visible for active card
+            expandIcon.style.opacity = '0';
+            expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
+            collapseIcon.style.opacity = '1';
+            collapseIcon.style.transform = 'scale(1) rotate(0deg)';
         }
 
-
-
-
-
-        </script>
-
-<div class="divider-container">
-<div class="divider"></div>
-</div>
-
-        <h2>API Integration</h2>
-
-        <h3>Chosing AI/API Model</h3>
-        <a>To get structured responses and summaries from the web results you can integrate an API-based AI. 
-        You’ll interact with it through Python SDKs already integrated in the code.
-        Specific usage depends on what AI platform you choose.
-        </a>
-        <span class="notice">
-        <a>
-            <span class="material-symbols-outlined">error</span>
-            Keep in mind that using external APIs may incur fees, such as pay-as-you-go charges.
-            1X2S does not include or cover any costs associated with API usage.
-            Fees and plans are usually stated by respective API provider.
-        </a></span>
-
-        <a>LiteWS supports by default the following APIs:</a>
-        <div class="grid-list">
-        <ul>
-            <li><img src="/pagecontent/resources/images/openai-white-logo-png.png" alt="">OpenAI</li>
-            <li><img src="/pagecontent/resources/images/gemini-white-logo-png.png" alt="">Google Cloud AI</li>
-            <li><img src="/pagecontent/resources/images/mistral-white-logo-png.png" alt="">Mistral AI</li>
-            <li><img src="/pagecontent/resources/images/deepseek-white-logo-png.png" alt="">DeepSeek API</li>
-            <li>Hugging Face Inference API</li>
-            <li><img src="/pagecontent/resources/images/xai-white-logo-png.png" alt="">Grok API</li>
-        </ul>
-        </div>
-        <a style="color: rgb(116, 116, 116);">The code can be modified to support other AI models.</a>
-
-        <h3>Accessing an API Key</h3>
-        <a>
-            Every API requires a unique API key, which is necessary to make API calls. 
-            You can obtain these keys directly from the corresponding API or AI service provider.
-        </a>
-        <div class="column-list">
-        <ul>
-            <span class="linkSpan"><li><a href="https://platform.openai.com/account/api-keys">OpenAI API<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-            <span class="linkSpan"><li><a href="https://ai.google.dev/gemini-api/docs/api-key">Google AI<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-            <span class="linkSpan"><li><a href="https://iamistral.com/api/">Mistral API<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-            <span class="linkSpan"><li><a href="https://api-docs.deepseek.com/">DeepSeek API<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-            <span class="linkSpan"><li><a href="https://huggingface.co/docs/hub/api">Hugging Face APi<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-            <span class="linkSpan"><li><a href="https://x.ai/api">xAI Grok API<span class="material-symbols-outlined"">arrow_outward</span></a></li></span>
-        </ul>
-        </div>
-
-        <h3>Setting Up Environment Variables</h3>
-        <a>
-        Your API keys should be securely stored in an environment variable file located in your project directory.
-        If configured correctly, the script will automatically retrieve the necessary API keys from the <code>.env</code> file.
-        To begin, create a file named <code>.env</code> in the root directory of your project.
-        </a>
-
-        <a>
-        Next, choose the API provider you intend to use from the list below. Copy the corresponding line, paste it into your <code>.env</code> file, and replace <code>PLACEHOLDER</code> with the actual API key provided by that service.
-        </a>
-
-        <pre><code id="command">OPENAI_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-        <pre><code id="command">GEMINI_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-        <pre><code id="command">MISTRAL_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-        <pre><code id="command">DEEPSEEK_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-        <pre><code id="command">HFI_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-        <pre><code id="command">XAI_API_KEY=PLACEHOLDER</code>
-        <button class="copy-button" onclick="copyToClipboard('playwright install', this)">
-        <span class="material-symbols-outlined">content_copy</span>
-        </button></pre>
-
-
-        <span class="notice">
-            <a>
-            <span class="material-symbols-outlined">error</span>
-            Never share your <code>.env</code> file or API keys with anyone. 
-            These credentials are private and should be kept secure at all times.
-            When publishing your files to public directories like e.g. Github, make 
-            sure not to include your <code>.env</code> files, instead use tools like
-             code>gitignore</code>.
-            </a>
-        </span>
-
-
-
-    </div>
-
-    
-
-</div>
+        // Smooth card interaction
+        const cards = document.querySelectorAll('.expandable-card');
+        
+        // Add click event to each card
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Get the material icons for this card
+                const expandIcon = card.querySelector('.expand-icon');
+                const collapseIcon = card.querySelector('.collapse-icon');
+                
+                // If the clicked card is already active, collapse it
+                if (card.classList.contains('expandable-card--active')) {
+                    card.classList.remove('expandable-card--active');
+                    
+                    // Animate icons: collapse icon fades out, expand icon fades in
+                    expandIcon.style.opacity = '1';
+                    expandIcon.style.transform = 'scale(1) rotate(0deg)';
+                    collapseIcon.style.opacity = '0';
+                    collapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
+                    
+                    // Update container background
+                    card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
+                    return;
+                }
+                
+                // Remove active class from all cards and reset their icons
+                cards.forEach(c => {
+                    if (c.classList.contains('expandable-card--active')) {
+                        const cExpandIcon = c.querySelector('.expand-icon');
+                        const cCollapseIcon = c.querySelector('.collapse-icon');
+                        
+                        cExpandIcon.style.opacity = '1';
+                        cExpandIcon.style.transform = 'scale(1) rotate(0deg)';
+                        cCollapseIcon.style.opacity = '0';
+                        cCollapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
+                        
+                        c.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
+                    }
+                    c.classList.remove('expandable-card--active');
+                    c.style.transform = '';
+                });
+                
+                // Add active class to clicked card and update its icons
+                card.classList.add('expandable-card--active');
+                
+                // Animate icons: expand icon fades out, collapse icon fades in
+                expandIcon.style.opacity = '0';
+                expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
+                collapseIcon.style.opacity = '1';
+                collapseIcon.style.transform = 'scale(1) rotate(0deg)';
+                
+                // Update container background
+                card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.2)';
+                
+                // Add subtle animation to container
+                const container = document.querySelector('.cards-section__container');
+                container.style.transform = 'scale(1.005)';
+                setTimeout(() => {
+                    container.style.transform = 'scale(1)';
+                }, 300);
+            });
+            
+            // Add hover effect for non-active cards
+            card.addEventListener('mouseenter', () => {
+                if (!card.classList.contains('expandable-card--active')) {
+                    card.style.transform = 'translateY(-5px)';
+                    
+                    // Slight icon animation on hover
+                    const iconContainer = card.querySelector('.material-icon-container');
+                    iconContainer.style.transform = 'scale(1.1)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (!card.classList.contains('expandable-card--active')) {
+                    card.style.transform = 'translateY(0)';
+                    
+                    // Reset icon scale
+                    const iconContainer = card.querySelector('.material-icon-container');
+                    iconContainer.style.transform = 'scale(1)';
+                }
+            });
+        });
+        
+        // Add button interactions
+        document.querySelectorAll('.card-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // Ripple effect
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const activeCard = document.querySelector('.expandable-card--active');
+            let index = Array.from(cards).indexOf(activeCard);
+            
+            if (e.key === 'ArrowRight') {
+                index = (index + 1) % cards.length;
+            } else if (e.key === 'ArrowLeft') {
+                index = (index - 1 + cards.length) % cards.length;
+            } else if (e.key === 'Escape') {
+                // Collapse all cards with Escape key
+                cards.forEach(card => {
+                    if (card.classList.contains('expandable-card--active')) {
+                        const expandIcon = card.querySelector('.expand-icon');
+                        const collapseIcon = card.querySelector('.collapse-icon');
+                        
+                        expandIcon.style.opacity = '1';
+                        expandIcon.style.transform = 'scale(1) rotate(0deg)';
+                        collapseIcon.style.opacity = '0';
+                        collapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
+                        
+                        card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
+                    }
+                    card.classList.remove('expandable-card--active');
+                    card.style.transform = '';
+                });
+                return;
+            } else {
+                return;
+            }
+            
+            // Remove active class from all cards and reset icons
+            cards.forEach(c => {
+                if (c.classList.contains('expandable-card--active')) {
+                    const cExpandIcon = c.querySelector('.expand-icon');
+                    const cCollapseIcon = c.querySelector('.collapse-icon');
+                    
+                    cExpandIcon.style.opacity = '1';
+                    cExpandIcon.style.transform = 'scale(1) rotate(0deg)';
+                    cCollapseIcon.style.opacity = '0';
+                    cCollapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
+                    
+                    c.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
+                }
+                c.classList.remove('expandable-card--active');
+            });
+            
+            // Add active class to new card and update icons
+            const newCard = cards[index];
+            newCard.classList.add('expandable-card--active');
+            
+            const expandIcon = newCard.querySelector('.expand-icon');
+            const collapseIcon = newCard.querySelector('.collapse-icon');
+            
+            expandIcon.style.opacity = '0';
+            expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
+            collapseIcon.style.opacity = '1';
+            collapseIcon.style.transform = 'scale(1) rotate(0deg)';
+            
+            newCard.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.2)';
+            
+            // Smooth scroll into view
+            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Page load animation
+        document.addEventListener('DOMContentLoaded', () => {
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+ 
 
 
 </section>
@@ -367,21 +374,21 @@ cursor: help;
 
 
 
-<section id="section3">
+<section id="resources">
         
 
- <div class="h-section-content-container">
-            <div class="i-section-container">
+ <div class="resources__grid">
+            <div class="resources__item">
                 <h1>Datasets</h1>
                 <p>All our datasets and resources can be found here.</p>
                 <span class="linkSpan"><a href="/resources" target="_self">Resources<span class="material-symbols-outlined"">arrow_outward</span></a></span>
             </div>
-            <div class="i-section-container">
+            <div class="resources__item">
                 <h1>Docs</h1>
                 <p>Full documentation can be found here.</p>
                 <span class="linkSpan"><a href="/#" target="_blank">Documentation<span class="material-symbols-outlined">arrow_outward</span></a></span>
             </div>
-            <div class="i-section-container">
+            <div class="resources__item">
                 <h1>More Models</h1>
                 <p>Explore more open-source AI models here.</p>
                  <span class="linkSpan"><a href="https://ollama.com/search" target="_blank">ollama index<span class="material-symbols-outlined"">arrow_outward</span></a></span>
@@ -393,16 +400,16 @@ cursor: help;
 
 
 
-    <button id="scrollToTopBtn">Back to Top</button>
-            <link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
-      <script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
+    <button id="scroll-to-top">Back to Top</button>
+            <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+      <script src="/assets/js/components/back-to-top.js"></script>
 
 
 
 
       <div id="footer-container"></div>
-      <script src="/pagecontent/scriptsheets/global-footer.js"></script>
-      <link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+      <script src="/assets/js/components/footer.js"></script>
+      <link rel="stylesheet" href="/assets/css/components/footer.css">
 
 
 

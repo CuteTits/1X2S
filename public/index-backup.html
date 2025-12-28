@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
   </mobilenav>
 
-  <div class="background-video background-video--fixed">
+  <div class="fixed-background-video">
     <video autoplay muted loop id="background-video">
       <source src="/assets/videos/7094565-ix-uhd_3840_2160_25fps.mp4" type="video/mp4">
       Your browser does not support the video tag.
@@ -75,9 +75,9 @@
     });
   </script>
 
-  <section id="hero">
-    <div class="hero__container">
-      <div class="hero__content">
+  <section id="section1">
+    <div class="section1-container-parent">
+      <div class="section-container-content">
         <h2>Exploring the World Wide Web</h2>
         <h3>Advanced AI Infrastructure Pipeline for Web Scaling and Integration.</h3>
       </div>
@@ -85,15 +85,15 @@
     </div>
   </section>
 
-  <section id="query-demo" class="section section--dynamic section--vh400">
-    <div class="section__container section__container--dynamic">
-      <div class="query-demo__wrapper">
-        <div class="query-demo__text">
+  <section id="section1-2" class="dynamicsection vh400">
+    <div class="dynamic-container">
+      <div class="s1-2-parent-container">
+        <div class="s1-2-text-container">
           <h4 data-aos="fade-up">Scale the Web</h4>
-          <h1 data-aos="fade-up" id="query-demo-dynamic-text" class="query-demo__dynamic-text" style="margin-bottom: 25px;">...Ask anything</h1>
+          <h1 data-aos="fade-up" id="dynamic" class="dynamic-text" style="margin-bottom: 25px;">...Ask anything</h1>
           <script>
-            const dynamicText = document.getElementById('query-demo-dynamic-text');
-            const section1_2 = document.getElementById('query-demo');
+            const dynamicText = document.getElementById('dynamic');
+            const section1_2 = document.getElementById('section1-2');
 
             const startPhrase = '...Ask anything';
             const phrases = [
@@ -141,42 +141,42 @@
               }
             });
           </script>
-            <div class="query-demo__icons" style="display: flex; flex-direction: row; gap: 20px;">
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="200" >
+            <div class="icon-container-flex" style="display: flex; flex-direction: row; gap: 20px;">
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="200" >
                 <span class="material-symbols-outlined">search</span>
                 <p>Smart Queries</p>
               </div>
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="400">
                 <span class="material-symbols-outlined">web</span>
                 <p>Web Scaling</p>
               </div>
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="600">
+              <div class="icon-container" data-aos="fade-up" data-aos-delay="600">
                 <span class="material-symbols-outlined">settings</span>
                 <p>Integration</p>
               </div>
             </div>
         </div>
 
-        <div class="query-demo__textbox">
-          <div class="query-demo__typing" id="query-demo-typing">
-            <div class="query-demo__typing-content">
+        <div class="display-textbox">
+          <div class="scrollTypingContainer" id="scrollTypingContainer">
+            <div class="typing-content">
               <p>List <span>Arsenal's Current Injuries</span>.</p>
             </div>
           </div>
           <span class="material-symbols-outlined">send</span>
         </div>
-        <div class="query-demo__examples" data-aos="flip-down" data-aos-delay="1200">
-          <div id="query-demo-arrow"></div>
-          <div class="query-demo__example query-demo__example--r1">
+        <div class="inboundcontainer" data-aos="flip-down" data-aos-delay="1200">
+          <div id="arrow"></div>
+          <div class="example r1">
             <h1>Keyword Filtering</h1>
             <p>Use queries and keywords without comprimising accuracy.</p>
             <p>Advanced query-handling allows for natural language input.</p>
           </div>
-          <div class="query-demo__example query-demo__example--r2">
+          <div class="example r2">
             <h1>Relevancy Sorting</h1>
             <p>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</p>
           </div>
-          <div class="query-demo__example query-demo__example--r3">
+          <div class="example r3">
             <h1>Data Extraction</h1>
             <p>
               Combines full-query parsing with keyword-based searches to efficiently crawl the web for high-relevance content.
@@ -185,9 +185,9 @@
           </div>
         </div>
         <script>
-          const section = document.getElementById('query-demo');
-          const examples = Array.from(section.querySelectorAll('.query-demo__example'));
-          const arrow = document.getElementById('query-demo-arrow');
+          const section = document.getElementById('section1-2');
+          const examples = Array.from(section.querySelectorAll('.example'));
+          const arrow = document.getElementById('arrow');
 
           // Define custom widths for each example (in vw)
           const arrowWidths = [25, 17, 0]; // <-- editable intervals, one per example
@@ -231,8 +231,8 @@
     </div>
 
     <script>
-      const container = document.getElementById('query-demo-typing');
-      const originalContent = container.querySelector('.query-demo__typing-content').innerHTML;
+      const container = document.getElementById('scrollTypingContainer');
+      const originalContent = container.querySelector('.typing-content').innerHTML;
       container.innerHTML = '';
 
       function parseHTMLToChars(html) {
@@ -258,7 +258,7 @@
 
       function updateScrollEffects() {
         // Get section and scroll position
-        const section = document.getElementById('query-demo');
+        const section = document.getElementById('section1-2');
         const sectionRect = section.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
@@ -273,14 +273,14 @@
             progress = Math.min(1, progress * 5); // change speed
             const charsToShow = Math.floor(progress * chars.length);
             container.innerHTML =
-              '<span class="query-demo__text-typed">' +
+              '<span class="typing-text">' +
               chars.slice(0, charsToShow).join('') +
               '</span>';
           }
         }
 
         // --- Expand textbox on scroll ---
-        const textbox = document.querySelector('.query-demo__textbox');
+        const textbox = document.querySelector('.display-textbox');
         if (textbox) {
           if (!textbox.classList.contains('expanded') && window.scrollY > 50) {
             textbox.classList.add('expanded');
@@ -298,16 +298,16 @@
 
   <section style="height: 2.5vh;"></section>
 
-  <section id="results-summary" class="section section--dynamic section--vh300">
-    <div class="section__container section__container--dynamic">
-      <div class="results-summary__wrapper">
-        <div class="results-summary__panel" style="padding: 20px;">
+  <section id="section1-3" class="dynamicsection vh300">
+    <div class="dynamic-container">
+      <div class="s-1-3-parent">
+        <div class="s-1-3-child" style="padding: 20px;">
           <h1>Result Summaries | <span>✦ Gemini API</span></h1>
-          <div class="results-summary__tags">
+          <div class="tag-container">
             <span>Arsenal</span><span>Football</span><span>Sports</span><span>Injuries</span><span>Updates</span><span>News</span>
             <span>Now</span><span>Report</span>
           </div>
-          <div class="results-summary__text results-summary__text--progressive">
+          <div class="progressive-text-container">
             <p>Arsenal currently face several injury concerns as of 11-20-2025.</p>
             <P>Key injuries include:</P>
             <ul>
@@ -325,15 +325,15 @@
         </div>
 
 
-        <div class="divider divider--vertical divider--light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
+        <div class="divider-vertical-light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
 
-        <div class="results-summary__panel results-summary__panel--mobile-hide">
+        <div class="s-1-3-child dvc-mob">
           <h1 style="margin: 20px 0 0 20px;">JSON</h1>
           <a style="margin-left: 20px;"><span>●</span> online</a>
-          <section class="results-summary__scroll" id="results-scroll">
-            <div class="results-summary__scroll-inner">
-              <div class="json__container">
-                <div class="json__section" data-json="{
+          <section class="scroll-sync-section" id="scroll-sec">
+            <div class="scroll-inner">
+              <div class="inner-container">
+                <div class="json-section" data-json="{
                   &quot;query&quot;: &quot;List Arsenal´s Current Injuries.&quot;,
                   &quot;identified_keywords&quot;: &quot;Arsenal, Injuries&quot;,
                   &quot;enhanced_filter&quot;: &quot;football, sport, news, premier league, players&quot;,
@@ -358,32 +358,32 @@
                     <span class="json-key">"sources"</span>: [
                   }</code></pre>
                 </div>
-                <div class="json__arrow json__arrow--var1">
-                  <div class="json__arrow-line"></div>
+                <div class="inner-container-arrow var-1">
+                  <div class="line"></div>
                   <h1>Detailed Metadata</h1>
                   <p>Smart metadata handling for quick and easy integration.</p>
                 </div>
               </div>
 
-              <div class="json__container">
-                <div class="json__section" data-json="{
+              <div class="inner-container">
+                <div class="json-section" data-json="{
                   &quot;summary&quot;: &quot;Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include:\nBukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.\nKai Havertz - Knee injury, expected to be back in January.\nGabriel Magalhaes - Thigh injury, expected to be back by February 2026.\nRiccardo Calafiori - Calf injury, will be back by the end of November.\nNoni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.\n\nViktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley.&quot;
                 }">
                   <pre class="json-container"><code>{
                     <span class="json-key">"summary":</span> <span class="json-string">"Arsenal currently face several injury concerns as of 11-20-2025.<br>Key injuries include:<br>Bukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.<br>Kai Havertz - Knee injury, expected to be back in January.<br>Gabriel Magalhaes - Thigh injury, expected to be back by February 2026.<br>Riccardo Calafiori - Calf injury, will be back by the end of November.<br>Noni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.<br><br>Viktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."</span>
                   }</code></pre>
                 </div>
-                <div class="json__arrow json__arrow--var2">
-                  <div class="json__arrow-line"></div>
-                  <div class="json__arrow-text">
+                <div class="inner-container-arrow var-2">
+                  <div class="line"></div>
+                  <div class="actual-text">
                     <h1>Integratable Summary</h1>
                     <p>AI-based unified source summary for seamless integration.</p>
                   </div>
                 </div>
               </div>
 
-              <div class="json__container">
-                  <pre class="json__code"><code>{
+              <div class="inner-container">
+                  <pre class="json-container"><code>{
                     <span class="json-key">"sources"</span>: [
                         <span class="json-key">"title"</span>: <span class="json-string">"Arsenal Injury Update — Key Players Assessed"</span>,
                         <span class="json-key">"link"</span>: <span class="json-string">"https://www.bbc.co.uk/sport/epl/arsenal/arsenal-injury-update"</span>,
@@ -412,49 +412,49 @@
                   }</code></pre>
 
               </div>
-              <div class="json__textbox">
+              <div class="inner-container-text-box">
                   <h2>Source References</h2>
                   <p>Includes titles, links, snippets, and publication timestamps for traceability.</p>
                   <p>Facilitates verification and further exploration of summarized content.</p>
                   <p>Allows for easier source attribution and credibility assessment as well as enhanced crawling and indexing capabilities.</p>
-                  <div class="json__icons">
-                    <div class="json__icon">
+                  <div class="inner-container-text-box-icon-container">
+                    <div class="inner-container-text-box-icon">
                       <span class="material-symbols-outlined">source</span>
                       <p>Sources</p>
                     </div>
-                    <div class="json__icon">
+                    <div class="inner-container-text-box-icon">
                       <span class="material-symbols-outlined">link</span>
                       <p>Links</p>
                     </div>
-                    <div class="json__icon">
+                    <div class="inner-container-text-box-icon">
                       <span class="material-symbols-outlined">description</span>
                       <p>Snippets</p>
                     </div>
                    </div>
 
 
-                    <div class="json__logos">
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo-container">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-ddgs.png" alt="DuckDuckGo Logo">
                       <p>DuckDuckGo</p>
                     </div>
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-wiki.png" alt="Wikipedia Logo">
                       <p>Wikipedia</p>
                     </div>
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-searx.png" alt="SearXNG Logo">
                       <p>SearXNG</p>
                     </div>
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-gdelt.png" alt="GDELT Logo">
                       <p>GDELT</p>
                     </div>
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-statsbomb.png" alt="StatsBomb Logo">
                       <p>StatsBomb</p>
                     </div>
-                    <div class="json__logo">
+                    <div class="inner-container-text-box-logo">
                       <img src="/assets/images/logo-espn.png" alt="ESPN Logo">
                       <p>ESPN</p>
                     </div>
@@ -463,12 +463,12 @@
   // Configurable speed (pixels per second)
   const carouselSpeed = 60; // Change this value for speed
 
-  const logocarousel = document.querySelector('.json__logo-carousel');
+  const logocarousel = document.querySelector('.inner-container-text-box-logo-carousel');
   let direction = 1;
   let position = 0;
 
   function animateCarousel() {
-    const wrapper = document.querySelector('.json__logo-carousel-wrapper');
+    const wrapper = document.querySelector('.inner-container-text-box-logo-carousel-wrapper');
     const maxOffset = carousel.scrollWidth - wrapper.offsetWidth;
     position += direction * (carouselSpeed / 60); // 60fps
 
@@ -493,8 +493,8 @@
           </section>
 
           <script>
-            const parentSection = document.querySelector('#results-summary');
-            const innerContainers = parentSection.querySelectorAll('.json__container');
+            const parentSection = document.querySelector('#section1-3');
+            const innerContainers = parentSection.querySelectorAll('.inner-container');
 
             const intervalPx = 800; // show arrow every 250px
             const showDuration = 800; // hide arrow after 100px
@@ -513,7 +513,7 @@
                   const scrolledSinceTrigger = scrollIntoSection - triggerPx;
 
                   innerContainers.forEach((container, i) => {
-                    const arrow = container.querySelector('.json__arrow');
+                    const arrow = container.querySelector('.inner-container-arrow');
                     if (!arrow) return;
 
                     const intervalStart = i * intervalPx;
@@ -531,8 +531,8 @@
               }
             });
 
-            const sectioncontrol = document.querySelector('#results-summary');
-            const inner = document.querySelector('.results-summary__scroll-inner');
+            const sectioncontrol = document.querySelector('#section1-3');
+            const inner = document.querySelector('.scroll-inner');
 
             const startAt = 0.1; // start effect after 50% scrolled into the section
 
@@ -577,23 +577,23 @@
                 return `<span class="${cls}">${match}</span>`;
               });
             }
-            document.querySelectorAll('.json__section').forEach(section => {
+            document.querySelectorAll('.json-section').forEach(section => {
               const rawJson = section.getAttribute('data-json');
               const formattedJson = syntaxHighlight(JSON.stringify(JSON.parse(rawJson), null, 2));
               section.innerHTML = `
-                <pre class="json__code"><code>${formattedJson}</code></pre>
+                <pre class="json-container"><code>${formattedJson}</code></pre>
               `;
             });
           </script>
         </div>
-                          <div class="results-summary__mask"></div>
+                          <div class="mask"></div>
 
       </div>
 
 
       <script>
         document.addEventListener("DOMContentLoaded", () => {
-          const container = document.querySelector(".results-summary__text--progressive");
+          const container = document.querySelector(".progressive-text-container");
           let lines = [];
 
           Array.from(container.children).forEach(child => {
@@ -626,7 +626,7 @@
           };
 
           function checkScrollStart() {
-            const section = document.getElementById('results-summary');
+            const section = document.getElementById('section1-3');
             const rect = section.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             const sectionHeight = rect.height;
@@ -650,26 +650,26 @@
 
   </section>
 
-  <section id="news-feed" class="section--vh100">
-    <div class="news-feed__background">
+  <section id="section1-5" class="vh100">
+    <div class="background-image-wrapper">
       <img src="/assets/images/element-pattern-dot.png" alt="background patterned image">
     </div>
-    <div class="section__title">
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Streamlined News Feed</h1>
       <h3 data-aos="fade-up">Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
         Showing the latest news articles, blog posts, and updates from across the web.
         With Built-in <span>AI Summary</span> for Quick Insights.
       </h3>
-      <div class="section__title-link">
+      <div class="section-absolute-title-ml-link">
         <a href="/user/dashboard" style="display: flex; justify-items: center; align-items: center; text-decoration: none;">
           Available through your user dashboard
           <span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span>
         </a>
       </div>
     </div>
-    <div class="carousel" data-aos="fade-up">
-      <div class="carousel__container">
-        <div class="carousel__track" id="carousel-track">
+    <div class="carousel-wrapper" data-aos="fade-up">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel">
           <img src="/assets/images/frame140.png" alt="Image 4">
           <img src="/assets/images/frame141.png" alt="Image 5">
           <img src="/assets/images/frame142.png" alt="Image 6">
@@ -678,7 +678,7 @@
       </div>
     </div>
     <script>
-      const carousel = document.getElementById('carousel-track');
+      const carousel = document.getElementById('carousel');
       const speedFactor = 1.5; // >1 = faster, <1 = slower
       let carouselActivated = false; // flag to run once
 
@@ -709,90 +709,90 @@
     </script>
   </section>
 
-  <section id="features" class="section section--vhauto section--bg-dark">
-    <div class="section__title">
+  <section id="section2" class="vhauto bg-0b0b0b">
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Raw Features</h1>
       <h3 data-aos="fade-up">
         LiteWS is built with efficiency, precision, and scalability in mind. With ready-to-integrate AI capabilities and advanced data-collection features,
         it delivers a robust yet lightweight Python scraping solution designed for seamless integration into existing systems and infrastructure.
       </h3>
     </div>
-    <div class="features__grid" data-aos="fade-up">
-      <div class="features__item">
-        <div class="features__item-title">
+    <div class="s2-grid" data-aos="fade-up">
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
           <h2>Smooth Deployment</h2>
           <h3>API First</h3>
         </div>
-        <div class="features__item-content">
+        <div class="s2-grid-item-show-more">
           <p>
             Easy integration with existing systems through RESTful APIs and SDKs.
           </p>
         </div>
-        <img class="features__item-img" src="/assets/images/illustration-03.png" alt="AI Image 1">
+        <img class="s2-grid-img" src="/assets/images/illustration-03.png" alt="AI Image 1">
       </div>
-      <div class="features__item">
-        <div class="features__item-title">
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
           <h2>Scalable</h2>
           <h3>Cloud-Native</h3>
         </div>
-        <div class="features__item-content">
+        <div class="s2-grid-item-show-more">
           <p>
             Easily handles increasing workloads with minimal latency. Supports direct integration into existing systems, projects and infrastructure.
           </p>
         </div>
-        <img class="features__item-img" src="/assets/images/illustration-02.png" alt="AI Image 1">
+        <img class="s2-grid-img" src="/assets/images/illustration-02.png" alt="AI Image 1">
       </div>
-      <div class="features__item">
-        <div class="features__item-title">
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
           <h2>Customizable</h2>
           <h3>Self-Hosted</h3>
         </div>
-        <div class="features__item-content">
+        <div class="s2-grid-item-show-more">
           <p>
             Self-hosted options available for tailored deployments to meet specific business needs.
           </p>
         </div>
-        <img class="features__item-img" src="/assets/images/illustration-01.png" alt="AI Image 1">
+        <img class="s2-grid-img" src="/assets/images/illustration-01.png" alt="AI Image 1">
       </div>
-      <div class="features__item">
-        <div class="features__item-title">
+      <div class="s2-grid-item">
+        <div class="s2-grid-item-title">
           <h2>Lightweight</h2>
           <h3>Python Architecture</h3>
         </div>
-        <div class="features__item-content">
+        <div class="s2-grid-item-show-more">
           <p>
             Minimal resource consumption, optimized for performance on modest hardware.
           </p>
         </div>
-        <img class="features__item-img" src="/assets/images/illustration-05.png" alt="AI Image 1">
+        <img class="s2-grid-img" src="/assets/images/illustration-05.png" alt="AI Image 1">
       </div>
     </div>
   </section>
 
-  <section id="security-privacy" class="section section--vh80 section--bg-dark">
-    <div class="section__title">
+  <section id="section2-1" class="vh80 bg-0b0b0b">
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Secure Endpoints</h1>
-      <div class="section__paragraph">
+      <div class="section-absolute-title-sx-paragraph">
         <p data-aos="fade-up">
           Our API endpoints are secured using industry-leading providers, employing TLS 1.3 and HTTPS to protect both users and our infrastructure.
           We leverage industry-standard security solutions to safeguard API operations without compromising efficiency or performance.
         </p>
       </div>
-      <div class="security-privacy__logos" style="width: 100%;
+      <div class="flex-bound-container" style="width: 100%;
         display: flex; opacity: .3; margin: 10px 0;
         flex-direction: row; border-top: solid 1px rgb(255, 255, 255);
         gap: 20px; align-items: center; justify-content: right;">
-        <img class="features__item-img" src="/assets/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
-        <img class="features__item-img" src="/assets/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
-        <img class="features__item-img" src="/assets/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
+        <img class="s2-grid-img" src="/assets/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
+        <img class="s2-grid-img" src="/assets/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
+        <img class="s2-grid-img" src="/assets/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
       </div>
     </div>
-    <div class="section__title">
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Total Privacy</h1>
-      <div class="section__paragraph">
+      <div class="section-absolute-title-sx-paragraph">
         <p data-aos="fade-up">
-          User API calls are <span class="highlight highlight--red">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information,
-          and user inputs are <span class="highlight highlight--red">never</span> logged.
+          User API calls are <span class="p-red-li">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information,
+          and user inputs are <span class="p-red-li">never</span> logged.
         </p>
         <p data-aos="fade-up">
           If you choose to integrate the Google Gemini API in your projects, their logging policy applies, which may include API request logging,
@@ -807,24 +807,24 @@
     </div>
   </section>
 
-  <section class="section section--vh80" id="cta">
-    <div class="section__title">
+  <section class="vh80" id="p-s-10">
+    <div class="section-absolute-title">
       <h1 data-aos="fade-up">Get Started</h1>
     </div>
-    <div class="cta__cards" data-aos="fade-up">
-      <div class="cta__card">
+    <div class="container-flex-row" data-aos="fade-up">
+      <div class="section-card-v">
         <h2>LiteWS</h2>
         <p>Access on-demand web results and site content through DuckDuckGo as structured, ready-to-use JSON, or receive AI-generated summaries using Google Gemini</p>
-        <div class="cta__buttons">
+        <div class="btn-container">
           <a href="/login/?mode=login"><button>API Dashboard</button></a>
           <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
         </div>
       </div>
-      <div class="divider divider--vertical"></div>
-      <div class="cta__card">
+      <div class="divider-vertical"></div>
+      <div class="section-card-v">
         <h2>Documentation</h2>
         <p>Read our full documentation to get started with our APIs and services.</p>
-        <div class="cta__buttons">
+        <div class="btn-container">
           <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
         </div>
       </div>
@@ -835,8 +835,8 @@
     // Add all section IDs you want sticky behavior for
     const stickySections = [
       'section1-1',
-      'query-demo',
-      'results-summary'
+      'section1-2',
+      'section1-3'
     ];
 
     // Sticky config
@@ -850,7 +850,7 @@
         const section = document.getElementById(sectionID);
         if (!section) return;
 
-        const dynamic_container = section.querySelector('.section__container--dynamic');
+        const dynamic_container = section.querySelector('.dynamic-container');
         if (!dynamic_container) return;
 
         const contentHeight = dynamic_container.offsetHeight;
@@ -897,7 +897,7 @@
     handleStickyContent();
   </script>
 
-  <button id="scroll-to-top">Back to Top</button>
+  <button id="scrollToTopBtn">Back to Top</button>
   <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
   <script src="/assets/js/components/back-to-top.js"></script>
 

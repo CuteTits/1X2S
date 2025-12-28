@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<link rel="icon" href="/pagecontent/resources/images/logo.png">
+<link rel="icon" href="/assets/images/logo.png">
 <title>Login / Apply</title>
-<link rel="stylesheet" href="/pagecontent/stylesheets/global.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/fonts.css">
-<link rel="stylesheet" href="/pagecontent/stylesheets/stylesheet-loginpage.css">
+<link rel="stylesheet" href="/assets/css/core/global.css">
+<link rel="stylesheet" href="/assets/css/core/fonts.css">
+<link rel="stylesheet" href="/assets/css/pages/page-login.css">
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
@@ -24,7 +24,7 @@
 
 <!-- Back button -->
 <button id="backtoPrevious">
-  <link rel="stylesheet" href="/pagecontent/stylesheets/navbar.css">
+  <link rel="stylesheet" href="/assets/css/components/navbar.css">
   <a href="/"><span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.5em;">arrow_back_ios</span> Back </a>
   <script>
     document.getElementById('backtoPrevious').addEventListener('click', function() {
@@ -35,14 +35,14 @@
 
 <section id="section1">
   <div class="s1-background">
-    <img src="/pagecontent/resources/images/illustration-flat-img.png" alt="">
+    <img src="/assets/images/illustration-flat-img.png" alt="">
   </div>
 
   <div id="notice" class="notice;"></div>
     <div id="notifications-container"></div>
 
   <div class="form-container">
-    <img src="/pagecontent/resources/images/vultrlogo.png" alt="Logo" class="form-logo" style="width: 100px;">
+    <img src="/assets/images/vultrlogo.png" alt="Logo" class="form-logo" style="width: 100px;">
     <div class="form-title" id="formTitle">Apply for Access</div>
 
     <!-- Apply Form -->
@@ -211,11 +211,11 @@ function showNotification(message, type = 'info', duration = 4000) {
 </script>
 
 <button id="scrollToTopBtn">Back to Top</button>
-<link rel="stylesheet" href="/pagecontent/stylesheets/backtotopbtn.css">
-<script src="/pagecontent/scriptsheets/backtotopbtn.js"></script>
+<link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+<script src="/assets/js/components/back-to-top.js"></script>
 
 <div id="footer-container"></div>
-<script src="/pagecontent/scriptsheets/global-footer.js"></script>
-<link rel="stylesheet" href="/pagecontent/stylesheets/footer.css">
+<script src="/assets/js/components/footer.js"></script>
+<link rel="stylesheet" href="/assets/css/components/footer.css">
 </body>
 </html>
