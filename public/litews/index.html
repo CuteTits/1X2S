@@ -98,7 +98,6 @@ cursor: help;
 
 <section id="litews-secondary">
   
-</section>
 
 
     <div class="cards-section">
@@ -110,17 +109,17 @@ cursor: help;
                     <div class="card-icon">
                         <i class="fas fa-palette"></i>
                     </div>
-                    <h1>Design Principles</h1>
+                    <span class="material-symbols-outlined">search</span>
+                    <h1>Intent & Query Intelligence</h1>
                 </div>
                 <div class="card-content">
-                    <p>Focus on clean, minimalist design with subtle animations that enhance user experience without overwhelming the interface.</p>
-                    <p>Every transition is carefully timed to feel natural and responsive, creating a seamless interaction flow.</p>
-                    <button class="card-button">View Details</button>
+                    <p>LiteWS analyzes user queries, prompts, or keywords to detect intent, extract contextual signals, and determine time sensitivity.</p>
+                    <p>It then retrieves, filters, and ranks web data using the minimum required sources to return fast, structured, and context-relevant results.</p>
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">add</span>
-                    <span class="material-icon collapse-icon">remove</span>
+                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
             
@@ -131,12 +130,15 @@ cursor: help;
                     <div class="card-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h1>Development</h1>
+                    <span class="material-symbols-outlined">code</span>
+                    <h1>Modular Retrieval Engines</h1>
                 </div>
                 <div class="card-content">
-                    <p>Optimized code structure with efficient animations using CSS transitions with refined timing functions.</p>
-                    <p>Performance-focused implementation ensures smooth animations across all modern browsers and devices.</p>
-                    <button class="card-button">See Code</button>
+                    <p>Uses SearXNG, GDELT, DDGS, Bing Search API, and Deep Search Crawling. Performs intelligent, query-driven crawling across websites and urls to discover, analyze, and extract relevant information. 
+                    <p>Deep Search Crawling. Performs intelligent, query-driven crawling across websites, RSS feeds and urls to discover, analyze, and extract relevant information. 
+                       Uses keyword matching, semantic relevance, and contextual filtering to surface high-value data aligned with user intent.
+                    With customizable crawling depth, frequency, and scope, LiteWS ensures up-to-date and comprehensive coverage of the web.
+                    </p>
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
@@ -152,224 +154,146 @@ cursor: help;
                     <div class="card-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h1>User Experience</h1>
+                    <span class="material-symbols-outlined">deblur</span>
+                    <h1>Aggregation, Ranking & Normalization</h1>
                 </div>
                 <div class="card-content">
-                    <p>Intuitive interactions with subtle visual feedback that guides users without distracting from the content.</p>
-                    <p>Accessibility considerations ensure the experience works well for all users regardless of ability or device.</p>
-                    <button class="card-button">Learn More</button>
+                    <p>Advanced ranking algorithms prioritize content based on relevance, credibility, and freshness to ensure users receive the most pertinent information.</p>
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">expand_more</span>
-                    <span class="material-icon collapse-icon">expand_less</span>
+                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+            <div class="expandable-card expandable-card--4">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="material-symbols-outlined">deployed_code</span>
+                    <h1>Output Modes</h1>
+                </div>
+                <div class="card-content">
+                    <p>SERP-Compatible Mode, LLM Context Mode, and Stream / Agent Mode</p>
+                    <p> Each mode tailors the output format to suit different applications, whether for direct user consumption, LLM integration, or real-time data streaming.</p>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="instructions">
-        <h3>Icon Transformation</h3>
-        <p>Each card has two Material Symbols icons layered on top of each other. When collapsed, the "expand" icon is visible. When expanded, it fades out and the "collapse" icon fades in with a smooth scaling animation.</p>
-    </div>
 
-    <div class="card-footer">
-        <p>Material Symbols with smooth icon transitions</p>
-    </div>
 
-    <script>
-        // Set first card as active with correct icon state
-        const firstCard = document.querySelector('.expandable-card--active');
-        if (firstCard) {
-            const expandIcon = firstCard.querySelector('.expand-icon');
-            const collapseIcon = firstCard.querySelector('.collapse-icon');
-            
-            // Initially, collapse icon should be visible for active card
-            expandIcon.style.opacity = '0';
-            expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
-            collapseIcon.style.opacity = '1';
-            collapseIcon.style.transform = 'scale(1) rotate(0deg)';
+<script>
+(() => {
+    const cards = [...document.querySelectorAll('.expandable-card')];
+    let activeIndex = cards.findIndex(c =>
+        c.classList.contains('expandable-card--active')
+    );
+
+    /* -----------------------------
+       Core state handler
+    ------------------------------ */
+    function setActiveCard(index, scroll = false) {
+        cards.forEach((card, i) => {
+            card.classList.toggle('expandable-card--active', i === index);
+        });
+
+        activeIndex = index;
+
+        if (scroll && cards[index]) {
+            cards[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }
+    }
+
+    function collapseAll() {
+        cards.forEach(card =>
+            card.classList.remove('expandable-card--active')
+        );
+        activeIndex = -1;
+    }
+
+    /* -----------------------------
+       Click handling (delegated)
+    ------------------------------ */
+    document.addEventListener('click', e => {
+        const card = e.target.closest('.expandable-card');
+        if (!card) return;
+
+        // Prevent bubbling from buttons
+        if (e.target.closest('.card-button')) return;
+
+        const index = cards.indexOf(card);
+
+        if (card.classList.contains('expandable-card--active')) {
+            collapseAll();
+        } else {
+            setActiveCard(index);
+        }
+    });
+
+    /* -----------------------------
+       Button interaction
+    ------------------------------ */
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.card-button');
+        if (!btn) return;
+
+        e.stopPropagation();
+        btn.classList.add('is-pressed');
+        setTimeout(() => btn.classList.remove('is-pressed'), 120);
+    });
+
+    /* -----------------------------
+       Keyboard navigation
+    ------------------------------ */
+    document.addEventListener('keydown', e => {
+        if (!cards.length) return;
+
+        if (e.key === 'Escape') {
+            collapseAll();
+            return;
         }
 
-        // Smooth card interaction
-        const cards = document.querySelectorAll('.expandable-card');
-        
-        // Add click event to each card
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Get the material icons for this card
-                const expandIcon = card.querySelector('.expand-icon');
-                const collapseIcon = card.querySelector('.collapse-icon');
-                
-                // If the clicked card is already active, collapse it
-                if (card.classList.contains('expandable-card--active')) {
-                    card.classList.remove('expandable-card--active');
-                    
-                    // Animate icons: collapse icon fades out, expand icon fades in
-                    expandIcon.style.opacity = '1';
-                    expandIcon.style.transform = 'scale(1) rotate(0deg)';
-                    collapseIcon.style.opacity = '0';
-                    collapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
-                    
-                    // Update container background
-                    card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
-                    return;
-                }
-                
-                // Remove active class from all cards and reset their icons
-                cards.forEach(c => {
-                    if (c.classList.contains('expandable-card--active')) {
-                        const cExpandIcon = c.querySelector('.expand-icon');
-                        const cCollapseIcon = c.querySelector('.collapse-icon');
-                        
-                        cExpandIcon.style.opacity = '1';
-                        cExpandIcon.style.transform = 'scale(1) rotate(0deg)';
-                        cCollapseIcon.style.opacity = '0';
-                        cCollapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
-                        
-                        c.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
-                    }
-                    c.classList.remove('expandable-card--active');
-                    c.style.transform = '';
-                });
-                
-                // Add active class to clicked card and update its icons
-                card.classList.add('expandable-card--active');
-                
-                // Animate icons: expand icon fades out, collapse icon fades in
-                expandIcon.style.opacity = '0';
-                expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
-                collapseIcon.style.opacity = '1';
-                collapseIcon.style.transform = 'scale(1) rotate(0deg)';
-                
-                // Update container background
-                card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.2)';
-                
-                // Add subtle animation to container
-                const container = document.querySelector('.cards-section__container');
-                container.style.transform = 'scale(1.005)';
-                setTimeout(() => {
-                    container.style.transform = 'scale(1)';
-                }, 300);
-            });
-            
-            // Add hover effect for non-active cards
-            card.addEventListener('mouseenter', () => {
-                if (!card.classList.contains('expandable-card--active')) {
-                    card.style.transform = 'translateY(-5px)';
-                    
-                    // Slight icon animation on hover
-                    const iconContainer = card.querySelector('.material-icon-container');
-                    iconContainer.style.transform = 'scale(1.1)';
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                if (!card.classList.contains('expandable-card--active')) {
-                    card.style.transform = 'translateY(0)';
-                    
-                    // Reset icon scale
-                    const iconContainer = card.querySelector('.material-icon-container');
-                    iconContainer.style.transform = 'scale(1)';
-                }
-            });
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        if (activeIndex === -1) {
+            setActiveCard(0, true);
+            return;
+        }
+
+        const dir = e.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex =
+            (activeIndex + dir + cards.length) % cards.length;
+
+        setActiveCard(nextIndex, true);
+    });
+
+    /* -----------------------------
+       Entry animation (CSS-driven)
+    ------------------------------ */
+    window.addEventListener('load', () => {
+        cards.forEach((card, i) => {
+            card.style.animationDelay = `${i * 80}ms`;
+            card.classList.add('card-enter');
         });
-        
-        // Add button interactions
-        document.querySelectorAll('.card-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                // Ripple effect
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 150);
-            });
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const activeCard = document.querySelector('.expandable-card--active');
-            let index = Array.from(cards).indexOf(activeCard);
-            
-            if (e.key === 'ArrowRight') {
-                index = (index + 1) % cards.length;
-            } else if (e.key === 'ArrowLeft') {
-                index = (index - 1 + cards.length) % cards.length;
-            } else if (e.key === 'Escape') {
-                // Collapse all cards with Escape key
-                cards.forEach(card => {
-                    if (card.classList.contains('expandable-card--active')) {
-                        const expandIcon = card.querySelector('.expand-icon');
-                        const collapseIcon = card.querySelector('.collapse-icon');
-                        
-                        expandIcon.style.opacity = '1';
-                        expandIcon.style.transform = 'scale(1) rotate(0deg)';
-                        collapseIcon.style.opacity = '0';
-                        collapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
-                        
-                        card.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
-                    }
-                    card.classList.remove('expandable-card--active');
-                    card.style.transform = '';
-                });
-                return;
-            } else {
-                return;
-            }
-            
-            // Remove active class from all cards and reset icons
-            cards.forEach(c => {
-                if (c.classList.contains('expandable-card--active')) {
-                    const cExpandIcon = c.querySelector('.expand-icon');
-                    const cCollapseIcon = c.querySelector('.collapse-icon');
-                    
-                    cExpandIcon.style.opacity = '1';
-                    cExpandIcon.style.transform = 'scale(1) rotate(0deg)';
-                    cCollapseIcon.style.opacity = '0';
-                    cCollapseIcon.style.transform = 'scale(0.5) rotate(180deg)';
-                    
-                    c.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.1)';
-                }
-                c.classList.remove('expandable-card--active');
-            });
-            
-            // Add active class to new card and update icons
-            const newCard = cards[index];
-            newCard.classList.add('expandable-card--active');
-            
-            const expandIcon = newCard.querySelector('.expand-icon');
-            const collapseIcon = newCard.querySelector('.collapse-icon');
-            
-            expandIcon.style.opacity = '0';
-            expandIcon.style.transform = 'scale(0.5) rotate(-180deg)';
-            collapseIcon.style.opacity = '1';
-            collapseIcon.style.transform = 'scale(1) rotate(0deg)';
-            
-            newCard.querySelector('.material-icon-container').style.background = 'rgba(255, 255, 255, 0.2)';
-            
-            // Smooth scroll into view
-            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
-        
-        // Page load animation
-        document.addEventListener('DOMContentLoaded', () => {
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 * index);
-            });
-        });
-    </script>
- 
+    });
+})();
+</script>
+
+ </section>
 
 
-</section>
+
 
 
 

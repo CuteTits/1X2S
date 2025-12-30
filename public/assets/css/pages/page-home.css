@@ -458,13 +458,14 @@ pointer-events: auto;
 transition: all 0.5s;
 }
 .features__item:hover .features__item-img {
-content: url("/pagecontent/resources/images/illustration-04.png");
+content: url("/assets/images/illustration-04.png");
 transition: all 0.5s;
 }
 .features__item:hover .features__item-title h2, .features__item:hover .features__item-title h3 {
 color: #ffffff94;
 transition: all 0.5s;
 }
+
 
 
 
