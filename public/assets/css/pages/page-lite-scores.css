@@ -336,7 +336,7 @@ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 border-radius: 15px;
 border: 2px solid transparent;
 background:
-linear-gradient(#0e0e0e) padding-box,
+linear-gradient(#161616) padding-box,
 linear-gradient(137deg, #151515 45%, #72727292 50%, #151515 55%) border-box;
 background-size: 100% 100%, 200% 100%;
 background-position: 0 0, 200% 50%;
@@ -557,6 +557,7 @@ transform: rotate(0deg);
 margin-bottom: 0;
 margin-left: 20px;
 font-size: 1.3rem;
+text-align: left;
 }
 
 .card-icon {
