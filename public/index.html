@@ -41,12 +41,11 @@
       Your browser does not support the video tag.
     </video>
   </div>
-  <!-- Make video play on scroll, stop when user is not scrolling. stay paused by default. Reverse video if user is scrolling the other way -->
   <script>
     let lastScrollTop = 0;
     let isScrolling;
     const video = document.getElementById('background-video');
-    video.pause(); // Start paused
+    video.pause(); 
     video.currentTime = 0;
 
     window.addEventListener('scroll', function() {
@@ -78,10 +77,10 @@
   <section id="hero">
     <div class="hero__container">
       <div class="hero__content">
-        <h2>Exploring the World Wide Web</h2>
-        <h3>Advanced AI Infrastructure Pipeline for Web Scaling and Integration.</h3>
+        <h2>The World Wide Web in One Call</h2>
+        <h3>Context-aware web retrieval and grounding stack that supplies AI systems with fast, structured, and time-relevant web data.</h3>
       </div>
-      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">LiteWS version 1.2.0.6 Chrome</p>
+      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">GrabStack version 1.2.0.6 Chrome</p>
     </div>
   </section>
 
@@ -141,20 +140,7 @@
               }
             });
           </script>
-            <div class="query-demo__icons" style="display: flex; flex-direction: row; gap: 20px;">
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="200" >
-                <span class="material-symbols-outlined">search</span>
-                <p>Smart Queries</p>
-              </div>
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="400">
-                <span class="material-symbols-outlined">web</span>
-                <p>Web Scaling</p>
-              </div>
-              <div class="query-demo__icon" data-aos="fade-up" data-aos-delay="600">
-                <span class="material-symbols-outlined">settings</span>
-                <p>Integration</p>
-              </div>
-            </div>
+ 
         </div>
 
         <div class="query-demo__textbox">
@@ -321,7 +307,6 @@
             <p>The players will be unlikely to participate in the upcoming fixture</p>
             <p>against Manchester United on 11-25-2025.</p>
           </div>
-          <h2>Agent Tooling and LLM WEB source reinforcement </h2>
         </div>
 
 
@@ -333,31 +318,38 @@
           <section class="results-summary__scroll" id="results-scroll">
             <div class="results-summary__scroll-inner">
               <div class="json__container">
-                <div class="json__section" data-json="{
-                  &quot;query&quot;: &quot;List Arsenal´s Current Injuries.&quot;,
-                  &quot;identified_keywords&quot;: &quot;Arsenal, Injuries&quot;,
-                  &quot;enhanced_filter&quot;: &quot;football, sport, news, premier league, players&quot;,
-                  &quot;relevancy&quot;: &quot;now:11/20/2025&quot;,
-                  &quot;location&quot;: &quot;United Kingdom&quot;,
-                  &quot;google_gemini&quot;: true,
-                  &quot;model&quot;: &quot;gemini-3-pro&quot;,
-                  &quot;results_count&quot;: 3,
-                  &quot;thought_for_ms&quot;: 187
-                }">
-                  <pre class="json-container"><code>{
-                    <span class="json-key">"query"</span>: <span class="json-string">"List Arsenals Current Injuries"</span>,
-                    <span class="json-key">"identified_keywords"</span>: <span class="json-string">"Arsenal, Injuries"</span>,
-                    <span class="json-key">"enhanced_filter"</span>: <span class="json-string">"football, sport, news, premier league, players"</span>,
-                    <span class="json-key">"relevancy"</span>: <span class="json-string">"now:11/20/2025"</span>,
-                    <span class="json-key">"location"</span>: <span class="json-string">"United Kingdom"</span>,
-                    <span class="json-key">"google_gemini"</span>: <span class="json-boolean">true</span>,
-                    <span class="json-key">"model"</span>: <span class="json-string">"gemini-3-pro"</span>,
-                    <span class="json-key">"results_count"</span>: <span class="json-number">3</span>,
-                    <span class="json-key">"thought_for_ms"</span>: <span class="json-number">187</span>,
-                    <span class="json-key">"summary"</span>: <span class="json-string">"Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include: Bukayo Saka - Ankle Injury, back in training but will be back playing before the end of November. Kai Havertz - Knee injury, expected to be back in January. Gabriel Magalhaes - Thigh injury, expected to be back by February 2026. Riccardo Calafiori - Calf injury, will be back by the end of November. Noni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January. Viktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."</span>,
-                    <span class="json-key">"sources"</span>: [
+                  <div class="json__section" data-json="{
+                    &quot;query&quot;: &quot;List Arsenal's current injuries&quot;,
+                    &quot;filters&quot;: {
+                      &quot;sport&quot;: &quot;football&quot;,
+                      &quot;competition&quot;: &quot;Premier League&quot;,
+                      &quot;team&quot;: &quot;Arsenal&quot;,
+                      &quot;time_window&quot;: &quot;last_24_hours&quot;,
+                      &quot;location&quot;: &quot;United Kingdom&quot;
+                    },
+                    &quot;options&quot;: {
+                      &quot;max_results&quot;: 5,
+                      &quot;source_priority&quot;: [&quot;SearXNG&quot;, &quot;RSS&quot;, &quot;Crawl&quot;],
+                      &quot;return_summary&quot;: true
+                    }
+                  }">
+                    <pre class="json-container"><code>{
+                    <span class="json-key">"query"</span>: <span class="json-string">"List Arsenal's current injuries"</span>,
+                    <span class="json-key">"filters"</span>: {
+                      <span class="json-key">"sport"</span>: <span class="json-string">"football"</span>,
+                      <span class="json-key">"competition"</span>: <span class="json-string">"Premier League"</span>,
+                      <span class="json-key">"team"</span>: <span class="json-string">"Arsenal"</span>,
+                      <span class="json-key">"time_window"</span>: <span class="json-string">"last_24_hours"</span>,
+                      <span class="json-key">"location"</span>: <span class="json-string">"United Kingdom"</span>
+                    },
+                    <span class="json-key">"options"</span>: {
+                      <span class="json-key">"max_results"</span>: <span class="json-number">5</span>,
+                      <span class="json-key">"source_priority"</span>: [<span class="json-string">"SearXNG"</span>, <span class="json-string">"RSS"</span>, <span class="json-string">"Crawl"</span>],
+                      <span class="json-key">"return_summary"</span>: <span class="json-boolean">true</span>
+                    }
                   }</code></pre>
-                </div>
+                  </div>
+
                 <div class="json__arrow json__arrow--var1">
                   <div class="json__arrow-line"></div>
                   <h1>Detailed Metadata</h1>
@@ -376,8 +368,8 @@
                 <div class="json__arrow json__arrow--var2">
                   <div class="json__arrow-line"></div>
                   <div class="json__arrow-text">
-                    <h1>Integratable Summary</h1>
-                    <p>AI-based unified source summary for seamless integration.</p>
+                    <h1>Per-source Summary</h1>
+                    <p>Per source summary for easy LM digestion.</p>
                   </div>
                 </div>
               </div>
@@ -650,64 +642,52 @@
 
   </section>
 
-  <section id="news-feed" class="section--vh100">
-    <div class="news-feed__background">
-      <img src="/assets/images/element-pattern-dot.png" alt="background patterned image">
+  <section class="section section--vh100 section--bg-dark">
+  <div class="features__display-container">
+    <div class="features__display-title" data-aos="fade-up">
+      <h1>Reinforce the Best</h1>
+      <h2>Search grounding and web retrieval for LLM's and AI Agents.</h2>
     </div>
-    <div class="section__title">
-      <h1 data-aos="fade-up">Streamlined News Feed</h1>
-      <h3 data-aos="fade-up">Stay Updated With a Live News Feed based on your Activities, Interests and Upcoming Matches.
-        Showing the latest news articles, blog posts, and updates from across the web.
-        With Built-in <span>AI Summary</span> for Quick Insights.
-      </h3>
-      <div class="section__title-link">
-        <a href="/user/dashboard" style="display: flex; justify-items: center; align-items: center; text-decoration: none;">
-          Available through your user dashboard
-          <span class="material-symbols-outlined" onclick="window.location='/user/dashboard'">arrow_forward_ios</span>
-        </a>
+
+      <div class="features__display-grid" data-aos="fade-up">        
+        <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT 5.2</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek R1</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V3.2</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 3</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 3</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/kimi-white-logo-png.png"><h1>Kimi K2</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Opus 4.5</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Sonnet 4.5</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/minimax-white-logo-png.png"><h1>Minimax M2.1</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 2.5</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemma 3</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mistral 3 Large</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-4</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 4</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 2.5</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mixtral 8</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT OSS</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V2.5</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/ai21-white-logo-png.png"><h1>Maestro</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 3.1</h1></div>
+        <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-2</h1></div>
       </div>
+
+      <button><a href="/litews" target="_self">How to Integrate</a><span class="material-symbols-outlined">arrow_forward_ios</span></button>
+
+      <p>*GravityStack is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
+        Proprietary or closed APIs that do not permit external plugin integration may not be supported.</p>
+
     </div>
-    <div class="carousel" data-aos="fade-up">
-      <div class="carousel__container">
-        <div class="carousel__track" id="carousel-track">
-          <img src="/assets/images/frame140.png" alt="Image 4">
-          <img src="/assets/images/frame141.png" alt="Image 5">
-          <img src="/assets/images/frame142.png" alt="Image 6">
-          <img src="/assets/images/frame143.png" alt="Image 7">
-        </div>
-      </div>
-    </div>
-    <script>
-      const carousel = document.getElementById('carousel-track');
-      const speedFactor = 1.5; // >1 = faster, <1 = slower
-      let carouselActivated = false; // flag to run once
+  </div>
 
-      function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.bottom > 0 && rect.top < window.innerHeight;
-      }
 
-      function handleCarouselScroll() {
-        if (!carouselActivated && isInViewport(carousel)) {
-          carouselActivated = true; // mark as activated
 
-          // Attach scroll listener that moves carousel
-          window.addEventListener('scroll', () => {
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            let scrollFraction = window.scrollY / maxScroll; // 0 to 1
-            scrollFraction *= speedFactor;
 
-            const maxTranslate = carousel.scrollWidth - window.innerWidth;
-            carousel.style.transform = `translateX(-${scrollFraction * maxTranslate}px)`;
-          });
-        }
-      }
-
-      // Check once on scroll and on page load
-      window.addEventListener('scroll', handleCarouselScroll);
-      window.addEventListener('load', handleCarouselScroll);
-    </script>
   </section>
+
 
   <section id="features" class="section section--vhauto section--bg-dark">
     <div class="section__title">
@@ -790,14 +770,13 @@
       <h1 data-aos="fade-up">Total Privacy</h1>
       <div class="section__paragraph">
         <p data-aos="fade-up">
-          User API calls are <span class="highlight highlight--red">only</span> logged for dashboard statistics and analytics. User API keys, identifiable information,
-          and user inputs are <span class="highlight highlight--red">never</span> logged.
+       <p data-aos="fade-up">
+        User API calls are <span class="highlight highlight--red">never logged</span> in a way that captures API keys, user inputs, or any personally identifiable information. Only <span class="highlight highlight--red">aggregated, anonymized metrics</span> are collected for operational purposes such as dashboard statistics, usage monitoring, and performance analytics.
         </p>
         <p data-aos="fade-up">
-          If you choose to integrate the Google Gemini API in your projects, their logging policy applies, which may include API request logging,
-          AI training, and abuse monitoring in accordance with their API usage guidelines.
+          When integrating third-party APIs in your projects, please note that those APIs may have their own logging policies, which can include request logging, AI training, or abuse monitoring, in accordance with their terms of service.
         </p>
-        <p data-aos="fade-up">
+]        <p data-aos="fade-up">
           We follow strict privacy codes and will never share user data unless explicitly
           required by law or uniquely specified in our
           <a href="/privacy-policy">Privacy Policy<span class="material-symbols-outlined">arrow_outward</span></a>.
