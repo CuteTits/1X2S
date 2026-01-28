@@ -1289,7 +1289,8 @@ font-size: .8em;
 
 .features__display-container button{
 position: relative;
-left: 20%;
+bottom: 60px;
+left: 25%;
 background: none;
 border: none;
 padding: 5px 10px;

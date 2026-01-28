@@ -1,5 +1,55 @@
+# Environment variables - CRITICAL
 .env
+.env.local
+.env.*.local
+
+# Dependency directories
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build outputs
+dist/
+build/
+*.log
+
+# SSL certificates
 ca.pem
-public/pagecontent/resources/videos/7094565-uhd_3840_2160_25fps.mp4
-/pagecontent/resources/videos/7094565-uhd_3840_2160_25fps.mp4
-7094565-uhd_3840_2160_25fps.mp4
+*.pem
+*.key
+
+# Large media files
+public/pagecontent/resources/videos/**/*.mp4
+public/pagecontent/resources/videos/**/*.mov
+public/pagecontent/resources/videos/**/*.avi
+
+# Database files (if using local SQLite)
+*.sqlite
+*.sqlite3
+*.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Secret files
+secret.json
+credentials.json

@@ -54,14 +54,6 @@
 
 <div class="button-carousel-wrapper">
   <div class="button-carousel" id="button-carousel">
-
-    <button class="card-button active" data-card="0">2025 Week 50</button>
-    <button class="card-button" data-card="1">2025 Week 51</button>
-    <button class="card-button" data-card="2">2025 Week 52</button>
-    <button class="card-button" data-card="3">2026 Week 1</button>
-    <button class="card-button" data-card="4">2026 Week 2</button>
-    <button class="card-button" data-card="5">2026 Week 3</button>
-
   </div>
 </div>
 
@@ -81,24 +73,39 @@ function centerButton(btn) {
   btn.classList.add('active');
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+function generateButtonCarousel(carouselData) {
+  const buttonCarousel = document.getElementById('button-carousel');
+  buttonCarousel.innerHTML = ''; // Clear existing buttons
+  
+  carouselData.forEach((data, index) => {
+    const button = document.createElement('button');
+    button.className = 'card-button' + (index === 0 ? ' active' : '');
+    button.dataset.card = index;
+    button.textContent = data.title;
+    buttonCarousel.appendChild(button);
+  });
+  
+  // Attach click listeners to all buttons
+  attachButtonListeners();
+}
+
+function attachButtonListeners() {
   const buttons = document.querySelectorAll('.card-button');
   const cards = document.querySelectorAll('.carousel-card');
-  const activebydefault = 0 // Change this to set which button/card is active on load (0-indexed)
-  // Make button 3 active and center it on load
-  if (buttons[0]) {
-    buttons.forEach(b => b.classList.remove('active')); 
-    buttons[activebydefault].classList.add('active');
-    centerButton(buttons[activebydefault]);
-    if (cards[activebydefault]) centerCard(cards[activebydefault]);
-  }
+  
   buttons.forEach((btn, idx) => {
     btn.addEventListener('click', function() {
       centerButton(btn);
       if (cards[idx]) centerCard(cards[idx]);
     });
   });
-});
+  
+  // Center the first button and card on load
+  if (buttons[0]) {
+    centerButton(buttons[0]);
+    if (cards[0]) centerCard(cards[0]);
+  }
+}
 </script>
 <!-- ...existing code... -->
 
@@ -107,53 +114,116 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <div class="carousel-container" id="carousel-container">
   <div class="carousel" id="carousel">
-
-<div class="carousel-card">
-  <h3>Featured Competitions</h3>
-  <div class="horizontal-league-list">
-    <div class="league-item"><img src="/assets/images/league-icons/en-premierleague.png" alt="Premier League Icon">Premier League</div>
-    <div class="league-item"><img src="/assets/images/league-icons/es-laliga.png" alt="La Liga Icon">La Liga</div>
-    <div class="league-item"><img src="/assets/images/league-icons/it-seriea.png" alt="Serie A Icon">Serie A</div>
-    <div class="league-item"><img src="/assets/images/league-icons/de-bundesliga.png" alt="Bundesliga Icon">Bundesliga</div>
-    <div class="league-item"><img src="/assets/images/league-icons/fr-ligue1.png" alt="Ligue 1 Icon">Ligue 1</div>
-    <div class="league-item"><img src="/assets/images/league-icons/uefa-champions-league.png" alt="UEFA Champions League Icon">UEFA Champions League</div>
-  </div>
-
-<a href="https://docs.google.com/spreadsheets/d/1pSAHDyZaX3sBc0o4uU3Kb1yl-ArjfwqpHFKQB7OuW0s/edit?usp=sharing" target="_blank" class="data-link-button ">
-  <span class="material-symbols-rounded">lists</span>
-  <span>View Full Insights</span>
-  <span class="material-symbols-rounded">open_in_new</span>
-</a>
-      
-</div>
-
-    <div class="carousel-card">
-      <h1>Placeholder</h1>
-    </div>
-
-    <div class="carousel-card">
-      <h1>Placeholder</h1>
-    </div>
-
-    <div class="carousel-card">
-      <h1>Placeholder</h1>
-    </div>
-
-    <div class="carousel-card">
-      <h1>Placeholder</h1>
-    </div>
-
-    <div class="carousel-card">
-      <h1>Placeholder</h1>
-    </div>
-
-
+    <!-- Carousel cards will be dynamically loaded here -->
   </div>
 </div>
-</div>
-
 
 <script>
+// ========== DYNAMIC CAROUSEL LOADER ==========
+
+async function loadCarouselData() {
+  try {
+    const response = await fetch('/api/carousel/insights');
+    
+    if (!response.ok) {
+      throw new Error(`API responded with status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    
+    if (!result.success || !result.data) {
+      throw new Error('Invalid API response format');
+    }
+    
+    // Generate buttons from carousel data
+    generateButtonCarousel(result.data);
+    
+    // Render carousel cards
+    renderCarouselCards(result.data);
+    
+    // Initialize interactions
+    initializeCarouselInteractions();
+    
+  } catch (error) {
+    console.error('Error loading carousel data:', error);
+    // Fallback: show error message
+    document.getElementById('carousel').innerHTML = `
+      <div class="carousel-card" style="padding: 2rem; text-align: center;">
+        <p>Unable to load insights data. Please try refreshing the page.</p>
+      </div>
+    `;
+  }
+}
+
+function renderCarouselCards(data) {
+  const carousel = document.getElementById('carousel');
+  carousel.innerHTML = ''; // Clear placeholder
+  
+  data.forEach((cardData, index) => {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'carousel-card' + (index === 0 ? ' centered' : '');
+    cardElement.dataset.index = index;
+    cardElement.dataset.cardId = cardData.id;
+    
+    // Format date if it exists
+    const dateStr = cardData.date ? new Date(cardData.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    
+    // Create dropdowns HTML
+    const dropdownsHTML = cardData.dropdowns && cardData.dropdowns.length > 0
+      ? cardData.dropdowns.map((dropdown, idx) => `
+          <div class="dropdown-section">
+            <button class="dropdown-toggle" onclick="toggleDropdown(event)">
+              <span class="dropdown-header">${dropdown.header}</span>
+              <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="dropdown-content" style="display: none;">
+              <div class="dropdown-info">
+                <p><strong>${dropdown.subheader || ''}</strong></p>
+                <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
+                <p class="dropdown-text">${dropdown.text || ''}</p>
+              </div>
+            </div>
+          </div>
+        `).join('')
+      : '';
+    
+    cardElement.innerHTML = `
+      <div class="card-header-meta">
+        <span class="card-date">${dateStr}</span>
+        <span class="card-id">[ID: ${cardData.id}]</span>
+      </div>
+      
+      <div class="card-title-section">
+        <h1 class="card-title">${cardData.title || 'Untitled'}</h1>
+        <p class="card-subtitle">${cardData.subtitle || ''}</p>
+        <p class="card-description">${cardData.description || ''}</p>
+      </div>
+      
+      <div class="card-dropdowns">
+        ${dropdownsHTML}
+      </div>
+    `;
+    
+    carousel.appendChild(cardElement);
+  });
+}
+
+function toggleDropdown(event) {
+  const button = event.currentTarget;
+  const content = button.nextElementSibling;
+  const isOpen = content.style.display !== 'none';
+  
+  // Close all dropdowns
+  document.querySelectorAll('.dropdown-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.dropdown-arrow').forEach(el => el.style.transform = 'rotate(0deg)');
+  
+  // Open this dropdown if it wasn't open
+  if (!isOpen) {
+    content.style.display = 'block';
+    button.querySelector('.dropdown-arrow').style.transform = 'rotate(180deg)';
+  }
+}
+
 function centerCard(card) {
   const container = document.getElementById("carousel-container");
   const cardRect = card.getBoundingClientRect();
@@ -174,13 +244,17 @@ function centerCard(card) {
   card.classList.add('centered');
 }
 
-
-document.addEventListener("DOMContentLoaded", function() {
-  var centeredCard = document.querySelector('.carousel-card.centered');
-  if (centeredCard) {
-    centerCard(centeredCard);
+function initializeCarouselInteractions() {
+  // Attach button listeners (already done in attachButtonListeners called by generateButtonCarousel)
+  // Setup dropdowns if the function exists
+  if (typeof setupDropdowns === 'function') {
+    setupDropdowns();
   }
-  setupDropdowns();
+}
+
+// Load carousel data when DOM is ready
+document.addEventListener("DOMContentLoaded", function() {
+  loadCarouselData();
 });
 </script>
 

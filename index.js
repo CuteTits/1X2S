@@ -133,7 +133,8 @@ app.get('/api/session', (req, res) => {
       user: {
         id: req.session.user.id,
         name: req.session.user.name,
-        email: req.session.user.email
+        email: req.session.user.email,
+        role: req.session.user.role || 'user'
       }
     });
   } else {
@@ -189,15 +190,16 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
 
-    // ✅ Store minimal user info in session, including user_uid
+    // ✅ Store user info in session, including role for authorization
     req.session.user = { 
-      id: user.id,         // optional, your internal auto-increment ID
-      user_uid: user.user_uid,  // this is what you want to display
+      id: user.id,
+      user_uid: user.user_uid,
       name: user.name, 
-      email: user.email 
+      email: user.email,
+      role: user.role || 'user'  // Default to 'user' if role not set
     };
 
-    res.json({ success: true, message: 'Login successful' });
+    res.json({ success: true, message: 'Login successful', role: user.role });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ success: false, message: err.message });
@@ -356,6 +358,253 @@ app.post("/api/gemini", async (req, res) => {
 //
 // --- ERROR HANDLING ---
 //
+
+// ========== CAROUSEL API ENDPOINT ==========
+app.get('/api/carousel/insights', async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      'SELECT * FROM carousel_insights ORDER BY id'
+    );
+    
+    // Parse JSON fields and provide defaults
+    const data = rows.map(row => {
+      let parsedData = {
+        id: row.id,
+        title: row.title,
+        date: row.date || null,
+        subtitle: row.subtitle || row.header || '',
+        description: row.description || row.subheader || '',
+        dropdowns: []
+      };
+
+      // Try to parse dropdowns first (new format)
+      if (row.dropdowns) {
+        try {
+          if (typeof row.dropdowns === 'string') {
+            parsedData.dropdowns = JSON.parse(row.dropdowns);
+          } else if (typeof row.dropdowns === 'object') {
+            parsedData.dropdowns = row.dropdowns;
+          }
+        } catch (e) {
+          console.warn('Failed to parse dropdowns for card', row.id);
+          parsedData.dropdowns = [];
+        }
+      }
+
+      // Fallback: convert old items format to dropdowns
+      if (!parsedData.dropdowns || parsedData.dropdowns.length === 0) {
+        if (row.items) {
+          try {
+            let items = typeof row.items === 'string' ? JSON.parse(row.items) : row.items;
+            if (Array.isArray(items) && items.length > 0) {
+              parsedData.dropdowns = items.map(item => ({
+                header: item.title || '',
+                subheader: item.description || '',
+                subheader2: '',
+                text: ''
+              }));
+            }
+          } catch (e) {
+            console.warn('Failed to parse items for card', row.id);
+          }
+        }
+      }
+
+      return parsedData;
+    });
+    
+    res.json({ success: true, data });
+  } catch (err) {
+    console.error('Error fetching carousel data:', err);
+    // If the columns don't exist, return empty array
+    if (err.message && err.message.includes('Unknown column')) {
+      res.json({ success: true, data: [] });
+    } else {
+      res.status(500).json({ success: false, error: err.message });
+    }
+  }
+});
+
+// ========== ADMIN AUTHENTICATION MIDDLEWARE ==========
+// Protect admin endpoints - only logged-in users can access
+const requireAdmin = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ success: false, error: 'Authentication required' });
+  }
+  next();
+};
+
+// ========== ADMIN ROLE MIDDLEWARE ==========
+// Stricter: only users with 'admin' role can access
+const requireAdminRole = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ success: false, error: 'Authentication required' });
+  }
+  
+  if (req.session.user.role !== 'admin') {
+    return res.status(403).json({ success: false, error: 'Admin access required' });
+  }
+  
+  next();
+};
+
+// ========== CAROUSEL MANAGEMENT ENDPOINTS ==========
+
+// Create a new carousel card (PROTECTED - ADMIN ONLY)
+app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
+  const { title, date, subtitle, description, dropdowns } = req.body;
+  if (!title) {
+    return res.status(400).json({ success: false, error: 'Title is required' });
+  }
+
+  try {
+    const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
+    const [result] = await db.query(
+      'INSERT INTO carousel_insights (title, date, subtitle, description, dropdowns) VALUES (?, ?, ?, ?, ?)',
+      [title, date || null, subtitle || '', description || '', dropdownsJSON]
+    );
+    
+    res.json({ success: true, message: 'Card created', id: result.insertId });
+  } catch (err) {
+    console.error('Error creating carousel card:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Update carousel card (PROTECTED - ADMIN ONLY)
+app.put('/api/carousel/insights/:id', requireAdminRole, async (req, res) => {
+  const { id } = req.params;
+  const { title, date, subtitle, description, dropdowns } = req.body;
+
+  try {
+    const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
+    await db.query(
+      'UPDATE carousel_insights SET title = ?, date = ?, subtitle = ?, description = ?, dropdowns = ? WHERE id = ?',
+      [title, date || null, subtitle || '', description || '', dropdownsJSON, id]
+    );
+    
+    res.json({ success: true, message: 'Card updated' });
+  } catch (err) {
+    console.error('Error updating carousel card:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Delete carousel card (PROTECTED - ADMIN ONLY)
+app.delete('/api/carousel/insights/:id', requireAdminRole, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await db.query('DELETE FROM carousel_insights WHERE id = ?', [id]);
+    res.json({ success: true, message: 'Card deleted' });
+  } catch (err) {
+    console.error('Error deleting carousel card:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ========== USER MANAGEMENT API ENDPOINTS ==========
+
+// Get all users (PROTECTED - ADMIN ONLY)
+app.get('/api/admin/users', requireAdminRole, async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      'SELECT id, user_uid, name, email, created_at FROM users ORDER BY created_at DESC'
+    );
+    
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Create a new user (PROTECTED - ADMIN ONLY)
+app.post('/api/admin/users', requireAdminRole, async (req, res) => {
+  const { name, email, password, role } = req.body;
+  
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, error: 'Name, email, and password are required' });
+  }
+
+  // Only allow role to be 'admin' or 'user'
+  const userRole = (role === 'admin') ? 'admin' : 'user';
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // Generate random user_uid
+    const user_uid = Math.random().toString(36).substr(2, 12);
+    
+    const [result] = await db.query(
+      'INSERT INTO users (user_uid, name, email, password, role) VALUES (?, ?, ?, ?, ?)',
+      [user_uid, name, email, hashedPassword, userRole]
+    );
+    
+    res.json({ success: true, message: 'User created', id: result.insertId });
+  } catch (err) {
+    console.error('Error creating user:', err);
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ success: false, error: 'Email already in use' });
+    }
+    
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Update a user (PROTECTED - ADMIN ONLY)
+app.put('/api/admin/users/:id', requireAdminRole, async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, role } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ success: false, error: 'Name and email are required' });
+  }
+
+  // Only allow role to be 'admin' or 'user'
+  const userRole = (role === 'admin') ? 'admin' : 'user';
+
+  try {
+    if (password) {
+      // Update with new password and role
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await db.query(
+        'UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?',
+        [name, email, hashedPassword, userRole, id]
+      );
+    } else {
+      // Update without changing password but allow role change
+      await db.query(
+        'UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?',
+        [name, email, userRole, id]
+      );
+    }
+    
+    res.json({ success: true, message: 'User updated' });
+  } catch (err) {
+    console.error('Error updating user:', err);
+    
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ success: false, error: 'Email already in use' });
+    }
+    
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Delete a user (PROTECTED - ADMIN ONLY)
+app.delete('/api/admin/users/:id', requireAdminRole, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await db.query('DELETE FROM users WHERE id = ?', [id]);
+    res.json({ success: true, message: 'User deleted' });
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // 404 handler (must be after all routes)
 app.use((req, res) => {
