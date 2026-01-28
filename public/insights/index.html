@@ -85,24 +85,25 @@ function generateButtonCarousel(carouselData) {
     buttonCarousel.appendChild(button);
   });
   
-  // Attach click listeners to all buttons
-  attachButtonListeners();
+  // Don't attach listeners here - will be done after cards are rendered
 }
 
 function attachButtonListeners() {
   const buttons = document.querySelectorAll('.card-button');
-  const cards = document.querySelectorAll('.carousel-card');
   
-  buttons.forEach((btn, idx) => {
+  buttons.forEach((btn) => {
     btn.addEventListener('click', function() {
+      const cardIndex = parseInt(btn.dataset.card);
+      const cards = document.querySelectorAll('.carousel-card');
       centerButton(btn);
-      if (cards[idx]) centerCard(cards[idx]);
+      if (cards[cardIndex]) centerCard(cards[cardIndex]);
     });
   });
   
   // Center the first button and card on load
   if (buttons[0]) {
     centerButton(buttons[0]);
+    const cards = document.querySelectorAll('.carousel-card');
     if (cards[0]) centerCard(cards[0]);
   }
 }
@@ -141,6 +142,9 @@ async function loadCarouselData() {
     // Render carousel cards
     renderCarouselCards(result.data);
     
+    // Attach button listeners now that cards exist
+    attachButtonListeners();
+    
     // Initialize interactions
     initializeCarouselInteractions();
     
@@ -168,23 +172,39 @@ function renderCarouselCards(data) {
     // Format date if it exists
     const dateStr = cardData.date ? new Date(cardData.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
     
-    // Create dropdowns HTML
+    // Create dropdowns HTML - now includes per-match details (location, gmt_time, competition)
     const dropdownsHTML = cardData.dropdowns && cardData.dropdowns.length > 0
-      ? cardData.dropdowns.map((dropdown, idx) => `
-          <div class="dropdown-section">
-            <button class="dropdown-toggle" onclick="toggleDropdown(event)">
-              <span class="dropdown-header">${dropdown.header}</span>
-              <span class="dropdown-arrow">▼</span>
-            </button>
-            <div class="dropdown-content" style="display: none;">
-              <div class="dropdown-info">
-                <p><strong>${dropdown.subheader || ''}</strong></p>
-                <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
-                <p class="dropdown-text">${dropdown.text || ''}</p>
+      ? cardData.dropdowns.map((dropdown, idx) => {
+          // Get competition icon and name for this specific dropdown
+          const competitionInfo = dropdown.competition_name ? `
+            <div style="display: flex; align-items: center; gap: 8px; flex-direction:row;">
+              ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 20px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;">🏆</span>'}
+              <span class="dropdown-context__info"">${dropdown.competition_name}</span>
+            </div>
+          ` : '';
+          
+          const locationInfo = dropdown.location ? `<div class="dropdown-datetime__content"><a>${dropdown.location}</a></div>` : '';
+          const timeInfo = dropdown.gmt_time ? `<div class="dropdown-datetime__content"><a>${dropdown.gmt_time} GMT</a></div>` : '';
+          
+          return `
+            <div class="dropdown-section">
+              <button class="dropdown-toggle" onclick="toggleDropdown(event)">
+                <span class="dropdown-subheader">${dropdown.subheader || ''}</span><span class="dropdown-header">${dropdown.header}</span>
+
+              </button>
+              <div class="dropdown-content" style="display: none;">
+                <div class="dropdown-info">
+                  ${competitionInfo}
+                  <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
+
+                  <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
+                  <p class="dropdown-text">${dropdown.text || ''}</p>
+                  ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details →</a></div>` : ''}
+                </div>
               </div>
             </div>
-          </div>
-        `).join('')
+          `;
+        }).join('')
       : '';
     
     cardElement.innerHTML = `

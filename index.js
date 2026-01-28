@@ -43,9 +43,63 @@ async function initDB() {
 
     const [rows] = await db.query('SELECT NOW() AS now');
     console.log('✅ Connected to Aiven MySQL at', rows[0].now);
+    
+    // Run migrations
+    await runMigrations();
   } catch (err) {
     console.error('❌ MySQL connection failed:', err);
     process.exit(1); // stop if DB fails
+  }
+}
+
+// Migration function to add new columns if they don't exist
+async function runMigrations() {
+  try {
+    console.log('🔄 Running database migrations...');
+    
+    // Create competitions table if it doesn't exist
+    try {
+      await db.query(`
+        CREATE TABLE IF NOT EXISTS competitions (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(255) NOT NULL UNIQUE,
+          icon VARCHAR(255),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+      console.log('✅ Competitions table created/verified');
+    } catch (err) {
+      console.log('ℹ️  Competitions table already exists');
+    }
+    
+    // Add new columns to carousel_insights if they don't exist (one at a time)
+    const columns = [
+      { name: 'date', def: 'DATE' },
+      { name: 'subtitle', def: 'VARCHAR(255)' },
+      { name: 'description', def: 'TEXT' },
+      { name: 'dropdowns', def: 'JSON' },
+      { name: 'location', def: 'VARCHAR(255)' },
+      { name: 'gmt_time', def: 'TIME' },
+      { name: 'competition_id', def: 'INT' },
+      { name: 'link', def: 'VARCHAR(500)' }
+    ];
+    
+    for (const col of columns) {
+      try {
+        await db.query(`ALTER TABLE carousel_insights ADD COLUMN ${col.name} ${col.def}`);
+        console.log(`✅ Added column: ${col.name}`);
+      } catch (err) {
+        if (err.message.includes('Duplicate column')) {
+          console.log(`ℹ️  Column ${col.name} already exists`);
+        } else {
+          throw err;
+        }
+      }
+    }
+    
+    console.log('✅ Carousel columns migration completed');
+  } catch (err) {
+    console.warn('⚠️  Migration warning:', err.message);
   }
 }
 
@@ -359,6 +413,78 @@ app.post("/api/gemini", async (req, res) => {
 // --- ERROR HANDLING ---
 //
 
+// ========== ADMIN AUTHENTICATION MIDDLEWARE ==========
+// Protect admin endpoints - only logged-in users can access
+const requireAdmin = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ success: false, error: 'Authentication required' });
+  }
+  next();
+};
+
+// ========== ADMIN ROLE MIDDLEWARE ==========
+// Stricter: only users with 'admin' role can access
+const requireAdminRole = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ success: false, error: 'Authentication required' });
+  }
+  
+  if (req.session.user.role !== 'admin') {
+    return res.status(403).json({ success: false, error: 'Admin access required' });
+  }
+  
+  next();
+};
+
+// ========== COMPETITIONS API ENDPOINTS ==========
+// Get all competitions
+app.get('/api/competitions', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT id, name, icon FROM competitions ORDER BY name');
+    res.json({ success: true, data: rows });
+  } catch (err) {
+    console.error('Error fetching competitions:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Create new competition (PROTECTED - ADMIN ONLY)
+app.post('/api/competitions', requireAdminRole, async (req, res) => {
+  const { name, icon } = req.body;
+  
+  if (!name) {
+    return res.status(400).json({ success: false, error: 'Competition name is required' });
+  }
+
+  try {
+    const [result] = await db.query(
+      'INSERT INTO competitions (name, icon) VALUES (?, ?)',
+      [name, icon || null]
+    );
+    
+    res.json({ success: true, message: 'Competition created', id: result.insertId });
+  } catch (err) {
+    if (err.message.includes('Duplicate entry')) {
+      return res.status(400).json({ success: false, error: 'Competition already exists' });
+    }
+    console.error('Error creating competition:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Delete competition (PROTECTED - ADMIN ONLY)
+app.delete('/api/competitions/:id', requireAdminRole, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await db.query('DELETE FROM competitions WHERE id = ?', [id]);
+    res.json({ success: true, message: 'Competition deleted' });
+  } catch (err) {
+    console.error('Error deleting competition:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // ========== CAROUSEL API ENDPOINT ==========
 app.get('/api/carousel/insights', async (req, res) => {
   try {
@@ -367,13 +493,14 @@ app.get('/api/carousel/insights', async (req, res) => {
     );
     
     // Parse JSON fields and provide defaults
-    const data = rows.map(row => {
+    const data = await Promise.all(rows.map(async (row) => {
       let parsedData = {
         id: row.id,
         title: row.title,
         date: row.date || null,
         subtitle: row.subtitle || row.header || '',
         description: row.description || row.subheader || '',
+        link: row.link || '',
         dropdowns: []
       };
 
@@ -384,6 +511,24 @@ app.get('/api/carousel/insights', async (req, res) => {
             parsedData.dropdowns = JSON.parse(row.dropdowns);
           } else if (typeof row.dropdowns === 'object') {
             parsedData.dropdowns = row.dropdowns;
+          }
+          
+          // Enhance each dropdown with competition details
+          for (let dropdown of parsedData.dropdowns) {
+            if (dropdown.competition_id) {
+              try {
+                const [compRows] = await db.query(
+                  'SELECT id, name, icon FROM competitions WHERE id = ?',
+                  [dropdown.competition_id]
+                );
+                if (compRows.length > 0) {
+                  dropdown.competition_name = compRows[0].name;
+                  dropdown.competition_icon = compRows[0].icon;
+                }
+              } catch (err) {
+                console.warn('Failed to fetch competition for dropdown');
+              }
+            }
           }
         } catch (e) {
           console.warn('Failed to parse dropdowns for card', row.id);
@@ -411,7 +556,7 @@ app.get('/api/carousel/insights', async (req, res) => {
       }
 
       return parsedData;
-    });
+    }));
     
     res.json({ success: true, data });
   } catch (err) {
@@ -425,34 +570,13 @@ app.get('/api/carousel/insights', async (req, res) => {
   }
 });
 
-// ========== ADMIN AUTHENTICATION MIDDLEWARE ==========
-// Protect admin endpoints - only logged-in users can access
-const requireAdmin = (req, res, next) => {
-  if (!req.session || !req.session.user) {
-    return res.status(401).json({ success: false, error: 'Authentication required' });
-  }
-  next();
-};
-
-// ========== ADMIN ROLE MIDDLEWARE ==========
-// Stricter: only users with 'admin' role can access
-const requireAdminRole = (req, res, next) => {
-  if (!req.session || !req.session.user) {
-    return res.status(401).json({ success: false, error: 'Authentication required' });
-  }
-  
-  if (req.session.user.role !== 'admin') {
-    return res.status(403).json({ success: false, error: 'Admin access required' });
-  }
-  
-  next();
-};
+// ========== CAROUSEL MANAGEMENT ENDPOINTS ==========
 
 // ========== CAROUSEL MANAGEMENT ENDPOINTS ==========
 
 // Create a new carousel card (PROTECTED - ADMIN ONLY)
 app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
-  const { title, date, subtitle, description, dropdowns } = req.body;
+  const { title, date, subtitle, description, link, dropdowns } = req.body;
   if (!title) {
     return res.status(400).json({ success: false, error: 'Title is required' });
   }
@@ -460,8 +584,8 @@ app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
   try {
     const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
     const [result] = await db.query(
-      'INSERT INTO carousel_insights (title, date, subtitle, description, dropdowns) VALUES (?, ?, ?, ?, ?)',
-      [title, date || null, subtitle || '', description || '', dropdownsJSON]
+      'INSERT INTO carousel_insights (title, date, subtitle, description, link, dropdowns) VALUES (?, ?, ?, ?, ?, ?)',
+      [title, date || null, subtitle || '', description || '', link || '', dropdownsJSON]
     );
     
     res.json({ success: true, message: 'Card created', id: result.insertId });
@@ -474,13 +598,13 @@ app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
 // Update carousel card (PROTECTED - ADMIN ONLY)
 app.put('/api/carousel/insights/:id', requireAdminRole, async (req, res) => {
   const { id } = req.params;
-  const { title, date, subtitle, description, dropdowns } = req.body;
+  const { title, date, subtitle, description, link, dropdowns } = req.body;
 
   try {
     const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
     await db.query(
-      'UPDATE carousel_insights SET title = ?, date = ?, subtitle = ?, description = ?, dropdowns = ? WHERE id = ?',
-      [title, date || null, subtitle || '', description || '', dropdownsJSON, id]
+      'UPDATE carousel_insights SET title = ?, date = ?, subtitle = ?, description = ?, link = ?, dropdowns = ? WHERE id = ?',
+      [title, date || null, subtitle || '', description || '', link || '', dropdownsJSON, id]
     );
     
     res.json({ success: true, message: 'Card updated' });

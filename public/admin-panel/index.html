@@ -14,38 +14,67 @@
       box-sizing: border-box;
     }
 
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f0f0f;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #f75454;
+      border-radius: 10px;
+      transition: all 0.5s ease-in-out;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff2e2e;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0B0B0B;
       min-height: 100vh;
       padding: 20px;
+      color: #e0e0e0;
     }
 
     .container {
       max-width: 1400px;
       margin: 0 auto;
-      background: white;
+      background: #1a1a1a;
       border-radius: 10px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       overflow: hidden;
+      border: 1px solid #333;
     }
 
     header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(137deg, rgba(36, 36, 36, 1) 0%, rgba(14, 14, 14, 1) 26%, rgba(14, 14, 14, 1) 100%);
       color: white;
       padding: 30px;
       text-align: center;
+      border-bottom: 2px solid #ff2525;
     }
 
     header h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
+      background: linear-gradient(90deg, #ff2525, #ff7272);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      color: #999;
+      font-size: 0.95em;
     }
 
     .tabs {
       display: flex;
-      background: #f8f9fa;
-      border-bottom: 2px solid #ddd;
+      background: #0f0f0f;
+      border-bottom: 2px solid #333;
     }
 
     .tab-button {
@@ -56,18 +85,19 @@
       cursor: pointer;
       font-size: 1em;
       font-weight: 600;
-      color: #555;
+      color: #888;
       transition: all 0.3s;
       border-bottom: 3px solid transparent;
     }
 
     .tab-button:hover {
-      background: #e9ecef;
+      background: #1a1a1a;
+      color: #ccc;
     }
 
     .tab-button.active {
-      color: #667eea;
-      border-bottom-color: #667eea;
+      color: #ff2525;
+      border-bottom-color: #ff2525;
     }
 
     .content {
@@ -78,15 +108,15 @@
     }
 
     .sidebar {
-      background: #f8f9fa;
-      border-right: 2px solid #ddd;
+      background: #0f0f0f;
+      border-right: 2px solid #333;
       padding: 20px;
       overflow-y: auto;
       max-height: 70vh;
     }
 
     .sidebar h2 {
-      color: #333;
+      color: #ff2525;
       margin-bottom: 15px;
       font-size: 1.2em;
     }
@@ -95,6 +125,7 @@
       padding: 30px;
       overflow-y: auto;
       max-height: 70vh;
+      background: #151515;
     }
 
     .form-group {
@@ -106,7 +137,7 @@
 
     label {
       font-weight: 600;
-      color: #555;
+      color: #ccc;
       font-size: 0.95em;
     }
 
@@ -117,10 +148,12 @@
     select,
     textarea {
       padding: 10px;
-      border: 2px solid #ddd;
+      border: 2px solid #333;
       border-radius: 5px;
       font-family: inherit;
       font-size: 1em;
+      background: #222;
+      color: #e0e0e0;
       transition: border-color 0.3s;
     }
 
@@ -131,8 +164,8 @@
     select:focus,
     textarea:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+      border-color: #ff2525;
+      box-shadow: 0 0 8px rgba(255, 37, 37, 0.3);
     }
 
     textarea {
@@ -151,36 +184,39 @@
     }
 
     .btn-primary {
-      background: #667eea;
+      background: linear-gradient(90deg, #ff2525 0%, #ff6b6b 100%);
       color: white;
       width: 100%;
       margin-bottom: 10px;
     }
 
     .btn-primary:hover {
-      background: #5568d3;
+      background: linear-gradient(90deg, #ff1a1a 0%, #ff5555 100%);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 37, 37, 0.3);
     }
 
     .btn-danger {
-      background: #e74c3c;
+      background: #c0392b;
       color: white;
       width: 100%;
     }
 
     .btn-danger:hover {
-      background: #c0392b;
+      background: #a93226;
+      box-shadow: 0 5px 15px rgba(192, 57, 43, 0.3);
     }
 
     .btn-add {
-      background: #27ae60;
+      background: linear-gradient(90deg, #ff2525 0%, #ff6b6b 100%);
       color: white;
       width: 100%;
       margin-top: 10px;
     }
 
     .btn-add:hover {
-      background: #229954;
+      background: linear-gradient(90deg, #ff1a1a 0%, #ff5555 100%);
+      transform: translateY(-2px);
     }
 
     .list {
@@ -190,8 +226,8 @@
     }
 
     .list-item {
-      background: white;
-      border: 2px solid #ddd;
+      background: #222;
+      border: 2px solid #333;
       border-radius: 5px;
       padding: 12px;
       cursor: pointer;
@@ -199,30 +235,33 @@
     }
 
     .list-item:hover {
-      border-color: #667eea;
-      background: #f0f1ff;
+      border-color: #ff2525;
+      background: #2a2a2a;
       transform: translateX(5px);
     }
 
     .list-item.active {
-      border-color: #667eea;
-      background: #667eea;
+      border-color: #ff2525;
+      background: #ff2525;
       color: white;
     }
 
     .list-item h4 {
       margin-bottom: 5px;
       font-size: 0.95em;
+      color: #fff;
     }
 
     .list-item p {
       font-size: 0.85em;
       opacity: 0.8;
       margin: 2px 0;
+      color: #aaa;
     }
 
     .list-item.active p {
-      opacity: 0.9;
+      opacity: 0.95;
+      color: #ffe0e0;
     }
 
     .message {
@@ -237,36 +276,36 @@
     }
 
     .message.success {
-      background: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+      border: 1px solid rgba(76, 175, 80, 0.3);
     }
 
     .message.error {
-      background: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      background: rgba(255, 37, 37, 0.2);
+      color: #ff5555;
+      border: 1px solid rgba(255, 37, 37, 0.3);
     }
 
     .no-selection {
-      color: #999;
+      color: #666;
       text-align: center;
       padding: 40px 20px;
       font-style: italic;
     }
 
     .section-title {
-      color: #667eea;
+      color: #ff2525;
       font-size: 1.1em;
       margin-top: 20px;
       margin-bottom: 10px;
-      border-bottom: 2px solid #667eea;
+      border-bottom: 2px solid #ff2525;
       padding-bottom: 8px;
     }
 
     .dropdown-item {
-      background: #f8f9fa;
-      border: 1px solid #ddd;
+      background: #222;
+      border: 1px solid #333;
       border-radius: 5px;
       padding: 12px;
       margin-bottom: 10px;
@@ -274,7 +313,7 @@
 
     .dropdown-item-num {
       font-size: 0.85em;
-      color: #667eea;
+      color: #ff2525;
       font-weight: 600;
       margin-bottom: 8px;
     }
@@ -292,7 +331,7 @@
     }
 
     .btn-remove {
-      background: #e74c3c;
+      background: #c0392b;
       color: white;
       font-size: 0.85em;
       padding: 6px 12px;
@@ -301,7 +340,7 @@
     }
 
     .btn-remove:hover {
-      background: #c0392b;
+      background: #a93226;
     }
 
     .tab-content {
@@ -314,6 +353,11 @@
       gap: 0;
       min-height: 600px;
     }
+
+    small {
+      color: #888;
+    }
+  </style>
   </style>
 </head>
 <body>
@@ -383,9 +427,9 @@
           <textarea id="card-description" placeholder="Brief description..."></textarea>
         </div>
 
-        <div class="section-title">Dropdowns</div>
+        <div class="section-title">Matches / Predictions</div>
         <div id="dropdowns-container"></div>
-        <button class="btn-add" onclick="addDropdownSection()">+ Add Dropdown</button>
+        <button class="btn-add" onclick="addDropdownSection()">+ Add Match / Prediction</button>
 
         <div class="section-title" style="margin-top: 30px;">Actions</div>
         <button class="btn-primary" onclick="saveCard()">💾 Save Card</button>
@@ -483,6 +527,7 @@ async function checkAdminAuth() {
 
     // User is admin, show admin panel
     console.log('✅ Logged in as admin:', result.user.name);
+    loadCompetitions(); // Load competitions dropdown
     loadCards(); // Auto-load carousel on page load
     return true;
   } catch (err) {
@@ -494,6 +539,81 @@ async function checkAdminAuth() {
 
 // Run auth check on page load
 document.addEventListener('DOMContentLoaded', checkAdminAuth);
+
+// ========== COMPETITIONS MANAGEMENT ==========
+async function loadCompetitions() {
+  try {
+    const response = await fetch('/api/competitions');
+    const result = await response.json();
+
+    if (!result.success) return;
+
+    const select = document.getElementById('card-competition');
+    select.innerHTML = '<option value="">-- Select Competition --</option>';
+
+    result.data.forEach(comp => {
+      const option = document.createElement('option');
+      option.value = comp.id;
+      option.textContent = comp.name;
+      if (comp.icon) option.dataset.icon = comp.icon;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Error loading competitions:', error);
+  }
+}
+
+function showCompetitionIcon() {
+  const select = document.getElementById('card-competition');
+  const selectedOption = select.options[select.selectedIndex];
+  const icon = selectedOption.dataset.icon;
+  const preview = document.getElementById('competition-icon-preview');
+  const img = document.getElementById('competition-icon-img');
+
+  if (icon) {
+    // Check if it's a URL or a filename
+    const iconPath = icon.startsWith('http') ? icon : `/assets/images/league-icons/${icon}`;
+    img.src = iconPath;
+    img.onerror = () => {
+      img.src = '/assets/images/league-icons/default.png';
+    };
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+}
+
+async function addNewCompetition() {
+  const name = document.getElementById('card-new-competition').value.trim();
+  const icon = document.getElementById('card-new-competition-icon').value.trim();
+  
+  if (!name) {
+    showMessage('carousel-message', 'Competition name is required', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/competitions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, icon: icon || null })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      showMessage('carousel-message', 'Error: ' + result.error, 'error');
+      return;
+    }
+
+    document.getElementById('card-new-competition').value = '';
+    document.getElementById('card-new-competition-icon').value = '';
+    showMessage('carousel-message', '✓ Competition added!', 'success');
+    loadCompetitions();
+  } catch (error) {
+    showMessage('carousel-message', 'Error: ' + error.message, 'error');
+  }
+}
 
 // ========== TAB SWITCHING ==========
 function switchTab(tab) {
@@ -592,17 +712,271 @@ function renderDropdownEditor(dropdown, index) {
   dropdownEl.dataset.dropdownIndex = index;
 
   dropdownEl.innerHTML = `
-    <div class="dropdown-item-num">Dropdown ${index + 1}</div>
+    <div class="dropdown-item-num">Match / Prediction ${index + 1}</div>
     <div class="dropdown-fields">
-      <input type="text" class="dropdown-header" placeholder="Header (e.g., Over 2.5 Goals)" value="${dropdown.header || ''}">
-      <input type="text" class="dropdown-subheader" placeholder="Subheader (e.g., Arsenal - Newcastle)" value="${dropdown.subheader || ''}">
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin-bottom: 5px;">Match Details</label>
+      <input type="text" class="dropdown-header" placeholder="Match (e.g., Over 2.5 Goals)" value="${dropdown.header || ''}">
+      <input type="text" class="dropdown-subheader" placeholder="Teams (e.g., Arsenal vs Newcastle)" value="${dropdown.subheader || ''}">
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Location</label>
+      <input type="text" class="dropdown-location" placeholder="e.g., Emirates Stadium" value="${dropdown.location || ''}">
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">GMT Time (Kickoff)</label>
+      <input type="time" class="dropdown-gmt-time" value="${dropdown.gmt_time || ''}">
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Competition</label>
+      <div style="display: flex; gap: 8px; align-items: flex-start;">
+        <div style="flex: 1;">
+          <select class="dropdown-competition" onchange="showDropdownCompetitionIcon(this)">
+            <option value="">-- Select Competition --</option>
+          </select>
+          <div class="dropdown-competition-preview" style="margin-top: 8px; text-align: center; display: none;">
+            <img class="dropdown-competition-icon" src="" alt="Competition Icon" style="max-height: 40px; border-radius: 5px;">
+          </div>
+        </div>
+        <button class="btn-manage-comp" onclick="openCompetitionManager(event)" style="margin-top: 20px; padding: 8px 12px; background: #ff2525; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.85em;">⚙️ Manage</button>
+      </div>
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Link</label>
+      <input type="text" class="dropdown-link" placeholder="e.g., https://example.com/match" value="${dropdown.link || ''}">
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Additional Info</label>
       <input type="text" class="dropdown-subheader2" placeholder="Secondary info (optional)" value="${dropdown.subheader2 || ''}">
+      
+      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Analysis/Reasoning</label>
       <textarea class="dropdown-text" placeholder="Text/Reasoning...">${dropdown.text || ''}</textarea>
-      <button class="btn-remove" onclick="removeDropdown(${index})">Remove Dropdown</button>
+      
+      <button class="btn-remove" onclick="removeDropdown(${index})">Remove Match / Prediction</button>
     </div>
   `;
 
   container.appendChild(dropdownEl);
+  
+  // Load competitions into this dropdown's select
+  loadCompetitionsForDropdown(dropdownEl.querySelector('.dropdown-competition'), dropdown.competition_id);
+}
+
+async function loadCompetitionsForDropdown(selectElement, selectedId) {
+  try {
+    const response = await fetch('/api/competitions');
+    const result = await response.json();
+
+    if (!result.success) return;
+
+    selectElement.innerHTML = '<option value="">-- Select Competition --</option>';
+
+    result.data.forEach(comp => {
+      const option = document.createElement('option');
+      option.value = comp.id;
+      option.textContent = comp.name;
+      if (comp.icon) option.dataset.icon = comp.icon;
+      if (comp.id == selectedId) option.selected = true;
+      selectElement.appendChild(option);
+    });
+    
+    // Show icon if already selected
+    if (selectedId) {
+      showDropdownCompetitionIcon(selectElement);
+    }
+  } catch (error) {
+    console.error('Error loading competitions:', error);
+  }
+}
+
+function showDropdownCompetitionIcon(selectElement) {
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  const icon = selectedOption.dataset.icon;
+  const preview = selectElement.closest('.dropdown-fields').querySelector('.dropdown-competition-preview');
+  const img = preview.querySelector('.dropdown-competition-icon');
+
+  if (icon) {
+    const iconPath = icon.startsWith('http') ? icon : `/assets/images/league-icons/${icon}`;
+    img.src = iconPath;
+    img.onerror = () => {
+      img.src = '/assets/images/league-icons/default.png';
+    };
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+}
+
+function openCompetitionManager(event) {
+  event.preventDefault();
+  const modal = document.createElement('div');
+  modal.id = 'comp-manager-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  `;
+
+  const dialog = document.createElement('div');
+  dialog.style.cssText = `
+    background: #0B0B0B;
+    border: 2px solid #ff2525;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #ccc;
+  `;
+
+  dialog.innerHTML = `
+    <h2 style="color: #ff2525; margin-bottom: 20px;">Manage Competitions</h2>
+    
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #fff; font-size: 1em; margin-bottom: 10px;">Add New Competition</h3>
+      <input type="text" id="new-comp-name" placeholder="Competition name" style="width: 100%; padding: 8px; margin-bottom: 8px; background: #222; border: 1px solid #333; color: #fff; border-radius: 5px;">
+      <input type="text" id="new-comp-icon" placeholder="Icon filename (e.g., en-premierleague.png)" style="width: 100%; padding: 8px; margin-bottom: 8px; background: #222; border: 1px solid #333; color: #fff; border-radius: 5px;">
+      <button onclick="addNewCompetition()" style="width: 100%; padding: 10px; background: #ff2525; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">+ Add Competition</button>
+    </div>
+
+    <div style="border-top: 1px solid #333; padding-top: 20px;">
+      <h3 style="color: #fff; font-size: 1em; margin-bottom: 10px;">Existing Competitions</h3>
+      <div id="competitions-list" style="max-height: 300px; overflow-y: auto;"></div>
+    </div>
+
+    <button onclick="closeCompetitionManager()" style="width: 100%; padding: 10px; margin-top: 20px; background: #333; color: #ccc; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Close</button>
+  `;
+
+  modal.appendChild(dialog);
+  document.body.appendChild(modal);
+
+  loadCompetitionsIntoManager();
+}
+
+async function loadCompetitionsIntoManager() {
+  try {
+    const response = await fetch('/api/competitions');
+    const result = await response.json();
+
+    if (!result.success) return;
+
+    const list = document.getElementById('competitions-list');
+    list.innerHTML = '';
+
+    result.data.forEach(comp => {
+      const item = document.createElement('div');
+      item.style.cssText = `
+        background: #222;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 3px solid #ff2525;
+      `;
+
+      const info = document.createElement('div');
+      info.style.cssText = 'flex: 1;';
+      info.innerHTML = `
+        <div style="color: #fff; font-weight: 600;">${comp.name}</div>
+        <div style="color: #888; font-size: 0.85em;">${comp.icon || 'No icon'}</div>
+      `;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '✕ Delete';
+      deleteBtn.style.cssText = `
+        padding: 5px 10px;
+        background: #c0392b;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.85em;
+      `;
+      deleteBtn.onclick = () => deleteCompetition(comp.id);
+
+      item.appendChild(info);
+      item.appendChild(deleteBtn);
+      list.appendChild(item);
+    });
+  } catch (error) {
+    console.error('Error loading competitions:', error);
+  }
+}
+
+async function addNewCompetition() {
+  const nameInput = document.getElementById('new-comp-name');
+  const iconInput = document.getElementById('new-comp-icon');
+  const name = nameInput.value.trim();
+  const icon = iconInput.value.trim();
+
+  if (!name) {
+    alert('Competition name is required');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/competitions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, icon: icon || null })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      alert('Error: ' + result.error);
+      return;
+    }
+
+    nameInput.value = '';
+    iconInput.value = '';
+    loadCompetitionsIntoManager();
+    
+    // Refresh all dropdown competition selects
+    document.querySelectorAll('.dropdown-competition').forEach(select => {
+      const currentId = select.value;
+      loadCompetitionsForDropdown(select, currentId);
+    });
+  } catch (error) {
+    alert('Error adding competition: ' + error.message);
+  }
+}
+
+async function deleteCompetition(compId) {
+  if (!confirm('Delete this competition?')) return;
+
+  try {
+    const response = await fetch(`/api/competitions/${compId}`, {
+      method: 'DELETE'
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      alert('Error: ' + result.error);
+      return;
+    }
+
+    loadCompetitionsIntoManager();
+    
+    // Refresh all dropdown competition selects
+    document.querySelectorAll('.dropdown-competition').forEach(select => {
+      const currentId = select.value;
+      if (currentId == compId) select.value = '';
+      loadCompetitionsForDropdown(select, currentId);
+    });
+  } catch (error) {
+    alert('Error deleting competition: ' + error.message);
+  }
+}
+
+function closeCompetitionManager() {
+  const modal = document.getElementById('comp-manager-modal');
+  if (modal) modal.remove();
 }
 
 function addDropdownSection() {
@@ -642,11 +1016,25 @@ async function saveCard() {
   document.querySelectorAll('.dropdown-item').forEach(dropdownEl => {
     const header = dropdownEl.querySelector('.dropdown-header').value.trim();
     const subheader = dropdownEl.querySelector('.dropdown-subheader').value.trim();
+    const location = dropdownEl.querySelector('.dropdown-location').value.trim();
+    const gmt_time = dropdownEl.querySelector('.dropdown-gmt-time').value;
+    const competitionSelect = dropdownEl.querySelector('.dropdown-competition');
+    const competition_id = competitionSelect.value ? parseInt(competitionSelect.value) : null;
     const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value.trim();
     const text = dropdownEl.querySelector('.dropdown-text').value.trim();
+    const link = dropdownEl.querySelector('.dropdown-link').value.trim();
 
     if (header || subheader || text) {
-      dropdowns.push({ header, subheader, subheader2, text });
+      dropdowns.push({ 
+        header, 
+        subheader, 
+        location,
+        gmt_time,
+        competition_id,
+        subheader2, 
+        text,
+        link
+      });
     }
   });
 
