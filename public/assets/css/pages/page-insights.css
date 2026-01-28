@@ -309,16 +309,19 @@ font-size: .8rem;
 }
 
 .card-date {
-  font-weight: 600;
-  color: #667eea;
+font-weight: 600;
+color: #ff4f4f;
+font-family: inter;
+font-size: .8em;
 }
 
 .card-id {
-  background: #667eea;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 0.75rem;
+color: rgb(42, 42, 42);
+padding: 2px 8px;
+border-radius: 3px;
+font-size: 0.6rem;
+font-weight: 600;
+font-family: inter;
 }
 
 .card-title-section {
@@ -371,17 +374,20 @@ transition: background 0.3s;
   background: #101010;
 }
 .dropdown-header {
+font-size: .9em;
 text-align: right;
-font-family: inter;
-flex: 1;
-color: silver;
+font-family: montserrat;
+color: rgb(255, 70, 70);
+border: solid 1px rgb(255, 70, 70);
+border-radius: 5px;
+padding: 2px;
 }
 .dropdown-subheader{
-font-family: inter;
+font-family: montserrat;
 font-size: .8em;
 text-align: left;
 color: silver;
-
+flex: 1;
 }
 
 .dropdown-content {
@@ -396,9 +402,9 @@ border-top: 1px solid #333;
 }
 
 .dropdown-info p {
-  margin: 0;
-  color: #ddd;
-  line-height: 1.6;
+margin: 5px;
+color: #ddd;
+line-height: 1.6;
 }
 
 
@@ -409,9 +415,9 @@ border-top: 1px solid #333;
 }
 
 .dropdown-text {
-  font-size: 0.8rem;
-  line-height: 1;
-  color: #ccc;
+font-size: 0.6rem;
+line-height: 0;
+color: #3f3f3f;
 }
 
 
@@ -420,9 +426,15 @@ color: rgb(255, 46, 46);
 font-size: .7em;
 font-family: montserrat;
 text-decoration: none;
-
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 5px;
 }
-
+.details-text__link span{
+color: rgb(255, 46, 46);
+font-size: 1em;
+}
 
 
 .dropdown-context__info{

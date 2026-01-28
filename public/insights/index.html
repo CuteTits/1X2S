@@ -199,7 +199,7 @@ function renderCarouselCards(data) {
 
                   <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
                   <p class="dropdown-text">${dropdown.text || ''}</p>
-                  ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details →</a></div>` : ''}
+                  ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
                 </div>
               </div>
             </div>
@@ -210,7 +210,7 @@ function renderCarouselCards(data) {
     cardElement.innerHTML = `
       <div class="card-header-meta">
         <span class="card-date">${dateStr}</span>
-        <span class="card-id">[ID: ${cardData.id}]</span>
+        <span class="card-id">${cardData.id}</span>
       </div>
       
       <div class="card-title-section">
