@@ -329,13 +329,13 @@ font-family: inter;
 }
 
 .card-title {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-bottom: 8px;
   color: #fff;
 }
 
 .card-subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #aaa;
   margin-bottom: 8px;
 }
@@ -403,21 +403,26 @@ border-top: 1px solid #333;
 
 .dropdown-info p {
 margin: 5px;
+padding: 5px;
 color: #ddd;
 line-height: 1.6;
+
 }
 
 
 
 .dropdown-subtext {
-  font-size: 0.7rem;
-  color: #aaa;
+font-size: 0.7rem;
+color: #aaa;
+font-family: orbitron;
+font-weight: 600;
 }
 
 .dropdown-text {
 font-size: 0.6rem;
 line-height: 0;
 color: #3f3f3f;
+border-left: solid 2px rgb(215, 215, 215);
 }
 
 
@@ -437,14 +442,25 @@ font-size: 1em;
 }
 
 
+
+
 .dropdown-context__info{
-font-size: .8em;
-color: white;
-font-weight: 600;
-font-family: montserrat;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+opacity: .7;
 }
-
-
+.dropdown-context__league{
+margin: 0;
+padding: 0px 5px;
+}
+.dropdown-context__league h1{
+font-size: .6em;
+font-weight: 200;
+font-family: orbitron;
+padding: 0;
+margin: 0;
+}
 .dropdown-datetime__display{
 display: flex;
 flex-direction: row;
@@ -455,10 +471,10 @@ gap: 10px;
 display: flex;
 flex-direction: row;
 align-items: center;
-color: rgb(91, 91, 91);
-font-size: .8em;
-font-weight: 400;
-font-family:inter ;
+color: rgb(255, 255, 255);
+font-size: .7em;
+font-weight: 200;
+font-family:montserrat ;
 }
 .dropdown-datetime__content span{
 font-size: 1em;

@@ -194,11 +194,16 @@ function renderCarouselCards(data) {
               </button>
               <div class="dropdown-content" style="display: none;">
                 <div class="dropdown-info">
-                  ${competitionInfo}
-                  <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
+                  <div class="dropdown-context__info">
+                    <div class="dropdown-context__league">
+                      <h1>${competitionInfo}</h1>
+                    </div>
+                    <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
+                  </div>
 
-                  <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
+                  
                   <p class="dropdown-text">${dropdown.text || ''}</p>
+                  <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
                   ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
                 </div>
               </div>
