@@ -180,33 +180,33 @@ font-weight: bold;
 opacity: 1;
 }
 .card-button::before {
-  content: '';
-  position: absolute;
-  height: 2px;
-  width: 0%;
-  bottom: 0;
-  left: 0;
-  background: #ff5252;
-  transition:
-    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
+content: '';
+position: absolute;
+height: 2px;
+width: 0%;
+bottom: 0;
+left: 0;
+background: #ff5252;
+transition:
+width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+pointer-events: none;
 }
 
 .card-button.active::before {
-  width: 100%;
-  left: 0;
-  transition:
-    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    right 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+width: 100%;
+left: 0;
+transition:
+width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+right 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-button:not(.active)::before {
-  width: 0%;
-  left: 100%;
-  transition:
-    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+width: 0%;
+left: 100%;
+transition:
+width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Carousel Container */
@@ -229,7 +229,7 @@ gap: 50px;
 overflow-y: show;
 height: auto;
 width: max-content;
-padding: 0px 50vw 0px 50vw; /* Center the carousel */ 
+padding: 50px 50vw 50px 50vw; /* Center the carousel */ 
 scroll-snap-type: x mandatory;
 }
 
@@ -241,17 +241,18 @@ opacity: 0;
 padding: 20px;
 transform: scale(0.85);
 transition:
-  transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-  opacity 1s ease;
+transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+opacity 1s ease;
 pointer-events: auto;
+border: solid 1px #212121;
+border-radius: 15px;
 }
 .carousel-card.centered {
-  background: #121212;
-  opacity: 1;
-  transform: scale(1.1);
-  z-index: 2;
-  pointer-events: auto;
-  transition:   opacity 1s ease;
+opacity: 1;
+transform: scale(1.1);
+z-index: 2;
+pointer-events: auto;
+transition:   opacity 1s ease;
 }
 
 
@@ -281,13 +282,13 @@ display: inline-flex;
 align-items: center;
 gap: 8px;
 background: none;
-border: solid 1px #1b1b1b;
+border: solid 1px #212121;
 color: #fff;
 font-family: 'Montserrat', sans-serif;
 font-weight: 400;
 font-size: .6rem;
 padding: 5px 10px;
-border-radius: 5px;
+border-radius: 15px;
 text-decoration: none;
 cursor: pointer;
 position: relative;
@@ -298,14 +299,14 @@ font-size: .8rem;
 /* ========== CAROUSEL CARD STYLES ========== */
 
 .card-header-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  color: #999;
-  border-bottom: 1px solid #333;
-  padding-bottom: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+font-size: 0.85rem;
+color: #999;
+border-bottom: 1px solid #212121;
+padding-bottom: 8px;
 }
 
 .card-date {
@@ -325,80 +326,135 @@ font-family: inter;
 }
 
 .card-title-section {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .card-title {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-  color: #fff;
+font-size: 1.4rem;
+margin-bottom: 8px;
+color: #fff;
 }
 
 .card-subtitle {
-  font-size: 1rem;
-  color: #aaa;
-  margin-bottom: 8px;
+font-size: 1rem;
+color: #aaa;
+margin-bottom: 8px;
 }
 
 .card-description {
-  font-size: 0.95rem;
-  color: #ccc;
-  line-height: 1.6;
+font-size: 0.95rem;
+color: #ccc;
+line-height: 1.6;
 }
 
+
+
+
+.parent-section{
+border: solid 1px #212121;
+}
+.parent-section h1{
+color: white;
+font-family: zendots;
+font-weight: 200;
+font-size: 1em;
+
+margin: 0;
+padding: 0;
+}
+.parent-section h2{
+color: rgb(121, 121, 121);
+font-family: orbitron;
+font-weight: 400;
+font-size: .8em;
+margin: 0;
+padding: 0;
+}
+.parent-section p{
+color: rgb(121, 121, 121);
+font-family: montserrat;
+font-weight: 400;
+font-size: .7em;
+margin: 10px 0;
+padding: 0;
+text-decoration: none;
+}
+
+
 .card-dropdowns {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .dropdown-section {
-  margin-bottom: 4px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  overflow: hidden;
-  background: #1a1a1a;
+margin: 0;
+overflow: hidden;
+border: 1px solid #212121;
+border-radius: 5px;
+margin: 5px;
+
 }
 
 .dropdown-toggle {
 width: 100%;
 padding: 5px;
-background: #141414;
 border: none;
 cursor: pointer;
 display: flex;
-justify-content: space-between;
+gap: 10px;
 align-items: center;
 transition: background 0.3s;
+background: transparent;
 }
-
 .dropdown-toggle:hover {
-  background: #101010;
+background-color: #212121;
 }
 .dropdown-header {
-font-size: .9em;
-text-align: right;
-font-family: montserrat;
-color: rgb(255, 70, 70);
-border: solid 1px rgb(255, 70, 70);
+text-align: left;
 border-radius: 5px;
-padding: 2px;
+display: flex;
+flex-direction: column;
+}
+.dropdown-header h1{
+font-size: 1em;
+padding: 0;
+margin: 0;
+font-weight: 200;
+font-family: orbitron;
+color: rgb(255, 255, 255);
+}
+.dropdown-header h2{
+font-size: .8em;
+padding: 0;
+margin: 0;
+font-weight: 200;
+font-family: orbitron;
+color: gray;
 }
 .dropdown-subheader{
-font-family: montserrat;
-font-size: .8em;
-text-align: left;
-color: silver;
 flex: 1;
+text-align: right;
+margin: 0 5px;
 }
+.dropdown-subheader h1{
+font-size: 1.2em;
+color: white;
+font-family: orbitron;
+font-weight: 600;
+}
+
 
 .dropdown-content {
 padding: 8px;
-background: #1a1a1a;
-border-top: 1px solid #333;
+border-top: 1px solid #212121;
+background-color: #171717;
+border: 1px solid #212121;
+border-radius: 5px;
 }
 
 .dropdown-info {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
+
 }
 
 .dropdown-info p {
@@ -406,7 +462,11 @@ margin: 5px;
 padding: 5px;
 color: #ddd;
 line-height: 1.6;
-
+font-family: montserrat;
+}
+.dropdown-text span{
+font-weight: 600;
+color: #ff4f4f;
 }
 
 
@@ -423,8 +483,8 @@ font-size: 0.6rem;
 line-height: 0;
 color: #3f3f3f;
 border-left: solid 2px rgb(215, 215, 215);
+display: block;
 }
-
 
 .details-text__link{
 color: rgb(255, 46, 46);
@@ -449,6 +509,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 opacity: .7;
+font-size: .8em;
 }
 .dropdown-context__league{
 margin: 0;
@@ -478,4 +539,186 @@ font-family:montserrat ;
 }
 .dropdown-datetime__content span{
 font-size: 1em;
+}
+
+/* Sporty bookmaker refresh */
+:root{
+	--pitch-deep: #07120c;
+	--pitch-dark: #0b1510;
+	--pitch-line: rgba(255, 255, 255, 0.04);
+	--accent-red: #ff4a4a;
+	--accent-gold: #f2c94c;
+	--panel: rgba(12, 20, 15, 0.88);
+	--panel-border: rgba(255, 255, 255, 0.08);
+}
+
+body, html{
+	background:
+		linear-gradient(180deg, #070b09 0%, #0a100c 50%, #090d0b 100%),
+		repeating-linear-gradient(90deg, transparent 0 22px, var(--pitch-line) 22px 23px),
+		repeating-linear-gradient(0deg, transparent 0 22px, var(--pitch-line) 22px 23px);
+}
+
+#section1{
+	background:
+		linear-gradient(120deg, rgba(7, 12, 9, 0.9), rgba(7, 12, 9, 0.4)),
+		url('../images/insights-ucl-bg.png') no-repeat center center/cover;
+}
+
+#section1 h1{
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	text-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+#section1 h3{
+	color: #b0b7b2;
+	gap: 6px;
+}
+
+#section1 h3 span{
+	background: linear-gradient(90deg, #ff6b6b, #f2c94c);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+#section2, #section3, #section4{
+	background:
+		linear-gradient(180deg, rgba(7, 12, 9, 0.92), rgba(7, 12, 9, 0.98)),
+		repeating-linear-gradient(90deg, transparent 0 26px, var(--pitch-line) 26px 27px);
+}
+
+.button-carousel-wrapper{
+	width: min(78vw, 720px);
+	border-left: 1px solid rgba(255, 255, 255, 0.08);
+	border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-button{
+	border-radius: 999px;
+	border: 1px solid transparent;
+	background: rgba(10, 16, 12, 0.6);
+	transition: all 0.25s ease;
+}
+
+.card-button.active{
+	border-color: rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.card-button::before{
+	background: var(--accent-red);
+	height: 3px;
+	border-radius: 999px;
+}
+
+.carousel{
+	padding: 60px 45vw 60px 45vw;
+}
+
+.carousel-card{
+	background: var(--panel);
+	border: 1px solid var(--panel-border);
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+	backdrop-filter: blur(10px);
+}
+
+.carousel-card.centered{
+	transform: scale(1.08);
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.card-header-meta{
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-date{
+	color: var(--accent-gold);
+	letter-spacing: 0.6px;
+}
+
+.card-id{
+	background: rgba(255, 255, 255, 0.08);
+	color: #d6d6d6;
+	border-radius: 999px;
+}
+
+.card-title{
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.card-description{
+	color: #c7d2c9;
+}
+
+.parent-section{
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(7, 12, 9, 0.75);
+}
+
+.dropdown-section{
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(7, 12, 9, 0.55);
+}
+
+.dropdown-toggle{
+	padding: 10px 12px;
+}
+
+.dropdown-toggle:hover{
+	background-color: rgba(255, 255, 255, 0.04);
+}
+
+.dropdown-header h1{
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+}
+
+.dropdown-subheader h1{
+	color: var(--accent-red);
+}
+
+.dropdown-content{
+	background-color: rgba(10, 16, 12, 0.85);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.details-text__link{
+	color: var(--accent-gold);
+}
+
+.details-text__link span{
+	color: var(--accent-gold);
+}
+
+.dropdown-text{
+	border-left: solid 2px var(--accent-gold);
+	color: #9aa8a0;
+}
+
+.dropdown-subtext{
+	color: #c2c2c2;
+}
+
+#section3 h3{
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+#section4 p{
+	color: #9aa8a0;
+}
+
+@media (max-width: 900px){
+	.carousel{
+		padding: 40px 35vw 40px 35vw;
+	}
+
+	.carousel-card{
+		flex: 0 0 80vw;
+	}
 }

@@ -109,10 +109,9 @@ const blockedCountries = ['CN', 'RU', 'NG', 'SE'];
 // Middleware to parse JSON
 app.use(express.json());
 
-// Middleware to detect country via Cloudflare
+// Middleware to set country (Cloudflare detection disabled)
 app.use((req, res, next) => {
-  const userCountry = req.headers['cf-ipcountry'] || 'Unknown';
-  req.country = userCountry;
+  req.country = 'Unknown';
   next();
 });
 
@@ -228,9 +227,12 @@ app.post('/api/signup', async (req, res) => {
 // --- Login endpoint ---
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(400).json({ success: false, message: 'Missing credentials' });
   }
+
+  // Cloudflare Turnstile verification disabled
 
   try {
     const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
@@ -500,58 +502,72 @@ app.get('/api/carousel/insights', async (req, res) => {
         date: row.date || null,
         subtitle: row.subtitle || row.header || '',
         description: row.description || row.subheader || '',
-        link: row.link || '',
-        dropdowns: []
+        parents: [],
+        dropdowns: [] // Fallback for old data
       };
 
-      // Try to parse dropdowns first (new format)
+      // Try to parse dropdowns (now contains parents or flat dropdowns)
       if (row.dropdowns) {
         try {
+          let parsed;
           if (typeof row.dropdowns === 'string') {
-            parsedData.dropdowns = JSON.parse(row.dropdowns);
-          } else if (typeof row.dropdowns === 'object') {
-            parsedData.dropdowns = row.dropdowns;
+            parsed = JSON.parse(row.dropdowns);
+          } else {
+            parsed = row.dropdowns;
           }
           
-          // Enhance each dropdown with competition details
-          for (let dropdown of parsedData.dropdowns) {
-            if (dropdown.competition_id) {
-              try {
-                const [compRows] = await db.query(
-                  'SELECT id, name, icon FROM competitions WHERE id = ?',
-                  [dropdown.competition_id]
-                );
-                if (compRows.length > 0) {
-                  dropdown.competition_name = compRows[0].name;
-                  dropdown.competition_icon = compRows[0].icon;
+          // Check if it's the new hierarchical structure (parents)
+          if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].title !== undefined && parsed[0].dropdowns !== undefined) {
+            // New structure: array of parent objects
+            parsedData.parents = parsed;
+            
+            // Enhance each dropdown in each parent with competition details
+            for (let parent of parsedData.parents) {
+              if (parent.dropdowns && Array.isArray(parent.dropdowns)) {
+                for (let dropdown of parent.dropdowns) {
+                  if (dropdown.competition_id) {
+                    try {
+                      const [compRows] = await db.query(
+                        'SELECT id, name, icon FROM competitions WHERE id = ?',
+                        [dropdown.competition_id]
+                      );
+                      if (compRows.length > 0) {
+                        dropdown.competition_name = compRows[0].name;
+                        dropdown.competition_icon = compRows[0].icon;
+                      }
+                    } catch (err) {
+                      console.warn('Failed to fetch competition for dropdown');
+                    }
+                  }
                 }
-              } catch (err) {
-                console.warn('Failed to fetch competition for dropdown');
+              }
+            }
+          } else {
+            // Old structure: flat dropdowns array - convert to new structure
+            parsedData.dropdowns = parsed;
+            
+            // Enhance each dropdown with competition details
+            for (let dropdown of parsedData.dropdowns) {
+              if (dropdown.competition_id) {
+                try {
+                  const [compRows] = await db.query(
+                    'SELECT id, name, icon FROM competitions WHERE id = ?',
+                    [dropdown.competition_id]
+                  );
+                  if (compRows.length > 0) {
+                    dropdown.competition_name = compRows[0].name;
+                    dropdown.competition_icon = compRows[0].icon;
+                  }
+                } catch (err) {
+                  console.warn('Failed to fetch competition for dropdown');
+                }
               }
             }
           }
         } catch (e) {
           console.warn('Failed to parse dropdowns for card', row.id);
+          parsedData.parents = [];
           parsedData.dropdowns = [];
-        }
-      }
-
-      // Fallback: convert old items format to dropdowns
-      if (!parsedData.dropdowns || parsedData.dropdowns.length === 0) {
-        if (row.items) {
-          try {
-            let items = typeof row.items === 'string' ? JSON.parse(row.items) : row.items;
-            if (Array.isArray(items) && items.length > 0) {
-              parsedData.dropdowns = items.map(item => ({
-                header: item.title || '',
-                subheader: item.description || '',
-                subheader2: '',
-                text: ''
-              }));
-            }
-          } catch (e) {
-            console.warn('Failed to parse items for card', row.id);
-          }
         }
       }
 
@@ -576,16 +592,16 @@ app.get('/api/carousel/insights', async (req, res) => {
 
 // Create a new carousel card (PROTECTED - ADMIN ONLY)
 app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
-  const { title, date, subtitle, description, link, dropdowns } = req.body;
+  const { title, date, subtitle, description, parents } = req.body;
   if (!title) {
     return res.status(400).json({ success: false, error: 'Title is required' });
   }
 
   try {
-    const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
+    const parentsJSON = parents ? JSON.stringify(parents) : null;
     const [result] = await db.query(
-      'INSERT INTO carousel_insights (title, date, subtitle, description, link, dropdowns) VALUES (?, ?, ?, ?, ?, ?)',
-      [title, date || null, subtitle || '', description || '', link || '', dropdownsJSON]
+      'INSERT INTO carousel_insights (title, date, subtitle, description, dropdowns) VALUES (?, ?, ?, ?, ?)',
+      [title, date || null, subtitle || '', description || '', parentsJSON]
     );
     
     res.json({ success: true, message: 'Card created', id: result.insertId });
@@ -598,13 +614,13 @@ app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {
 // Update carousel card (PROTECTED - ADMIN ONLY)
 app.put('/api/carousel/insights/:id', requireAdminRole, async (req, res) => {
   const { id } = req.params;
-  const { title, date, subtitle, description, link, dropdowns } = req.body;
+  const { title, date, subtitle, description, parents } = req.body;
 
   try {
-    const dropdownsJSON = dropdowns ? JSON.stringify(dropdowns) : null;
+    const parentsJSON = parents ? JSON.stringify(parents) : null;
     await db.query(
-      'UPDATE carousel_insights SET title = ?, date = ?, subtitle = ?, description = ?, link = ?, dropdowns = ? WHERE id = ?',
-      [title, date || null, subtitle || '', description || '', link || '', dropdownsJSON, id]
+      'UPDATE carousel_insights SET title = ?, date = ?, subtitle = ?, description = ?, dropdowns = ? WHERE id = ?',
+      [title, date || null, subtitle || '', description || '', parentsJSON, id]
     );
     
     res.json({ success: true, message: 'Card updated' });

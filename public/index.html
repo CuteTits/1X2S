@@ -80,7 +80,7 @@
         <h2>The World Wide Web in One Call</h2>
         <h3>Context-aware web retrieval and grounding stack that supplies AI systems with fast, structured, and time-relevant web data.</h3>
       </div>
-      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">GrabStack version 1.2.0.6 Chrome</p>
+      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">LiteWS version 1.2.0.6 Chrome</p>
     </div>
   </section>
 
@@ -284,7 +284,7 @@
 
   <section style="height: 2.5vh;"></section>
 
-  <section id="results-summary" class="section section--dynamic section--vh300">
+  <section id="results-summary" class="section section--dynamic section--vh250">
     <div class="section__container section__container--dynamic">
       <div class="results-summary__wrapper">
         <div class="results-summary__panel" style="padding: 20px;">
@@ -409,20 +409,7 @@
                   <p>Includes titles, links, snippets, and publication timestamps for traceability.</p>
                   <p>Facilitates verification and further exploration of summarized content.</p>
                   <p>Allows for easier source attribution and credibility assessment as well as enhanced crawling and indexing capabilities.</p>
-                  <div class="json__icons">
-                    <div class="json__icon">
-                      <span class="material-symbols-outlined">source</span>
-                      <p>Sources</p>
-                    </div>
-                    <div class="json__icon">
-                      <span class="material-symbols-outlined">link</span>
-                      <p>Links</p>
-                    </div>
-                    <div class="json__icon">
-                      <span class="material-symbols-outlined">description</span>
-                      <p>Snippets</p>
-                    </div>
-                   </div>
+              
 
 
                     <div class="json__logos">
@@ -450,34 +437,6 @@
                       <img src="/assets/images/logo-espn.png" alt="ESPN Logo">
                       <p>ESPN</p>
                     </div>
-
-<script>
-  // Configurable speed (pixels per second)
-  const carouselSpeed = 60; // Change this value for speed
-
-  const logocarousel = document.querySelector('.json__logo-carousel');
-  let direction = 1;
-  let position = 0;
-
-  function animateCarousel() {
-    const wrapper = document.querySelector('.json__logo-carousel-wrapper');
-    const maxOffset = carousel.scrollWidth - wrapper.offsetWidth;
-    position += direction * (carouselSpeed / 60); // 60fps
-
-    if (position > maxOffset) {
-      direction = -1;
-      position = maxOffset;
-    } else if (position < 0) {
-      direction = 1;
-      position = 0;
-    }
-
-    carousel.style.transform = `translateX(-${position}px)`;
-    requestAnimationFrame(animateCarousel);
-  }
-
-  if (carousel) animateCarousel();
-</script>
 
                   </div>  
               </div>
@@ -526,7 +485,8 @@
             const sectioncontrol = document.querySelector('#results-summary');
             const inner = document.querySelector('.results-summary__scroll-inner');
 
-            const startAt = 0.1; // start effect after 50% scrolled into the section
+            const startAt = 0.1;
+            const scrollSensitivity = 2; // 0.5 = slower, 1 = normal, 2 = faster
 
             window.addEventListener('scroll', () => {
               const sectionTop = sectioncontrol.offsetTop;
@@ -547,6 +507,7 @@
 
               // Offset proportional to section scroll
               let progress = (scrollIntoSection - startAt) / (1 - startAt);
+              progress = Math.min(Math.max(progress * scrollSensitivity, 0), 1);
               if (progress > 1) progress = 1;
 
               // Reversed translation
@@ -677,76 +638,30 @@
 
       <button><a href="/litews" target="_self">How to Integrate</a><span class="material-symbols-outlined">arrow_forward_ios</span></button>
 
-      <p>*GravityStack is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
+      <p>*LiteWS is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
         Proprietary or closed APIs that do not permit external plugin integration may not be supported.</p>
 
     </div>
   </div>
 
 
+  </section>
+  <section class="section section--vh100 section--bg-dark">
+    
+      <h1>Back Up Your Sports Prediction</h1>
 
+      <h1>Reinforce Your Stock Analysis</h1>
+
+
+        <p>Fetch for actionable and up-to-date news and data from web results, news aggregation, rss feeds
+          and open API endpoints. Continious polling with mere millisecond margin ensures you get your information
+          before others.
+        </p>
 
   </section>
 
 
-  <section id="features" class="section section--vhauto section--bg-dark">
-    <div class="section__title">
-      <h1 data-aos="fade-up">Raw Features</h1>
-      <h3 data-aos="fade-up">
-        -- text --
-      </h3>
-    </div>
-    <div class="features__grid" data-aos="fade-up">
-      <div class="features__item">
-        <div class="features__item-title">
-          <h2>Seamless Integration</h2>
-          <h3>API First</h3>
-        </div>
-        <div class="features__item-content">
-          <p>
-            Designed for easy integration with existing applications and services via RESTful API endpoints.
-          </p>
-        </div>
-        <img class="features__item-img" src="/assets/images/illustration-03.png" alt="AI Image 1">
-      </div>
-      <div class="features__item">
-        <div class="features__item-title">
-          <h2>Scalable</h2>
-          <h3>Cloud-Native</h3>
-        </div>
-        <div class="features__item-content">
-          <p>
-            Easily handles increasing workloads with minimal latency. Supports direct integration into existing systems, projects and infrastructure.
-          </p>
-        </div>
-        <img class="features__item-img" src="/assets/images/illustration-02.png" alt="AI Image 1">
-      </div>
-      <div class="features__item">
-        <div class="features__item-title">
-          <h2>Customizable</h2>
-          <h3>Plugin Ready</h3>
-        </div>
-        <div class="features__item-content">
-          <p>
-            Plugin ready with preintegrated support for XML feeds, RSS, JSON, and HTML content parsing.
-          </p>
-        </div>
-        <img class="features__item-img" src="/assets/images/illustration-01.png" alt="AI Image 1">
-      </div>
-      <div class="features__item">
-        <div class="features__item-title">
-          <h2>AI Ready</h2>
-          <h3>LLM Support</h3>
-        </div>
-        <div class="features__item-content">
-          <p>
-            Seamless integration with LLMs that lack native web access, enabling real-time data retrieval and enhanced AI capabilities.
-          </p>
-        </div>
-        <img class="features__item-img" src="/assets/images/illustration-05.png" alt="AI Image 1">
-      </div>
-    </div>
-  </section>
+ 
 
   <section id="security-privacy" class="section section--vh80 section--bg-dark">
     <div class="section__title">

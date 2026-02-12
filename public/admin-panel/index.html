@@ -6,12 +6,29 @@
   <title>Admin Panel</title>
 
     <link rel="stylesheet" href="/assets/css/core/fonts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200;400&display=swap" rel="stylesheet" />
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: 400;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
     }
 
     ::-webkit-scrollbar {
@@ -35,240 +52,250 @@
       font-family: 'montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #0B0B0B;
       min-height: 100vh;
-      padding: 20px;
-      color: #e0e0e0;
+      padding: 15px;
+      color: #d4d4d4;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1600px;
       margin: 0 auto;
-      background: #1a1a1a;
-      border-radius: 10px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      background: #141414;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
       overflow: hidden;
-      border: 1px solid #333;
+      border: 1px solid #2a2a2a;
     }
 
     header {
-      background: linear-gradient(137deg, rgba(36, 36, 36, 1) 0%, rgba(14, 14, 14, 1) 26%, rgba(14, 14, 14, 1) 100%);
+      background: #1a1a1a;
       color: white;
-      padding: 30px;
-      text-align: center;
-      border-bottom: 2px solid #ff2525;
+      padding: 20px 24px;
+      text-align: left;
+      border-bottom: 1px solid #2a2a2a;
     }
 
     header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ff2525, #ff7272);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 1.5em;
+      margin-bottom: 4px;
+      color: #ffffff;
+      font-weight: 600;
     }
 
     header p {
-      color: #999;
-      font-size: 0.95em;
+      color: #808080;
+      font-size: 0.8em;
+      font-weight: 400;
     }
 
     .tabs {
       display: flex;
-      background: #0f0f0f;
-      border-bottom: 2px solid #333;
+      background: #1a1a1a;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 0 24px;
+      gap: 8px;
     }
 
     .tab-button {
-      flex: 1;
-      padding: 15px;
+      padding: 12px 16px;
       border: none;
       background: none;
       cursor: pointer;
-      font-size: 1em;
-      font-weight: 600;
-      color: #888;
-      transition: all 0.3s;
-      border-bottom: 3px solid transparent;
+      font-size: 0.85em;
+      font-weight: 500;
+      color: #808080;
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
     }
 
     .tab-button:hover {
-      background: #1a1a1a;
-      color: #ccc;
+      color: #d4d4d4;
     }
 
     .tab-button.active {
-      color: #ff2525;
-      border-bottom-color: #ff2525;
+      color: #ffffff;
+      border-bottom-color: #ff4f4f;
     }
 
     .content {
       display: grid;
-      grid-template-columns: 350px 1fr;
+      grid-template-columns: 280px 1fr;
       gap: 0;
       min-height: 600px;
     }
 
     .sidebar {
-      background: #0f0f0f;
-      border-right: 2px solid #333;
-      padding: 20px;
+      background: #1a1a1a;
+      border-right: 1px solid #2a2a2a;
+      padding: 16px;
       overflow-y: auto;
-      max-height: 70vh;
+      max-height: calc(100vh - 200px);
     }
 
     .sidebar h2 {
-      color: #ff2525;
-      margin-bottom: 15px;
-      font-size: 1.2em;
+      color: #ffffff;
+      margin-bottom: 12px;
+      font-size: 0.9em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .main-section {
-      padding: 30px;
+      padding: 24px;
       overflow-y: auto;
-      max-height: 70vh;
-      background: #151515;
+      max-height: calc(100vh - 200px);
+      background: #141414;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 15px;
+      gap: 6px;
+      margin-bottom: 16px;
     }
 
     label {
-      font-weight: 600;
-      color: #ccc;
-      font-size: 0.95em;
+      font-weight: 500;
+      color: #d4d4d4;
+      font-size: 0.8em;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="date"],
+    input[type="time"],
     input[type="password"],
     select,
     textarea {
-      padding: 10px;
-      border: 2px solid #333;
-      border-radius: 5px;
+      padding: 8px 10px;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
       font-family: inherit;
-      font-size: 1em;
-      background: #222;
-      color: #e0e0e0;
-      transition: border-color 0.3s;
+      font-size: 0.85em;
+      background: #1a1a1a;
+      color: #d4d4d4;
+      transition: all 0.2s;
     }
 
     input[type="text"]:focus,
     input[type="email"]:focus,
     input[type="date"]:focus,
+    input[type="time"]:focus,
     input[type="password"]:focus,
     select:focus,
     textarea:focus {
       outline: none;
-      border-color: #ff2525;
-      box-shadow: 0 0 8px rgba(255, 37, 37, 0.3);
+      border-color: #ff4f4f;
+      background: #1f1f1f;
     }
 
     textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 70px;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 8px 14px;
       border: none;
-      border-radius: 5px;
-      font-size: 0.95em;
-      font-weight: 600;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    button .material-symbols-outlined {
+      font-size: 1.2em;
     }
 
     .btn-primary {
-      background: linear-gradient(90deg, #ff2525 0%, #ff6b6b 100%);
+      background: #ff4f4f;
       color: white;
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .btn-primary:hover {
-      background: linear-gradient(90deg, #ff1a1a 0%, #ff5555 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 37, 37, 0.3);
+      background: #ff3838;
     }
 
     .btn-danger {
-      background: #c0392b;
-      color: white;
+      background: #2a2a2a;
+      color: #ff4f4f;
+      border: 1px solid #3a3a3a;
       width: 100%;
     }
 
     .btn-danger:hover {
-      background: #a93226;
-      box-shadow: 0 5px 15px rgba(192, 57, 43, 0.3);
+      background: #333333;
+      border-color: #ff4f4f;
     }
 
     .btn-add {
-      background: linear-gradient(90deg, #ff2525 0%, #ff6b6b 100%);
-      color: white;
+      background: #1a1a1a;
+      color: #ff4f4f;
+      border: 1px dashed #3a3a3a;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .btn-add:hover {
-      background: linear-gradient(90deg, #ff1a1a 0%, #ff5555 100%);
-      transform: translateY(-2px);
+      background: #222222;
+      border-color: #ff4f4f;
     }
 
     .list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 4px;
     }
 
     .list-item {
-      background: #222;
-      border: 2px solid #333;
-      border-radius: 5px;
-      padding: 12px;
+      background: #141414;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 10px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
     }
 
     .list-item:hover {
-      border-color: #ff2525;
-      background: #2a2a2a;
-      transform: translateX(5px);
+      background: #1f1f1f;
+      border-color: #3a3a3a;
     }
 
     .list-item.active {
-      border-color: #ff2525;
-      background: #ff2525;
-      color: white;
+      background: #1f1f1f;
+      border-color: #ff4f4f;
     }
 
     .list-item h4 {
-      margin-bottom: 5px;
-      font-size: 0.95em;
-      color: #fff;
+      margin-bottom: 4px;
+      font-size: 0.8em;
+      color: #ffffff;
+      font-weight: 500;
     }
 
     .list-item p {
-      font-size: 0.85em;
-      opacity: 0.8;
+      font-size: 0.7em;
       margin: 2px 0;
-      color: #aaa;
+      color: #808080;
     }
 
     .list-item.active p {
-      opacity: 0.95;
-      color: #ffe0e0;
+      color: #a0a0a0;
     }
 
     .message {
-      padding: 12px;
-      border-radius: 5px;
-      margin-bottom: 15px;
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
       display: none;
+      font-size: 0.8em;
     }
 
     .message.show {
@@ -276,71 +303,79 @@
     }
 
     .message.success {
-      background: rgba(76, 175, 80, 0.2);
-      color: #4caf50;
-      border: 1px solid rgba(76, 175, 80, 0.3);
+      background: #1a2e1a;
+      color: #4ade80;
+      border: 1px solid #2a4a2a;
     }
 
     .message.error {
-      background: rgba(255, 37, 37, 0.2);
-      color: #ff5555;
-      border: 1px solid rgba(255, 37, 37, 0.3);
+      background: #2e1a1a;
+      color: #ff4f4f;
+      border: 1px solid #4a2a2a;
     }
 
     .no-selection {
       color: #666;
       text-align: center;
       padding: 40px 20px;
-      font-style: italic;
+      font-size: 0.85em;
     }
 
     .section-title {
-      color: #ff2525;
-      font-size: 1.1em;
+      color: #d4d4d4;
+      font-size: 0.85em;
+      font-weight: 600;
       margin-top: 20px;
-      margin-bottom: 10px;
-      border-bottom: 2px solid #ff2525;
+      margin-bottom: 12px;
       padding-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .dropdown-item {
-      background: #222;
-      border: 1px solid #333;
-      border-radius: 5px;
-      padding: 12px;
-      margin-bottom: 10px;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 8px;
     }
 
     .dropdown-item-num {
-      font-size: 0.85em;
-      color: #ff2525;
-      font-weight: 600;
-      margin-bottom: 8px;
+      font-size: 0.75em;
+      color: #ff4f4f;
+      font-weight: 500;
+      margin-bottom: 6px;
     }
 
     .dropdown-fields {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .dropdown-fields input,
     .dropdown-fields textarea {
-      font-size: 0.9em;
-      padding: 8px;
+      font-size: 0.8em;
+      padding: 7px 9px;
     }
 
     .btn-remove {
-      background: #c0392b;
-      color: white;
-      font-size: 0.85em;
-      padding: 6px 12px;
-      width: 100%;
-      margin-top: 8px;
+      background: transparent;
+      color: #808080;
+      font-size: 0.75em;
+      padding: 4px 8px;
+      border: 1px solid #2a2a2a;
+      width: auto;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
 
     .btn-remove:hover {
-      background: #a93226;
+      background: #2a2a2a;
+      color: #ff4f4f;
+      border-color: #3a3a3a;
     }
 
     .tab-content {
@@ -349,14 +384,220 @@
 
     .tab-content.active {
       display: grid;
-      grid-template-columns: 350px 1fr;
+      grid-template-columns: 280px 1fr;
       gap: 0;
       min-height: 600px;
     }
 
     small {
-      color: #888;
+      color: #666;
+      font-size: 0.75em;
     }
+
+    .btn-manage-comp {
+      background: #2a2a2a;
+      color: #d4d4d4;
+      border: 1px solid #3a3a3a;
+      font-size: 0.75em;
+      padding: 7px 10px;
+    }
+
+    .btn-manage-comp:hover {
+      background: #333333;
+      border-color: #4a4a4a;
+    }
+
+    .fixed-actions {
+      position: fixed;
+      right: 20px;
+      bottom: 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 999;
+    }
+
+    .fixed-actions button {
+      padding: 10px 16px;
+      font-size: 0.8em;
+      border-radius: 4px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .fixed-actions .btn-save {
+      background: #ff4f4f;
+      color: white;
+      border: none;
+    }
+
+    .fixed-actions .btn-save:hover {
+      background: #ff3838;
+      box-shadow: 0 4px 12px rgba(255, 79, 79, 0.3);
+    }
+
+    .fixed-actions .btn-delete {
+      background: #2a2a2a;
+      color: #ff4f4f;
+      border: 1px solid #3a3a3a;
+    }
+
+    .fixed-actions .btn-delete:hover {
+      background: #333333;
+      border-color: #ff4f4f;
+    }
+
+    .fixed-actions .btn-duplicate {
+      background: #1a3a3a;
+      color: #4ade80;
+      border: 1px solid #2a5a5a;
+    }
+
+    .fixed-actions .btn-duplicate:hover {
+      background: #1f4a4a;
+      border-color: #4ade80;
+    }
+
+    .btn-duplicate {
+      background: #1a3a3a;
+      color: #4ade80;
+      border: 1px solid #2a5a5a;
+      font-size: 0.75em;
+      padding: 4px 8px;
+      width: auto;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .btn-duplicate:hover {
+      background: #1f4a4a;
+      border-color: #4ade80;
+    }
+
+    .fixed-actions.hidden {
+      display: none;
+    }
+
+    /* Database Console Styles */
+    .db-console {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 250px;
+      background: #0B0B0B;
+      border-top: 2px solid #ff4f4f;
+      border-left: 1px solid #2a2a2a;
+      border-right: 1px solid #2a2a2a;
+      display: flex;
+      flex-direction: column;
+      z-index: 10000;
+      font-family: 'Monaco', 'Courier New', monospace;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .db-console.minimized {
+      height: auto;
+    }
+
+    .db-console.minimized .console-body {
+      display: none;
+    }
+
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      background: #141414;
+      border-bottom: 1px solid #2a2a2a;
+      flex-shrink: 0;
+    }
+
+    .console-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff4f4f;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+
+    .console-title .material-symbols-outlined {
+      font-size: 1.2em;
+    }
+
+    .console-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .console-btn {
+      background: #1a1a1a;
+      color: #d4d4d4;
+      border: 1px solid #2a2a2a;
+      border-radius: 3px;
+      padding: 4px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.8em;
+      transition: all 0.2s;
+    }
+
+    .console-btn:hover {
+      background: #2a2a2a;
+      color: #ff4f4f;
+      border-color: #3a3a3a;
+    }
+
+    .console-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px 15px;
+      font-size: 0.75em;
+      line-height: 1.4;
+    }
+
+    .console-message {
+      margin-bottom: 4px;
+      padding: 2px 4px;
+      border-left: 2px solid #444;
+      padding-left: 8px;
+    }
+
+    .console-message.request {
+      color: #4ade80;
+      border-left-color: #4ade80;
+    }
+
+    .console-message.response {
+      color: #60a5fa;
+      border-left-color: #60a5fa;
+    }
+
+    .console-message.error {
+      color: #ff4f4f;
+      border-left-color: #ff4f4f;
+    }
+
+    .console-message.info {
+      color: #d4d4d4;
+      border-left-color: #666;
+    }
+
+    .console-message.timestamp {
+      color: #808080;
+      font-size: 0.8em;
+    }
+
   </style>
   </style>
 </head>
@@ -377,12 +618,12 @@
 
 <div class="container">
   <header>
-    <h1>⚙️ Admin Panel</h1>
+    <h1><span class="material-symbols-outlined">settings</span> Admin Panel</h1>
     <p>Manage carousel cards and users</p>
   </header>
 
   <div class="tabs">
-    <button class="tab-button active" onclick="switchTab('carousel')">📊 Carousel</button>
+    <button class="tab-button active" onclick="switchTab('carousel')"><span class="material-symbols-outlined">show_chart</span> Carousel</button>
     <button class="tab-button" onclick="switchTab('users')">👥 Users</button>
   </div>
 
@@ -395,7 +636,7 @@
         <div style="color: #999; text-align: center; padding: 20px;">Loading...</div>
       </div>
       <button class="btn-primary" onclick="createNewCard()" style="margin-top: 15px;">+ New Card</button>
-      <button class="btn-primary" onclick="loadCards()" style="margin-top: 10px;">🔄 Refresh</button>
+      <button class="btn-primary" onclick="loadCards()" style="margin-top: 10px;"><span class="material-symbols-outlined">refresh</span> Refresh</button>
     </div>
 
     <!-- MAIN SECTION: Edit Card -->
@@ -427,13 +668,12 @@
           <textarea id="card-description" placeholder="Brief description..."></textarea>
         </div>
 
-        <div class="section-title">Matches / Predictions</div>
-        <div id="dropdowns-container"></div>
-        <button class="btn-add" onclick="addDropdownSection()">+ Add Match / Prediction</button>
+        <div class="section-title">Content Sections</div>
+        <div id="parents-container"></div>
+        <button class="btn-add" onclick="addParentContainer()">+ Add Section</button>
 
         <div class="section-title" style="margin-top: 30px;">Actions</div>
-        <button class="btn-primary" onclick="saveCard()">💾 Save Card</button>
-        <button class="btn-danger" onclick="deleteCard()">🗑️ Delete Card</button>
+        <p style="color: #808080; font-size: 0.75em; margin-bottom: 12px;">Use buttons at bottom-right or press Ctrl+S to save</p>
       </div>
     </div>
   </div>
@@ -447,7 +687,7 @@
         <div style="color: #999; text-align: center; padding: 20px;">Loading...</div>
       </div>
       <button class="btn-primary" onclick="createNewUser()" style="margin-top: 15px;">+ New User</button>
-      <button class="btn-primary" onclick="loadUsers()" style="margin-top: 10px;">🔄 Refresh</button>
+      <button class="btn-primary" onclick="loadUsers()" style="margin-top: 10px;"><span class="material-symbols-outlined">refresh</span> Refresh</button>
     </div>
 
     <!-- MAIN SECTION: Edit User -->
@@ -494,22 +734,151 @@
         </div>
 
         <div class="section-title" style="margin-top: 30px;">Actions</div>
-        <button class="btn-primary" onclick="saveUser()">💾 Save User</button>
-        <button class="btn-danger" onclick="deleteUser()">🗑️ Delete User</button>
+        <button class="btn-primary" onclick="saveUser()"><span class="material-symbols-outlined">save</span> Save User</button>
+        <button class="btn-danger" onclick="deleteUser()"><span class="material-symbols-outlined">delete</span> Delete User</button>
       </div>
     </div>
   </div>
 </div>
 
+  <!-- Fixed Database Console -->
+  <div id="db-console" class="db-console">
+    <div class="console-header">
+      <div class="console-title">
+        <span class="material-symbols-outlined">terminal</span>
+        Database Console
+      </div>
+      <div class="console-controls">
+        <button onclick="toggleConsole()" title="Minimize/Maximize" class="console-btn">
+          <span class="material-symbols-outlined">unfold_more</span>
+        </button>
+        <button onclick="clearConsole()" title="Clear Logs" class="console-btn">
+          <span class="material-symbols-outlined">delete_sweep</span>
+        </button>
+        <button onclick="closeConsole()" title="Close" class="console-btn">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+    </div>
+    <div class="console-body" id="console-body">
+      <div class="console-message info">Console initialized. Ready to log database actions.</div>
+    </div>
+  </div>
+
 <script>
 let editingCardId = null;
 let editingUserId = null;
+
+// ========== SAFE JSON PARSING HELPER ==========
+async function safeJsonResponse(response, endpoint = 'API') {
+  // Check if response is OK
+  if (!response.ok) {
+    console.error(`${endpoint} error - Status:`, response.status, response.statusText);
+    throw new Error(`${endpoint} failed with status ${response.status}`);
+  }
+
+  // Check content type
+  const contentType = response.headers.get('content-type');
+  if (!contentType || !contentType.includes('application/json')) {
+    console.error(`${endpoint} returned non-JSON:`, contentType);
+    const text = await response.text();
+    console.error('Response text:', text.substring(0, 200));
+    throw new Error(`${endpoint} returned invalid content type: ${contentType}`);
+  }
+
+  return await response.json();
+}
+
+// ========== DATABASE CONSOLE ==========
+let consoleMaxLogs = 100;
+let consoleLogs = [];
+
+function addConsoleLog(message, type = 'info', data = null) {
+  const timestamp = new Date().toLocaleTimeString();
+  const logEntry = {
+    message,
+    type,
+    data,
+    timestamp
+  };
+  
+  consoleLogs.push(logEntry);
+  
+  // Keep only last N logs
+  if (consoleLogs.length > consoleMaxLogs) {
+    consoleLogs.shift();
+  }
+
+  const consoleBody = document.getElementById('console-body');
+  if (consoleBody) {
+    const logDiv = document.createElement('div');
+    logDiv.className = `console-message ${type}`;
+    
+    let displayMessage = message;
+    if (data) {
+      try {
+        displayMessage += ` → ${JSON.stringify(data).substring(0, 100)}`;
+      } catch (e) {
+        displayMessage += ` → [Complex Object]`;
+      }
+    }
+    
+    logDiv.innerHTML = `<span class="console-message timestamp">[${timestamp}]</span> ${escapeHtml(displayMessage)}`;
+    consoleBody.appendChild(logDiv);
+    consoleBody.scrollTop = consoleBody.scrollHeight;
+  }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function clearConsole() {
+  consoleLogs = [];
+  const consoleBody = document.getElementById('console-body');
+  if (consoleBody) {
+    consoleBody.innerHTML = '<div class="console-message info">Console cleared.</div>';
+  }
+}
+
+function toggleConsole() {
+  const console = document.getElementById('db-console');
+  console.classList.toggle('minimized');
+}
+
+function closeConsole() {
+  const console = document.getElementById('db-console');
+  console.style.display = 'none';
+}
+
+// Intercept fetch calls
+const originalFetch = window.fetch;
+window.fetch = function(...args) {
+  const [url, config] = args;
+  const method = (config?.method || 'GET').toUpperCase();
+  
+  addConsoleLog(`${method} ${url}`, 'request', config?.body ? JSON.parse(config.body) : null);
+  
+  return originalFetch.apply(this, args)
+    .then(response => {
+      const status = response.status;
+      const statusType = status >= 400 ? 'error' : 'response';
+      addConsoleLog(`${method} ${url} - Status ${status}`, statusType);
+      return response;
+    })
+    .catch(error => {
+      addConsoleLog(`${method} ${url} - Error: ${error.message}`, 'error');
+      throw error;
+    });
+};
 
 // ========== AUTHENTICATION CHECK ==========
 async function checkAdminAuth() {
   try {
     const response = await fetch('/api/session');
-    const result = await response.json();
+    const result = await safeJsonResponse(response, '/api/session');
 
     if (!result.loggedIn || !result.user) {
       // Not logged in - redirect to login
@@ -532,19 +901,19 @@ async function checkAdminAuth() {
     return true;
   } catch (err) {
     console.error('Auth check error:', err);
+    alert('Error: ' + err.message + '\n\nPlease check browser console for details.');
     window.location.href = '/login/';
     return false;
   }
 }
 
-// Run auth check on page load
-document.addEventListener('DOMContentLoaded', checkAdminAuth);
+// DOMContentLoaded will be handled below after fixed-actions setup
 
 // ========== COMPETITIONS MANAGEMENT ==========
 async function loadCompetitions() {
   try {
     const response = await fetch('/api/competitions');
-    const result = await response.json();
+    const result = await safeJsonResponse(response, '/api/competitions');
 
     if (!result.success) return;
 
@@ -608,7 +977,7 @@ async function addNewCompetition() {
 
     document.getElementById('card-new-competition').value = '';
     document.getElementById('card-new-competition-icon').value = '';
-    showMessage('carousel-message', '✓ Competition added!', 'success');
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Competition added!', 'success');
     loadCompetitions();
   } catch (error) {
     showMessage('carousel-message', 'Error: ' + error.message, 'error');
@@ -644,7 +1013,7 @@ async function loadCards() {
       return;
     }
     
-    const result = await response.json();
+    const result = await safeJsonResponse(response, '/api/carousel/insights');
 
     if (!result.success) {
       showMessage('carousel-message', 'Failed to load cards', 'error');
@@ -690,70 +1059,182 @@ function selectCard(card) {
   document.getElementById('card-subtitle').value = card.subtitle || '';
   document.getElementById('card-description').value = card.description || '';
 
-  const dropdownsContainer = document.getElementById('dropdowns-container');
-  dropdownsContainer.innerHTML = '';
+  const parentsContainer = document.getElementById('parents-container');
+  parentsContainer.innerHTML = '';
 
-  if (card.dropdowns && card.dropdowns.length > 0) {
-    card.dropdowns.forEach((dropdown, idx) => {
-      renderDropdownEditor(dropdown, idx);
+  // Handle new structure: parents with nested dropdowns
+  if (card.parents && card.parents.length > 0) {
+    card.parents.forEach((parent, idx) => {
+      parent._expanded = true; // Expand loaded parents so users can edit them
+      renderParentContainer(parent, idx);
     });
+  } else if (card.dropdowns && card.dropdowns.length > 0) {
+    // Fallback: convert old flat structure to new hierarchical structure
+    const newParent = {
+      title: 'Predictions',
+      text: '',
+      dropdowns: card.dropdowns,
+      _expanded: true // Expand by default so content is visible
+    };
+    renderParentContainer(newParent, 0);
   }
 
   document.querySelectorAll('#cards-list .list-item').forEach(el => el.classList.remove('active'));
   event.target.closest('.list-item')?.classList.add('active');
 
   showMessage('carousel-message', `Editing: ${card.title}`, 'success');
+  updateFixedActionsVisibility();
 }
 
-function renderDropdownEditor(dropdown, index) {
-  const container = document.getElementById('dropdowns-container');
-  const dropdownEl = document.createElement('div');
-  dropdownEl.className = 'dropdown-item';
-  dropdownEl.dataset.dropdownIndex = index;
+function addParentContainer() {
+  const container = document.getElementById('parents-container');
+  const index = container.children.length;
+  renderParentContainer({ title: '', text: '', dropdowns: [], _expanded: true }, index);
+}
 
-  dropdownEl.innerHTML = `
-    <div class="dropdown-item-num">Match / Prediction ${index + 1}</div>
-    <div class="dropdown-fields">
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin-bottom: 5px;">Match Details</label>
-      <input type="text" class="dropdown-header" placeholder="Match (e.g., Over 2.5 Goals)" value="${dropdown.header || ''}">
-      <input type="text" class="dropdown-subheader" placeholder="Teams (e.g., Arsenal vs Newcastle)" value="${dropdown.subheader || ''}">
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Location</label>
-      <input type="text" class="dropdown-location" placeholder="e.g., Emirates Stadium" value="${dropdown.location || ''}">
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">GMT Time (Kickoff)</label>
-      <input type="time" class="dropdown-gmt-time" value="${dropdown.gmt_time || ''}">
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Competition</label>
-      <div style="display: flex; gap: 8px; align-items: flex-start;">
-        <div style="flex: 1;">
-          <select class="dropdown-competition" onchange="showDropdownCompetitionIcon(this)">
-            <option value="">-- Select Competition --</option>
-          </select>
-          <div class="dropdown-competition-preview" style="margin-top: 8px; text-align: center; display: none;">
-            <img class="dropdown-competition-icon" src="" alt="Competition Icon" style="max-height: 40px; border-radius: 5px;">
-          </div>
-        </div>
-        <button class="btn-manage-comp" onclick="openCompetitionManager(event)" style="margin-top: 20px; padding: 8px 12px; background: #ff2525; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 0.85em;">⚙️ Manage</button>
+function renderParentContainer(parent, parentIndex) {
+  const container = document.getElementById('parents-container');
+  const parentEl = document.createElement('div');
+  parentEl.className = 'parent-container';
+  parentEl.dataset.parentIndex = parentIndex;
+  parentEl.style.cssText = 'border: 1px solid #2a2a2a; border-radius: 4px; margin-bottom: 12px; background: #1a1a1a; overflow: hidden;';
+
+  const isExpanded = parent._expanded !== false; // Default to expanded for new items, collapsed for loaded
+  
+  parentEl.innerHTML = `
+    <div class="parent-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #1f1f1f; cursor: pointer; user-select: none;" onclick="toggleParentExpand(this)">
+      <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
+        <span class="parent-toggle-icon" style="display: inline-block; width: 14px; text-align: center; color: #ff4f4f; transition: transform 0.2s; transform: ${isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'}; font-size: 0.7em;">▶</span>
+        <h3 style="color: #ffffff; margin: 0; font-size: 0.85em; font-weight: 500;">${parent.title || `Section ${parentIndex + 1}`}</h3>
       </div>
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Link</label>
-      <input type="text" class="dropdown-link" placeholder="e.g., https://example.com/match" value="${dropdown.link || ''}">
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Additional Info</label>
-      <input type="text" class="dropdown-subheader2" placeholder="Secondary info (optional)" value="${dropdown.subheader2 || ''}">
-      
-      <label style="color: #ccc; font-weight: 600; font-size: 0.9em; margin: 10px 0 5px 0;">Analysis/Reasoning</label>
-      <textarea class="dropdown-text" placeholder="Text/Reasoning...">${dropdown.text || ''}</textarea>
-      
-      <button class="btn-remove" onclick="removeDropdown(${index})">Remove Match / Prediction</button>
+      <button class="btn-remove" onclick="event.stopPropagation(); removeParentContainer(${parentIndex})">Remove</button>
+    </div>
+
+    <div class="parent-content" style="display: ${isExpanded ? 'block' : 'none'}; padding: 14px; max-height: ${isExpanded ? '10000px' : '0'}; transition: max-height 0.3s ease; overflow: hidden;">
+      <div class="parent-fields" style="margin-bottom: 12px;">
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.8em; display: block; margin-bottom: 6px;">Section Title</label>
+        <input type="text" class="parent-title" placeholder="e.g., Champions League Predictions" value="${parent.title || ''}" style="width: 100%; padding: 8px 10px; background: #141414; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 10px; font-size: 0.85em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.8em; display: block; margin-bottom: 6px;">Section Description</label>
+        <textarea class="parent-text" placeholder="Description or intro text for this section..." style="width: 100%; padding: 8px 10px; background: #141414; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; min-height: 60px; margin-bottom: 10px; font-size: 0.85em;">${parent.text || ''}</textarea>
+      </div>
+
+      <div style="background: #141414; padding: 12px 12px 0 12px; border-radius: 4px; border: 1px solid #2a2a2a; margin-bottom: 0;">
+        <h4 style="color: #d4d4d4; margin: 0 0 10px 0; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">Matches / Predictions</h4>
+        <div class="dropdowns-container" data-parent-index="${parentIndex}"></div>
+        <button class="btn-add" onclick="addDropdownToParent(${parentIndex})" style="width: 100%; margin-top: 8px; margin-bottom: 12px;">+ Add Match / Prediction</button>
+      </div>
     </div>
   `;
 
-  container.appendChild(dropdownEl);
+  container.appendChild(parentEl);
+
+  // Render existing dropdowns
+  if (parent.dropdowns && parent.dropdowns.length > 0) {
+    parent.dropdowns.forEach((dropdown, idx) => {
+      renderDropdownEditor(dropdown, idx, parentIndex);
+    });
+  }
+}
+
+function toggleParentExpand(headerElement) {
+  const contentEl = headerElement.nextElementSibling;
+  const iconEl = headerElement.querySelector('.parent-toggle-icon');
+  const isHidden = contentEl.style.display === 'none';
+  
+  contentEl.style.display = isHidden ? 'block' : 'none';
+  iconEl.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+function addDropdownToParent(parentIndex) {
+  const dropsContainer = document.querySelector(`.dropdowns-container[data-parent-index="${parentIndex}"]`);
+  const index = dropsContainer.children.length;
+  renderDropdownEditor({ header: '', subheader: '', location: '', gmt_time: '', competition_id: null, link: '', subheader2: '', text: '', _expanded: true }, index, parentIndex);
+}
+
+function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
+  const dropsContainer = document.querySelector(`[data-parent-index="${parentIndex}"]`);
+  const dropdownEl = document.createElement('div');
+  dropdownEl.className = 'dropdown-item';
+  dropdownEl.dataset.dropdownIndex = dropdownIndex;
+  dropdownEl.dataset.parentIndex = parentIndex;
+  dropdownEl.style.cssText = 'background: #141414; border: 1px solid #2a2a2a; border-radius: 4px; margin-bottom: 8px; overflow: hidden;';
+
+  const previewText = `${dropdown.header || 'Match'}${dropdown.subheader ? ' - ' + dropdown.subheader : ''}`.substring(0, 50);
+  const isExpanded = dropdown._expanded === true;
+  
+  dropdownEl.innerHTML = `
+    <div class="dropdown-toggle-header" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #1a1a1a; cursor: pointer; user-select: none;" onclick="toggleDropdownExpand(this)">
+      <div style="display: flex; align-items: center; gap: 6px; flex: 1;">
+        <span class="dropdown-toggle-icon" style="display: inline-block; width: 12px; text-align: center; color: #808080; transition: transform 0.2s; transform: ${isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'}; font-size: 0.7em;">▶</span>
+        <span style="color: #d4d4d4; font-size: 0.8em; font-weight: 400;">${previewText}${previewText.length >= 50 ? '...' : ''}</span>
+      </div>
+      <div style="display: flex; gap: 4px;">
+        <button class="btn-duplicate" onclick="event.stopPropagation(); duplicateDropdown(${dropdownIndex}, ${parentIndex})" title="Duplicate this match"><span class="material-symbols-outlined">content_copy</span></button>
+        <button class="btn-remove" onclick="event.stopPropagation(); removeDropdown(${dropdownIndex}, ${parentIndex})"><span class="material-symbols-outlined">close</span></button>
+      </div>
+    </div>
+    
+    <div class="dropdown-content" style="display: ${isExpanded ? 'block' : 'none'}; padding: 12px; max-height: ${isExpanded ? '10000px' : '0'}; transition: max-height 0.3s ease; overflow: hidden;">
+      <div class="dropdown-fields">
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin-bottom: 5px; display: block;">Match Details</label>
+        <input type="text" class="dropdown-header" placeholder="Match (e.g., Over 2.5 Goals)" value="${dropdown.header || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        <input type="text" class="dropdown-subheader" placeholder="Teams (e.g., Arsenal vs Newcastle)" value="${dropdown.subheader || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Location</label>
+        <input type="text" class="dropdown-location" placeholder="e.g., Emirates Stadium" value="${dropdown.location || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">GMT Time (Kickoff)</label>
+        <input type="time" class="dropdown-gmt-time" value="${dropdown.gmt_time || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Competition</label>
+        <div style="display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px;">
+          <select class="dropdown-competition" onchange="showDropdownCompetitionIcon(this)" style="flex: 1; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.8em;">
+            <option value="">-- Select Competition --</option>
+          </select>
+          <button class="btn-manage-comp" onclick="openCompetitionManager(event)"><span class="material-symbols-outlined">settings</span></button>
+        </div>
+        <div class="dropdown-competition-preview" style="margin-bottom: 6px; text-align: center; display: none;">
+          <img class="dropdown-competition-icon" src="" alt="Competition Icon" style="max-height: 28px; border-radius: 3px;">
+        </div>
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Link</label>
+        <input type="text" class="dropdown-link" placeholder="e.g., https://example.com/match" value="${dropdown.link || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Additional Info</label>
+        <input type="text" class="dropdown-subheader2" placeholder="Secondary info (optional)" value="${dropdown.subheader2 || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
+        
+        <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Analysis/Reasoning</label>
+        <textarea class="dropdown-text" placeholder="Text/Reasoning..." style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; min-height: 60px; font-size: 0.8em;">${dropdown.text || ''}</textarea>
+      </div>
+    </div>
+  `;
+
+  dropsContainer.appendChild(dropdownEl);
   
   // Load competitions into this dropdown's select
   loadCompetitionsForDropdown(dropdownEl.querySelector('.dropdown-competition'), dropdown.competition_id);
+}
+
+function toggleDropdownExpand(headerElement) {
+  const contentEl = headerElement.nextElementSibling;
+  const iconEl = headerElement.querySelector('.dropdown-toggle-icon');
+  const isHidden = contentEl.style.display === 'none';
+  
+  contentEl.style.display = isHidden ? 'block' : 'none';
+  contentEl.style.maxHeight = isHidden ? '10000px' : '0';
+  iconEl.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+}
+
+function removeDropdown(dropdownIndex, parentIndex) {
+  const dropsContainer = document.querySelector(`[data-parent-index="${parentIndex}"]`);
+  const dropdownEl = dropsContainer.querySelector(`[data-dropdown-index="${dropdownIndex}"]`);
+  if (dropdownEl) dropdownEl.remove();
+}
+
+function removeParentContainer(parentIndex) {
+  const parentEl = document.querySelector(`[data-parent-index="${parentIndex}"]`).closest('.parent-container');
+  if (parentEl) parentEl.remove();
 }
 
 async function loadCompetitionsForDropdown(selectElement, selectedId) {
@@ -886,7 +1367,7 @@ async function loadCompetitionsIntoManager() {
       `;
 
       const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = '✕ Delete';
+      deleteBtn.innerHTML = '<span class="material-symbols-outlined">close</span> Delete';
       deleteBtn.style.cssText = `
         padding: 5px 10px;
         background: #c0392b;
@@ -895,6 +1376,9 @@ async function loadCompetitionsIntoManager() {
         border-radius: 3px;
         cursor: pointer;
         font-size: 0.85em;
+        display: flex;
+        align-items: center;
+        gap: 4px;
       `;
       deleteBtn.onclick = () => deleteCompetition(comp.id);
 
@@ -999,10 +1483,11 @@ function createNewCard() {
   document.getElementById('card-title').value = '';
   document.getElementById('card-subtitle').value = '';
   document.getElementById('card-description').value = '';
-  document.getElementById('dropdowns-container').innerHTML = '';
+  document.getElementById('parents-container').innerHTML = '';
 
   document.querySelectorAll('#cards-list .list-item').forEach(el => el.classList.remove('active'));
   showMessage('carousel-message', 'Creating new card...', 'success');
+  updateFixedActionsVisibility();
 }
 
 async function saveCard() {
@@ -1012,28 +1497,42 @@ async function saveCard() {
     return;
   }
 
-  const dropdowns = [];
-  document.querySelectorAll('.dropdown-item').forEach(dropdownEl => {
-    const header = dropdownEl.querySelector('.dropdown-header').value.trim();
-    const subheader = dropdownEl.querySelector('.dropdown-subheader').value.trim();
-    const location = dropdownEl.querySelector('.dropdown-location').value.trim();
-    const gmt_time = dropdownEl.querySelector('.dropdown-gmt-time').value;
-    const competitionSelect = dropdownEl.querySelector('.dropdown-competition');
-    const competition_id = competitionSelect.value ? parseInt(competitionSelect.value) : null;
-    const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value.trim();
-    const text = dropdownEl.querySelector('.dropdown-text').value.trim();
-    const link = dropdownEl.querySelector('.dropdown-link').value.trim();
+  const parents = [];
+  document.querySelectorAll('.parent-container').forEach(parentEl => {
+    const parentTitle = parentEl.querySelector('.parent-title').value.trim();
+    const parentText = parentEl.querySelector('.parent-text').value.trim();
+    const dropdowns = [];
+    
+    parentEl.querySelectorAll('.dropdown-item').forEach(dropdownEl => {
+      const header = dropdownEl.querySelector('.dropdown-header').value.trim();
+      const subheader = dropdownEl.querySelector('.dropdown-subheader').value.trim();
+      const location = dropdownEl.querySelector('.dropdown-location').value.trim();
+      const gmt_time = dropdownEl.querySelector('.dropdown-gmt-time').value;
+      const competitionSelect = dropdownEl.querySelector('.dropdown-competition');
+      const competition_id = competitionSelect.value ? parseInt(competitionSelect.value) : null;
+      const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value.trim();
+      const text = dropdownEl.querySelector('.dropdown-text').value.trim();
+      const link = dropdownEl.querySelector('.dropdown-link').value.trim();
 
-    if (header || subheader || text) {
-      dropdowns.push({ 
-        header, 
-        subheader, 
-        location,
-        gmt_time,
-        competition_id,
-        subheader2, 
-        text,
-        link
+      if (header || subheader || text) {
+        dropdowns.push({ 
+          header, 
+          subheader, 
+          location,
+          gmt_time,
+          competition_id,
+          subheader2, 
+          text,
+          link
+        });
+      }
+    });
+
+    if (parentTitle || parentText || dropdowns.length > 0) {
+      parents.push({
+        title: parentTitle,
+        text: parentText,
+        dropdowns
       });
     }
   });
@@ -1043,7 +1542,7 @@ async function saveCard() {
     title,
     subtitle: document.getElementById('card-subtitle').value.trim(),
     description: document.getElementById('card-description').value.trim(),
-    dropdowns
+    parents
   };
 
   try {
@@ -1063,7 +1562,7 @@ async function saveCard() {
       return;
     }
 
-    showMessage('carousel-message', editingCardId ? '✓ Card updated!' : '✓ Card created!', 'success');
+    showMessage('carousel-message', editingCardId ? '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card updated!' : '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card created!', 'success');
     loadCards();
     setTimeout(() => {
       document.getElementById('edit-card-form').style.display = 'none';
@@ -1093,7 +1592,7 @@ async function deleteCard() {
       return;
     }
 
-    showMessage('carousel-message', '✓ Card deleted!', 'success');
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card deleted!', 'success');
     loadCards();
     setTimeout(() => {
       document.getElementById('edit-card-form').style.display = 'none';
@@ -1225,7 +1724,7 @@ async function saveUser() {
       return;
     }
 
-    showMessage('users-message', editingUserId ? '✓ User updated!' : '✓ User created!', 'success');
+    showMessage('users-message', editingUserId ? '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> User updated!' : '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> User created!', 'success');
     loadUsers();
     setTimeout(() => {
       document.getElementById('edit-user-form').style.display = 'none';
@@ -1255,7 +1754,7 @@ async function deleteUser() {
       return;
     }
 
-    showMessage('users-message', '✓ User deleted!', 'success');
+    showMessage('users-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> User deleted!', 'success');
     loadUsers();
     setTimeout(() => {
       document.getElementById('edit-user-form').style.display = 'none';
@@ -1277,7 +1776,136 @@ function showMessage(elementId, text, type) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadCards);
+// Show/hide fixed actions based on form visibility
+function updateFixedActionsVisibility() {
+  const form = document.getElementById('edit-card-form');
+  const actions = document.getElementById('fixed-actions');
+  if (!actions) return;
+  
+  if (form.style.display !== 'none' && editingCardId) {
+    actions.classList.remove('hidden');
+  } else {
+    actions.classList.add('hidden');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Create fixed action buttons
+  const fixedActions = document.createElement('div');
+  fixedActions.className = 'fixed-actions hidden';
+  fixedActions.id = 'fixed-actions';
+  fixedActions.innerHTML = `
+    <button class="btn-save" onclick="saveCard()" title="Save (Ctrl+S)"><span class="material-symbols-outlined">save</span> Save</button>
+    <button class="btn-duplicate" onclick="duplicateCard()" title="Duplicate card"><span class="material-symbols-outlined">content_copy</span> Duplicate</button>
+    <button class="btn-delete" onclick="deleteCard()" title="Delete"><span class="material-symbols-outlined">delete</span> Delete</button>
+  `;
+  document.body.appendChild(fixedActions);
+
+  // Check authentication and load data
+  checkAdminAuth();
+});
+
+// Duplicate card function
+async function duplicateCard() {
+  if (!editingCardId) {
+    showMessage('carousel-message', 'No card selected to duplicate', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/carousel/insights/${editingCardId}`);
+    const result = await response.json();
+
+    if (!result.success || !result.data) {
+      showMessage('carousel-message', 'Error loading card data', 'error');
+      return;
+    }
+
+    const cardData = result.data;
+    // Create new card with copied data
+    const newCardData = {
+      date: new Date().toISOString().split('T')[0],
+      title: `${cardData.title} (Copy)`,
+      subtitle: cardData.subtitle,
+      description: cardData.description,
+      parents: cardData.parents || []
+    };
+
+    const saveResponse = await fetch('/api/carousel/insights', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newCardData)
+    });
+
+    const saveResult = await saveResponse.json();
+
+    if (!saveResult.success) {
+      showMessage('carousel-message', 'Error: ' + saveResult.error, 'error');
+      return;
+    }
+
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card duplicated!', 'success');
+    loadCards();
+  } catch (error) {
+    showMessage('carousel-message', 'Error: ' + error.message, 'error');
+  }
+}
+
+// Duplicate dropdown/match function
+function duplicateDropdown(dropdownIndex, parentIndex) {
+  const dropsContainer = document.querySelector(`.dropdowns-container[data-parent-index="${parentIndex}"]`);
+  if (!dropsContainer) {
+    showMessage('carousel-message', 'Error: Could not find container', 'error');
+    return;
+  }
+  
+  const dropdownEl = dropsContainer.querySelector(`[data-dropdown-index="${dropdownIndex}"]`);
+  if (!dropdownEl) {
+    showMessage('carousel-message', 'Error: Could not find match to duplicate', 'error');
+    return;
+  }
+
+  // Get all input values from the original dropdown
+  const header = dropdownEl.querySelector('.dropdown-header').value;
+  const subheader = dropdownEl.querySelector('.dropdown-subheader').value;
+  const location = dropdownEl.querySelector('.dropdown-location').value;
+  const gmt_time = dropdownEl.querySelector('.dropdown-gmt-time').value;
+  const competition_id = dropdownEl.querySelector('.dropdown-competition').value;
+  const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value;
+  const text = dropdownEl.querySelector('.dropdown-text').value;
+  const link = dropdownEl.querySelector('.dropdown-link').value;
+
+  // Create new dropdown with copied data
+  const newIndex = dropsContainer.children.length;
+  renderDropdownEditor(
+    {
+      header: header + ' (Copy)',
+      subheader,
+      location,
+      gmt_time,
+      competition_id: competition_id ? parseInt(competition_id) : null,
+      subheader2,
+      text,
+      link,
+      _expanded: true
+    },
+    newIndex,
+    parentIndex
+  );
+
+  showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Match duplicated!', 'success');
+}
+
+// Ctrl+S to save
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    const form = document.getElementById('edit-card-form');
+    if (form.style.display !== 'none' && editingCardId) {
+      saveCard();
+    }
+  }
+});
 </script>
 
 </body>

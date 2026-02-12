@@ -83,6 +83,18 @@ fetch('/navbar.html')
       .then(res => res.json())
       .then(session => {
         if (session.loggedIn && session.user) {
+          // Build dropdown menu items
+          let dropdownItems = `
+            <li><a href="/account">Dashboard</a></li>
+            <li><a href="/account/settings">Settings</a></li>`;
+          
+          // Add admin panel link if user is admin
+          if (session.user.role === 'admin') {
+            dropdownItems += `<li><a href="/admin-panel"><span class="material-symbols-outlined">admin_panel_settings</span> Admin Panel</a></li>`;
+          }
+          
+          dropdownItems += `<li><a id="logout-link-nav"><span class="material-symbols-outlined">logout</span> Logout</a></li>`;
+
           const userOptions = document.createElement('div');
           userOptions.className = 'navigation-menu-desktop-buttons-user-options-logged-in-true';
           userOptions.innerHTML = `
@@ -92,9 +104,7 @@ fetch('/navbar.html')
             </div>
             <div class="user-options-dropdown-menu" id="user-options-dropdown-menu">
               <ul>
-                <li><a href="/account">Dashboard</a></li>
-                <li><a href="/account/settings">Settings</a></li>
-                <li><a id="logout-link-nav"><span class="material-symbols-outlined">logout</span> Logout</a></li>
+                ${dropdownItems}
               </ul>
             </div>
           `;

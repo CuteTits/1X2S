@@ -3,6 +3,7 @@ overflow-x: hidden;
 padding: 0;
 margin: 0;
 background-color: #0f0f0f;
+color: #d4d4d4;
 }
 html.js body {
 opacity: 0;
@@ -21,6 +22,7 @@ justify-content: center;
 align-items: center;
 display: flex;
 flex-direction: column;
+padding: 40px 16px;
 }
 .s1-background{
 position: absolute;
@@ -35,7 +37,8 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 object-fit: cover;
-opacity: 0.1;
+opacity: 0.06;
+filter: saturate(0.6) contrast(1.1);
 }
 
 
@@ -63,24 +66,24 @@ color: transparent;
 
 
 .form-title {
-font-size: 1.3em;
-color: #fff;
-font-weight: 500;
-letter-spacing: 0.5px;
-text-align: center;
+font-size: 1.2em;
+color: #f5f5f5;
+font-weight: 600;
+letter-spacing: 0.2px;
+text-align: left;
 margin-bottom: 18px;
-font-family: orbitron;
+font-family: inter, montserrat, system-ui, sans-serif;
 }
 
 .notice {
-background: #2a1616;
+background: #1a0f0f;
 color: #ffb3b3;
-padding: 12px 18px;
+padding: 10px 14px;
 border: 1px solid #f75454;
-border-radius: 6px;
-margin-bottom: 18px;
-font-size: .8em;
-max-width: 350px;
+border-radius: 10px;
+margin-bottom: 16px;
+font-size: .78em;
+max-width: 420px;
 text-align: center;
 z-index: 2;
 font-family: inter;
@@ -92,16 +95,16 @@ width: 50%;
 }
 }
 .form-container {
-width: 300px;
+width: min(420px, 92vw);
 height: auto;
-padding: 32px 28px 24px 28px;
-border-radius: 12px;
+padding: 28px 26px 24px 26px;
+border-radius: 16px;
 display: flex;
 flex-direction: column;
-backdrop-filter: blur(5px);
-background: rgba(255, 255, 255, 0.05);
-box-shadow: 0 8px 32px 0 rgba(255, 56, 56, 0.37);
-border: 1px solid rgba(255, 255, 255, 0.117);
+backdrop-filter: blur(10px);
+background: rgba(20, 20, 20, 0.9);
+box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+border: 1px solid #2a2a2a;
 margin: 20px;
 position: relative;
 z-index: 2;
@@ -110,70 +113,62 @@ transition: all 0.3s ease;
 form {
 display: flex;
 flex-direction: column;
+gap: 10px;
 }
 
 form input {
 display: block;
-width: 90%;
 position: relative;
-margin-bottom: 14px;
-padding: 10px 12px;
-border: 1px solid #23242a;
-background: #252424;
+margin-bottom: 0;
+padding: 12px 12px;
+border: 1px solid #2a2a2a;
+background: #141414;
 color: #f0f0f0;
-font-size: .8em;
-transition: border 0.2s;
+font-size: .82em;
+border-radius: 10px;
+transition: border 0.2s, box-shadow 0.2s, background 0.2s;
 }
 form input:focus {
-border: 1.5px solid #f75454;
+border: 1.5px solid #ff4f4f;
 outline: none;
-background: #23242a;
+background: #101010;
+box-shadow: 0 0 0 3px rgba(255, 79, 79, 0.15);
 }
 .form-notice{
-font-size: .7em;
-color: #555555;
-margin-bottom: 10px;
-text-align: center;
+font-size: .72em;
+color: #7a7a7a;
+margin: 6px 0 0 0;
+text-align: left;
 display: block;
 font-family: inter;
 text-decoration: none;
 }
 
 form button {
-width: 150px;
-padding: 5px;
-border-radius: 5px;
-border: solid 1px #ffffff;
-color: #fff;
-font-size: .7em;
+width: 100%;
+padding: 10px 12px;
+border-radius: 10px;
+border: solid 1px #2a2a2a;
+color: #0b0b0b;
+font-size: .8em;
 font-family: montserrat;
 font-weight: 600;
 cursor: pointer;
-margin: 10px 0 20px 50%  ;
-letter-spacing: 0.5px;
-background: none;
+margin: 6px 0 6px 0;
+letter-spacing: 0.3px;
+background: #ff4f4f;
 position: relative;
 overflow: hidden;
 z-index: 1;
-transition: all 0.5s ease;
-}
-form button::before{
-width: 0%;
-height: 100%;
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-background: rgb(255, 255, 255);
-z-index: -1;
-transition: all 0.5s ease;
-}
-form button:hover::before{
-width: 100%;
+transition: all 0.2s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
 }
 form button:hover {
-color: #000;
-transition: all 0.5s ease;
+background: #ff6b6b;
+box-shadow: 0 6px 16px rgba(255, 79, 79, 0.35);
 }   
 
 
@@ -183,11 +178,11 @@ opacity: 0.5;
 cursor: not-allowed;
 }
 .switch-btn {
-color: #f75454;
+color: #ff4f4f;
 background: none;
 border: none;
 cursor: pointer;
-text-decoration: underline;
+text-decoration: none;
 margin-bottom: 0;
 margin-top: 8px;
 text-align: left;
@@ -196,6 +191,7 @@ left: 0;
 position: relative;
 font-weight: 500;
 transition: background 0.2s, color 0.2s;
+padding: 6px 0;
 }
 .switch-btn:hover {
 color: #fff;
@@ -209,26 +205,29 @@ letter-spacing: 0.5px;
 text-align: center;
 }
 a {
-color: #f75454;
+color: #ff4f4f;
+text-decoration: none;
+}
+a:hover {
 text-decoration: underline;
 }
 
 
 form span{
-color: #555555;
+color: #8a8a8a;
 font-family: inter;
 font-size: 12px;
 }
 #applyType{
 position: relative;
-background: #252525;
+background: #141414;
 margin: 0 0 5px 0;
-color: white;
-border-radius: 5px;
+color: #d4d4d4;
+border-radius: 10px;
 font-size: 12px;
-padding: 10px;
+padding: 12px;
 font-family: montserrat;
-border: none;
+border: 1px solid #2a2a2a;
 }
 
 

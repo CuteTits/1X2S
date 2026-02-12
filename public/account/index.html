@@ -19,11 +19,7 @@
   
 </script>
 
-</head>
- 
- 
- 
-</head>
+ </head>
 <body>
 
 
@@ -42,62 +38,359 @@
 
 
   <div class="pageheader">
-  <h2>Hello, <strong id="greeting">Loading...</strong> </h2>
+    <h2>Hello, <strong id="greeting">Loading...</strong></h2>
   </div>
 
-  <div class="container">
-
-    <div class="info">
-      <h1><span id="name">Loading...</span></h1>
-      <h2><span id="email">Loading...</span></h2>
-        <div class="container-uid">
-        <a>UID </a>
-        <a><span id="userid"> Loading...</span></a>
-        </div>
+  <section class="page">
+    <div class="tabs" role="tablist" aria-label="Account settings">
+      <button class="tab-button active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab-button" role="tab" aria-selected="false" data-tab="api">API Keys</button>
+      <button class="tab-button" role="tab" aria-selected="false" data-tab="security">Security</button>
+      <button class="tab-button" role="tab" aria-selected="false" data-tab="sessions">Sessions</button>
+      <button class="tab-button" role="tab" aria-selected="false" data-tab="billing">Billing</button>
     </div>
-  </div>
 
-<div class="container">
-<div class="key-actions">
-    <h1><span class="material-symbols-outlined">key</span>API Keys</h1>
-
-<div class="dropdown">
-  <button id="dropdownBtnApikey" class="dropdown-btn">Manage API Keys</button>
-    <div id="dropdownApikey" class="container-dropdown">
-    <p>To manage API settings and API usage, visit the dashboard.</p>
-    <p>Usage and quotas are monitored in the dashboard.</p>
-
-      <div class="api-display">
-        <h1><span>*</span> LiteWS API Key</h1>
-
-        <div class="api-key-container">
-        <span class="api-key" data-key="VG-7K9Q-R2H4-1Z8X-M5N0-P3T6-B4V9-S2Y1">••••••••••••••••••</span>
-        <div class="button-container">
-          <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
-          <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
-        </div>
-        </div>
-
-        <div class="api-options-container">
-          <button class="api-options"><span class="material-symbols-outlined">more_vert</span></button>
-          <div class="api-options-menu">
-            <button class="regenerate">Regenerate Key</button>
-            <button class="revoke">Revoke Key</button>
+    <div class="tab-panels">
+      <section id="tab-overview" class="tab-panel active" role="tabpanel">
+        <div class="container">
+          <div class="info">
+            <h1><span id="name">Loading...</span></h1>
+            <h2><span id="email">Loading...</span></h2>
+            <div class="container-uid">
+              <a>UID</a>
+              <a><span id="userid"> Loading...</span></a>
+            </div>
           </div>
         </div>
-        
-      </div>
-      <p>This is your primary API key for accessing LiteWS services. Keep it secure and do not share it publicly.
-      Your primary key cannot be deleted, but you can regenerate it if compromised.
-      </p>
+      </section>
 
+      <section id="tab-api" class="tab-panel" role="tabpanel">
+        <div class="container">
+          <div class="key-actions">
+            <h1><span class="material-symbols-outlined">key</span>API Keys</h1>
+            <div class="dropdown">
+              <button id="dropdownBtnApikey" class="dropdown-btn">Manage API Keys</button>
+              <div id="dropdownApikey" class="container-dropdown">
+                <div class="api-header">
+                  <div>
+                    <p class="api-subtitle">Manage keys, usage, and security policies.</p>
+                    <p>Rotate keys regularly and restrict them to trusted environments.</p>
+                  </div>
+                  <div class="api-actions">
+                    <button class="btn-ghost">Create key</button>
+                    <button class="btn-primary">Open dashboard</button>
+                  </div>
+                </div>
 
-      </div>
+                <div class="api-overview">
+                  <div class="api-stat">
+                    <span class="api-stat-label">Usage this month</span>
+                    <span class="api-stat-value">12,480 calls</span>
+                    <div class="api-progress"><span style="width: 42%;"></span></div>
+                  </div>
+                  <div class="api-stat">
+                    <span class="api-stat-label">Rate limit</span>
+                    <span class="api-stat-value">1,200 rpm</span>
+                    <span class="api-stat-note">Peak usage: 62%</span>
+                  </div>
+                  <div class="api-stat">
+                    <span class="api-stat-label">Last key used</span>
+                    <span class="api-stat-value">2 hours ago</span>
+                    <span class="api-stat-note">US-East (Virginia)</span>
+                  </div>
+                </div>
+
+                <div class="api-row">
+                  <div class="api-display">
+                    <div class="api-title">
+                      <h1><span>*</span> LiteWS API Key</h1>
+                      <span class="api-tag">Primary</span>
+                    </div>
+
+                    <div class="api-key-container">
+                      <span class="api-key" data-key="VG-7K9Q-R2H4-1Z8X-M5N0-P3T6-B4V9-S2Y1">••••••••••••••••••</span>
+                      <div class="button-container">
+                        <button class="unhide"><span class="material-symbols-outlined">visibility_off</span></button>
+                        <button class="copy"><span class="material-symbols-outlined">content_copy</span></button>
+                      </div>
+                    </div>
+
+                    <div class="api-options-container">
+                      <button class="api-options"><span class="material-symbols-outlined">more_vert</span></button>
+                      <div class="api-options-menu">
+                        <button class="regenerate">Rotate key</button>
+                        <button class="revoke">Disable key</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="api-surface">
+                    <div class="api-meta">
+                      <span>Created</span>
+                      <strong>Jan 04, 2026</strong>
+                    </div>
+                    <div class="api-meta">
+                      <span>Environment</span>
+                      <strong>Production</strong>
+                    </div>
+                    <div class="api-meta">
+                      <span>Status</span>
+                      <strong class="api-status">Active</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="api-grid">
+                  <div class="api-surface">
+                    <h4>Scopes</h4>
+                    <div class="chip-row">
+                      <span class="chip">read:scores</span>
+                      <span class="chip">read:stats</span>
+                      <span class="chip">write:alerts</span>
+                      <span class="chip">admin:billing</span>
+                    </div>
+                    <button class="btn-ghost">Edit scopes</button>
+                  </div>
+                  <div class="api-surface">
+                    <h4>Allowed origins</h4>
+                    <div class="api-list">
+                      <div class="api-list-item">https://app.1x2s.com</div>
+                      <div class="api-list-item">https://dashboard.1x2s.com</div>
+                      <div class="api-list-item">https://localhost:5173</div>
+                    </div>
+                    <button class="btn-ghost">Manage origins</button>
+                  </div>
+                </div>
+
+                <div class="api-grid">
+                  <div class="api-surface">
+                    <h4>Environment keys</h4>
+                    <div class="api-envs">
+                      <button class="api-env active">Production</button>
+                      <button class="api-env">Staging</button>
+                      <button class="api-env">Development</button>
+                    </div>
+                    <p class="api-hint">Each environment uses a dedicated key.</p>
+                  </div>
+                  <div class="api-surface">
+                    <h4>Recent activity</h4>
+                    <div class="api-list">
+                      <div class="api-list-item">Key used from 54.210.18.21</div>
+                      <div class="api-list-item">Scope updated by admin@1x2s.com</div>
+                      <div class="api-list-item">Rotation scheduled for Mar 01</div>
+                    </div>
+                    <button class="btn-ghost">View audit log</button>
+                  </div>
+                </div>
+
+                <p>This is your primary API key for accessing LiteWS services. Keep it secure and do not share it publicly.
+                Your primary key cannot be deleted, but you can regenerate it if compromised.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-security" class="tab-panel" role="tabpanel">
+        <div class="container">
+          <div class="security-actions">
+            <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
+
+            <div class="dropdown">
+              <button id="dropdownBtn2FA" class="dropdown-btn">Manage 2FA</button>
+              <div id="dropdownMenu2FA" class="container-dropdown">
+                <p>Enabling Two-Factor Authentication will require you to confirm your identification using a dynamic security code for each login.</p>
+                <p>2FA is currently not enabled on this account</p>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button id="dropdownBtnPass" class="dropdown-btn">Change Password</button>
+              <div id="dropdownMenuPass" class="container-dropdown">
+                <p>Enter Your Current Password</p>
+                <div class="currentPass">
+                  <input 
+                    type="password" 
+                    placeholder="This Action Requires Your Current Password" 
+                    required 
+                    id="currentPassword"
+                  >
+                </div>
+                <p>New Password</p>
+                <div class="newPassDiv">
+                  <input 
+                    type="password" 
+                    placeholder="Enter Your New Password" 
+                    required 
+                    id="newPassword"
+                  >
+                </div>
+                <div class="confirmNewPassDiv">
+                  <input 
+                    type="password" 
+                    placeholder="Reenter Your New Password" 
+                    required 
+                    id="confirmNewPassword"
+                  >
+                </div>
+
+                <div class="encase">
+                  <button id="changepassBtn" class="change" disabled>Confirm Change</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button id="dropdownBtn" class="dropdown-btn" style="color: crimson;">Delete Account</button>
+              <div id="dropdownMenu" class="container-dropdown">
+                <p>Deleting your account will terminate your account along with all its data. 
+                Financial transactions will be saved to comply with legal obligations.
+                </p>
+                <div class="hidden">
+                  <form id="password-enforcement-form">
+                    <input 
+                      type="password" 
+                      placeholder="This action requires your password" 
+                      required 
+                      id="loginPassword">
+                  </form>
+                </div>
+                <div class="encase">
+                  <button id="deleteBtn" class="delete" disabled onclick="deleteAccount()">Delete Account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-sessions" class="tab-panel" role="tabpanel">
+        <div class="container">
+          <div class="session-actions">
+            <h1><span class="material-symbols-outlined">desktop_windows</span>Session</h1>
+            <div class="session-meta">
+              <div class="session-row">
+                <span class="session-label">Location</span>
+                <span id="sessionLocation" class="session-value">Loading...</span>
+              </div>
+              <div class="session-row">
+                <span class="session-label">Session ID</span>
+                <span id="sessionId" class="session-value">Loading...</span>
+              </div>
+              <div class="session-row">
+                <span class="session-label">IP Address</span>
+                <span id="sessionIp" class="session-value">Loading...</span>
+              </div>
+            </div>
+            <a style="color: gray; font-family: montserrat; font-size: 12px;">This will log you out on this device.</a>
+            <button class="logout" onclick="logout()">Logout</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-billing" class="tab-panel" role="tabpanel">
+        <div class="container billing">
+          <h1><span class="material-symbols-outlined">payments</span>Billing overview</h1>
+          <div class="billing-grid">
+            <div class="billing-card">
+              <h3>Account balance</h3>
+              <div class="billing-metrics">
+                <div class="metric">
+                  <span class="metric-label">Accumulated costs</span>
+                  <span class="metric-value">$0.00</span>
+                </div>
+                <div class="metric">
+                  <span class="metric-label">Available credits</span>
+                  <span class="metric-value">$0.00</span>
+                </div>
+              </div>
+              <button class="btn-primary">Top up credits</button>
+            </div>
+
+            <div class="billing-card">
+              <h3>Payment method</h3>
+              <p class="billing-note">Current payment option</p>
+              <div class="payment-row">
+                <div class="payment-details">
+                  <span class="payment-brand">Visa</span>
+                  <span class="payment-meta">Ending in 2408 • Expires 08/27</span>
+                </div>
+                <span class="payment-status">Primary</span>
+              </div>
+              <div class="billing-actions">
+                <button class="btn-ghost">Add backup</button>
+                <button class="btn-primary">Change payment</button>
+
+                <div class="payment-icons">
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M16.539 9.186a4.2 4.2 0 0 0-1.451-.251c-1.6 0-2.73.806-2.738 1.963-.01.85.803 1.329 1.418 1.613.631.292.842.476.84.737-.004.397-.504.577-.969.577-.639 0-.988-.089-1.525-.312l-.199-.093-.227 1.332c.389.162 1.09.301 1.814.313 1.701 0 2.813-.801 2.826-2.032.014-.679-.426-1.192-1.352-1.616-.563-.275-.912-.459-.912-.738 0-.247.299-.511.924-.511a2.95 2.95 0 0 1 1.213.229l.15.067.227-1.287zm4.152-.143h-1.25c-.389 0-.682.107-.852.493l-2.404 5.446h1.701l.34-.893 2.076.002c.049.209.199.891.199.891h1.5zm-10.642-.05h1.621l-1.014 5.942H9.037l1.012-5.944zm-4.115 3.275.168.825 1.584-4.05h1.717l-2.551 5.931H5.139l-1.4-5.022a.34.34 0 0 0-.149-.199 7 7 0 0 0-1.592-.589l.022-.125h2.609c.354.014.639.125.734.503l.57 2.729v-.003zm12.757.606.646-1.662c-.008.018.133-.343.215-.566l.111.513.375 1.714H18.69z"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M11.454 17.021q.073.062.151.122a6.17 6.17 0 0 1-3.42 1.03A6.17 6.17 0 0 1 2.01 12a6.175 6.175 0 0 1 9.592-5.144c-.05.043-.1.082-.138.126A6.63 6.63 0 0 0 9.166 12c0 1.925.833 3.755 2.288 5.021m4.361-11.195a6.14 6.14 0 0 0-3.416 1.03c.049.043.099.082.137.126 1.462 1.263 2.299 3.094 2.299 5.018s-.835 3.753-2.288 5.021q-.075.062-.151.122a6.16 6.16 0 0 0 3.418 1.03 6.174 6.174 0 1 0 .001-12.347M12 7.15A6.15 6.15 0 0 0 9.644 12 6.15 6.15 0 0 0 12 16.853 6.16 6.16 0 0 0 14.357 12 6.15 6.15 0 0 0 12 7.15"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="m20.31 16.93-.9-1-.93 1h-5.66v-4.55h-1.86l2.28-5.14h2.21L16.24 9V7.24h2.72l.45 1.34.45-1.34h2.07v-.76c0-.45-.38-.86-.86-.86H2.86c-.48.03-.86.41-.86.86v11.03c0 .45.38.86.86.86h18.28c.45 0 .86-.38.86-.86v-.55z"></path><path d="M20.55 16.41h1.42l-1.87-2 1.87-1.96h-1.38l-1.21 1.27-1.14-1.27h-1.45l1.9 2-1.9 1.96h1.38l1.21-1.27zm-6.03-.93v-.58h2.2v-.93h-2.2v-.59h2.27v-.93h-3.38v3.96h3.38v-.93zm6.38-3.62h1.07v-4l-1.66.04-.9 2.48-.89-2.48h-1.73v3.96h1.11V9.07l1.03 2.79h.97l1-2.79zM15.03 7.9h-1.41l-1.76 4h1.21l.31-.83h1.83l.34.83h1.24zm-1.28 2.28.52-1.31.52 1.31h-1.03Z"></path><path d="m20.97 14.31 1 1.07.03-2.17z"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M21.33 5.61H2.67c-.37 0-.67.3-.67.67v11.44c0 .37.3.67.67.67h18.67c.37 0 .67-.3.67-.67V6.26c0-.37-.3-.65-.67-.65ZM21.01 12c0 3.4-2.75 6.18-6.18 6.18H2.67c-.25 0-.44-.19-.44-.44V6.28c0-.25.19-.44.44-.44h12.18c3.4-.02 6.18 2.75 6.18 6.16Z"></path><path d="M3.72 10.61h-.77v2.72h.77c.4 0 .7-.11.96-.32.32-.26.49-.65.49-1.04 0-.81-.6-1.37-1.46-1.37Zm.61 2.04c-.16.16-.39.21-.72.21h-.14v-1.79h.14c.33 0 .54.05.72.23.18.16.3.42.3.68 0 .25-.11.51-.3.67m1.09-2.04h.53v2.72h-.53zm1.83 1.04c-.32-.12-.4-.19-.4-.33 0-.18.16-.3.39-.3.16 0 .28.07.42.23l.28-.37c-.23-.19-.51-.3-.79-.3-.47 0-.84.33-.84.77 0 .37.18.56.67.74.21.07.32.12.37.16.11.07.16.18.16.28 0 .23-.18.39-.4.39-.25 0-.46-.12-.58-.37l-.33.33c.25.35.54.51.95.51.54 0 .93-.37.93-.89-.04-.42-.21-.61-.81-.84Zm.94.31c0 .79.63 1.42 1.44 1.42.23 0 .42-.05.67-.16v-.63c-.21.21-.4.3-.63.3-.53 0-.91-.39-.91-.93s.39-.93.89-.93c.25 0 .44.09.67.3v-.63c-.23-.12-.42-.18-.65-.18-.82.02-1.47.65-1.47 1.44Zm6.3.48-.72-1.83h-.58l1.14 2.79h.28l1.18-2.79h-.56zm1.55.89h1.5v-.47h-.98v-.72h.95v-.47h-.95v-.6h.98v-.46h-1.5zm3.59-1.93c0-.51-.35-.81-.96-.81h-.79v2.74h.53v-1.09h.07l.74 1.09h.65l-.86-1.14c.42-.09.63-.37.63-.79Zm-1.05.46h-.16v-.82h.16c.33 0 .51.14.51.4 0 .28-.18.42-.51.42m1.47-1.11c0-.05-.04-.07-.09-.07h-.07v.25h.05v-.09l.07.09h.07l-.07-.11s.04-.04.04-.07m-.11.04-.02-.07h.02s.04.02.04.04c.02.02 0 .04-.04.04Z"></path><path d="M19.98 10.6c-.12 0-.21.09-.21.21s.09.21.21.21c.11 0 .21-.09.21-.21-.02-.12-.11-.21-.21-.21m0 .37c-.09 0-.16-.07-.16-.18 0-.09.07-.18.16-.18s.16.07.16.18-.07.18-.16.18m-6.65.99c0 .79-.65 1.44-1.44 1.44s-1.44-.65-1.44-1.44.65-1.44 1.44-1.44 1.44.65 1.44 1.44"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="m11.953 8.819-.547 2.19c.619.154 2.529.784 2.838-.456.322-1.291-1.673-1.579-2.291-1.734m-.822 3.296-.603 2.415c.743.185 3.037.921 3.376-.441.355-1.422-2.029-1.789-2.773-1.974"></path><path d="M14.421 2.299C9.064.964 3.641 4.224 2.306 9.581.97 14.936 4.23 20.361 9.583 21.697c5.357 1.335 10.783-1.924 12.117-7.281 1.336-5.356-1.924-10.781-7.279-12.117m1.991 8.275c-.145.974-.686 1.445-1.402 1.611.985.512 1.485 1.298 1.009 2.661-.592 1.691-1.998 1.834-3.87 1.48l-.454 1.82-1.096-.273.447-1.794a45 45 0 0 1-.875-.228l-.449 1.804-1.095-.275.454-1.823c-.257-.066-.517-.136-.782-.202L6.87 15l.546-1.256s.808.215.797.199c.311.077.448-.125.502-.261l.719-2.875.115.029a1 1 0 0 0-.114-.037l.512-2.053c.013-.234-.066-.528-.511-.639.018-.011-.797-.198-.797-.198l.291-1.172 1.514.378-.001.005q.341.085.7.165l.449-1.802 1.097.273-.44 1.766c.294.067.591.135.879.207l.438-1.755 1.097.273-.449 1.802c1.384.479 2.396 1.195 2.198 2.525"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M13.479 9.883c-1.626-.604-2.512-1.067-2.512-1.803 0-.622.511-.977 1.423-.977 1.667 0 3.379.642 4.558 1.22l.666-4.111c-.935-.446-2.847-1.177-5.49-1.177-1.87 0-3.425.489-4.536 1.401-1.155.954-1.757 2.334-1.757 4 0 3.023 1.847 4.312 4.847 5.403 1.936.688 2.579 1.178 2.579 1.934 0 .732-.629 1.155-1.762 1.155-1.403 0-3.716-.689-5.231-1.578l-.674 4.157c1.304.732 3.705 1.488 6.197 1.488 1.976 0 3.624-.467 4.735-1.356 1.245-.977 1.89-2.422 1.89-4.289 0-3.091-1.889-4.38-4.935-5.468h.002z"></path>
+                  </svg>
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                  fill="white" viewBox="0 0 24 24" >
+                  <path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container billing-plans">
+          <h1><span class="material-symbols-outlined">stars</span>Account plans</h1>
+          <div class="plan-grid">
+            <div class="plan-card">
+              <div class="plan-header">
+                <h4>Dev</h4>
+                <span class="plan-price">$1200.00/mo</span>
+              </div>
+              <p>Basic access for personal use.</p>
+              <button class="btn-ghost">Current plan</button>
+            </div>
+            <div class="plan-card">
+              <div class="plan-header">
+                <h4>Pro</h4>
+                <span class="plan-price">$2500.00/mo</span>
+              </div>
+              <p>Expanded limits for growing teams.</p>
+              <button class="btn-primary">Upgrade</button>
+            </div>
+            <div class="plan-card">
+              <div class="plan-header">
+                <h4>Enterprise</h4>
+              </div>
+              <p>Custom plans and priority support.</p>
+              <button class="btn-ghost">Contact sales</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-
-
-  </div>
-</div>
+  </section>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -109,10 +402,10 @@
     // Toggle hide/unhide
     unhideBtn.addEventListener("click", () => {
       if (keySpan.textContent.includes("•")) {
-        keySpan.textContent = keySpan.dataset.key; // show real key
+        keySpan.textContent = keySpan.dataset.key;
         unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility</span>';
       } else {
-        keySpan.textContent = "••••••••••••••••••"; // mask it again
+        keySpan.textContent = "••••••••••••••••••";
         unhideBtn.innerHTML = '<span class="material-symbols-outlined">visibility_off</span>';
       }
     });
@@ -125,293 +418,215 @@
         setTimeout(() => (copyBtn.innerHTML = '<span class="material-symbols-outlined">content_copy</span>'), 1500);
       });
     });
-  });
-</script>
 
+    const currentPass = document.getElementById("currentPassword");
+    const newPass = document.getElementById("newPassword");
+    const confirmNewPass = document.getElementById("confirmNewPassword");
+    const changeBtn = document.getElementById("changepassBtn");
 
+    changeBtn.addEventListener("click", async () => {
+      const oldPassword = currentPass.value.trim();
+      const newPassword = newPass.value.trim();
+      const confirmPassword = confirmNewPass.value.trim();
 
+      if (!oldPassword || !newPassword || !confirmPassword) {
+        alert("⚠️ All fields are required");
+        return;
+      }
 
+      try {
+        const res = await fetch("/api/change-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
+        });
 
-<div class="container">
-  <div class="security-actions">
-    <h1><span class="material-symbols-outlined">lock_reset</span>Security Actions</h1>
-
-<div class="dropdown">
-  <button id="dropdownBtn2FA" class="dropdown-btn">Manage 2FA</button>
-  <div id="dropdownMenu2FA" class="container-dropdown">
-    <p>Enabling Two-Factor Authentication will require you to confirm your identification using a dynamic security code for each login.</p>
-    <p>2FA is currently not enabled on this account</p>
-  </div>
-</div>
-
-
-<div class="dropdown">
-  <button id="dropdownBtnPass" class="dropdown-btn">Change Password</button>
-  <div id="dropdownMenuPass" class="container-dropdown">
-    <p>Enter Your Current Password</p>
-    <div class="currentPass">
-      <input 
-        type="password" 
-        placeholder="This Action Requires Your Current Password" 
-        required 
-        id="currentPassword"
-      >
-    </div>
-    <p>New Password</p>
-    <div class="newPassDiv">
-      <input 
-        type="password" 
-        placeholder="Enter Your New Password" 
-        required 
-        id="newPassword"
-      >
-    </div>
-    <div class="confirmNewPassDiv">
-      <input 
-        type="password" 
-        placeholder="Reenter Your New Password" 
-        required 
-        id="confirmNewPassword"
-      >
-    </div>
-
-    <div class="encase">
-      <button id="changepassBtn" class="change" disabled onclick="changePassword()">Confirm Change</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const currentPass = document.getElementById("currentPassword");
-const newPass = document.getElementById("newPassword");
-const confirmNewPass = document.getElementById("confirmNewPassword");
-const changeBtn = document.getElementById("changepassBtn");
-
-changeBtn.addEventListener("click", async () => {
-  const oldPassword = currentPass.value.trim();
-  const newPassword = newPass.value.trim();
-  const confirmPassword = confirmNewPass.value.trim();
-
-  if (!oldPassword || !newPassword || !confirmPassword) {
-    alert("⚠️ All fields are required");
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/change-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ oldPassword, newPassword, confirmPassword })
+        const data = await res.json();
+        if (data.success) {
+          alert("✅ " + data.message);
+          currentPass.value = newPass.value = confirmNewPass.value = "";
+          changeBtn.disabled = true;
+          changepassBtn.style.opacity = "10%";
+        } else {
+          alert("❌ " + data.error);
+          changepassBtn.style.opacity = "10%";
+        }
+      } catch (err) {
+        alert("⚠️ Server error: " + err.message);
+        changepassBtn.style.opacity = "10%";
+      }
     });
 
-    const data = await res.json();
-    if (data.success) {
-      alert("✅ " + data.message);
-      currentPass.value = newPass.value = confirmNewPass.value = "";
-      changeBtn.disabled = true;
-     changepassBtn.style.opacity = "10%";
-    } else {
-      alert("❌ " + data.error);
-         changepassBtn.style.opacity = "10%";
-    }
-  } catch (err) {
-    alert("⚠️ Server error: " + err.message);
-       changepassBtn.style.opacity = "10%";
-  }
-});
-
-// Enable button only when all fields are filled
-[currentPass, newPass, confirmNewPass].forEach(input => {
-  input.addEventListener("input", () => {
-    changeBtn.disabled = !(currentPass.value && newPass.value && confirmNewPass.value);
-    changepassBtn.style.opacity = "100%";
-  });
-});
-
-</script>
-
-
-    
-
-    <div class="dropdown">
-      <button id="dropdownBtn" class="dropdown-btn" style="color: crimson;">Delete Account</button>
-      <div id="dropdownMenu" class="container-dropdown">
-        <p>Deleting your account will terminate your account along with all its data. 
-        Financial transactions will be saved to comply with legal obligations.
-        </p>
-        <div class="hidden">
-          <form id="password-enforcement-form">
-            <input 
-              type="password" 
-              placeholder="This action requires your password" 
-              required 
-              id="loginPassword">
-          </form>
-        </div>
-        <div class="encase">
-          <button id="deleteBtn" class="delete" disabled onclick="deleteAccount()">Delete Account</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-
-<div class="container">
-<div class="session-actions">
-    <h1><span class="material-symbols-outlined">desktop_windows</span>Session</h1>
-      <a style="color: gray; font-family: montserrat; font-size: 12px;">This will log you out on this device.</a>
-      <button class="logout" onclick="logout()">Logout</button>
-</div>
-</div>  
-
-
-
-<script>
-  // dropdown handler
- function setupDropdown(buttonId, menuId) {
-  const btn = document.getElementById(buttonId);
-  const menu = document.getElementById(menuId);
-
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent immediate close
-    menu.classList.toggle("active");
-  });
-}
-
-// Initialize both dropdowns
-setupDropdown("dropdownBtnApikey", "dropdownApikey"); // Api Key Management
-setupDropdown("dropdownBtn", "dropdownMenu"); // Delete account
-setupDropdown("dropdownBtnPass", "dropdownMenuPass"); // Change password
-setupDropdown("dropdownBtn2FA", "dropdownMenu2FA"); // Manage 2FA
-
-
-
-
-  const passwordInput = document.getElementById("loginPassword");
-  const deleteBtn = document.getElementById("deleteBtn");
-
-  // Disable delete until password is typed
-  passwordInput.addEventListener("input", () => {
-    deleteBtn.disabled = passwordInput.value.trim() === "";
-    deleteBtn.style.pointerEvents = "auto"; // enable click
-    deleteBtn.style.userSelect = "all";    // disable text selection
-    deleteBtn.style.opacity = "100%";
-  });
-
-  // 🔑 Delete account with password enforcement
-  async function deleteAccount() {
-    const password = passwordInput.value.trim();
-
-    if (!password) {
-      alert("Please enter your password.");
-      return;
-    }
-
-    if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) {
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/delete-account", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ password })
+    // Enable button only when all fields are filled
+    [currentPass, newPass, confirmNewPass].forEach(input => {
+      input.addEventListener("input", () => {
+        changeBtn.disabled = !(currentPass.value && newPass.value && confirmNewPass.value);
+        changepassBtn.style.opacity = "100%";
       });
+    });
 
-      const result = await response.json();
-      if (result.success) {
-        alert("✅ Your account has been deleted.");
-        window.location.href = "/login?mode=login";
-      } else {
-        alert("❌ " + (result.error || "Failed to delete account."));
+    // Tabs
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    function setActiveTab(target) {
+      const targetButton = Array.from(tabButtons).find(b => b.dataset.tab === target) || tabButtons[0];
+      const activeTarget = targetButton.dataset.tab;
+      tabButtons.forEach(b => b.classList.toggle('active', b === targetButton));
+      tabButtons.forEach(b => b.setAttribute('aria-selected', b === targetButton ? 'true' : 'false'));
+      tabPanels.forEach(panel => panel.classList.toggle('active', panel.id === `tab-${activeTarget}`));
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        setActiveTab(target);
+        const url = new URL(window.location.href);
+        url.searchParams.set('tab', target);
+        window.history.replaceState({}, '', url.toString());
+      });
+    });
+
+    // dropdown handler
+    function setupDropdown(buttonId, menuId) {
+      const btn = document.getElementById(buttonId);
+      const menu = document.getElementById(menuId);
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("active");
+      });
+    }
+
+    // Initialize both dropdowns
+    setupDropdown("dropdownBtnApikey", "dropdownApikey");
+    setupDropdown("dropdownBtn", "dropdownMenu");
+    setupDropdown("dropdownBtnPass", "dropdownMenuPass");
+    setupDropdown("dropdownBtn2FA", "dropdownMenu2FA");
+
+    const optionsBtn = document.querySelector('.api-options');
+    const optionsMenu = document.querySelector('.api-options-menu');
+
+    optionsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      optionsMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+      optionsMenu.classList.remove('active');
+    });
+
+    const passwordInput = document.getElementById("loginPassword");
+    const deleteBtn = document.getElementById("deleteBtn");
+
+    passwordInput.addEventListener("input", () => {
+      deleteBtn.disabled = passwordInput.value.trim() === "";
+      deleteBtn.style.pointerEvents = "auto";
+      deleteBtn.style.userSelect = "all";
+      deleteBtn.style.opacity = "100%";
+    });
+
+    async function deleteAccount() {
+      const password = passwordInput.value.trim();
+
+      if (!password) {
+        alert("Please enter your password.");
+        return;
       }
-    } catch (err) {
-      alert("⚠️ Server error: " + err.message);
+
+      if (!confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/delete-account", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ password })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert("✅ Your account has been deleted.");
+          window.location.href = "/login?mode=login";
+        } else {
+          alert("❌ " + (result.error || "Failed to delete account."));
+        }
+      } catch (err) {
+        alert("⚠️ Server error: " + err.message);
+      }
     }
-  }
 
-
-
-  // Load account info
-  async function loadAccount() {
-    try {
-      const res = await fetch('/api/account', { credentials: 'include' });
-      if (!res.ok) throw new Error("Not logged in");
-      const data = await res.json();
-      document.getElementById('name').textContent = data.name;
-      document.getElementById('userid').textContent = data.user_uid || "N/A";
-      document.getElementById('email').textContent = data.email;
-      document.getElementById('greeting').textContent = data.name;
-    } catch (err) {
-      window.location.href = '/login';
-    }
-  }
-
-  async function logout() {
-    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-    window.location.href = '/login?mode=login';
-  }
-
-  loadAccount();
-</script>
-
-<script>
-  // Load account info initially
-  async function loadAccount() {
-    try {
-      const res = await fetch('/api/account', { credentials: 'include' });
-      if (!res.ok) throw new Error("Not logged in");
-      const data = await res.json();
-      document.getElementById('name').textContent = data.name;
-      document.getElementById('userid').textContent = data.user_uid || "N/A";
-      document.getElementById('email').textContent = data.email;
-      document.getElementById('greeting').textContent = data.name;
-    } catch (err) {
-      // kick if not logged in
-      window.location.href = '/login?mode=login';
-    }
-  }
-
-  // Force logout (button action)
-  async function logout() {
-    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-    window.location.href = '/login?mode=login';
-  }
-
-  // Call once when page loads
-  loadAccount();
-
-  // 🔄 Actively check session every 60 seconds
-  setInterval(async () => {
-    try {
-      const res = await fetch('/api/account', { credentials: 'include' });
-      if (!res.ok) {
+    async function loadAccount() {
+      try {
+        const res = await fetch('/api/account', { credentials: 'include' });
+        if (!res.ok) throw new Error("Not logged in");
+        const data = await res.json();
+        document.getElementById('name').textContent = data.name;
+        document.getElementById('userid').textContent = data.user_uid || "N/A";
+        document.getElementById('email').textContent = data.email;
+        document.getElementById('greeting').textContent = data.name;
+      } catch (err) {
         window.location.href = '/login?mode=login';
       }
-    } catch {
+    }
+
+    function generateSessionId() {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function loadSessionMeta() {
+      const sessionIdEl = document.getElementById('sessionId');
+      const sessionIpEl = document.getElementById('sessionIp');
+      const sessionLocationEl = document.getElementById('sessionLocation');
+
+      sessionIdEl.textContent = generateSessionId();
+
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        if (!res.ok) throw new Error('Location lookup failed');
+        const data = await res.json();
+        const city = data.city || 'Unknown city';
+        const region = data.region || data.region_code || 'Unknown region';
+        const country = data.country_name || data.country || 'Unknown country';
+        sessionLocationEl.textContent = `${city}, ${region}, ${country}`;
+        sessionIpEl.textContent = data.ip || 'Unknown IP';
+      } catch (err) {
+        sessionLocationEl.textContent = 'Unavailable';
+        sessionIpEl.textContent = 'Unavailable';
+      }
+    }
+
+    async function logout() {
+      await fetch('/api/logout', { method: 'POST', credentials: 'include' });
       window.location.href = '/login?mode=login';
     }
-  }, 30000); // 30s
-</script>
-<script>
-  const optionsBtn = document.querySelector('.api-options');
-  const optionsMenu = document.querySelector('.api-options-menu');
 
-  optionsBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent immediate close
-    optionsMenu.classList.toggle('active');
-  });
+    window.deleteAccount = deleteAccount;
+    window.logout = logout;
 
-  // Close menu when clicking outside
-  document.addEventListener('click', () => {
-    optionsMenu.classList.remove('active');
+    const initialTab = new URLSearchParams(window.location.search).get('tab');
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+
+    loadAccount();
+    loadSessionMeta();
+
+    setInterval(async () => {
+      try {
+        const res = await fetch('/api/account', { credentials: 'include' });
+        if (!res.ok) {
+          window.location.href = '/login?mode=login';
+        }
+      } catch {
+        window.location.href = '/login?mode=login';
+      }
+    }, 30000);
   });
 </script>
 
