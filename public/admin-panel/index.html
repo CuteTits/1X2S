@@ -338,6 +338,71 @@
       border-radius: 4px;
       padding: 10px;
       margin-bottom: 8px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dropdown-item.state-win {
+      border-color: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.2);
+    }
+
+    .dropdown-item.state-loss {
+      border-color: #ef4444;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
+    }
+
+    .dropdown-item.state-open {
+      border-color: #3b82f6;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+    }
+
+    .parent-container {
+      transition: border-color 0.3s ease;
+    }
+
+    .parent-container.state-win {
+      border-color: #22c55e !important;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+    }
+
+    .parent-container.state-loss {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+    }
+
+    .parent-container.state-open {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .parent-state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .parent-state-badge.state-win {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border: 1px solid #22c55e;
+    }
+
+    .parent-state-badge.state-loss {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid #ef4444;
+    }
+
+    .parent-state-badge.state-open {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+      border: 1px solid #3b82f6;
     }
 
     .dropdown-item-num {
@@ -1106,6 +1171,7 @@ function renderParentContainer(parent, parentIndex) {
       <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
         <span class="parent-toggle-icon" style="display: inline-block; width: 14px; text-align: center; color: #ff4f4f; transition: transform 0.2s; transform: ${isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'}; font-size: 0.7em;">▶</span>
         <h3 style="color: #ffffff; margin: 0; font-size: 0.85em; font-weight: 500;">${parent.title || `Section ${parentIndex + 1}`}</h3>
+        <span class="parent-state-badge state-${parent.state || 'open'}">${parent.state === 'win' ? '✓ Won' : parent.state === 'loss' ? '✕ Lost' : '○ Open'}</span>
       </div>
       <button class="btn-remove" onclick="event.stopPropagation(); removeParentContainer(${parentIndex})">Remove</button>
     </div>
@@ -1134,6 +1200,8 @@ function renderParentContainer(parent, parentIndex) {
     parent.dropdowns.forEach((dropdown, idx) => {
       renderDropdownEditor(dropdown, idx, parentIndex);
     });
+    // Update parent state after all dropdowns are rendered
+    setTimeout(() => updateParentState(parentIndex), 0);
   }
 }
 
@@ -1149,16 +1217,21 @@ function toggleParentExpand(headerElement) {
 function addDropdownToParent(parentIndex) {
   const dropsContainer = document.querySelector(`.dropdowns-container[data-parent-index="${parentIndex}"]`);
   const index = dropsContainer.children.length;
-  renderDropdownEditor({ header: '', subheader: '', location: '', gmt_time: '', competition_id: null, link: '', subheader2: '', text: '', _expanded: true }, index, parentIndex);
+  renderDropdownEditor({ header: '', subheader: '', location: '', gmt_time: '', competition_id: null, link: '', subheader2: '', text: '', total_odds: '', state: 'open', _expanded: true }, index, parentIndex);
+  // Update parent state after adding new dropdown
+  setTimeout(() => updateParentState(parentIndex), 0);
 }
 
 function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
   const dropsContainer = document.querySelector(`[data-parent-index="${parentIndex}"]`);
   const dropdownEl = document.createElement('div');
   dropdownEl.className = 'dropdown-item';
+  if (dropdown.state) {
+    dropdownEl.classList.add(`state-${dropdown.state}`);
+  }
   dropdownEl.dataset.dropdownIndex = dropdownIndex;
   dropdownEl.dataset.parentIndex = parentIndex;
-  dropdownEl.style.cssText = 'background: #141414; border: 1px solid #2a2a2a; border-radius: 4px; margin-bottom: 8px; overflow: hidden;';
+  dropdownEl.style.cssText = 'background: #141414; border-radius: 4px; margin-bottom: 8px; overflow: hidden;';
 
   const previewText = `${dropdown.header || 'Match'}${dropdown.subheader ? ' - ' + dropdown.subheader : ''}`.substring(0, 50);
   const isExpanded = dropdown._expanded === true;
@@ -1204,6 +1277,21 @@ function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
         <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Additional Info</label>
         <input type="text" class="dropdown-subheader2" placeholder="Secondary info (optional)" value="${dropdown.subheader2 || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; margin-bottom: 6px; font-size: 0.8em;">
         
+        <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+          <div style="flex: 1;">
+            <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Total Odds</label>
+            <input type="text" class="dropdown-total-odds" placeholder="e.g., 2.50" value="${dropdown.total_odds || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.8em;">
+          </div>
+          <div style="flex: 1;">
+            <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">State</label>
+            <select class="dropdown-state" onchange="updateDropdownState(this)" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.8em;">
+              <option value="open" ${dropdown.state === 'open' ? 'selected' : ''}>Open</option>
+              <option value="win" ${dropdown.state === 'win' ? 'selected' : ''}>Win</option>
+              <option value="loss" ${dropdown.state === 'loss' ? 'selected' : ''}>Loss</option>
+            </select>
+          </div>
+        </div>
+        
         <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Analysis/Reasoning</label>
         <textarea class="dropdown-text" placeholder="Text/Reasoning..." style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; min-height: 60px; font-size: 0.8em;">${dropdown.text || ''}</textarea>
       </div>
@@ -1229,7 +1317,64 @@ function toggleDropdownExpand(headerElement) {
 function removeDropdown(dropdownIndex, parentIndex) {
   const dropsContainer = document.querySelector(`[data-parent-index="${parentIndex}"]`);
   const dropdownEl = dropsContainer.querySelector(`[data-dropdown-index="${dropdownIndex}"]`);
-  if (dropdownEl) dropdownEl.remove();
+  if (dropdownEl) {
+    dropdownEl.remove();
+    // Update parent state after removing dropdown
+    setTimeout(() => updateParentState(parentIndex), 0);
+  }
+}
+
+function updateDropdownState(selectElement) {
+  const dropdownItem = selectElement.closest('.dropdown-item');
+  const state = selectElement.value;
+  
+  // Remove all state classes
+  dropdownItem.classList.remove('state-win', 'state-loss', 'state-open');
+  
+  // Add the current state class
+  if (state) {
+    dropdownItem.classList.add(`state-${state}`);
+  }
+  
+  // Update parent state
+  const parentIndex = dropdownItem.dataset.parentIndex;
+  updateParentState(parentIndex);
+}
+
+function updateParentState(parentIndex) {
+  const parentContainer = document.querySelector(`.parent-container[data-parent-index="${parentIndex}"]`);
+  if (!parentContainer) return;
+  
+  const dropdowns = parentContainer.querySelectorAll('.dropdown-item');
+  const states = Array.from(dropdowns).map(dd => dd.querySelector('.dropdown-state')?.value || 'open');
+  
+  let parentState = 'open';
+  
+  // Any bet marked as "lost" = automatically mark parent section as "lost"
+  if (states.includes('loss')) {
+    parentState = 'loss';
+  }
+  // Won/open with at least 1 open = parent section is "open"
+  else if (states.includes('open')) {
+    parentState = 'open';
+  }
+  // All bets are won = parent section is "won"
+  else if (states.length > 0 && states.every(s => s === 'win')) {
+    parentState = 'win';
+  }
+  
+  // Update parent container class
+  parentContainer.classList.remove('state-win', 'state-loss', 'state-open');
+  parentContainer.classList.add(`state-${parentState}`);
+  
+  // Update state badge
+  const badge = parentContainer.querySelector('.parent-state-badge');
+  if (badge) {
+    badge.className = `parent-state-badge state-${parentState}`;
+    badge.textContent = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : '○ Open';
+  }
+  
+  return parentState;
 }
 
 function removeParentContainer(parentIndex) {
@@ -1513,6 +1658,8 @@ async function saveCard() {
       const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value.trim();
       const text = dropdownEl.querySelector('.dropdown-text').value.trim();
       const link = dropdownEl.querySelector('.dropdown-link').value.trim();
+      const total_odds = dropdownEl.querySelector('.dropdown-total-odds').value.trim();
+      const state = dropdownEl.querySelector('.dropdown-state').value;
 
       if (header || subheader || text) {
         dropdowns.push({ 
@@ -1523,15 +1670,31 @@ async function saveCard() {
           competition_id,
           subheader2, 
           text,
-          link
+          link,
+          total_odds,
+          state
         });
       }
     });
+
+    // Calculate parent state based on dropdowns
+    let parentState = 'open';
+    if (dropdowns.length > 0) {
+      const states = dropdowns.map(d => d.state || 'open');
+      if (states.includes('loss')) {
+        parentState = 'loss';
+      } else if (states.includes('open')) {
+        parentState = 'open';
+      } else if (states.every(s => s === 'win')) {
+        parentState = 'win';
+      }
+    }
 
     if (parentTitle || parentText || dropdowns.length > 0) {
       parents.push({
         title: parentTitle,
         text: parentText,
+        state: parentState,
         dropdowns
       });
     }
@@ -1782,8 +1945,13 @@ function updateFixedActionsVisibility() {
   const actions = document.getElementById('fixed-actions');
   if (!actions) return;
   
-  if (form.style.display !== 'none' && editingCardId) {
+  if (form.style.display !== 'none') {
     actions.classList.remove('hidden');
+    // Show/hide delete and duplicate buttons only when editing existing card
+    const deleteBtn = actions.querySelector('.btn-delete');
+    const duplicateBtn = actions.querySelector('.btn-duplicate');
+    if (deleteBtn) deleteBtn.style.display = editingCardId ? 'flex' : 'none';
+    if (duplicateBtn) duplicateBtn.style.display = editingCardId ? 'flex' : 'none';
   } else {
     actions.classList.add('hidden');
   }

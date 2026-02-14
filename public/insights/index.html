@@ -13,6 +13,12 @@
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@100" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
+<style>
+  .parent-dropdowns.open {
+    max-height: 5000px !important;
+    opacity: 1 !important;
+  }
+</style>
 </head>
 
 
@@ -41,6 +47,14 @@
 
   <h1>Weekly Insights</h1>
   <h3><span class="material-symbols-outlined">bolt</span>Powered by <b>LiteWS Sport</b> and Google <span>Gemini</span></h3>
+  <p style="margin-top: 1.5rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+    Our insights leverage LiteWS technology to analyze user queries and detect intent, extracting contextual signals and determining time sensitivity. 
+    Using modular retrieval engines including SearXNG, GDELT, DDGS, and Bing Search API, the system performs intelligent, query-driven crawling across websites, RSS feeds, and URLs to discover and extract relevant sports information. 
+    Advanced ranking algorithms prioritize content based on relevance, credibility, and freshness, delivering results in multiple output modes optimized for different applications.
+  </p>
+
+
+
 
 </section>  
 
@@ -50,7 +64,31 @@
 <section id="section2">
 
 
+
+<div class="side-element-container__absolute" style="display: flex; flex-direction: column; pointer-events: auto; position: absolute; 
+left: 10px; z-index: 200; top: 0; gap: 10px; background-color: rgb(14, 14, 14); border: solid 1px gray; padding: 10px 5px;
+border-radius: 15px;">
+      <iframe
+      title="polymarket-market-iframe"
+      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark"
+      width="400"
+      height="180"
+      frameBorder="0"
+    /></iframe>
+    <iframe
+      title="polymarket-market-iframe"
+    	src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
+      width="400"
+      height="180"
+      frameBorder="0"
+    /></iframe>
+
+</div>
+
+
   <div class="section-content-body">
+
+
 
 <div class="button-carousel-wrapper">
   <div class="button-carousel" id="button-carousel">
@@ -79,7 +117,7 @@ function generateButtonCarousel(carouselData) {
   
   carouselData.forEach((data, index) => {
     const button = document.createElement('button');
-    button.className = 'card-button' + (index === 0 ? ' active' : '');
+    button.className = 'card-button' + (index === carouselData.length - 1 ? ' active' : '');
     button.dataset.card = index;
     button.textContent = data.title;
     buttonCarousel.appendChild(button);
@@ -100,15 +138,19 @@ function attachButtonListeners() {
     });
   });
   
-  // Center the first button and card on load
-  if (buttons[0]) {
-    centerButton(buttons[0]);
+  // Center the latest (last) button and card on load
+  const lastIndex = buttons.length - 1;
+  if (buttons[lastIndex]) {
+    centerButton(buttons[lastIndex]);
     const cards = document.querySelectorAll('.carousel-card');
-    if (cards[0]) centerCard(cards[0]);
+    if (cards[lastIndex]) centerCard(cards[lastIndex]);
   }
 }
 </script>
 <!-- ...existing code... -->
+
+
+
 
 
 
@@ -165,7 +207,7 @@ function renderCarouselCards(data) {
   
   data.forEach((cardData, index) => {
     const cardElement = document.createElement('div');
-    cardElement.className = 'carousel-card' + (index === 0 ? ' centered' : '');
+    cardElement.className = 'carousel-card' + (index === data.length - 1 ? ' centered' : '');
     cardElement.dataset.index = index;
     cardElement.dataset.cardId = cardData.id;
     
@@ -187,13 +229,16 @@ function renderCarouselCards(data) {
               
               const locationInfo = dropdown.location ? `<div class="dropdown-datetime__content"><a>${dropdown.location}</a></div>` : '';
               const timeInfo = dropdown.gmt_time ? `<div class="dropdown-datetime__content"><a>${dropdown.gmt_time} GMT</a></div>` : '';
+              const stateClass = dropdown.state ? `state-${dropdown.state}` : 'state-open';
+              const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : '○ Open';
+              const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : '#3b82f6';
               
               return `
-                <div class="dropdown-section">
+                <div class="dropdown-section ${stateClass}" style="border-radius: 8px; margin-bottom: 12px;">
                   <button class="dropdown-toggle" onclick="toggleDropdown(event)">
                       ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 30px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;">🏆</span>'}
                     <span class="dropdown-header"><h1>${dropdown.header}</h1><h2>${dropdown.subheader || ''}</h2></span>
-                    <span class="dropdown-subheader"><h1>${dropdown.subheader2 || ''}</h1></span>
+                    <span class="dropdown-subheader"><h1 style="color: ${stateBadgeColor}; font-weight: 600;">${stateLabel}${dropdown.total_odds ? ` @ ${dropdown.total_odds}` : ''}</h1></span>
                   </button>
                   <div class="dropdown-content" style="display: none;">
                     <div class="dropdown-info">
@@ -204,7 +249,7 @@ function renderCarouselCards(data) {
                         <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
                       </div>
                       <p class="dropdown-text">${dropdown.text || ''}</p>
-                      <p class="dropdown-subtext">odds ${dropdown.subheader2 || ''}</p>
+                      ${dropdown.total_odds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${dropdown.total_odds} | Status: ${stateLabel}</p>` : ''}
                       ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
                     </div>
                   </div>
@@ -213,13 +258,45 @@ function renderCarouselCards(data) {
             }).join('')
           : '';
         
+        // Calculate parent state based on dropdown states
+        let parentState = 'open';
+        if (parent.dropdowns && parent.dropdowns.length > 0) {
+          const states = parent.dropdowns.map(d => d.state || 'open');
+          // Any bet marked as "lost" = automatically mark parent section as "lost"
+          if (states.includes('loss')) {
+            parentState = 'loss';
+          }
+          // Won/open with at least 1 open = parent section is "open"
+          else if (states.includes('open')) {
+            parentState = 'open';
+          }
+          // All bets are won = parent section is "won"
+          else if (states.every(s => s === 'win')) {
+            parentState = 'win';
+          }
+        }
+        
+        const parentStateLabel = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : '○ Open';
+        const parentStateBadgeColor = parentState === 'win' ? '#22c55e' : parentState === 'loss' ? '#ef4444' : '#3b82f6';
+        
         return `
-          <div class="parent-section" style="margin-bottom: 20px; padding: 15px;">
-            ${parent.title ? `<h1>${parent.title}</h1>` : ''}
-            ${parent.text ? `<h2>${parent.text}</h2>` : ''}
-            <div class="parent-dropdowns">
+          <div class="parent-section state-${parentState}" style="margin-bottom: 20px; padding: 5px; border-radius: 12px;">
+            ${parent.title || parent.text ? `
+              <div class="parent-header" onclick="toggleParentSection(event)" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <span class="parent-arrow"><span class="material-symbols-outlined">expand_all</span></span>
+                <div style="flex: 1;">
+                  ${parent.title ? `<h1 style="margin: 0; display: inline-block;">${parent.title}</h1>` : ''}
+                  ${parent.text ? `<h2 style="margin: 0;">${parent.text}</h2>` : ''}
+                </div>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: ${parentStateBadgeColor}15; color: ${parentStateBadgeColor}; border: 1px solid ${parentStateBadgeColor}30;">${parentStateLabel}</span>
+                  <img src="/assets/images/logo-betmgm.png" alt="" style="width:40px; height: 40px;">
+                </div>
+            ` : ''}
+            <div class="parent-dropdowns" style="max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease;">
               ${dropdownsHTML}
+
             </div>
+
           </div>
         `;
       }).join('');
@@ -235,11 +312,14 @@ function renderCarouselCards(data) {
         
         const locationInfo = dropdown.location ? `<div class="dropdown-datetime__content"><a>${dropdown.location}</a></div>` : '';
         const timeInfo = dropdown.gmt_time ? `<div class="dropdown-datetime__content"><a>${dropdown.gmt_time} GMT</a></div>` : '';
+        const stateClass = dropdown.state ? `state-${dropdown.state}` : 'state-open';
+        const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : '○ Open';
+        const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : '#3b82f6';
         
         return `
-          <div class="dropdown-section">
+          <div class="dropdown-section ${stateClass}" style="border-radius: 8px; margin-bottom: 12px;">
             <button class="dropdown-toggle" onclick="toggleDropdown(event)">
-              <span class="dropdown-subheader">${dropdown.subheader || ''}</span><span class="dropdown-header">${dropdown.header}</span>
+              <span class="dropdown-subheader" style="color: ${stateBadgeColor};">${stateLabel}${dropdown.total_odds ? ` @ ${dropdown.total_odds}` : ''}</span><span class="dropdown-header">${dropdown.header}</span>
             </button>
             <div class="dropdown-content" style="display: none;">
               <div class="dropdown-info">
@@ -250,7 +330,7 @@ function renderCarouselCards(data) {
                   <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
                 </div>
                 <p class="dropdown-text">${dropdown.text || ''}</p>
-                <p class="dropdown-subtext">${dropdown.subheader2 || ''}</p>
+                ${dropdown.total_odds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${dropdown.total_odds} | Status: ${stateLabel}</p>` : ''}
                 ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
               </div>
             </div>
@@ -278,6 +358,22 @@ function renderCarouselCards(data) {
     
     carousel.appendChild(cardElement);
   });
+}
+
+function toggleParentSection(event) {
+  const header = event.currentTarget;
+  const parentSection = header.closest('.parent-section');
+  const content = parentSection.querySelector('.parent-dropdowns');
+  const arrow = header.querySelector('.parent-arrow .material-symbols-outlined');
+  const isOpen = content.classList.contains('open');
+  
+  if (isOpen) {
+    content.classList.remove('open');
+    arrow.textContent = 'expand_all';
+  } else {
+    content.classList.add('open');
+    arrow.textContent = 'collapse_content';
+  }
 }
 
 function toggleDropdown(event) {
@@ -333,19 +429,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </section>
 
 
-<section id="section3">
-
-  <h3>Proprietary Datasets</h3>
-  <p>Our insights are generated using a combination of proprietary datasets from LiteWS Sport and advanced AI models developed by Google Gemini. This unique blend of data sources allows us to provide accurate and timely sports insights.</p>
-     <ul>
-        <li>OPTA StatsPerform API</li>
-        <li>SportsRadar API</li>
-        <li>Google Gemini AI Models</li>
-        <li>LiteWS Sport Proprietary Data</li>
-        <li>Live Web News Feeds</li>
-      </ul>
-
-</section>
 
 
 
@@ -353,9 +436,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
   <p>Under the discretion of bookmakers, all insights provided are for informational purposes only. 1X2S holds no responsibility for any betting decisions made based on the insights presented on this platform.</p>
   <p>Bookmaker odds and/or markets may vary and are subject to change without notice. Displayed odds are correct at the time of publication but may change subsequently.</p>
+  <p>1X2S is not affiliated with the brands or organizations featured on this platform. All product names, logos, and brands are property of their respective owners.</p>
 
-</section>  
+</section>
 
+
+
+
+  <button id="scroll-to-top">Back to Top</button>
+  <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+  <script src="/assets/js/components/back-to-top.js"></script>
 
 
 

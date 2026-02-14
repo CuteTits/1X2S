@@ -2,8 +2,11 @@ body, html{
 overflow-x: hidden;
 padding: 0;
 margin: 0;
-background-color: #0B0B0B;
+background: #000000;
 scroll-behavior: smooth;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -41,6 +44,17 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+}
+
+#section1::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.75);
+z-index: -1;
 }
 
 
@@ -87,43 +101,47 @@ transition: all 0.4s ease-in-out;
 
 
 #section1 h1{
-font-size: 4rem;
-font-family: 'Montserrat', sans-serif;
+font-size: 3rem;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 text-align: center;
 margin: 0;
-background: linear-gradient(90deg, #ff2525, #ff7272);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+color: #ffffff;
+letter-spacing: -1px;
+font-weight: 600;
+line-height: 1.1;
 }
 #section1 h3{
-font-size: 1rem;
-font-family: 'Montserrat', sans-serif;
-text-align: left;
-font-weight: 300;
-margin: 0;
-color: #888;
+font-size: 0.95rem;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+text-align: center;
+font-weight: 400;
+margin: 12px 0 0 0;
+color: rgba(255, 255, 255, 0.6);
 display: flex;
 align-items: center;
 justify-content: center;
+letter-spacing: -0.2px;
 }
 #section1 h3 span{
 margin: 0 5px;
-background: linear-gradient(90deg, rgb(255, 159, 140) 0%, rgba(255, 153, 253, 1) 49%, rgba(116, 106, 252, 1) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+color: rgba(255, 255, 255, 0.9);
+font-weight: 500;
 }
 
 b{
 font-weight: 600;
-margin: 0 5px;
+margin: 0 4px;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
 
 #section4 p{
-font-size: .6rem;
-font-family: 'Montserrat', sans-serif;
+font-size: .75rem;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 text-align: center;
 margin: 0 20px;
-color: #888;
+color: rgba(255, 255, 255, 0.4);
+letter-spacing: -0.2px;
+font-weight: 400;
 }   
 
 
@@ -131,82 +149,66 @@ color: #888;
 
 
 .section-content-body{
-font-family: montserrat;
-font-size: 16px;    
-font-weight: 300;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+font-size: 15px;    
+font-weight: 400;
 color: white;
 align-items: center;
 justify-content: center;
 display: flex;
 flex-direction: column;
+letter-spacing: -0.2px;
 }
 
 /* buttons */
 
 .button-carousel-wrapper {
 overflow-x: auto;
-width: 25vw;
-margin-bottom: 24px;
+width: min(78vw, 700px);
+margin-bottom: 40px;
 scroll-behavior: smooth;
-border-left: solid 1px #333333;
-border-right: solid 1px #333333;
+background: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 12px;
+padding: 6px;
 }
 .button-carousel-wrapper::-webkit-scrollbar {
 display: none;
 }
 .button-carousel {
 display: flex;
-gap: 5px;
-padding: 8px 0;
+gap: 4px;
+padding: 0;
 min-width: max-content;
-padding: 0 10vw;
 }
 
 .card-button {
-font-family: montserrat, sans-serif;
-color: white;
-min-width: 120px;
-padding: 10px 18px;
-font-size: 12px;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+color: rgba(255, 255, 255, 0.6);
+min-width: auto;
+padding: 8px 16px;
+font-size: 13px;
 border: none;
 cursor: pointer;
-background: none;
+background: transparent;
 position: relative;
-transition: background 0.2s;
-opacity: 0.6;
+transition: color 0.2s ease;
+font-weight: 500;
+letter-spacing: -0.2px;
+border-radius: 8px;
+}
+
+.card-button:hover {
+color: rgba(255, 255, 255, 0.9);
+background: rgba(255, 255, 255, 0.06);
 }
 .card-button.active {
-font-weight: bold;
-opacity: 1;
+color: #000000;
+background: #ffffff;
+font-weight: 500;
 }
 .card-button::before {
-content: '';
-position: absolute;
-height: 2px;
-width: 0%;
-bottom: 0;
-left: 0;
-background: #ff5252;
-transition:
-width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-pointer-events: none;
-}
-
-.card-button.active::before {
-width: 100%;
-left: 0;
-transition:
-width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-right 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-button:not(.active)::before {
-width: 0%;
-left: 100%;
-transition:
-width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+content: none;
 }
 
 /* Carousel Container */
@@ -225,45 +227,49 @@ display: none;
 }   
 .carousel {
 display: flex;
-gap: 50px;
+gap: 32px;
 overflow-y: show;
 height: auto;
 width: max-content;
-padding: 50px 50vw 50px 50vw; /* Center the carousel */ 
+padding: 40px 45vw 40px 45vw; /* Center the carousel */ 
 scroll-snap-type: x mandatory;
 }
 
 .carousel-card {
-flex: 0 0 650px;
+flex: 0 0 580px;
 height: auto;
 z-index: 1;
-opacity: 0;
-padding: 20px;
-transform: scale(0.85);
+opacity: 0.4;
+padding: 24px;
+transform: scale(0.94);
 transition:
-transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-opacity 1s ease;
-pointer-events: auto;
-border: solid 1px #212121;
-border-radius: 15px;
+transform 0.3s ease,
+opacity 0.3s ease;
+pointer-events: none;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 16px;
+position: relative;
 }
 .carousel-card.centered {
 opacity: 1;
-transform: scale(1.1);
+transform: scale(1);
 z-index: 2;
 pointer-events: auto;
-transition:   opacity 1s ease;
+background: rgba(255, 255, 255, 0.06);
+border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 
 .carousel-card h3{
-color: rgb(119, 119, 119);
-font-family: 'Montserrat', sans-serif;
-font-size: .6rem;
-font-weight: 400;
+color: rgba(255, 255, 255, 0.5);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+font-size: .75rem;
+font-weight: 500;
 text-align: left;
 padding: 0;
 margin: 0;
+letter-spacing: -0.2px;
 }
 
 
@@ -280,21 +286,28 @@ margin: 0;
 .data-link-button {
 display: inline-flex;
 align-items: center;
-gap: 8px;
-background: none;
-border: solid 1px #212121;
-color: #fff;
-font-family: 'Montserrat', sans-serif;
-font-weight: 400;
-font-size: .6rem;
-padding: 5px 10px;
-border-radius: 15px;
+gap: 6px;
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(255, 255, 255, 0.12);
+color: #ffffff;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+font-weight: 500;
+font-size: .75rem;
+padding: 6px 12px;
+border-radius: 8px;
 text-decoration: none;
 cursor: pointer;
 position: relative;
+transition: all 0.2s ease;
+letter-spacing: -0.2px;
+}
+
+.data-link-button:hover {
+background: rgba(255, 255, 255, 0.12);
+border-color: rgba(255, 255, 255, 0.16);
 }
 .data-link-button span.material-symbols-rounded {
-font-size: .8rem;
+font-size: .9rem;
 }
 /* ========== CAROUSEL CARD STYLES ========== */
 
@@ -302,27 +315,31 @@ font-size: .8rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
-margin-bottom: 12px;
-font-size: 0.85rem;
-color: #999;
-border-bottom: 1px solid #212121;
-padding-bottom: 8px;
+margin-bottom: 16px;
+font-size: 0.8rem;
+color: rgba(255, 255, 255, 0.5);
+border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+padding-bottom: 12px;
 }
 
 .card-date {
-font-weight: 600;
-color: #ff4f4f;
-font-family: inter;
+font-weight: 500;
+color: rgba(255, 255, 255, 0.7);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
 font-size: .8em;
+letter-spacing: -0.2px;
 }
 
 .card-id {
-color: rgb(42, 42, 42);
-padding: 2px 8px;
-border-radius: 3px;
-font-size: 0.6rem;
-font-weight: 600;
-font-family: inter;
+color: rgba(255, 255, 255, 0.5);
+padding: 4px 10px;
+border-radius: 6px;
+font-size: 0.7rem;
+font-weight: 500;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', 'Menlo', monospace;
+background: rgba(255, 255, 255, 0.06);
+border: 1px solid rgba(255, 255, 255, 0.1);
+letter-spacing: -0.2px;
 }
 
 .card-title-section {
@@ -330,54 +347,86 @@ margin-bottom: 20px;
 }
 
 .card-title {
-font-size: 1.4rem;
-margin-bottom: 8px;
+font-size: 1.3rem;
+margin-bottom: 12px;
 color: #fff;
+font-weight: 600;
+letter-spacing: -0.5px;
+line-height: 1.3;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 .card-subtitle {
-font-size: 1rem;
-color: #aaa;
+font-size: 0.95rem;
+color: rgba(255, 255, 255, 0.6);
 margin-bottom: 8px;
+font-weight: 500;
+letter-spacing: -0.2px;
 }
 
 .card-description {
-font-size: 0.95rem;
-color: #ccc;
-line-height: 1.6;
+font-size: 0.9rem;
+color: rgba(255, 255, 255, 0.65);
+line-height: 1.5;
+font-weight: 400;
+letter-spacing: -0.2px;
 }
 
 
 
 
 .parent-section{
-border: solid 1px #212121;
+background: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 12px;
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.parent-section:hover {
+border-color: rgba(255, 255, 255, 0.12);
+}
+
+.parent-section.state-win {
+border-color: rgba(34, 197, 94, 0.4);
+box-shadow: 0 0 8px rgba(34, 197, 94, 0.12);
+}
+
+.parent-section.state-loss {
+border-color: rgba(239, 68, 68, 0.4);
+box-shadow: 0 0 8px rgba(239, 68, 68, 0.12);
+}
+
+.parent-section.state-open {
+border-color: rgba(59, 130, 246, 0.4);
+box-shadow: 0 0 8px rgba(59, 130, 246, 0.12);
 }
 .parent-section h1{
 color: white;
-font-family: zendots;
-font-weight: 200;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+font-weight: 600;
 font-size: 1em;
-
 margin: 0;
 padding: 0;
+letter-spacing: -0.3px;
 }
 .parent-section h2{
-color: rgb(121, 121, 121);
-font-family: orbitron;
-font-weight: 400;
-font-size: .8em;
+color: rgba(255, 255, 255, 0.5);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+font-weight: 500;
+font-size: .85em;
 margin: 0;
 padding: 0;
+letter-spacing: -0.2px;
 }
 .parent-section p{
-color: rgb(121, 121, 121);
-font-family: montserrat;
+color: rgba(255, 255, 255, 0.5);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 font-weight: 400;
-font-size: .7em;
+font-size: .8em;
 margin: 10px 0;
 padding: 0;
 text-decoration: none;
+letter-spacing: -0.2px;
 }
 
 
@@ -386,27 +435,47 @@ margin-top: 20px;
 }
 
 .dropdown-section {
-margin: 0;
+margin: 6px;
 overflow: hidden;
-border: 1px solid #212121;
-border-radius: 5px;
-margin: 5px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 10px;
+background: rgba(255, 255, 255, 0.03);
+transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
+.dropdown-section:hover {
+border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-section.state-win {
+border-color: rgba(34, 197, 94, 0.3);
+box-shadow: 0 0 6px rgba(34, 197, 94, 0.08);
+}
+
+.dropdown-section.state-loss {
+border-color: rgba(239, 68, 68, 0.3);
+box-shadow: 0 0 6px rgba(239, 68, 68, 0.08);
+}
+
+.dropdown-section.state-open {
+border-color: rgba(59, 130, 246, 0.3);
+box-shadow: 0 0 6px rgba(59, 130, 246, 0.08);
 }
 
 .dropdown-toggle {
 width: 100%;
-padding: 5px;
+padding: 5px 10px;
 border: none;
 cursor: pointer;
 display: flex;
 gap: 10px;
 align-items: center;
-transition: background 0.3s;
+transition: background 0.2s ease;
 background: transparent;
+border-radius: 10px;
 }
 .dropdown-toggle:hover {
-background-color: #212121;
+background: rgba(255, 255, 255, 0.04);
 }
 .dropdown-header {
 text-align: left;
@@ -415,20 +484,22 @@ display: flex;
 flex-direction: column;
 }
 .dropdown-header h1{
-font-size: 1em;
+font-size: 0.95em;
 padding: 0;
 margin: 0;
-font-weight: 200;
-font-family: orbitron;
+font-weight: 500;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 color: rgb(255, 255, 255);
+letter-spacing: -0.3px;
 }
 .dropdown-header h2{
 font-size: .8em;
 padding: 0;
 margin: 0;
-font-weight: 200;
-font-family: orbitron;
-color: gray;
+font-weight: 400;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+color: rgba(255, 255, 255, 0.5);
+letter-spacing: -0.2px;
 }
 .dropdown-subheader{
 flex: 1;
@@ -436,19 +507,21 @@ text-align: right;
 margin: 0 5px;
 }
 .dropdown-subheader h1{
-font-size: 1.2em;
+font-size: 1.1em;
 color: white;
-font-family: orbitron;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 font-weight: 600;
+letter-spacing: -0.5px;
 }
 
 
 .dropdown-content {
-padding: 8px;
-border-top: 1px solid #212121;
-background-color: #171717;
-border: 1px solid #212121;
-border-radius: 5px;
+padding: 14px;
+margin: 6px;
+border-top: 1px solid rgba(255, 255, 255, 0.08);
+background: rgba(0, 0, 0, 0.3);
+border: 1px solid rgba(255, 255, 255, 0.06);
+border-radius: 8px;
 }
 
 .dropdown-info {
@@ -460,44 +533,58 @@ flex-direction: column;
 .dropdown-info p {
 margin: 5px;
 padding: 5px;
-color: #ddd;
-line-height: 1.6;
-font-family: montserrat;
+color: rgba(255, 255, 255, 0.7);
+line-height: 1.5;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+font-size: 0.85rem;
+letter-spacing: -0.2px;
 }
 .dropdown-text span{
-font-weight: 600;
-color: #ff4f4f;
+font-weight: 500;
+color: rgba(255, 255, 255, 0.9);
 }
 
 
 
 .dropdown-subtext {
-font-size: 0.7rem;
-color: #aaa;
-font-family: orbitron;
-font-weight: 600;
+font-size: 0.75rem;
+color: rgba(255, 255, 255, 0.5);
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+font-weight: 500;
+letter-spacing: -0.2px;
 }
 
 .dropdown-text {
-font-size: 0.6rem;
-line-height: 0;
-color: #3f3f3f;
-border-left: solid 2px rgb(215, 215, 215);
+font-size: 0.75rem;
+line-height: 1.4;
+color: rgba(255, 255, 255, 0.5);
+border-left: solid 2px rgba(255, 255, 255, 0.2);
 display: block;
+padding-left: 12px;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+letter-spacing: -0.2px;
 }
 
 .details-text__link{
-color: rgb(255, 46, 46);
-font-size: .7em;
-font-family: montserrat;
+color: rgba(255, 255, 255, 0.9);
+font-size: .8em;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 text-decoration: none;
 display: flex;
 flex-direction: row;
 align-items: center;
-gap: 5px;
+gap: 6px;
+font-weight: 500;
+letter-spacing: -0.2px;
+transition: opacity 0.2s ease;
 }
+
+.details-text__link:hover {
+opacity: 0.7;
+}
+
 .details-text__link span{
-color: rgb(255, 46, 46);
+color: rgba(255, 255, 255, 0.9);
 font-size: 1em;
 }
 
@@ -516,11 +603,13 @@ margin: 0;
 padding: 0px 5px;
 }
 .dropdown-context__league h1{
-font-size: .6em;
-font-weight: 200;
-font-family: orbitron;
+font-size: .75em;
+font-weight: 500;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 padding: 0;
 margin: 0;
+letter-spacing: -0.2px;
+color: rgba(255, 255, 255, 0.6);
 }
 .dropdown-datetime__display{
 display: flex;
@@ -532,185 +621,14 @@ gap: 10px;
 display: flex;
 flex-direction: row;
 align-items: center;
-color: rgb(255, 255, 255);
-font-size: .7em;
-font-weight: 200;
-font-family:montserrat ;
+color: rgba(255, 255, 255, 0.8);
+font-size: .8em;
+font-weight: 400;
+font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+letter-spacing: -0.2px;
 }
 .dropdown-datetime__content span{
 font-size: 1em;
-}
-
-/* Sporty bookmaker refresh */
-:root{
-	--pitch-deep: #07120c;
-	--pitch-dark: #0b1510;
-	--pitch-line: rgba(255, 255, 255, 0.04);
-	--accent-red: #ff4a4a;
-	--accent-gold: #f2c94c;
-	--panel: rgba(12, 20, 15, 0.88);
-	--panel-border: rgba(255, 255, 255, 0.08);
-}
-
-body, html{
-	background:
-		linear-gradient(180deg, #070b09 0%, #0a100c 50%, #090d0b 100%),
-		repeating-linear-gradient(90deg, transparent 0 22px, var(--pitch-line) 22px 23px),
-		repeating-linear-gradient(0deg, transparent 0 22px, var(--pitch-line) 22px 23px);
-}
-
-#section1{
-	background:
-		linear-gradient(120deg, rgba(7, 12, 9, 0.9), rgba(7, 12, 9, 0.4)),
-		url('../images/insights-ucl-bg.png') no-repeat center center/cover;
-}
-
-#section1 h1{
-	letter-spacing: 1.5px;
-	text-transform: uppercase;
-	text-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-}
-
-#section1 h3{
-	color: #b0b7b2;
-	gap: 6px;
-}
-
-#section1 h3 span{
-	background: linear-gradient(90deg, #ff6b6b, #f2c94c);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
-
-#section2, #section3, #section4{
-	background:
-		linear-gradient(180deg, rgba(7, 12, 9, 0.92), rgba(7, 12, 9, 0.98)),
-		repeating-linear-gradient(90deg, transparent 0 26px, var(--pitch-line) 26px 27px);
-}
-
-.button-carousel-wrapper{
-	width: min(78vw, 720px);
-	border-left: 1px solid rgba(255, 255, 255, 0.08);
-	border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.card-button{
-	border-radius: 999px;
-	border: 1px solid transparent;
-	background: rgba(10, 16, 12, 0.6);
-	transition: all 0.25s ease;
-}
-
-.card-button.active{
-	border-color: rgba(255, 255, 255, 0.2);
-	background: rgba(255, 255, 255, 0.06);
-}
-
-.card-button::before{
-	background: var(--accent-red);
-	height: 3px;
-	border-radius: 999px;
-}
-
-.carousel{
-	padding: 60px 45vw 60px 45vw;
-}
-
-.carousel-card{
-	background: var(--panel);
-	border: 1px solid var(--panel-border);
-	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-	backdrop-filter: blur(10px);
-}
-
-.carousel-card.centered{
-	transform: scale(1.08);
-	border-color: rgba(255, 255, 255, 0.18);
-}
-
-.card-header-meta{
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.card-date{
-	color: var(--accent-gold);
-	letter-spacing: 0.6px;
-}
-
-.card-id{
-	background: rgba(255, 255, 255, 0.08);
-	color: #d6d6d6;
-	border-radius: 999px;
-}
-
-.card-title{
-	font-family: 'Montserrat', sans-serif;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-}
-
-.card-description{
-	color: #c7d2c9;
-}
-
-.parent-section{
-	border-radius: 12px;
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	background: rgba(7, 12, 9, 0.75);
-}
-
-.dropdown-section{
-	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	background: rgba(7, 12, 9, 0.55);
-}
-
-.dropdown-toggle{
-	padding: 10px 12px;
-}
-
-.dropdown-toggle:hover{
-	background-color: rgba(255, 255, 255, 0.04);
-}
-
-.dropdown-header h1{
-	text-transform: uppercase;
-	letter-spacing: 0.4px;
-}
-
-.dropdown-subheader h1{
-	color: var(--accent-red);
-}
-
-.dropdown-content{
-	background-color: rgba(10, 16, 12, 0.85);
-	border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.details-text__link{
-	color: var(--accent-gold);
-}
-
-.details-text__link span{
-	color: var(--accent-gold);
-}
-
-.dropdown-text{
-	border-left: solid 2px var(--accent-gold);
-	color: #9aa8a0;
-}
-
-.dropdown-subtext{
-	color: #c2c2c2;
-}
-
-#section3 h3{
-	text-transform: uppercase;
-	letter-spacing: 1px;
-}
-
-#section4 p{
-	color: #9aa8a0;
 }
 
 @media (max-width: 900px){

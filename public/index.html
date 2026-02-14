@@ -647,17 +647,323 @@
 
   </section>
   <section class="section section--vh100 section--bg-dark">
-    
-      <h1>Back Up Your Sports Prediction</h1>
+    <div class="card-carousel__container">
+      <!-- Card 1 -->
+      <div class="card-carousel__card card-carousel__card--active" data-card="0">
+        <div class="card-carousel__content">
+          <h1>Real-time Data</h1>
+          <p>Access live web data with our advanced real-time retrieval system. Get the most current information instantly.</p>
+          <div class="card-carousel__features">
+            <div class="feature-item">
+              <span class="material-symbols-outlined">bolt</span>
+              <span>Lightning Fast</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">update</span>
+              <span>Always Fresh</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">verified</span>
+              <span>Verified Sources</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h1>Reinforce Your Stock Analysis</h1>
+      <!-- Card 2 -->
+      <div class="card-carousel__card" data-card="1">
+        <div class="card-carousel__content">
+          <h1>AI-Powered Insights</h1>
+          <p>Intelligent analysis and summarization of complex data. Our AI extracts meaningful insights from vast information sources.</p>
+          <div class="card-carousel__features">
+            <div class="feature-item">
+              <span class="material-symbols-outlined">smart_toy</span>
+              <span>Machine Learning</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">analytics</span>
+              <span>Pattern Detection</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">auto_awesome</span>
+              <span>Smart Filtering</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Card 3 -->
+      <div class="card-carousel__card" data-card="2">
+        <div class="card-carousel__content">
+          <h1>Seamless Integration</h1>
+          <p>Easy implementation with your existing systems. Our APIs are designed for developers, by developers.</p>
+          <div class="card-carousel__features">
+            <div class="feature-item">
+              <span class="material-symbols-outlined">code</span>
+              <span>Clean APIs</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">library_books</span>
+              <span>Full Docs</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">sync</span>
+              <span>Real-time Sync</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <p>Fetch for actionable and up-to-date news and data from web results, news aggregation, rss feeds
-          and open API endpoints. Continious polling with mere millisecond margin ensures you get your information
-          before others.
-        </p>
+      <!-- Card 4 -->
+      <div class="card-carousel__card" data-card="3">
+        <div class="card-carousel__content">
+          <h1>Enterprise Scale</h1>
+          <p>Built for high-performance requirements. Handle thousands of requests with robust infrastructure built for scale.</p>
+          <div class="card-carousel__features">
+            <div class="feature-item">
+              <span class="material-symbols-outlined">storage</span>
+              <span>99.9% Uptime</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">security</span>
+              <span>Enterprise Security</span>
+            </div>
+            <div class="feature-item">
+              <span class="material-symbols-outlined">trending_up</span>
+              <span>Auto-scaling</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Navigation Dots -->
+      <div class="card-carousel__nav">
+        <button class="card-carousel__dot card-carousel__dot--active" data-index="0"></button>
+        <button class="card-carousel__dot" data-index="1"></button>
+        <button class="card-carousel__dot" data-index="2"></button>
+        <button class="card-carousel__dot" data-index="3"></button>
+      </div>
+    </div>
+
+    <style>
+      .card-carousel__container {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .card-carousel__card {
+        position: absolute;
+        width: 90%;
+        max-width: 800px;
+        height: 75%;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        background: #050505;
+      }
+
+      .card-carousel__card--active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        border: 1px solid transparent;
+        background:
+        linear-gradient(#0e0e0e) padding-box,
+        linear-gradient(137deg, #0e0e0e00 45%, #72727292 50%, #0e0e0e00 55%) border-box;
+        background-size: 100% 100%, 200% 100%;
+        background-position: 0 0, 200% 50%;
+        animation: shine 5s linear infinite;
+        box-shadow: #0000006e 5px 5px 20px 5px;
+        cursor: pointer;
+        transition: all 0.5s ease;
+      }
+
+      .card-carousel__content {
+        text-align: center;
+        width: 100%;
+      }
+
+      .card-carousel__content h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #ffffff;
+        letter-spacing: -1px;
+      }
+
+      .card-carousel__content p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 40px;
+        line-height: 1.6;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .card-carousel__features {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .feature-item:hover {
+        color: #ffffff;
+        transform: translateY(-5px);
+      }
+
+      .feature-item .material-symbols-outlined {
+        font-size: 2rem;
+        color: rgba(100, 200, 255, 0.8);
+      }
+
+      .feature-item:hover .material-symbols-outlined {
+        color: rgb(100, 200, 255);
+      }
+
+      .card-carousel__nav {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .card-carousel__dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        padding: 0;
+      }
+
+      .card-carousel__dot:hover {
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: scale(1.2);
+      }
+
+      .card-carousel__dot--active {
+        background: rgba(100, 200, 255, 0.9);
+        border-color: rgba(100, 200, 255, 0.9);
+        box-shadow: 0 0 15px rgba(100, 200, 255, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .card-carousel__card {
+          width: 95%;
+          height: 70%;
+          padding: 40px 25px;
+        }
+
+        .card-carousel__content h1 {
+          font-size: 2rem;
+        }
+
+        .card-carousel__content p {
+          font-size: 1rem;
+          margin-bottom: 30px;
+        }
+
+        .card-carousel__features {
+          gap: 15px;
+        }
+
+        .feature-item {
+          font-size: 0.85rem;
+        }
+
+        .feature-item .material-symbols-outlined {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+
+    <script>
+      let currentCard = 0;
+      const totalCards = 4;
+      const cards = document.querySelectorAll('.card-carousel__card');
+      const dots = document.querySelectorAll('.card-carousel__dot');
+      let isAnimating = false;
+      const clickDelay = 150; // milliseconds
+
+      function switchCard(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        setTimeout(() => {
+          currentCard = index % totalCards;
+
+          // Update cards
+          cards.forEach((card, i) => {
+            card.classList.remove('card-carousel__card--active');
+            if (i === currentCard) {
+              card.classList.add('card-carousel__card--active');
+            }
+          });
+
+          // Update dots
+          dots.forEach((dot, i) => {
+            dot.classList.remove('card-carousel__dot--active');
+            if (i === currentCard) {
+              dot.classList.add('card-carousel__dot--active');
+            }
+          });
+
+          isAnimating = false;
+        }, clickDelay);
+      }
+
+      // Add click listeners to cards
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+          switchCard((currentCard + 1) % totalCards);
+        });
+        card.style.cursor = 'pointer';
+      });
+
+      // Add click listeners to dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          switchCard(index);
+        });
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          switchCard((currentCard + 1) % totalCards);
+        } else if (e.key === 'ArrowLeft') {
+          switchCard((currentCard - 1 + totalCards) % totalCards);
+        }
+      });
+    </script>
   </section>
 
 
