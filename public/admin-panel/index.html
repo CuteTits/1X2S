@@ -342,18 +342,23 @@
     }
 
     .dropdown-item.state-win {
-      border-color: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.35);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.15);
     }
 
     .dropdown-item.state-loss {
-      border-color: #ef4444;
-      box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.35);
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.15);
     }
 
     .dropdown-item.state-open {
-      border-color: #3b82f6;
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.35);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.15);
+    }
+
+    .dropdown-item.state-void {
+      border-color: rgba(107, 114, 128, 0.35);
+      box-shadow: 0 0 8px rgba(107, 114, 128, 0.12);
     }
 
     .parent-container {
@@ -361,18 +366,23 @@
     }
 
     .parent-container.state-win {
-      border-color: #22c55e !important;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+      border-color: rgba(34, 197, 94, 0.35) !important;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.16);
     }
 
     .parent-container.state-loss {
-      border-color: #ef4444 !important;
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+      border-color: rgba(239, 68, 68, 0.35) !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.16);
     }
 
     .parent-container.state-open {
-      border-color: #3b82f6 !important;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.35) !important;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.16);
+    }
+
+    .parent-container.state-void {
+      border-color: rgba(107, 114, 128, 0.35) !important;
+      box-shadow: 0 0 12px rgba(107, 114, 128, 0.16);
     }
 
     .parent-state-badge {
@@ -388,21 +398,27 @@
     }
 
     .parent-state-badge.state-win {
-      background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
-      border: 1px solid #22c55e;
+      background: rgba(34, 197, 94, 0.12);
+      color: rgba(134, 239, 172, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.5);
     }
 
     .parent-state-badge.state-loss {
-      background: rgba(239, 68, 68, 0.2);
-      color: #ef4444;
-      border: 1px solid #ef4444;
+      background: rgba(239, 68, 68, 0.12);
+      color: rgba(248, 113, 113, 0.9);
+      border: 1px solid rgba(239, 68, 68, 0.5);
     }
 
     .parent-state-badge.state-open {
-      background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
-      border: 1px solid #3b82f6;
+      background: rgba(59, 130, 246, 0.12);
+      color: rgba(147, 197, 253, 0.9);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+    }
+
+    .parent-state-badge.state-void {
+      background: rgba(107, 114, 128, 0.12);
+      color: rgba(209, 213, 219, 0.7);
+      border: 1px solid rgb(99, 99, 99);
     }
 
     .dropdown-item-num {
@@ -1171,7 +1187,8 @@ function renderParentContainer(parent, parentIndex) {
       <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
         <span class="parent-toggle-icon" style="display: inline-block; width: 14px; text-align: center; color: #ff4f4f; transition: transform 0.2s; transform: ${isExpanded ? 'rotate(90deg)' : 'rotate(0deg)'}; font-size: 0.7em;">▶</span>
         <h3 style="color: #ffffff; margin: 0; font-size: 0.85em; font-weight: 500;">${parent.title || `Section ${parentIndex + 1}`}</h3>
-        <span class="parent-state-badge state-${parent.state || 'open'}">${parent.state === 'win' ? '✓ Won' : parent.state === 'loss' ? '✕ Lost' : '○ Open'}</span>
+        <span class="parent-state-badge state-${parent.state || 'open'}">${parent.state === 'win' ? '✓ Won' : parent.state === 'loss' ? '✕ Lost' : parent.state === 'void' ? '○ Void' : '○ Open'}</span>
+        <span class="parent-odds-display" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 0.7em; font-weight: 600; background: rgba(59, 130, 246, 0.12); color: rgba(147, 197, 253, 0.9); border: 1px solid rgba(59, 130, 246, 0.3);">@ <span class="parent-odds-value">1.00</span></span>
       </div>
       <button class="btn-remove" onclick="event.stopPropagation(); removeParentContainer(${parentIndex})">Remove</button>
     </div>
@@ -1183,6 +1200,20 @@ function renderParentContainer(parent, parentIndex) {
         
         <label style="color: #d4d4d4; font-weight: 500; font-size: 0.8em; display: block; margin-bottom: 6px;">Section Description</label>
         <textarea class="parent-text" placeholder="Description or intro text for this section..." style="width: 100%; padding: 8px 10px; background: #141414; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; min-height: 60px; margin-bottom: 10px; font-size: 0.85em;">${parent.text || ''}</textarea>
+        
+        <div style="display: flex; gap: 10px; align-items: flex-end;">
+          <div style="flex: 1;">
+            <label style="color: #d4d4d4; font-weight: 500; font-size: 0.8em; display: block; margin-bottom: 6px;">Combined Odds</label>
+            <input type="text" class="parent-odds-manual" placeholder="e.g., 5.25" value="${parent.total_odds || ''}" style="width: 100%; padding: 8px 10px; background: #141414; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.85em;" oninput="updateParentOdds(${parentIndex})">
+          </div>
+          <div style="flex: 0 0 auto;">
+            <label style="color: #d4d4d4; font-weight: 500; font-size: 0.8em; display: block; margin-bottom: 6px;">Mode</label>
+            <select class="parent-odds-mode" onchange="updateParentOdds(${parentIndex})" style="padding: 8px 10px; background: #141414; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.85em;">
+              <option value="auto" ${parent.odds_mode !== 'manual' ? 'selected' : ''}>Auto</option>
+              <option value="manual" ${parent.odds_mode === 'manual' ? 'selected' : ''}>Manual</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div style="background: #141414; padding: 12px 12px 0 12px; border-radius: 4px; border: 1px solid #2a2a2a; margin-bottom: 0;">
@@ -1201,7 +1232,10 @@ function renderParentContainer(parent, parentIndex) {
       renderDropdownEditor(dropdown, idx, parentIndex);
     });
     // Update parent state after all dropdowns are rendered
-    setTimeout(() => updateParentState(parentIndex), 0);
+    setTimeout(() => {
+      updateParentState(parentIndex);
+      updateParentOdds(parentIndex);
+    }, 0);
   }
 }
 
@@ -1219,7 +1253,10 @@ function addDropdownToParent(parentIndex) {
   const index = dropsContainer.children.length;
   renderDropdownEditor({ header: '', subheader: '', location: '', gmt_time: '', competition_id: null, link: '', subheader2: '', text: '', total_odds: '', state: 'open', _expanded: true }, index, parentIndex);
   // Update parent state after adding new dropdown
-  setTimeout(() => updateParentState(parentIndex), 0);
+  setTimeout(() => {
+    updateParentState(parentIndex);
+    updateParentOdds(parentIndex);
+  }, 0);
 }
 
 function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
@@ -1235,6 +1272,7 @@ function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
 
   const previewText = `${dropdown.header || 'Match'}${dropdown.subheader ? ' - ' + dropdown.subheader : ''}`.substring(0, 50);
   const isExpanded = dropdown._expanded === true;
+  const oddsValue = dropdown.state === 'void' ? '1.0' : (dropdown.total_odds || '');
   
   dropdownEl.innerHTML = `
     <div class="dropdown-toggle-header" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: #1a1a1a; cursor: pointer; user-select: none;" onclick="toggleDropdownExpand(this)">
@@ -1280,7 +1318,7 @@ function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
         <div style="display: flex; gap: 8px; margin-bottom: 6px;">
           <div style="flex: 1;">
             <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">Total Odds</label>
-            <input type="text" class="dropdown-total-odds" placeholder="e.g., 2.50" value="${dropdown.total_odds || ''}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.8em;">
+            <input type="text" class="dropdown-total-odds" placeholder="e.g., 2.50" value="${oddsValue}" style="width: 100%; padding: 7px 9px; background: #1a1a1a; border: 1px solid #2a2a2a; color: #d4d4d4; border-radius: 4px; font-size: 0.8em;">
           </div>
           <div style="flex: 1;">
             <label style="color: #d4d4d4; font-weight: 500; font-size: 0.75em; margin: 8px 0 5px 0; display: block;">State</label>
@@ -1288,6 +1326,7 @@ function renderDropdownEditor(dropdown, dropdownIndex, parentIndex) {
               <option value="open" ${dropdown.state === 'open' ? 'selected' : ''}>Open</option>
               <option value="win" ${dropdown.state === 'win' ? 'selected' : ''}>Win</option>
               <option value="loss" ${dropdown.state === 'loss' ? 'selected' : ''}>Loss</option>
+              <option value="void" ${dropdown.state === 'void' ? 'selected' : ''}>Void</option>
             </select>
           </div>
         </div>
@@ -1320,7 +1359,10 @@ function removeDropdown(dropdownIndex, parentIndex) {
   if (dropdownEl) {
     dropdownEl.remove();
     // Update parent state after removing dropdown
-    setTimeout(() => updateParentState(parentIndex), 0);
+    setTimeout(() => {
+      updateParentState(parentIndex);
+      updateParentOdds(parentIndex);
+    }, 0);
   }
 }
 
@@ -1329,16 +1371,22 @@ function updateDropdownState(selectElement) {
   const state = selectElement.value;
   
   // Remove all state classes
-  dropdownItem.classList.remove('state-win', 'state-loss', 'state-open');
+  dropdownItem.classList.remove('state-win', 'state-loss', 'state-open', 'state-void');
   
   // Add the current state class
   if (state) {
     dropdownItem.classList.add(`state-${state}`);
   }
+
+  if (state === 'void') {
+    const oddsInput = dropdownItem.querySelector('.dropdown-total-odds');
+    if (oddsInput) oddsInput.value = '1.0';
+  }
   
-  // Update parent state
+  // Update parent state and odds
   const parentIndex = dropdownItem.dataset.parentIndex;
   updateParentState(parentIndex);
+  updateParentOdds(parentIndex);
 }
 
 function updateParentState(parentIndex) {
@@ -1347,34 +1395,83 @@ function updateParentState(parentIndex) {
   
   const dropdowns = parentContainer.querySelectorAll('.dropdown-item');
   const states = Array.from(dropdowns).map(dd => dd.querySelector('.dropdown-state')?.value || 'open');
+  const nonVoidStates = states.filter(state => state !== 'void');
   
   let parentState = 'open';
+  if (nonVoidStates.length === 0 && states.includes('void')) {
+    parentState = 'void';
+  }
   
   // Any bet marked as "lost" = automatically mark parent section as "lost"
-  if (states.includes('loss')) {
+  if (parentState !== 'void' && nonVoidStates.includes('loss')) {
     parentState = 'loss';
   }
   // Won/open with at least 1 open = parent section is "open"
-  else if (states.includes('open')) {
+  else if (parentState !== 'void' && nonVoidStates.includes('open')) {
     parentState = 'open';
   }
   // All bets are won = parent section is "won"
-  else if (states.length > 0 && states.every(s => s === 'win')) {
+  else if (parentState !== 'void' && nonVoidStates.length > 0 && nonVoidStates.every(s => s === 'win')) {
     parentState = 'win';
   }
   
   // Update parent container class
-  parentContainer.classList.remove('state-win', 'state-loss', 'state-open');
+  parentContainer.classList.remove('state-win', 'state-loss', 'state-open', 'state-void');
   parentContainer.classList.add(`state-${parentState}`);
   
   // Update state badge
   const badge = parentContainer.querySelector('.parent-state-badge');
   if (badge) {
     badge.className = `parent-state-badge state-${parentState}`;
-    badge.textContent = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : '○ Open';
+    badge.textContent = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : parentState === 'void' ? '○ Void' : '○ Open';
   }
   
   return parentState;
+}
+
+function calculateCombinedOdds(parentIndex) {
+  const parentContainer = document.querySelector(`.parent-container[data-parent-index="${parentIndex}"]`);
+  if (!parentContainer) return 1.0;
+  
+  const dropdowns = parentContainer.querySelectorAll('.dropdown-item');
+  let combinedOdds = 1.0;
+  
+  dropdowns.forEach(dd => {
+    const oddsInput = dd.querySelector('.dropdown-total-odds');
+    const oddsValue = parseFloat(oddsInput?.value || '1.0');
+    if (!isNaN(oddsValue) && oddsValue > 0) {
+      combinedOdds *= oddsValue;
+    }
+  });
+  
+  return combinedOdds;
+}
+
+function updateParentOdds(parentIndex) {
+  const parentContainer = document.querySelector(`.parent-container[data-parent-index="${parentIndex}"]`);
+  if (!parentContainer) return;
+  
+  const modeSelect = parentContainer.querySelector('.parent-odds-mode');
+  const manualInput = parentContainer.querySelector('.parent-odds-manual');
+  const displayValue = parentContainer.querySelector('.parent-odds-value');
+  
+  const mode = modeSelect?.value || 'auto';
+  
+  let oddsValue;
+  if (mode === 'manual') {
+    oddsValue = parseFloat(manualInput?.value || '1.0');
+    manualInput.disabled = false;
+    manualInput.style.opacity = '1';
+  } else {
+    oddsValue = calculateCombinedOdds(parentIndex);
+    manualInput.value = oddsValue.toFixed(2);
+    manualInput.disabled = true;
+    manualInput.style.opacity = '0.6';
+  }
+  
+  if (displayValue) {
+    displayValue.textContent = oddsValue.toFixed(2);
+  }
 }
 
 function removeParentContainer(parentIndex) {
@@ -1658,8 +1755,11 @@ async function saveCard() {
       const subheader2 = dropdownEl.querySelector('.dropdown-subheader2').value.trim();
       const text = dropdownEl.querySelector('.dropdown-text').value.trim();
       const link = dropdownEl.querySelector('.dropdown-link').value.trim();
-      const total_odds = dropdownEl.querySelector('.dropdown-total-odds').value.trim();
+      let total_odds = dropdownEl.querySelector('.dropdown-total-odds').value.trim();
       const state = dropdownEl.querySelector('.dropdown-state').value;
+      if (state === 'void') {
+        total_odds = '1.0';
+      }
 
       if (header || subheader || text) {
         dropdowns.push({ 
@@ -1681,20 +1781,28 @@ async function saveCard() {
     let parentState = 'open';
     if (dropdowns.length > 0) {
       const states = dropdowns.map(d => d.state || 'open');
-      if (states.includes('loss')) {
+      const nonVoidStates = states.filter(state => state !== 'void');
+      if (nonVoidStates.length === 0 && states.includes('void')) {
+        parentState = 'void';
+      } else if (nonVoidStates.includes('loss')) {
         parentState = 'loss';
-      } else if (states.includes('open')) {
+      } else if (nonVoidStates.includes('open')) {
         parentState = 'open';
-      } else if (states.every(s => s === 'win')) {
+      } else if (nonVoidStates.every(s => s === 'win')) {
         parentState = 'win';
       }
     }
 
     if (parentTitle || parentText || dropdowns.length > 0) {
+      const oddsMode = parentContainer.querySelector('.parent-odds-mode')?.value || 'auto';
+      const oddsValue = parentContainer.querySelector('.parent-odds-manual')?.value || '';
+      
       parents.push({
         title: parentTitle,
         text: parentText,
         state: parentState,
+        odds_mode: oddsMode,
+        total_odds: oddsValue,
         dropdowns
       });
     }

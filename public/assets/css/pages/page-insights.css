@@ -400,6 +400,11 @@ box-shadow: 0 0 8px rgba(239, 68, 68, 0.12);
 border-color: rgba(59, 130, 246, 0.4);
 box-shadow: 0 0 8px rgba(59, 130, 246, 0.12);
 }
+
+.parent-section.state-void {
+border-color: rgba(36, 38, 41, 0.45);
+box-shadow: 0 0 8px rgba(107, 114, 128, 0.16);
+}
 .parent-section h1{
 color: white;
 font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
@@ -460,6 +465,12 @@ box-shadow: 0 0 6px rgba(239, 68, 68, 0.08);
 .dropdown-section.state-open {
 border-color: rgba(59, 130, 246, 0.3);
 box-shadow: 0 0 6px rgba(59, 130, 246, 0.08);
+}
+
+.dropdown-section.state-void {
+border-color: rgba(86, 86, 86, 0.603);
+box-shadow: 0 0 6px rgba(107, 114, 128, 0.12);
+opacity: .5;
 }
 
 .dropdown-toggle {
@@ -639,4 +650,46 @@ font-size: 1em;
 	.carousel-card{
 		flex: 0 0 80vw;
 	}
+}
+
+
+.redirect__button{
+display: flex;
+flex-direction: row;
+align-items: center;
+gap: 10px;
+justify-content: space-between;
+background-color: transparent;
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 5px;
+padding: 5px 10px;
+color: white;
+font-family: montserrat;
+font-size: 1em;
+text-decoration: none;
+}
+.redirect__button img{
+background-color: #2E5CFF; /* https://polymarket.com/brand "poly blue" */
+border-radius: 5px;
+padding: 5px;
+}
+
+
+span.material-symbols-outlined{
+color: white;
+}
+
+
+
+
+.side-element-container__absolute{
+display: flex; flex-direction: column; pointer-events: auto; position: absolute; 
+left: 10px; z-index: 200; top: 0; gap: 10px; background-color: rgb(14, 14, 14); border: 1px solid rgba(255, 255, 255, 0.12); padding: 10px 5px;
+border-radius: 15px;
+}
+
+@media screen and (max-width: 1500px) {
+	.side-element-container__absolute{
+	display: none;
+	}	
 }

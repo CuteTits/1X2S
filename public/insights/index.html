@@ -65,25 +65,92 @@
 
 
 
-<div class="side-element-container__absolute" style="display: flex; flex-direction: column; pointer-events: auto; position: absolute; 
-left: 10px; z-index: 200; top: 0; gap: 10px; background-color: rgb(14, 14, 14); border: solid 1px gray; padding: 10px 5px;
-border-radius: 15px;">
-      <iframe
+<div class="side-element-container__absolute">
+    <iframe
+      id="polymarket-iframe-primary"
       title="polymarket-market-iframe"
-      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark"
+      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark" 
       width="400"
       height="180"
       frameBorder="0"
-    /></iframe>
+    /></iframe> <!-- Dynamic -->
     <iframe
       title="polymarket-market-iframe"
     	src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
       width="400"
       height="180"
       frameBorder="0"
+      background-color="0f0f0f"
     /></iframe>
 
+    <a href="https://polymarket.com/" target="_blank" class="redirect__button" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+      <img src="/assets/images/logo-polymarket.png" alt="polymarket logo icon" style="width: 20px;">
+      <span>polymarket.com</span><span class="material-symbols-outlined">arrow_outward</span>
+    </a>
 </div>
+
+<style>
+  @keyframes fadeInOut {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+  
+  #polymarket-iframe-primary.cycling {
+    animation: fadeInOut 0.6s ease-in-out;
+  }
+</style>
+
+<script>
+// ========== POLYMARKET IFRAME CYCLER ==========
+
+// Configurable market list - add or remove market IDs as needed
+const POLYMARKET_MARKETS = [
+  'will-arsenal-win-the-202526-english-premier-league',
+  'will-manchester-city-win-the-202526-english-premier-league',
+  'will-aston-villa-win-the-202526-english-premier-league',
+  'will-manchester-united-win-the-202526-english-premier-league',
+  'will-liverpool-win-the-202526-english-premier-league'
+];
+
+// Configuration
+const ROTATION_INTERVAL_MS = 8000; // Rotate every 8 seconds
+let currentMarketIndex = 0;
+
+function updateIframeSrc() {
+  const iframe = document.getElementById('polymarket-iframe-primary');
+  if (!iframe) return;
+  
+  // Add animation class
+  iframe.classList.add('cycling');
+  
+  // Change src mid-animation
+  setTimeout(() => {
+    const market = POLYMARKET_MARKETS[currentMarketIndex % POLYMARKET_MARKETS.length];
+    const newSrc = `https://embed.polymarket.com/market.html?market=${market}&features=volume&theme=dark`;
+    iframe.src = newSrc;
+    currentMarketIndex = (currentMarketIndex + 1) % POLYMARKET_MARKETS.length;
+  }, 300);
+  
+  // Remove animation class after animation completes
+  setTimeout(() => {
+    iframe.classList.remove('cycling');
+  }, 600);
+}
+
+function initializeIframeRotation() {
+  // Initial update
+  updateIframeSrc();
+  
+  // Set up recurring rotation
+  setInterval(updateIframeSrc, ROTATION_INTERVAL_MS);
+}
+
+// Start rotation when DOM is ready
+document.addEventListener("DOMContentLoaded", function() {
+  initializeIframeRotation();
+});
+</script>
 
 
   <div class="section-content-body">
@@ -222,7 +289,7 @@ function renderCarouselCards(data) {
           ? parent.dropdowns.map((dropdown) => {
               const competitionInfo = dropdown.competition_name ? `
                 <div style="display: flex; align-items: center; gap: 8px; flex-direction:row;">
-                  ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 20px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;">🏆</span>'}
+                  ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 20px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;"><span class="material-symbols-outlined">trophy</span></span>'}
                   <span class="dropdown-context__info">${dropdown.competition_name}</span>
                 </div>
               ` : '';
@@ -230,15 +297,16 @@ function renderCarouselCards(data) {
               const locationInfo = dropdown.location ? `<div class="dropdown-datetime__content"><a>${dropdown.location}</a></div>` : '';
               const timeInfo = dropdown.gmt_time ? `<div class="dropdown-datetime__content"><a>${dropdown.gmt_time} GMT</a></div>` : '';
               const stateClass = dropdown.state ? `state-${dropdown.state}` : 'state-open';
-              const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : '○ Open';
-              const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : '#3b82f6';
+              const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : dropdown.state === 'void' ? '○ Void' : '○ Open';
+              const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : dropdown.state === 'void' ? '#6b7280' : '#3b82f6';
+              const effectiveOdds = dropdown.state === 'void' ? '1.0' : dropdown.total_odds;
               
               return `
                 <div class="dropdown-section ${stateClass}" style="border-radius: 8px; margin-bottom: 12px;">
                   <button class="dropdown-toggle" onclick="toggleDropdown(event)">
-                      ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 30px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;">🏆</span>'}
+                      ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 30px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;"><span class="material-symbols-outlined">trophy</span></span>'}
                     <span class="dropdown-header"><h1>${dropdown.header}</h1><h2>${dropdown.subheader || ''}</h2></span>
-                    <span class="dropdown-subheader"><h1 style="color: ${stateBadgeColor}; font-weight: 600;">${stateLabel}${dropdown.total_odds ? ` @ ${dropdown.total_odds}` : ''}</h1></span>
+                    <span class="dropdown-subheader"><h1 style="color: ${stateBadgeColor}; font-weight: 600;">${stateLabel}${effectiveOdds ? ` @ ${effectiveOdds}` : ''}</h1></span>
                   </button>
                   <div class="dropdown-content" style="display: none;">
                     <div class="dropdown-info">
@@ -249,7 +317,7 @@ function renderCarouselCards(data) {
                         <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
                       </div>
                       <p class="dropdown-text">${dropdown.text || ''}</p>
-                      ${dropdown.total_odds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${dropdown.total_odds} | Status: ${stateLabel}</p>` : ''}
+                      ${effectiveOdds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${effectiveOdds} | Status: ${stateLabel}</p>` : ''}
                       ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
                     </div>
                   </div>
@@ -262,33 +330,52 @@ function renderCarouselCards(data) {
         let parentState = 'open';
         if (parent.dropdowns && parent.dropdowns.length > 0) {
           const states = parent.dropdowns.map(d => d.state || 'open');
+          const nonVoidStates = states.filter(state => state !== 'void');
           // Any bet marked as "lost" = automatically mark parent section as "lost"
-          if (states.includes('loss')) {
+          if (nonVoidStates.length === 0 && states.includes('void')) {
+            parentState = 'void';
+          }
+          if (parentState !== 'void' && nonVoidStates.includes('loss')) {
             parentState = 'loss';
           }
           // Won/open with at least 1 open = parent section is "open"
-          else if (states.includes('open')) {
+          else if (parentState !== 'void' && nonVoidStates.includes('open')) {
             parentState = 'open';
           }
           // All bets are won = parent section is "won"
-          else if (states.every(s => s === 'win')) {
+          else if (parentState !== 'void' && nonVoidStates.length > 0 && nonVoidStates.every(s => s === 'win')) {
             parentState = 'win';
           }
         }
         
-        const parentStateLabel = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : '○ Open';
-        const parentStateBadgeColor = parentState === 'win' ? '#22c55e' : parentState === 'loss' ? '#ef4444' : '#3b82f6';
+        const parentStateLabel = parentState === 'win' ? '✓ Won' : parentState === 'loss' ? '✕ Lost' : parentState === 'void' ? '○ Void' : '○ Open';
+        const parentStateBadgeColor = parentState === 'win' ? '#22c55e' : parentState === 'loss' ? '#ef4444' : parentState === 'void' ? '#6b7280' : '#3b82f6';
+        
+        // Calculate combined odds
+        let combinedOdds = 1.0;
+        if (parent.odds_mode === 'manual' && parent.total_odds) {
+          combinedOdds = parseFloat(parent.total_odds);
+        } else if (parent.dropdowns && parent.dropdowns.length > 0) {
+          // Auto mode: multiply all dropdown odds
+          parent.dropdowns.forEach(d => {
+            const odds = parseFloat(d.total_odds || '1.0');
+            if (!isNaN(odds) && odds > 0) {
+              combinedOdds *= odds;
+            }
+          });
+        }
         
         return `
           <div class="parent-section state-${parentState}" style="margin-bottom: 20px; padding: 5px; border-radius: 12px;">
             ${parent.title || parent.text ? `
               <div class="parent-header" onclick="toggleParentSection(event)" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                <span class="parent-arrow"><span class="material-symbols-outlined">expand_all</span></span>
+                <span class="parent-arrow"><span class="material-symbols-outlined">unfold_more</span></span>
                 <div style="flex: 1;">
                   ${parent.title ? `<h1 style="margin: 0; display: inline-block;">${parent.title}</h1>` : ''}
                   ${parent.text ? `<h2 style="margin: 0;">${parent.text}</h2>` : ''}
                 </div>
                 <span style="display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: ${parentStateBadgeColor}15; color: ${parentStateBadgeColor}; border: 1px solid ${parentStateBadgeColor}30;">${parentStateLabel}</span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 700; background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">@ ${combinedOdds.toFixed(2)}</span>
                   <img src="/assets/images/logo-betmgm.png" alt="" style="width:40px; height: 40px;">
                 </div>
             ` : ''}
@@ -305,7 +392,7 @@ function renderCarouselCards(data) {
       parentsHTML = cardData.dropdowns.map((dropdown) => {
         const competitionInfo = dropdown.competition_name ? `
           <div style="display: flex; align-items: center; gap: 8px; flex-direction:row;">
-            ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 20px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em;">🏆</span>'}
+            ${dropdown.competition_icon ? `<img src="/assets/images/league-icons/${dropdown.competition_icon}" alt="${dropdown.competition_name}" style="height: 20px; width: auto; border-radius: 2px;" onerror="this.style.display='none'">` : '<span style="font-size: 1em; color:white;"><span class="material-symbols-outlined">trophy</span></span>'}
             <span class="dropdown-context__info">${dropdown.competition_name}</span>
           </div>
         ` : '';
@@ -313,13 +400,14 @@ function renderCarouselCards(data) {
         const locationInfo = dropdown.location ? `<div class="dropdown-datetime__content"><a>${dropdown.location}</a></div>` : '';
         const timeInfo = dropdown.gmt_time ? `<div class="dropdown-datetime__content"><a>${dropdown.gmt_time} GMT</a></div>` : '';
         const stateClass = dropdown.state ? `state-${dropdown.state}` : 'state-open';
-        const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : '○ Open';
-        const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : '#3b82f6';
+        const stateLabel = dropdown.state === 'win' ? '✓ Win' : dropdown.state === 'loss' ? '✕ Loss' : dropdown.state === 'void' ? '○ Void' : '○ Open';
+        const stateBadgeColor = dropdown.state === 'win' ? '#22c55e' : dropdown.state === 'loss' ? '#ef4444' : dropdown.state === 'void' ? '#6b7280' : '#3b82f6';
+        const effectiveOdds = dropdown.state === 'void' ? '1.0' : dropdown.total_odds;
         
         return `
           <div class="dropdown-section ${stateClass}" style="border-radius: 8px; margin-bottom: 12px;">
             <button class="dropdown-toggle" onclick="toggleDropdown(event)">
-              <span class="dropdown-subheader" style="color: ${stateBadgeColor};">${stateLabel}${dropdown.total_odds ? ` @ ${dropdown.total_odds}` : ''}</span><span class="dropdown-header">${dropdown.header}</span>
+              <span class="dropdown-subheader" style="color: ${stateBadgeColor};">${stateLabel}${effectiveOdds ? ` @ ${effectiveOdds}` : ''}</span><span class="dropdown-header">${dropdown.header}</span>
             </button>
             <div class="dropdown-content" style="display: none;">
               <div class="dropdown-info">
@@ -330,7 +418,7 @@ function renderCarouselCards(data) {
                   <div class="dropdown-datetime__display">${locationInfo}${timeInfo}</div>
                 </div>
                 <p class="dropdown-text">${dropdown.text || ''}</p>
-                ${dropdown.total_odds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${dropdown.total_odds} | Status: ${stateLabel}</p>` : ''}
+                ${effectiveOdds ? `<p class="dropdown-subtext" style="font-weight: 600; color: ${stateBadgeColor};">Total Odds: ${effectiveOdds} | Status: ${stateLabel}</p>` : ''}
                 ${dropdown.link ? `<div style="margin-top: 8px;"><a href="${dropdown.link}" target="_blank" class="details-text__link">View Match Details <span class="material-symbols-outlined">open_in_new</span></a></div>` : ''}
               </div>
             </div>
@@ -369,10 +457,10 @@ function toggleParentSection(event) {
   
   if (isOpen) {
     content.classList.remove('open');
-    arrow.textContent = 'expand_all';
+    arrow.textContent = 'unfold_more';
   } else {
     content.classList.add('open');
-    arrow.textContent = 'collapse_content';
+    arrow.textContent = 'unfold_less';
   }
 }
 
