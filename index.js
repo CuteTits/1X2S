@@ -115,6 +115,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware to allow Stripe and fix ITP issues
+app.use((req, res, next) => {
+  // Allow payment processing and storage access
+  res.setHeader('Permissions-Policy', 'payment=*, geolocation=*, storage-access=*');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  // Stripe requires these headers for iframe communication
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  next();
+});
+
 // --- Session middleware (must be BEFORE routes that use req.session) ---
 app.use(session({
   name: 'sid', // 👈 shorter cookie name

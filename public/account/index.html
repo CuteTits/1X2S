@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
 
 <!-- Stripe.js -->
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/" async defer crossorigin="anonymous"></script>
 
 <script>
   document.documentElement.classList.add('js');
@@ -1124,74 +1124,127 @@ fill="#ffffff" viewBox="0 0 24 24" >
             displayError.textContent = '';
           }
         });
+        
+        console.log('✅ Stripe initialized successfully');
+        return true;
       } catch (error) {
         console.error('Error initializing Stripe:', error);
         alert('Failed to load payment processor. Please refresh the page.');
+        return false;
       }
     }
 
-    // Initialize Stripe when DOM is ready
-    document.addEventListener('DOMContentLoaded', initializeStripe);
-    
-    // Payment mode toggle with smooth transitions
-    const paymentModeRadios = document.querySelectorAll('input[name="paymentMode"]');
-    const stripeContainer = document.getElementById('stripeCardContainer');
-    const paypalContainer = document.getElementById('paypalContainer');
-    const googlepayContainer = document.getElementById('googlepayContainer');
-    const bitcoinContainer = document.getElementById('bitcoinContainer');
-    const sepaContainer = document.getElementById('sepaContainer');
-    const banktransferContainer = document.getElementById('banktransferContainer');
-    
-    // All payment containers
-    const allContainers = [
-      stripeContainer,
-      paypalContainer,
-      googlepayContainer,
-      bitcoinContainer,
-      sepaContainer,
-      banktransferContainer
-    ];
-    
-    paymentModeRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        // Hide all containers with fade out
-        allContainers.forEach(container => {
-          if (container) {
-            container.classList.add('hidden');
+    // Setup payment mode toggle - runs after Stripe is ready
+    function setupPaymentModeToggle() {
+      const paymentModeRadios = document.querySelectorAll('input[name="paymentMode"]');
+      const stripeContainer = document.getElementById('stripeCardContainer');
+      const paypalContainer = document.getElementById('paypalContainer');
+      const googlepayContainer = document.getElementById('googlepayContainer');
+      const bitcoinContainer = document.getElementById('bitcoinContainer');
+      const sepaContainer = document.getElementById('sepaContainer');
+      const banktransferContainer = document.getElementById('banktransferContainer');
+      
+      // All payment containers
+      const allContainers = [
+        stripeContainer,
+        paypalContainer,
+        googlepayContainer,
+        bitcoinContainer,
+        sepaContainer,
+        banktransferContainer
+      ];
+      
+      paymentModeRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          // Hide all containers with fade out
+          allContainers.forEach(container => {
+            if (container) {
+              container.classList.add('hidden');
+            }
+          });
+          
+          // Show the selected container with fade in
+          switch(e.target.value) {
+            case 'stripe':
+              stripeContainer.classList.remove('hidden');
+              break;
+            case 'paypal':
+              paypalContainer.classList.remove('hidden');
+              break;
+            case 'googlepay':
+              googlepayContainer.classList.remove('hidden');
+              break;
+            case 'bitcoin':
+              bitcoinContainer.classList.remove('hidden');
+              break;
+            case 'sepa':
+              sepaContainer.classList.remove('hidden');
+              break;
+            case 'banktransfer':
+              banktransferContainer.classList.remove('hidden');
+              break;
           }
         });
-        
-        // Show the selected container with fade in
-        switch(e.target.value) {
-          case 'stripe':
-            stripeContainer.classList.remove('hidden');
-            break;
-          case 'paypal':
-            paypalContainer.classList.remove('hidden');
-            break;
-          case 'googlepay':
-            googlepayContainer.classList.remove('hidden');
-            break;
-          case 'bitcoin':
-            bitcoinContainer.classList.remove('hidden');
-            break;
-          case 'sepa':
-            sepaContainer.classList.remove('hidden');
-            break;
-          case 'banktransfer':
-            banktransferContainer.classList.remove('hidden');
-            break;
+      });
+
+      // Initialize: Ensure Stripe container is visible on page load
+      if (stripeContainer) stripeContainer.classList.remove('hidden');
+      if (paypalContainer) paypalContainer.classList.add('hidden');
+      if (googlepayContainer) googlepayContainer.classList.add('hidden');
+      if (bitcoinContainer) bitcoinContainer.classList.add('hidden');
+      if (sepaContainer) sepaContainer.classList.add('hidden');
+      if (banktransferContainer) banktransferContainer.classList.add('hidden');
+      
+      console.log('✅ Payment mode toggle setup complete');
+
+      // Ensure initial state is set correctly
+      const selectedRadio = document.querySelector('input[name="paymentMode"]:checked');
+      if (selectedRadio && selectedRadio.value === 'stripe') {
+        console.log('Stripe is default - showing stripe container');
+      }
+
+        // Also add click handlers to payment method labels for better UX
+        const paymentLabels = document.querySelectorAll('.payment-method-option');
+        paymentLabels.forEach(label => {
+          label.addEventListener('click', function() {
+            const radio = this.querySelector('input[name="paymentMode"]');
+            if (radio) {
+              radio.checked = true;
+              // Manually trigger change event
+              const event = new Event('change', { bubbles: true });
+              radio.dispatchEvent(event);
+              console.log('Manual trigger - Payment mode:', radio.value);
+            }
+          });
+        });
+    }
+
+        // IMMEDIATE: Set up payment toggle (doesn't need Stripe)
+        setupPaymentModeToggle();
+
+    // Initialize Stripe and setup payment toggles when DOM is ready
+    function initializePaymentSystem() {
+      if (typeof Stripe === 'undefined') {
+        console.warn('⚠️ Stripe not loaded yet, retrying...');
+        setTimeout(initializePaymentSystem, 500);
+        return;
+      }
+      
+      initializeStripe().then(stripeReady => {
+        if (stripeReady) {
+          setupPaymentModeToggle();
+        } else {
+          console.error('❌ Failed to initialize Stripe');
         }
       });
-    });
-
-    // Initialize: Ensure Stripe container is visible on page load
-    stripeContainer.classList.remove('hidden');
-    paypalContainer.classList.add('hidden');
-    googlepayContainer.classList.add('hidden');
-    bitcoinContainer.classList.add('hidden');
-    sepaContainer.classList.add('hidden');
-    banktransferContainer.classList.add('hidden');
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializePaymentSystem);
+    } else {
+      initializePaymentSystem();
+    }
+    
 
     // PayPal Connect Simulation
     const connectPayPalBtn = document.getElementById('connectPayPalBtn');
