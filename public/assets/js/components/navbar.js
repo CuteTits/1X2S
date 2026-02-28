@@ -43,21 +43,36 @@ function initializeBanner() {
 }
 
 // --- Load Navbar Once and Initialize Everything ---
-fetch('/navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('navbar').innerHTML = data;
+function loadNavbarComponent() {
+  const navbarContainer = document.getElementById('navbar');
+  
+  if (!navbarContainer) {
+    console.warn('⚠️ #navbar element not found, retrying...');
+    setTimeout(loadNavbarComponent, 100);
+    return;
+  }
 
-    // Initialize navbar behavior
-    if (typeof initializeNavbar === 'function') initializeNavbar();
+  console.log('🔄 Loading navbar component...');
+  
+  fetch('/navbar.html')
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.text();
+    })
+    .then(data => {
+      navbarContainer.innerHTML = data;
+      console.log('✅ Navbar HTML loaded');
 
-    // Progress bar setup
-    const progressBar = document.getElementById("progress-bar");
-    if (progressBar) {
-      window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight;
-        const clientHeight = document.documentElement.clientHeight;
+      // Initialize navbar behavior
+      if (typeof initializeNavbar === 'function') initializeNavbar();
+
+      // Progress bar setup
+      const progressBar = document.getElementById("progress-bar");
+      if (progressBar) {
+        window.addEventListener("scroll", () => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight;
+          const clientHeight = document.documentElement.clientHeight;
 
         const maxScroll = scrollHeight - clientHeight;
         const scrolledPercentage = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
@@ -86,11 +101,11 @@ fetch('/navbar.html')
           // Build dropdown menu items
           let dropdownItems = `
             <li><a href="/account">Dashboard</a></li>
-            <li><a href="/account/settings">Settings</a></li>`;
+          `;
           
           // Add admin panel link if user is admin
           if (session.user.role === 'admin') {
-            dropdownItems += `<li><a href="/admin-panel"><span class="material-symbols-outlined">admin_panel_settings</span> Admin Panel</a></li>`;
+            dropdownItems += `<li><a href="/admin-panel">Admin Panel</a></li>`;
           }
           
           dropdownItems += `<li><a id="logout-link-nav"><span class="material-symbols-outlined">logout</span> Logout</a></li>`;
@@ -151,5 +166,18 @@ fetch('/navbar.html')
         }
       })
       .catch(err => console.error('Session check failed:', err));
-  })
-  .catch(error => console.error('Error loading navbar:', error));
+    })
+    .catch(error => {
+      console.error('❌ Error loading navbar:', error);
+      // Retry after delay
+      setTimeout(loadNavbarComponent, 1000);
+    });
+}
+
+// Wait for DOM to be ready before loading navbar
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadNavbarComponent);
+} else {
+  // DOM already loaded
+  setTimeout(loadNavbarComponent, 0);
+}

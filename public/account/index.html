@@ -10,16 +10,20 @@
 <link rel="stylesheet" href="/assets/css/pages/page-account.css">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
 
+<!-- Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
 <script>
   document.documentElement.classList.add('js');
   window.addEventListener('load', function () {
     document.body.classList.add('fade-in');
   });
 
-  
+  // ========================================
+  // COUNTRY & DIALING CODE DATA
+  // ========================================
+  let COUNTRIES = [];
 </script>
-
- </head>
 <body>
 
 
@@ -48,6 +52,7 @@
       <button class="tab-button" role="tab" aria-selected="false" data-tab="security">Security</button>
       <button class="tab-button" role="tab" aria-selected="false" data-tab="sessions">Sessions</button>
       <button class="tab-button" role="tab" aria-selected="false" data-tab="billing">Billing</button>
+      <button class="tab-button" role="tab" aria-selected="false" data-tab="settings">Settings</button>
     </div>
 
     <div class="tab-panels">
@@ -246,7 +251,7 @@
                 <p>Deleting your account will terminate your account along with all its data. 
                 Financial transactions will be saved to comply with legal obligations.
                 </p>
-                <div class="hidden">
+                <div>
                   <form id="password-enforcement-form">
                     <input 
                       type="password" 
@@ -308,18 +313,19 @@
             </div>
 
             <div class="billing-card">
-              <h3>Payment method</h3>
-              <p class="billing-note">Current payment option</p>
-              <div class="payment-row">
-                <div class="payment-details">
-                  <span class="payment-brand">Visa</span>
-                  <span class="payment-meta">Ending in 2408 • Expires 08/27</span>
-                </div>
-                <span class="payment-status">Primary</span>
+              <h3>Payment methods</h3>
+              <p class="billing-note">Manage your saved payment cards</p>
+              
+              <!-- Saved Cards List -->
+              <div id="savedCardsList" class="saved-cards-list">
+                <!-- Cards will be populated here by JavaScript -->
               </div>
+
               <div class="billing-actions">
-                <button class="btn-ghost">Add backup</button>
-                <button class="btn-primary">Change payment</button>
+                <button id="addCardBtn" class="btn-primary">
+                  <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">add</span>
+                  Add new payment method
+                </button>
 
                 <div class="payment-icons">
                   <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
@@ -389,11 +395,894 @@
           </div>
         </div>
       </section>
+
+      <section id="tab-settings" class="tab-panel" role="tabpanel">
+        <div class="container settings">
+          <h1><span class="material-symbols-outlined">settings</span>Settings</h1>
+
+          <div class="settings-group">
+            <div class="settings-item">
+              <div class="settings-label">
+                <h3>Theme</h3>
+                <p>Customize your interface appearance</p>
+              </div>
+              <div class="settings-control">
+                <select class="settings-select">
+                  <option>Light</option>
+                  <option>Dark</option>
+                  <option>Auto</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <div class="settings-item">
+              <div class="settings-label">
+                <h3>Notifications</h3>
+                <p>Manage how you receive updates</p>
+              </div>
+              <div class="settings-control">
+                <label class="checkbox-label">
+                  <input type="checkbox" checked>
+                  <span>Email notifications</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 
+  <!-- Add Card Modal -->
+  <div id="addCardModal" class="card-modal">
+    <div class="card-modal-content">
+      <div class="card-modal-header">
+        <h2>Add new payment card</h2>
+        <button id="closeCardModal" class="close-modal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+
+      
+      <form id="addCardForm">
+        <div class="form-group">
+          <label for="cardholderName">Cardholder name</label>
+          <input 
+            type="text" 
+            id="cardholderName" 
+            placeholder="John Doe" 
+            required
+            autocomplete="cc-name"
+          >
+        </div>
+
+        <!-- Billing Address Selector -->
+        <div class="form-group">
+          <label>Billing Address</label>
+          <div class="address-selector">
+            <div class="address-selector-options">
+              <label class="address-radio-option">
+                <input type="radio" name="billingAddress" value="default" checked>
+                <span class="address-option-content">
+                  <span class="address-option-label">Use default billing address</span>
+                  <span class="address-option-preview" id="defaultAddressPreview"></span>
+                </span>
+              </label>
+              <div id="otherAddressesContainer" class="other-addresses-container"></div>
+              <label class="address-radio-option add-new">
+                <input type="radio" name="billingAddress" value="new">
+                <span class="address-option-content">
+                  <span class="address-option-label">Add a new billing address</span>
+                  <span class="add-new-icon">+</span>
+                </span>
+              </label>
+            </div>
+            <div id="newBillingAddressForm" class="new-address-form hidden">
+              <p style="color: #8f8f8f; font-family: montserrat; font-size: 11px; margin-bottom: 12px;">
+                Add a new billing address for this payment method
+              </p>
+              <div class="form-group">
+                <label for="newAddressLabel">Label</label>
+                <input type="text" id="newAddressLabel" placeholder="e.g., Office Address">
+              </div>
+              <div class="form-group">
+                <label for="newAddressFullName">Full Name</label>
+                <input type="text" id="newAddressFullName" placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="newAddressCountrySelect">Country</label>
+                <select id="newAddressCountrySelect" style="width: 100%; padding: 8px; background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 6px; color: #ffffff; font-family: montserrat; font-size: 11px; cursor: pointer;">
+                  <option value="">Select a country</option>
+                </select>
+              </div>
+              <div class="form-row" style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+                <div class="form-group">
+                  <label for="newAddressDialingCode">Dialing Code</label>
+                  <input type="text" id="newAddressDialingCode" placeholder="+1" readonly style="background: #0a0a0a; cursor: not-allowed; opacity: 0.7; padding: 8px; border: 1px solid #2a2a2a; border-radius: 6px; color: #ffffff; font-family: montserrat; font-size: 11px;">
+                </div>
+                <div class="form-group">
+                  <label for="newAddressPhone">Phone Number</label>
+                  <input type="tel" id="newAddressPhone" placeholder="(555) 123-4567" style="padding: 8px; background: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 6px; color: #ffffff; font-family: montserrat; font-size: 11px; width: 100%; box-sizing: border-box;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="newAddressStreet">Street</label>
+                <input type="text" id="newAddressStreet" placeholder="123 Main St">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newAddressCity">City</label>
+                  <input type="text" id="newAddressCity" placeholder="New York">
+                </div>
+                <div class="form-group">
+                  <label for="newAddressState">State</label>
+                  <input type="text" id="newAddressState" placeholder="NY">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newAddressZip">Postal Code</label>
+                  <input type="text" id="newAddressZip" placeholder="10001">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method Selector -->
+        <div class="form-group">
+          <label>Select payment method</label>
+          <div class="payment-method-grid">
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="stripe" checked>
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">
+                  <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M11.454 17.021q.073.062.151.122a6.17 6.17 0 0 1-3.42 1.03A6.17 6.17 0 0 1 2.01 12a6.175 6.175 0 0 1 9.592-5.144c-.05.043-.1.082-.138.126A6.63 6.63 0 0 0 9.166 12c0 1.925.833 3.755 2.288 5.021m4.361-11.195a6.14 6.14 0 0 0-3.416 1.03c.049.043.099.082.137.126 1.462 1.263 2.299 3.094 2.299 5.018s-.835 3.753-2.288 5.021q-.075.062-.151.122a6.16 6.16 0 0 0 3.418 1.03 6.174 6.174 0 1 0 .001-12.347M12 7.15A6.15 6.15 0 0 0 9.644 12 6.15 6.15 0 0 0 12 16.853 6.16 6.16 0 0 0 14.357 12 6.15 6.15 0 0 0 12 7.15"></path>
+</svg>
+<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M16.539 9.186a4.2 4.2 0 0 0-1.451-.251c-1.6 0-2.73.806-2.738 1.963-.01.85.803 1.329 1.418 1.613.631.292.842.476.84.737-.004.397-.504.577-.969.577-.639 0-.988-.089-1.525-.312l-.199-.093-.227 1.332c.389.162 1.09.301 1.814.313 1.701 0 2.813-.801 2.826-2.032.014-.679-.426-1.192-1.352-1.616-.563-.275-.912-.459-.912-.738 0-.247.299-.511.924-.511a2.95 2.95 0 0 1 1.213.229l.15.067.227-1.287zm4.152-.143h-1.25c-.389 0-.682.107-.852.493l-2.404 5.446h1.701l.34-.893 2.076.002c.049.209.199.891.199.891h1.5zm-10.642-.05h1.621l-1.014 5.942H9.037l1.012-5.944zm-4.115 3.275.168.825 1.584-4.05h1.717l-2.551 5.931H5.139l-1.4-5.022a.34.34 0 0 0-.149-.199 7 7 0 0 0-1.592-.589l.022-.125h2.609c.354.014.639.125.734.503l.57 2.729v-.003zm12.757.606.646-1.662c-.008.018.133-.343.215-.566l.111.513.375 1.714H18.69z"></path>
+</svg>
+<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="m20.31 16.93-.9-1-.93 1h-5.66v-4.55h-1.86l2.28-5.14h2.21L16.24 9V7.24h2.72l.45 1.34.45-1.34h2.07v-.76c0-.45-.38-.86-.86-.86H2.86c-.48.03-.86.41-.86.86v11.03c0 .45.38.86.86.86h18.28c.45 0 .86-.38.86-.86v-.55z"></path><path d="M20.55 16.41h1.42l-1.87-2 1.87-1.96h-1.38l-1.21 1.27-1.14-1.27h-1.45l1.9 2-1.9 1.96h1.38l1.21-1.27zm-6.03-.93v-.58h2.2v-.93h-2.2v-.59h2.27v-.93h-3.38v3.96h3.38v-.93zm6.38-3.62h1.07v-4l-1.66.04-.9 2.48-.89-2.48h-1.73v3.96h1.11V9.07l1.03 2.79h.97l1-2.79zM15.03 7.9h-1.41l-1.76 4h1.21l.31-.83h1.83l.34.83h1.24zm-1.28 2.28.52-1.31.52 1.31h-1.03Z"></path><path d="m20.97 14.31 1 1.07.03-2.17z"></path>
+</svg>
+<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M21.33 5.61H2.67c-.37 0-.67.3-.67.67v11.44c0 .37.3.67.67.67h18.67c.37 0 .67-.3.67-.67V6.26c0-.37-.3-.65-.67-.65ZM21.01 12c0 3.4-2.75 6.18-6.18 6.18H2.67c-.25 0-.44-.19-.44-.44V6.28c0-.25.19-.44.44-.44h12.18c3.4-.02 6.18 2.75 6.18 6.16Z"></path><path d="M3.72 10.61h-.77v2.72h.77c.4 0 .7-.11.96-.32.32-.26.49-.65.49-1.04 0-.81-.6-1.37-1.46-1.37Zm.61 2.04c-.16.16-.39.21-.72.21h-.14v-1.79h.14c.33 0 .54.05.72.23.18.16.3.42.3.68 0 .25-.11.51-.3.67m1.09-2.04h.53v2.72h-.53zm1.83 1.04c-.32-.12-.4-.19-.4-.33 0-.18.16-.3.39-.3.16 0 .28.07.42.23l.28-.37c-.23-.19-.51-.3-.79-.3-.47 0-.84.33-.84.77 0 .37.18.56.67.74.21.07.32.12.37.16.11.07.16.18.16.28 0 .23-.18.39-.4.39-.25 0-.46-.12-.58-.37l-.33.33c.25.35.54.51.95.51.54 0 .93-.37.93-.89-.04-.42-.21-.61-.81-.84Zm.94.31c0 .79.63 1.42 1.44 1.42.23 0 .42-.05.67-.16v-.63c-.21.21-.4.3-.63.3-.53 0-.91-.39-.91-.93s.39-.93.89-.93c.25 0 .44.09.67.3v-.63c-.23-.12-.42-.18-.65-.18-.82.02-1.47.65-1.47 1.44Zm6.3.48-.72-1.83h-.58l1.14 2.79h.28l1.18-2.79h-.56zm1.55.89h1.5v-.47h-.98v-.72h.95v-.47h-.95v-.6h.98v-.46h-1.5zm3.59-1.93c0-.51-.35-.81-.96-.81h-.79v2.74h.53v-1.09h.07l.74 1.09h.65l-.86-1.14c.42-.09.63-.37.63-.79Zm-1.05.46h-.16v-.82h.16c.33 0 .51.14.51.4 0 .28-.18.42-.51.42m1.47-1.11c0-.05-.04-.07-.09-.07h-.07v.25h.05v-.09l.07.09h.07l-.07-.11s.04-.04.04-.07m-.11.04-.02-.07h.02s.04.02.04.04c.02.02 0 .04-.04.04Z"></path><path d="M19.98 10.6c-.12 0-.21.09-.21.21s.09.21.21.21c.11 0 .21-.09.21-.21-.02-.12-.11-.21-.21-.21m0 .37c-.09 0-.16-.07-.16-.18 0-.09.07-.18.16-.18s.16.07.16.18-.07.18-.16.18m-6.65.99c0 .79-.65 1.44-1.44 1.44s-1.44-.65-1.44-1.44.65-1.44 1.44-1.44 1.44.65 1.44 1.44"></path>
+</svg>
+              </span>
+                <span style="font-weight: 600;">Credit Card</span>
+                <span class="payment-method-subtitle">Powered by Stripe</span>
+              </div>
+            </label>
+            
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="paypal">
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">
+<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path>
+</svg></span>
+                <span style="font-weight: 600;">PayPal</span>
+                <span class="payment-method-subtitle">Fast & Secure</span>
+              </div>
+            </label>
+            
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="googlepay">
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">
+<svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40"  
+fill="currentColor" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path>
+</svg>
+                </span>
+                <span style="font-weight: 600;">Google Pay</span>
+                <span class="payment-method-subtitle">One-tap checkout</span>
+              </div>
+            </label>
+            
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="bitcoin">
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">₿</span>
+                <span style="font-weight: 600;">Bitcoin</span>
+                <span class="payment-method-subtitle">Pay with BTC, ETH, BCH and more</span>
+              </div>
+            </label>
+            
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="sepa">
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+</svg>
+                </span>
+                <span style="font-weight: 600;">SEPA</span>
+                <span class="payment-method-subtitle">European bank transfer</span>
+              </div>
+            </label>
+            
+            <label class="payment-method-option">
+              <input type="radio" name="paymentMode" value="banktransfer">
+              <div class="payment-method-card">
+                <span style="font-size: 20px;">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+<path d="M11.5 1L2 6v2h19V6l-9.5-5zM4 8v11h3v-11H4zm5 0v11h3V8H9zm5 0v11h3V8h-3zM2 20v2h19v-2H2z"/>
+</svg>
+                </span>
+                <span style="font-weight: 600;">Bank Transfer</span>
+                <span class="payment-method-subtitle">Direct bank account</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Stripe Elements Container -->
+        <div id="stripeCardContainer" class="payment-container form-group">
+          <label>Card details</label>
+          <div id="stripe-card-element" style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 14px;
+          "></div>
+          <div id="stripe-card-errors" style="
+            color: #f87171;
+            font-family: montserrat;
+            font-size: 11px;
+            margin-top: 6px;
+          " role="alert"></div>
+          <small>
+            <a href="https://www.stripe.com" target="_blank"  style="color: #4ade80; font-family: montserrat; font-size: 10px; margin-top: 4px; display: flex; flex-direction: row;align-items: center;">
+            <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+              fill="currentColor" viewBox="0 0 24 24" >
+              <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+              <path d="M13.479 9.883c-1.626-.604-2.512-1.067-2.512-1.803 0-.622.511-.977 1.423-.977 1.667 0 3.379.642 4.558 1.22l.666-4.111c-.935-.446-2.847-1.177-5.49-1.177-1.87 0-3.425.489-4.536 1.401-1.155.954-1.757 2.334-1.757 4 0 3.023 1.847 4.312 4.847 5.403 1.936.688 2.579 1.178 2.579 1.934 0 .732-.629 1.155-1.762 1.155-1.403 0-3.716-.689-5.231-1.578l-.674 4.157c1.304.732 3.705 1.488 6.197 1.488 1.976 0 3.624-.467 4.735-1.356 1.245-.977 1.89-2.422 1.89-4.289 0-3.091-1.889-4.38-4.935-5.468h.002z"></path>
+              </svg> Secured by Stripe• PCI DSS Compliant • 256-bit SSL Encryption</a>
+          </small>
+        </div>
+
+        <!-- PayPal Container -->
+        <div id="paypalContainer" class="payment-container hidden">
+          <div style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+          ">
+            <div style="font-size: 48px; margin-bottom: 12px;">
+<svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40"  
+fill="#ffffff" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path>
+</svg>
+            </div>
+            <p style="color: #d0d0d0; font-family: montserrat; font-size: 13px; margin: 0 0 16px 0;">
+              Connect your PayPal account
+            </p>
+            <button type="button" id="connectPayPalBtn" style="
+              background: transparent;
+              color: white;
+              border: solid 1px gray;
+              padding: 12px 24px;
+              border-radius: 8px;
+              font-family: montserrat;
+              font-size: 13px;
+              font-weight: 600;
+              cursor: pointer;
+            ">
+              Connect PayPal Account
+            </button>
+            <p style="color: #8f8f8f; font-family: montserrat; font-size: 10px; margin: 12px 0 0 0;">
+            you will be redirected to PayPal authentication
+            </p>
+          </div>
+        </div>
+
+        <!-- Google Pay Container -->
+        <div id="googlepayContainer" class="payment-container hidden">
+          <div style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+          ">
+            <div style="font-size: 48px; margin-bottom: 12px;">
+<svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40"  
+fill="#ffffff" viewBox="0 0 24 24" >
+<!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+<path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path>
+</svg>
+            </div>
+            <p style="color: #d0d0d0; font-family: montserrat; font-size: 13px; margin: 0 0 16px 0;">
+              Add Google Pay as payment method
+            </p>
+            <button type="button" id="addGooglePayBtn" style="
+              background: transparent;
+              color: white;
+              border: solid 1px gray;
+              padding: 12px 24px;
+              border-radius: 8px;
+              font-family: montserrat;
+              font-size: 13px;
+              font-weight: 600;
+              cursor: pointer;
+            ">
+              <span style="margin-right: 8px;">G</span> Add to Google Pay
+            </button>
+            <p style="color: #8f8f8f; font-family: montserrat; font-size: 10px; margin: 12px 0 0 0;">
+              you will be redirected to G-Pay portal
+            </p>
+          </div>
+        </div>
+
+        <!-- Bitcoin Container -->
+        <div id="bitcoinContainer" class="payment-container hidden">
+          <div style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+          ">
+            <div style="text-align: center; font-size: 48px; margin-bottom: 12px;">₿</div>
+            <p style="color: #d0d0d0; font-family: montserrat; font-size: 13px; text-align: center; margin: 0 0 16px 0;">
+              Add your Bitcoin wallet address
+            </p>
+            <div class="form-group">
+              <label for="btcWalletAddress">Bitcoin Wallet Address</label>
+              <input 
+                type="text" 
+                id="btcWalletAddress" 
+                placeholder="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: JetBrainsMono;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+              <small style="color: #8f8f8f; font-family: montserrat; font-size: 10px; display: block; margin-top: 6px;">
+                Supports BTC (SegWit/Legacy), Lightning Network addresses
+              </small>
+            </div>
+            <div style="
+              background: #1a1a1a;
+              border-left: 3px solid #f59e0b;
+              padding: 12px;
+              border-radius: 6px;
+              margin-top: 12px;
+            ">
+              <p style="color: #fbbf24; font-family: montserrat; font-size: 11px; margin: 0 0 6px 0; font-weight: 600;">
+                ⚠️ Important Information
+              </p>
+              <p style="color: #a0a0a0; font-family: montserrat; font-size: 10px; margin: 0;">
+                Bitcoin payments are processed securely through our payment gateway. Transactions are irreversible and may take 10-60 minutes to confirm on the blockchain.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEPA Container -->
+        <div id="sepaContainer" class="payment-container hidden">
+          <div style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+          ">
+            <div style="text-align: center; font-size: 48px; margin-bottom: 12px;">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#ffffff" viewBox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+</svg>
+            </div>
+            <p style="color: #d0d0d0; font-family: montserrat; font-size: 13px; text-align: center; margin: 0 0 16px 0;">
+              Add your SEPA bank account details
+            </p>
+            <div class="form-group">
+              <label for="sepaIban">IBAN</label>
+              <input 
+                type="text" 
+                id="sepaIban" 
+                placeholder="DE89370400440532013000"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: JetBrainsMono;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+              <small style="color: #8f8f8f; font-family: montserrat; font-size: 10px; display: block; margin-top: 6px;">
+                International Bank Account Number (IBAN)
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="sepaBic">BIC/SWIFT (Optional)</label>
+              <input 
+                type="text" 
+                id="sepaBic" 
+                placeholder="DEUTDEFF"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: JetBrainsMono;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+            </div>
+            <div style="
+              background: #1a1a1a;
+              border-left: 3px solid #3b82f6;
+              padding: 12px;
+              border-radius: 6px;
+              margin-top: 12px;
+            ">
+              <p style="color: #60a5fa; font-family: montserrat; font-size: 11px; margin: 0 0 6px 0; font-weight: 600;">
+                ℹ️ SEPA Direct Debit
+              </p>
+              <p style="color: #a0a0a0; font-family: montserrat; font-size: 10px; margin: 0;">
+                SEPA payments are processed within the European payment area. Transfers typically complete within 1-3 business days. Your bank details are encrypted and stored securely.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Transfer Container -->
+        <div id="banktransferContainer" class="payment-container hidden">
+          <div style="
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+          ">
+            <div style="text-align: center; font-size: 48px; margin-bottom: 12px;">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#ffffff" viewBox="0 0 24 24">
+<path d="M11.5 1L2 6v2h19V6l-9.5-5zM4 8v11h3v-11H4zm5 0v11h3V8H9zm5 0v11h3V8h-3zM2 20v2h19v-2H2z"/>
+</svg>
+            </div>
+            <p style="color: #d0d0d0; font-family: montserrat; font-size: 13px; text-align: center; margin: 0 0 16px 0;">
+              Add your bank account details
+            </p>
+            <div class="form-group">
+              <label for="bankAccountNumber">Account Number</label>
+              <input 
+                type="text" 
+                id="bankAccountNumber" 
+                placeholder="1234567890"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: JetBrainsMono;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+            </div>
+            <div class="form-group">
+              <label for="bankRoutingNumber">Routing Number</label>
+              <input 
+                type="text" 
+                id="bankRoutingNumber" 
+                placeholder="021000021"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: JetBrainsMono;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+              <small style="color: #8f8f8f; font-family: montserrat; font-size: 10px; display: block; margin-top: 6px;">
+                Also known as ABA, Sort Code, or BSB depending on your country
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="bankName">Bank Name</label>
+              <input 
+                type="text" 
+                id="bankName" 
+                placeholder="Chase Bank"
+                style="
+                  background: #0a0a0a;
+                  border: 1px solid #2a2a2a;
+                  border-radius: 10px;
+                  padding: 12px 14px;
+                  color: #ffffff;
+                  font-family: montserrat;
+                  font-size: 11px;
+                  width: 100%;
+                  box-sizing: border-box;
+                "
+              >
+            </div>
+            <div style="
+              background: #1a1a1a;
+              border-left: 3px solid #10b981;
+              padding: 12px;
+              border-radius: 6px;
+              margin-top: 12px;
+            ">
+              <p style="color: #34d399; font-family: montserrat; font-size: 11px; margin: 0 0 6px 0; font-weight: 600;">
+                🔒 Secure Bank Connection
+              </p>
+              <p style="color: #a0a0a0; font-family: montserrat; font-size: 10px; margin: 0;">
+                Your banking information is encrypted using industry-standard 256-bit SSL encryption. Direct bank transfers typically complete within 1-5 business days.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="setPrimary" checked>
+            Set as primary payment method
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelAddCard" class="btn-ghost">Cancel</button>
+          <button type="submit" class="btn-primary">Add payment method</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 <script>
+  /* ==================================================================================
+   * STRIPE INTEGRATION - TEST MODE (100% FREE, NO COSTS)
+   * ==================================================================================
+   * 
+   * SETUP:
+   * ✅ Publishable Key: Used here (SAFE for frontend)
+   * ⚠️  Secret Key: MUST be on backend server (NEVER in frontend!)
+   * 
+   * YOUR SECRET KEY (for backend only):
+   * sk_test_51T4iPkGWFtb77R0vlN0jwkm4KwkwrZES8bHfQoV785LEZlltNl56Bf1VDQMLOY4RaHdonpy54QygRnMyQGunsVSM0036IOpJ13
+   * 
+   * COST: $0 - Test mode never charges real money
+   * 
+   * HOW IT WORKS:
+   * 1. Frontend (this file): Tokenizes card → creates PaymentMethod ID
+   * 2. Backend (you need to create): Uses PaymentMethod ID + secret key to charge
+   * 
+   * BACKEND EXAMPLE (Node.js):
+   * ---
+   * const stripe = require('stripe')('sk_test_51T4iPkGWFtb77R0v...');
+   * 
+   * app.post('/api/charge', async (req, res) => {
+   *   const { paymentMethodId, amount } = req.body;
+   *   
+   *   const paymentIntent = await stripe.paymentIntents.create({
+   *     amount: amount, // in cents
+   *     currency: 'usd',
+   *     payment_method: paymentMethodId,
+   *     confirm: true,
+   *   });
+   *   
+   *   res.json({ success: true });
+   * });
+   * ---
+   * 
+   * STRIPE TEST CARDS:
+   * - Success: 4242 4242 4242 4242
+   * - Decline: 4000 0000 0000 0002
+   * - 3D Secure: 4000 0025 0000 3155
+   * (Use any future expiry + any CVV)
+   * 
+   * DOCS: https://stripe.com/docs/testing
+   * =============================================================================== */
+  
   document.addEventListener("DOMContentLoaded", () => {
+    // ========================================
+    // LOAD COUNTRIES DATA
+    // ========================================
+    function loadCountries() {
+      return fetch('/data/countries.json')
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.json();
+        })
+        .then(data => {
+          COUNTRIES = data;
+          console.log('Countries data loaded successfully:', COUNTRIES.length, 'countries');
+          return data;
+        })
+        .catch(err => {
+          console.error('Error loading countries data:', err);
+          return [];
+        });
+    }
+
+    // ========================================
+    // COUNTRY & DIALING CODE INITIALIZATION
+    // ========================================
+    function initializeCountrySelectors() {
+      try {
+        const countrySelects = document.querySelectorAll('#country, #newAddressCountrySelect');
+        
+        // Only proceed if country selects exist
+        if (!countrySelects || countrySelects.length === 0) {
+          console.log('No country selectors found');
+          return;
+        }
+
+        const dialingCodeFields = {
+          'country': document.getElementById('dialingCode'),
+          'newAddressCountrySelect': document.getElementById('newAddressDialingCode')
+        };
+
+        countrySelects.forEach(select => {
+          if (!select) return;
+          
+          // Clear existing options
+          select.innerHTML = '<option value="">Select a country</option>';
+          
+          // Populate country dropdown
+          COUNTRIES.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.code;
+            option.textContent = `${country.flag} ${country.name}`;
+            select.appendChild(option);
+          });
+
+          // Add change listener
+          select.addEventListener('change', (e) => {
+            const selectedCode = e.target.value;
+            const fieldId = e.target.id === 'country' ? 'country' : 'newAddressCountrySelect';
+            
+            if (dialingCodeFields[fieldId]) {
+              dialingCodeFields[fieldId].value = selectedCode;
+            }
+          });
+
+          // Set default to United States
+          select.value = '+1';
+          if (dialingCodeFields[select.id]) {
+            dialingCodeFields[select.id].value = '+1';
+          }
+        });
+        
+        console.log('Country selectors initialized');
+      } catch (err) {
+        console.error('Error initializing country selectors:', err);
+      }
+    }
+
+    // Load countries first, then initialize selectors
+    loadCountries().then(() => {
+      initializeCountrySelectors();
+    });
+
+    const customAlert = document.getElementById('customAlert');
+    const customAlertMessage = document.getElementById('customAlertMessage');
+    const customAlertClose = document.getElementById('customAlertClose');
+    const customAlertOk = document.getElementById('customAlertOk');
+    const customAlertBackdrop = customAlert?.querySelector('.custom-alert-backdrop');
+
+    function showCustomAlert(message) {
+      if (!customAlert || !customAlertMessage) return;
+      customAlertMessage.textContent = String(message || '');
+      customAlert.classList.add('active');
+      customAlert.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCustomAlert() {
+      if (!customAlert) return;
+      customAlert.classList.remove('active');
+      customAlert.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (customAlertClose) customAlertClose.addEventListener('click', closeCustomAlert);
+    if (customAlertOk) customAlertOk.addEventListener('click', closeCustomAlert);
+    if (customAlertBackdrop) customAlertBackdrop.addEventListener('click', closeCustomAlert);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCustomAlert();
+    });
+
+    // Override native alert with custom popup
+    window.alert = showCustomAlert;
+
+    // ========================================
+    // STRIPE INITIALIZATION (TEST MODE - $0 COST)
+    // ========================================
+    const STRIPE_PUBLISHABLE_KEY = 'pk_test_51T4iPkGWFtb77R0vdeukQnxwJ9bVxTZM79VeqcDgPfKDg8t9FJ1hihVaQnHHVqwi6oR9R15S18unbUc3HfF02CMJ004DQeiNEw';
+    const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+    const elements = stripe.elements();
+    
+    // Create Stripe Card Element with custom styling
+    const cardElement = elements.create('card', {
+      style: {
+        base: {
+          color: '#ffffff',
+          fontFamily: 'montserrat, sans-serif',
+          fontSize: '13px',
+          '::placeholder': {
+            color: '#5a5a5a',
+          },
+        },
+        invalid: {
+          color: '#f87171',
+          iconColor: '#f87171',
+        },
+      },
+    });
+    
+    // Mount Stripe Card Element
+    cardElement.mount('#stripe-card-element');
+    
+    // Handle real-time validation errors
+    cardElement.on('change', (event) => {
+      const displayError = document.getElementById('stripe-card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
+    // Payment mode toggle with smooth transitions
+    const paymentModeRadios = document.querySelectorAll('input[name="paymentMode"]');
+    const stripeContainer = document.getElementById('stripeCardContainer');
+    const paypalContainer = document.getElementById('paypalContainer');
+    const googlepayContainer = document.getElementById('googlepayContainer');
+    const bitcoinContainer = document.getElementById('bitcoinContainer');
+    const sepaContainer = document.getElementById('sepaContainer');
+    const banktransferContainer = document.getElementById('banktransferContainer');
+    
+    // All payment containers
+    const allContainers = [
+      stripeContainer,
+      paypalContainer,
+      googlepayContainer,
+      bitcoinContainer,
+      sepaContainer,
+      banktransferContainer
+    ];
+    
+    paymentModeRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        // Hide all containers with fade out
+        allContainers.forEach(container => {
+          if (container) {
+            container.classList.add('hidden');
+          }
+        });
+        
+        // Show the selected container with fade in
+        switch(e.target.value) {
+          case 'stripe':
+            stripeContainer.classList.remove('hidden');
+            break;
+          case 'paypal':
+            paypalContainer.classList.remove('hidden');
+            break;
+          case 'googlepay':
+            googlepayContainer.classList.remove('hidden');
+            break;
+          case 'bitcoin':
+            bitcoinContainer.classList.remove('hidden');
+            break;
+          case 'sepa':
+            sepaContainer.classList.remove('hidden');
+            break;
+          case 'banktransfer':
+            banktransferContainer.classList.remove('hidden');
+            break;
+        }
+      });
+    });
+
+    // Initialize: Ensure Stripe container is visible on page load
+    stripeContainer.classList.remove('hidden');
+    paypalContainer.classList.add('hidden');
+    googlepayContainer.classList.add('hidden');
+    bitcoinContainer.classList.add('hidden');
+    sepaContainer.classList.add('hidden');
+    banktransferContainer.classList.add('hidden');
+
+    // PayPal Connect Simulation
+    const connectPayPalBtn = document.getElementById('connectPayPalBtn');
+    if (connectPayPalBtn) {
+      connectPayPalBtn.addEventListener('click', () => {
+        connectPayPalBtn.textContent = 'Connecting...';
+        connectPayPalBtn.disabled = true;
+        
+        setTimeout(() => {
+          const paypalData = {
+            holderName: document.getElementById('cardholderName').value || 'PayPal User',
+            brand: 'PayPal',
+            lastFour: 'user',
+            expiry: 'N/A',
+            isPrimary: document.getElementById('setPrimary').checked,
+            email: generateFakeEmail(),
+            paymentType: 'paypal'
+          };
+          
+          addNewCard(paypalData);
+          closeModal();
+          alert(`✅ PayPal connected successfully!\n\n📧 Account: ${paypalData.email}\n🔒 Secure payment method activated`);
+          connectPayPalBtn.textContent = 'Connect PayPal Account';
+          connectPayPalBtn.disabled = false;
+        }, 1500);
+      });
+    }
+
+    // Google Pay Simulation
+    const addGooglePayBtn = document.getElementById('addGooglePayBtn');
+    if (addGooglePayBtn) {
+      addGooglePayBtn.addEventListener('click', () => {
+        addGooglePayBtn.textContent = 'Processing...';
+        addGooglePayBtn.disabled = true;
+        
+        setTimeout(() => {
+          const googlePayData = {
+            holderName: document.getElementById('cardholderName').value || 'Google Pay User',
+            brand: 'Google Pay',
+            lastFour: 'gpay',
+            expiry: 'N/A',
+            isPrimary: document.getElementById('setPrimary').checked,
+            email: generateFakeEmail(),
+            paymentType: 'googlepay'
+          };
+          
+          addNewCard(googlePayData);
+          closeModal();
+          alert(`✅ Google Pay added successfully!\n\n📧 Account: ${googlePayData.email}\n🔵 Ready for one-tap payments`);
+          addGooglePayBtn.innerHTML = '<span style="margin-right: 8px;">G</span> Add to Google Pay';
+          addGooglePayBtn.disabled = false;
+        }, 1500);
+      });
+    }
+
+    // Helper function to generate fake email
+    function generateFakeEmail() {
+      const domains = ['gmail.com', 'yahoo.com', 'outlook.com'];
+      const randomDomain = domains[Math.floor(Math.random() * domains.length)];
+      const randomNum = Math.floor(Math.random() * 9999);
+      return `user${randomNum}@${randomDomain}`;
+    }
+
     const display = document.querySelector(".api-display");
     const keySpan = display.querySelector(".api-key");
     const unhideBtn = display.querySelector(".unhide");
@@ -487,6 +1376,9 @@
         window.history.replaceState({}, '', url.toString());
       });
     });
+
+    // Language Selection in Settings
+    // REMOVED - All translation logic removed
 
     // dropdown handler
     function setupDropdown(buttonId, menuId) {
@@ -609,6 +1501,825 @@
     window.deleteAccount = deleteAccount;
     window.logout = logout;
 
+    // Card Management System
+    let savedCards = [
+      {
+        id: 1,
+        brand: 'Visa',
+        lastFour: '2408',
+        expiry: '08/27',
+        holderName: 'John Doe',
+        isPrimary: true,
+        paymentType: 'card'
+      },
+      {
+        id: 2,
+        brand: 'PayPal',
+        lastFour: 'user',
+        expiry: 'N/A',
+        holderName: 'John Doe',
+        isPrimary: false,
+        email: 'john.doe@example.com',
+        paymentType: 'paypal'
+      },
+      {
+        id: 3,
+        brand: 'Bitcoin',
+        lastFour: 'x0wlh',
+        expiry: 'N/A',
+        holderName: 'John Doe',
+        isPrimary: false,
+        walletAddress: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+        addressType: 'SegWit',
+        paymentType: 'bitcoin'
+      }
+    ];
+
+    // ========================================
+    // BILLING ADDRESS MANAGEMENT
+    // ========================================
+    let savedAddresses = [
+      {
+        id: 1,
+        label: 'Home',
+        fullName: 'John Doe',
+        street: '123 Main Street',
+        city: 'New York',
+        state: 'NY',
+        postalCode: '10001',
+        country: 'United States',
+        phone: '+1 (555) 123-4567',
+        email: 'john@example.com',
+        isDefault: true
+      },
+      {
+        id: 2,
+        label: 'Office',
+        fullName: 'John Doe',
+        street: '456 Business Ave',
+        city: 'San Francisco',
+        state: 'CA',
+        postalCode: '94103',
+        country: 'United States',
+        phone: '+1 (555) 987-6543',
+        email: 'john.work@example.com',
+        isDefault: false
+      }
+    ];
+
+    function renderAddresses() {
+      const container = document.getElementById('savedAddressesList');
+      if (!container) return;
+      
+      if (savedAddresses.length === 0) {
+        container.innerHTML = '<p class="no-addresses">No billing addresses saved. Add one to get started.</p>';
+        return;
+      }
+
+      container.innerHTML = savedAddresses.map(address => `
+        <div class="address-row" data-address-id="${address.id}">
+          <div class="address-details">
+            <div class="address-header">
+              <span class="address-label">${address.label}</span>
+              ${address.isDefault ? '<span class="address-status">Default</span>' : ''}
+            </div>
+            <div class="address-info">
+              <p class="address-name">${address.fullName}</p>
+              <p class="address-street">${address.street}</p>
+              <p class="address-city">${address.city}, ${address.state} ${address.postalCode}</p>
+              <p class="address-country">${address.country}</p>
+              <p class="address-contact">${address.phone} • ${address.email}</p>
+            </div>
+          </div>
+          <div class="address-actions">
+            ${!address.isDefault 
+              ? '<button class="btn-ghost btn-sm set-default-addr-btn" data-address-id="' + address.id + '">Set as default</button>' 
+              : ''
+            }
+            <button class="btn-ghost btn-sm edit-addr-btn" data-address-id="' + address.id + '">Edit</button>
+            ${savedAddresses.length > 1
+              ? '<button class="btn-ghost btn-sm remove-addr-btn" data-address-id="' + address.id + '" style="color: crimson;">Remove</button>'
+              : ''
+            }
+          </div>
+        </div>
+      `).join('');
+
+      // Add event listeners
+      container.querySelectorAll('.set-default-addr-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const addressId = parseInt(e.target.dataset.addressId);
+          setDefaultAddress(addressId);
+        });
+      });
+
+      container.querySelectorAll('.edit-addr-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const addressId = parseInt(e.target.dataset.addressId);
+          editAddress(addressId);
+        });
+      });
+
+      container.querySelectorAll('.remove-addr-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const addressId = parseInt(e.target.dataset.addressId);
+          removeAddress(addressId);
+        });
+      });
+
+      // Update the default address preview and other addresses in payment modal
+      updateAddressSelectors();
+    }
+
+    function updateAddressSelectors() {
+      const defaultAddr = savedAddresses.find(a => a.isDefault);
+      const otherAddrs = savedAddresses.filter(a => !a.isDefault);
+      
+      // Update default address preview in payment modal
+      if (defaultAddr) {
+        const preview = document.getElementById('defaultAddressPreview');
+        if (preview) {
+          preview.textContent = `${defaultAddr.street}, ${defaultAddr.city}, ${defaultAddr.state} ${defaultAddr.postalCode}`;
+        }
+      }
+
+      // Update other addresses container
+      const otherContainer = document.getElementById('otherAddressesContainer');
+      if (otherContainer) {
+        otherContainer.innerHTML = otherAddrs.map(addr => `
+          <label class="address-radio-option">
+            <input type="radio" name="billingAddress" value="address-${addr.id}">
+            <span class="address-option-content">
+              <span class="address-option-label">${addr.label}</span>
+              <span class="address-option-preview">${addr.street}, ${addr.city}, ${addr.state}</span>
+            </span>
+          </label>
+        `).join('');
+      }
+    }
+
+    function setDefaultAddress(addressId) {
+      savedAddresses.forEach(addr => {
+        addr.isDefault = addr.id === addressId;
+      });
+      renderAddresses();
+    }
+
+    function editAddress(addressId) {
+      const address = savedAddresses.find(a => a.id === addressId);
+      if (!address) return;
+
+      // Find the country code by name
+      const countryData = COUNTRIES.find(c => c.name === address.country);
+      const dialingCode = countryData ? countryData.code : '+1';
+
+      // Populate modal with address data
+      document.getElementById('addressLabel').value = address.label;
+      document.getElementById('fullName').value = address.fullName;
+      document.getElementById('phoneNumber').value = address.phone.replace(/^[+\d\-\s()]+\s/, ''); // Remove dialing code
+      document.getElementById('emailAddress').value = address.email;
+      document.getElementById('street').value = address.street;
+      document.getElementById('city').value = address.city;
+      document.getElementById('state').value = address.state;
+      document.getElementById('postalCode').value = address.postalCode;
+      document.getElementById('country').value = dialingCode;
+      document.getElementById('dialingCode').value = dialingCode;
+      document.getElementById('setDefaultAddress').checked = address.isDefault;
+
+      // Update modal title and button
+      document.getElementById('addressModalTitle').textContent = 'Edit billing address';
+      const submitBtn = document.querySelector('#addAddressForm button[type="submit"]');
+      submitBtn.textContent = 'Update address';
+      submitBtn.dataset.editingId = addressId;
+
+      openAddressModal();
+    }
+
+    function removeAddress(addressId) {
+      if (!confirm('Are you sure you want to remove this address?')) return;
+
+      const addressToRemove = savedAddresses.find(a => a.id === addressId);
+      savedAddresses = savedAddresses.filter(a => a.id !== addressId);
+
+      // If removed address was default, set first remaining as default
+      if (addressToRemove.isDefault && savedAddresses.length > 0) {
+        savedAddresses[0].isDefault = true;
+      }
+
+      renderAddresses();
+    }
+
+    function addNewAddress(addressData) {
+      // If this is an edit operation
+      if (addressData.editingId) {
+        const addressIndex = savedAddresses.findIndex(a => a.id === addressData.editingId);
+        if (addressIndex >= 0) {
+          savedAddresses[addressIndex] = {
+            ...savedAddresses[addressIndex],
+            ...addressData,
+          };
+        }
+      } else {
+        // New address
+        const newAddress = {
+          id: Date.now(),
+          label: addressData.label,
+          fullName: addressData.fullName,
+          street: addressData.street,
+          city: addressData.city,
+          state: addressData.state,
+          postalCode: addressData.postalCode,
+          country: addressData.country,
+          phone: addressData.phone,
+          email: addressData.email,
+          isDefault: addressData.isDefault
+        };
+
+        if (newAddress.isDefault) {
+          savedAddresses.forEach(addr => addr.isDefault = false);
+        }
+
+        savedAddresses.push(newAddress);
+      }
+
+      renderAddresses();
+    }
+
+    // Modal management for addresses
+    const addressModal = document.getElementById('addAddressModal');
+    const addAddressBtn = document.getElementById('addAddressBtn');
+    const closeAddressModalBtn = document.getElementById('closeAddressModal');
+    const cancelAddressFormBtn = document.getElementById('cancelAddressForm');
+    const addAddressForm = document.getElementById('addAddressForm');
+
+    function openAddressModal() {
+      addressModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAddressModal() {
+      addressModal.classList.remove('active');
+      document.body.style.overflow = '';
+      addAddressForm.reset();
+      document.getElementById('addressModalTitle').textContent = 'Add billing address';
+      const submitBtn = document.querySelector('#addAddressForm button[type="submit"]');
+      submitBtn.textContent = 'Save address';
+      delete submitBtn.dataset.editingId;
+    }
+
+    if (addAddressBtn) {
+      addAddressBtn.addEventListener('click', openAddressModal);
+    }
+
+    if (closeAddressModalBtn) {
+      closeAddressModalBtn.addEventListener('click', closeAddressModal);
+    }
+
+    if (cancelAddressFormBtn) {
+      cancelAddressFormBtn.addEventListener('click', closeAddressModal);
+    }
+
+    addressModal?.addEventListener('click', (e) => {
+      if (e.target === addressModal) closeAddressModal();
+    });
+
+    // Address form submission
+    if (addAddressForm) {
+      addAddressForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const countryCode = document.getElementById('country').value;
+        const countryData = COUNTRIES.find(c => c.code === countryCode);
+        const countryName = countryData ? countryData.name : 'Unknown';
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const fullPhone = countryCode + ' ' + phoneNumber;
+
+        const addressData = {
+          label: document.getElementById('addressLabel').value,
+          fullName: document.getElementById('fullName').value,
+          phone: fullPhone,
+          email: document.getElementById('emailAddress').value,
+          street: document.getElementById('street').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          postalCode: document.getElementById('postalCode').value,
+          country: countryName,
+          isDefault: document.getElementById('setDefaultAddress').checked,
+          editingId: addAddressForm.querySelector('button[type="submit"]').dataset.editingId || null
+        };
+
+        // Validate required fields
+        if (!addressData.label || !addressData.fullName || !addressData.street || 
+            !addressData.city || !addressData.postalCode || !countryCode) {
+          alert('❌ Please fill in all required fields');
+          return;
+        }
+
+        addNewAddress(addressData);
+        closeAddressModal();
+        alert('✅ Address saved successfully!');
+      });
+    }
+
+    // Billing address selector in payment method modal
+    const billingAddressRadios = document.querySelectorAll('input[name="billingAddress"]');
+    const newBillingAddressForm = document.getElementById('newBillingAddressForm');
+
+    billingAddressRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.value === 'new') {
+          newBillingAddressForm.classList.remove('hidden');
+          // Reset the inline address form fields
+          document.getElementById('newAddressLabel').value = '';
+          document.getElementById('newAddressFullName').value = '';
+          document.getElementById('newAddressCountrySelect').value = '+1';
+          document.getElementById('newAddressDialingCode').value = '+1';
+          document.getElementById('newAddressPhone').value = '';
+          document.getElementById('newAddressStreet').value = '';
+          document.getElementById('newAddressCity').value = '';
+          document.getElementById('newAddressState').value = '';
+          document.getElementById('newAddressZip').value = '';
+        } else {
+          newBillingAddressForm.classList.add('hidden');
+        }
+      });
+    });
+
+    // Handle inline country selector change for payment modal
+    const inlineCountrySelect = document.getElementById('newAddressCountrySelect');
+    if (inlineCountrySelect) {
+      inlineCountrySelect.addEventListener('change', (e) => {
+        const selectedCode = e.target.value;
+        const dialingCodeField = document.getElementById('newAddressDialingCode');
+        if (dialingCodeField) {
+          dialingCodeField.value = selectedCode;
+        }
+      });
+    }
+
+    // Luhn Algorithm - validates card number checksum
+    function isValidLuhn(cardNumber) {
+      const digits = cardNumber.replace(/\D/g, '');
+      if (digits.length < 13 || digits.length > 19) return false;
+      
+      let sum = 0;
+      let isEven = false;
+      
+      for (let i = digits.length - 1; i >= 0; i--) {
+        let digit = parseInt(digits[i]);
+        
+        if (isEven) {
+          digit *= 2;
+          if (digit > 9) digit -= 9;
+        }
+        
+        sum += digit;
+        isEven = !isEven;
+      }
+      
+      return sum % 10 === 0;
+    }
+
+    /* TEST CARD NUMBERS (Valid Luhn, no charges):
+     * Visa: 4532015112830366
+     * Mastercard: 5425233430109903
+     * Amex: 374245455400126
+     * Discover: 6011000991001201
+     */
+
+    function getCardBrandFromNumber(number) {
+      const cleaned = number.replace(/\s/g, '');
+      if (/^4/.test(cleaned)) return 'Visa';
+      if (/^5[1-5]/.test(cleaned)) return 'Mastercard';
+      if (/^2(?:2[2-9]|[3-6]|7[0-1]|720)/.test(cleaned)) return 'Mastercard'; // New Mastercard BINs
+      if (/^3[47]/.test(cleaned)) return 'American Express';
+      if (/^6(?:011|5)/.test(cleaned)) return 'Discover';
+      if (/^(?:2131|1800|35)/.test(cleaned)) return 'JCB';
+      if (/^3(?:0[0-5]|[68])/.test(cleaned)) return 'Diners Club';
+      return 'Unknown';
+    }
+
+    // BIN Lookup - Get issuer/bank details (uses free binlist.net API)
+    async function getCardIssuerInfo(cardNumber) {
+      const bin = cardNumber.replace(/\D/g, '').substring(0, 8);
+      if (bin.length < 6) return null;
+      
+      try {
+        const response = await fetch(`https://lookup.binlist.net/${bin}`, {
+          headers: { 'Accept-Version': '3' }
+        });
+        
+        if (!response.ok) return null;
+        
+        const data = await response.json();
+        return {
+          bank: data.bank?.name || 'Unknown',
+          country: data.country?.name || 'Unknown',
+          type: data.type || 'Unknown', // debit/credit
+          brand: data.scheme || 'Unknown',
+          prepaid: data.prepaid || false
+        };
+      } catch (error) {
+        console.log('BIN lookup failed:', error.message);
+        return null;
+      }
+    }
+
+    function formatCardNumber(value) {
+      const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      const matches = v.match(/\d{4,16}/g);
+      const match = (matches && matches[0]) || '';
+      const parts = [];
+      
+      for (let i = 0, len = match.length; i < len; i += 4) {
+        parts.push(match.substring(i, i + 4));
+      }
+      
+      return parts.length ? parts.join(' ') : value;
+    }
+
+    function formatExpiryDate(value) {
+      const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      if (v.length >= 2) {
+        return v.substring(0, 2) + (v.length > 2 ? '/' + v.substring(2, 4) : '');
+      }
+      return v;
+    }
+
+    // SVG Icons for payment methods
+    const paymentIcons = {
+      paypal: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path></svg>',
+      googlepay: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path></svg>',
+      bitcoin: '<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor" viewBox="0 0 24 24" ><path d="m11.953 8.819-.547 2.19c.619.154 2.529.784 2.838-.456.322-1.291-1.673-1.579-2.291-1.734m-.822 3.296-.603 2.415c.743.185 3.037.921 3.376-.441.355-1.422-2.029-1.789-2.773-1.974"></path><path d="M14.421 2.299C9.064.964 3.641 4.224 2.306 9.581.97 14.936 4.23 20.361 9.583 21.697c5.357 1.335 10.783-1.924 12.117-7.281 1.336-5.356-1.924-10.781-7.279-12.117m1.991 8.275c-.145.974-.686 1.445-1.402 1.611.985.512 1.485 1.298 1.009 2.661-.592 1.691-1.998 1.834-3.87 1.48l-.454 1.82-1.096-.273.447-1.794a45 45 0 0 1-.875-.228l-.449 1.804-1.095-.275.454-1.823c-.257-.066-.517-.136-.782-.202L6.87 15l.546-1.256s.808.215.797.199c.311.077.448-.125.502-.261l.719-2.875.115.029a1 1 0 0 0-.114-.037l.512-2.053c.013-.234-.066-.528-.511-.639.018-.011-.797-.198-.797-.198l.291-1.172 1.514.378-.001.005q.341.085.7.165l.449-1.802 1.097.273-.44 1.766c.294.067.591.135.879.207l.438-1.755 1.097.273-.449 1.802c1.384.479 2.396 1.195 2.198 2.525"></path></svg>',
+      sepa: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
+      banktransfer: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M11.5 1L2 6v2h19V6l-9.5-5zM4 8v11h3v-11H4zm5 0v11h3V8H9zm5 0v11h3V8h-3zM2 20v2h19v-2H2z"/></svg>'
+    };
+
+    function renderCards() {
+      const container = document.getElementById('savedCardsList');
+      if (!container) return;
+      
+      if (savedCards.length === 0) {
+        container.innerHTML = '<p class="no-cards">No payment methods saved. Add a card to get started.</p>';
+        return;
+      }
+
+      container.innerHTML = savedCards.map(card => {
+        // Determine icon based on payment type
+        let icon = '💳';
+        let metaText = `Ending in ${card.lastFour} • Expires ${card.expiry}`;
+        
+        if (card.brand === 'PayPal') {
+          icon = paymentIcons.paypal;
+          metaText = card.email || 'PayPal Account';
+        } else if (card.brand === 'Google Pay') {
+          icon = paymentIcons.googlepay;
+          metaText = card.email || 'Google Pay Account';
+        } else if (card.brand === 'Bitcoin') {
+          icon = paymentIcons.bitcoin;
+          const shortAddr = card.walletAddress 
+            ? card.walletAddress.substring(0, 8) + '...' + card.walletAddress.substring(card.walletAddress.length - 6)
+            : `...${card.lastFour}`;
+          metaText = `${card.addressType || 'Wallet'}: ${shortAddr}`;
+        } else if (card.brand === 'SEPA') {
+          icon = paymentIcons.sepa;
+          metaText = card.iban ? `IBAN: ${card.iban.substring(0, 4)}...${card.iban.substring(card.iban.length - 4)}` : 'SEPA Account';
+        } else if (card.brand === 'Bank Transfer') {
+          icon = paymentIcons.banktransfer;
+          metaText = card.accountNumber ? `${card.bankName || 'Bank'} •••• ${card.accountNumber.slice(-4)}` : 'Bank Account';
+        }
+        
+        return `
+          <div class="payment-row" data-card-id="${card.id}">
+            <div class="payment-details">
+              <span class="payment-brand"><span class="payment-icon">${icon}</span> ${card.brand}</span>
+              <span class="payment-meta">${metaText}</span>
+            </div>
+            <div class="payment-actions">
+              ${card.isPrimary 
+                ? '<span class="payment-status">Primary</span>' 
+                : '<button class="btn-ghost btn-sm set-primary-btn" data-card-id="' + card.id + '">Set as primary</button>'
+              }
+              ${!card.isPrimary 
+                ? '<button class="btn-ghost btn-sm remove-card-btn" data-card-id="' + card.id + '" style="color: crimson;">Remove</button>' 
+                : ''
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Add event listeners to buttons
+      container.querySelectorAll('.set-primary-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const cardId = parseInt(e.target.dataset.cardId);
+          setPrimaryCard(cardId);
+        });
+      });
+
+      container.querySelectorAll('.remove-card-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const cardId = parseInt(e.target.dataset.cardId);
+          removeCard(cardId);
+        });
+      });
+    }
+
+    function setPrimaryCard(cardId) {
+      savedCards.forEach(card => {
+        card.isPrimary = card.id === cardId;
+      });
+      renderCards();
+      // Here you would normally make an API call to update the primary card
+      console.log('Primary card set to:', cardId);
+    }
+
+    function removeCard(cardId) {
+      if (!confirm('Are you sure you want to remove this payment method?')) {
+        return;
+      }
+      
+      savedCards = savedCards.filter(card => card.id !== cardId);
+      renderCards();
+      // Here you would normally make an API call to remove the card
+      console.log('Card removed:', cardId);
+    }
+
+    function addNewCard(cardData) {
+      const newCard = {
+        id: Date.now(), // Simple ID generation
+        brand: cardData.brand,
+        lastFour: cardData.lastFour,
+        expiry: cardData.expiry,
+        holderName: cardData.holderName,
+        isPrimary: cardData.isPrimary,
+        // Additional fields for different payment types
+        email: cardData.email || null,
+        walletAddress: cardData.walletAddress || null,
+        addressType: cardData.addressType || null,
+        paymentType: cardData.paymentType || 'card'
+      };
+
+      if (cardData.isPrimary) {
+        savedCards.forEach(card => card.isPrimary = false);
+      }
+
+      savedCards.push(newCard);
+      renderCards();
+      // Here you would normally make an API call to save the card
+      console.log('New payment method added:', newCard);
+    }
+
+    // Modal management
+    const modal = document.getElementById('addCardModal');
+    const addCardBtn = document.getElementById('addCardBtn');
+    const closeModalBtn = document.getElementById('closeCardModal');
+    const cancelBtn = document.getElementById('cancelAddCard');
+    const addCardForm = document.getElementById('addCardForm');
+
+    function openModal() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      addCardForm.reset();
+    }
+
+    if (addCardBtn) {
+      addCardBtn.addEventListener('click', openModal);
+    }
+
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', closeModal);
+    }
+
+    // Close modal when clicking outside
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Manual card entry removed - using Stripe/PayPal/Google Pay/Bitcoin only
+
+    // Form submission
+    if (addCardForm) {
+      addCardForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const paymentMode = document.querySelector('input[name="paymentMode"]:checked').value;
+        const holderName = document.getElementById('cardholderName').value;
+        const isPrimary = document.getElementById('setPrimary').checked;
+
+        if (paymentMode === 'stripe') {
+          // ========================================
+          // STRIPE MODE - Tokenize card securely
+          // ========================================
+          const submitBtn = addCardForm.querySelector('button[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Processing...';
+
+          try {
+            // Create Stripe payment method
+            const {paymentMethod, error} = await stripe.createPaymentMethod({
+              type: 'card',
+              card: cardElement,
+              billing_details: {
+                name: holderName,
+              },
+            });
+
+            if (error) {
+              throw new Error(error.message);
+            }
+
+            // Payment method created successfully
+            console.log('Stripe PaymentMethod created:', paymentMethod);
+            
+            const cardData = {
+              holderName: holderName,
+              brand: paymentMethod.card.brand.charAt(0).toUpperCase() + paymentMethod.card.brand.slice(1),
+              lastFour: paymentMethod.card.last4,
+              expiry: `${paymentMethod.card.exp_month.toString().padStart(2, '0')}/${paymentMethod.card.exp_year.toString().slice(-2)}`,
+              isPrimary: isPrimary,
+              stripePaymentMethodId: paymentMethod.id, // Store for backend use
+              funding: paymentMethod.card.funding, // credit/debit/prepaid
+              country: paymentMethod.card.country
+            };
+
+            addNewCard(cardData);
+            closeModal();
+            cardElement.clear();
+            
+            let successMsg = '✅ Card tokenized successfully via Stripe!\n\n';
+            successMsg += `💳 ${cardData.brand} •••• ${cardData.lastFour}\n`;
+            successMsg += `🏦 Type: ${cardData.funding.toUpperCase()}\n`;
+            successMsg += `🌍 Country: ${cardData.country}\n`;
+            successMsg += `🔑 Payment Method ID: ${paymentMethod.id}`;
+            alert(successMsg);
+
+          } catch (error) {
+            alert('❌ Stripe Error: ' + error.message);
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Add card';
+          }
+
+        } else if (paymentMode === 'bitcoin') {
+          // ========================================
+          // BITCOIN MODE - Validate wallet address
+          // ========================================
+          const btcWalletAddress = document.getElementById('btcWalletAddress').value.trim();
+          
+          if (!btcWalletAddress) {
+            alert('❌ Please enter a Bitcoin wallet address');
+            return;
+          }
+
+          // Basic Bitcoin address validation (simplified)
+          const isBech32 = /^(bc1|tb1)[a-zA-HJ-NP-Z0-9]{25,87}$/.test(btcWalletAddress);
+          const isLegacy = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/.test(btcWalletAddress);
+          const isLightning = /^(lnbc|lntb)[0-9]{1,}[a-z0-9]+$/.test(btcWalletAddress);
+
+          if (!isBech32 && !isLegacy && !isLightning) {
+            alert('❌ Invalid Bitcoin address format\n\nSupported formats:\n• SegWit (bc1...)\n• Legacy (1... or 3...)\n• Lightning (lnbc...)');
+            return;
+          }
+
+          const addressType = isBech32 ? 'SegWit' : isLegacy ? 'Legacy' : 'Lightning';
+          const shortAddr = btcWalletAddress.substring(0, 8) + '...' + btcWalletAddress.substring(btcWalletAddress.length - 6);
+
+          const bitcoinData = {
+            holderName: holderName,
+            brand: 'Bitcoin',
+            lastFour: btcWalletAddress.slice(-6),
+            expiry: 'N/A',
+            isPrimary: isPrimary,
+            walletAddress: btcWalletAddress,
+            addressType: addressType,
+            paymentType: 'bitcoin'
+          };
+
+          addNewCard(bitcoinData);
+          closeModal();
+          
+          let successMsg = '✅ Bitcoin wallet added successfully!\n\n';
+          successMsg += `₿ Address: ${shortAddr}\n`;
+          successMsg += `📍 Type: ${addressType}\n`;
+          successMsg += `⛓️ Network: Bitcoin ${addressType === 'Lightning' ? 'Lightning' : 'Mainnet'}`;
+          alert(successMsg);
+
+        } else if (paymentMode === 'sepa') {
+          // ========================================
+          // SEPA MODE - Validate IBAN
+          // ========================================
+          const sepaIban = document.getElementById('sepaIban').value.trim().replace(/\s/g, '');
+          const sepaBic = document.getElementById('sepaBic').value.trim();
+          
+          if (!sepaIban) {
+            alert('❌ Please enter an IBAN');
+            return;
+          }
+
+          // Basic IBAN validation (2 letter country code + 2 check digits + up to 30 alphanumeric)
+          const ibanRegex = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/i;
+          if (!ibanRegex.test(sepaIban)) {
+            alert('❌ Invalid IBAN format\n\nIBAN should start with 2 letters (country code), followed by 2 digits, and up to 30 alphanumeric characters.');
+            return;
+          }
+
+          const sepaData = {
+            holderName: holderName,
+            brand: 'SEPA',
+            lastFour: sepaIban.slice(-4),
+            expiry: 'N/A',
+            isPrimary: isPrimary,
+            iban: sepaIban,
+            bic: sepaBic || 'N/A',
+            paymentType: 'sepa'
+          };
+
+          addNewCard(sepaData);
+          closeModal();
+          
+          let successMsg = '✅ SEPA account added successfully!\n\n';
+          successMsg += `🏦 IBAN: ${sepaIban.substring(0, 4)}...${sepaIban.substring(sepaIban.length - 4)}\n`;
+          if (sepaBic) {
+            successMsg += `🔑 BIC: ${sepaBic}\n`;
+          }
+          successMsg += `🌍 Payment Area: European SEPA Zone`;
+          alert(successMsg);
+
+        } else if (paymentMode === 'banktransfer') {
+          // ========================================
+          // BANK TRANSFER MODE - Validate account details
+          // ========================================
+          const accountNumber = document.getElementById('bankAccountNumber').value.trim();
+          const routingNumber = document.getElementById('bankRoutingNumber').value.trim();
+          const bankName = document.getElementById('bankName').value.trim();
+          
+          if (!accountNumber) {
+            alert('❌ Please enter an account number');
+            return;
+          }
+
+          if (!routingNumber) {
+            alert('❌ Please enter a routing number');
+            return;
+          }
+
+          // Basic validation (digits only for account and routing)
+          if (!/^[0-9]+$/.test(accountNumber)) {
+            alert('❌ Account number should contain only digits');
+            return;
+          }
+
+          if (!/^[0-9]+$/.test(routingNumber)) {
+            alert('❌ Routing number should contain only digits');
+            return;
+          }
+
+          const bankData = {
+            holderName: holderName,
+            brand: 'Bank Transfer',
+            lastFour: accountNumber.slice(-4),
+            expiry: 'N/A',
+            isPrimary: isPrimary,
+            accountNumber: accountNumber,
+            routingNumber: routingNumber,
+            bankName: bankName || 'Unknown Bank',
+            paymentType: 'banktransfer'
+          };
+
+          addNewCard(bankData);
+          closeModal();
+          
+          let successMsg = '✅ Bank account added successfully!\n\n';
+          successMsg += `🏦 Bank: ${bankName || 'Unknown Bank'}\n`;
+          successMsg += `💳 Account: ••••${accountNumber.slice(-4)}\n`;
+          successMsg += `🔢 Routing: ${routingNumber}`;
+          alert(successMsg);
+
+        } else if (paymentMode === 'paypal' || paymentMode === 'googlepay') {
+          // These are handled by their respective button handlers
+          alert('⚠️ Please use the connect button above to add this payment method');
+          return;
+        }
+      });
+    }
+
+    // Initial render of cards and addresses
+    renderCards();
+    renderAddresses();
+
+
     const initialTab = new URLSearchParams(window.location.search).get('tab');
     if (initialTab) {
       setActiveTab(initialTab);
@@ -630,6 +2341,22 @@
   });
 </script>
 
+  <!-- Custom Alert Popup -->
+  <div id="customAlert" class="custom-alert" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="custom-alert-backdrop"></div>
+    <div class="custom-alert-card" role="document">
+      <div class="custom-alert-header">
+        <span class="custom-alert-title">Notification</span>
+        <button type="button" id="customAlertClose" class="custom-alert-close" aria-label="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div id="customAlertMessage" class="custom-alert-message"></div>
+      <div class="custom-alert-actions">
+        <button type="button" id="customAlertOk" class="btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
 
       <div id="footer-container"></div>
       <script src="/assets/js/components/footer.js"></script>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="/assets/images/logo.png">
+  <title>Pricing Plans - 1X2S</title>
+  <link rel="stylesheet" href="/assets/css/core/global.css">
+  <link rel="stylesheet" href="/assets/css/core/fonts.css">
+  <link rel="stylesheet" href="/assets/css/pages/page-plans.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add('js');
+    window.addEventListener('load', function () {
+      document.body.classList.add('fade-in');
+    });
+  </script>
+</head>
+
+<body>
+  <script>
+    AOS.init();
+  </script>
+
+  <nav>
+    <div id="navbar"></div>
+    <script src="/assets/js/components/navbar.js"></script>
+    <link rel="stylesheet" href="/assets/css/components/navbar.css">
+  </nav>
+  <mobilenav>
+    <div id="mobilenavbar"></div>
+    <script src="/assets/js/components/mobile-navbar.js"></script>
+    <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
+  </mobilenav>
+
+  <!-- Hero Section -->
+  <section id="pricing-hero">
+    <div class="pricing-hero__container">
+      <div class="trust-badges">
+        <span class="badge">⚡ 99.99% Uptime SLA</span>
+        <span class="badge">🔐 SOC 2 Type II Certified</span>
+        <span class="badge">📊 Real-time API Metrics</span>
+      </div>
+      <div class="pricing-hero__content">
+        <h1>Pricing Built for Scale</h1>
+        <p>Predictable costs. Zero vendor lock-in. Pay for what you use. Deploy anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Plans Section -->
+  <section id="pricing-plans" class="pricing-section">
+    <div class="pricing-container">
+      <div class="pricing-toggle">
+        <button class="toggle-btn active" data-billing="monthly">Monthly</button>
+        <button class="toggle-btn" data-billing="annual">Annual</button>
+      </div>
+
+      <div class="plans-grid">
+        <!-- Starter Plan -->
+        <div class="plan-card" data-aos="fade-up">
+          <div class="plan-header">
+            <h3>Developer</h3>
+            <p class="plan-subtitle">For prototypes and low-volume apps</p>
+          </div>
+
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount monthly">29</span>
+            <span class="amount annual" style="display: none;">290</span>
+            <span class="period">/month</span>
+          </div>
+
+          <div class="plan-description">
+            <p>Get up to speed quickly. Full API access, no throttling. Test, iterate, deploy.</p>
+          </div>
+
+          <ul class="plan-features">
+            <li><span class="material-symbols-outlined">check_circle</span> 10M requests/month</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Email support</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 500 connections concurrent</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Regional deployment</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 30-day data retention</li>
+            <li><span class="material-symbols-outlined">check_circle</span> REST + WebSocket APIs</li>
+          </ul>
+
+          <button class="plan-button">Start Building</button>
+          <p class="plan-note">Launch your MVP</p>
+        </div>
+
+        <!-- Professional Plan -->
+        <div class="plan-card featured">
+          <div class="plan-badge"><span class="material-symbols-outlined">cloud_done</span>Production Ready</div>
+          <div class="plan-header">
+            <h3>Production</h3>
+            <p class="plan-subtitle">Scale to millions of requests</p>
+          </div>
+
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount monthly">99</span>
+            <span class="amount annual" style="display: none;">990</span>
+            <span class="period">/month</span>
+          </div>
+
+          <div class="plan-description">
+            <p>Built for high-throughput, mission-critical systems. Auto-scaling, analytics, webhooks.</p>
+          </div>
+
+          <ul class="plan-features">
+            <li><span class="material-symbols-outlined">check_circle</span> 100M requests/month</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Priority support (2hr SLA)</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 5,000 connections concurrent</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Multi-region failover</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 90-day data retention</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Webhook delivery guarantees</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Custom rate limits</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Real-time streaming APIs</li>
+          </ul>
+
+          <button class="plan-button featured-button">Deploy Now</button>
+          <p class="plan-note">Most production systems</p>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="plan-card enterprise" data-aos="fade-up" data-aos-delay="200">
+          <div class="plan-badge-exclusive"><span class="material-symbols-outlined">app_badging</span>Custom</div>
+          <div class="plan-header">
+            <h3>Enterprise</h3>
+            <p class="plan-subtitle">Unlimited at your scale</p>
+          </div>
+
+          <div class="plan-price">
+            <span class="enterprise-price">Let's talk</span>
+          </div>
+
+          <div class="plan-description">
+            <p>Dedicated infrastructure, custom SLAs, on-premise deployment, direct engineering support.</p>
+          </div>
+
+          <ul class="plan-features">
+            <li><span class="material-symbols-outlined">check_circle</span> Unlimited requests</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Dedicated infrastructure</li>
+            <li><span class="material-symbols-outlined">check_circle</span> On-premise or VPC deployment</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 99.99% SLA with compensation</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Unlimited concurrent connections</li>
+            <li><span class="material-symbols-outlined">check_circle</span> 24/7 engineering support</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Custom compliance & audit</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Direct API integration support</li>
+            <li><span class="material-symbols-outlined">check_circle</span> Performance optimization</li>
+          </ul>
+
+          <button class="plan-button enterprise-button">Request Demo</button>
+          <p class="plan-note">Pricing scales with your business</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section id="plans-comparison" class="comparison-section">
+    <div class="comparison-container">
+      <h2>Technical Specifications</h2>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Specification</th>
+              <th>Developer</th>
+              <th>Production</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Requests/Month</td>
+              <td>10M</td>
+              <td>100M</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Burst Throughput</td>
+              <td>1K rps</td>
+              <td>10K rps</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Concurrent Connections</td>
+              <td>500</td>
+              <td>5,000</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>P99 Latency</td>
+              <td>&lt;200ms</td>
+              <td>&lt;50ms</td>
+              <td>&lt;10ms</td>
+            </tr>
+            <tr>
+              <td>SLA / Uptime</td>
+              <td>99%</td>
+              <td>99.5%</td>
+              <td>99.99%</td>
+            </tr>
+            <tr>
+              <td>Data Retention</td>
+              <td>30 days</td>
+              <td>90 days</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Regions</td>
+              <td>3</td>
+              <td>10+</td>
+              <td>Any</td>
+            </tr>
+            <tr>
+              <td>Deployment Options</td>
+              <td>Managed</td>
+              <td>Managed + VPC</td>
+              <td>Managed / On-Prem / VPC</td>
+            </tr>
+            <tr>
+              <td>Support</td>
+              <td>Email</td>
+              <td>Priority (2h SLA)</td>
+              <td>Dedicated 24/7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="pricing-faq" class="faq-section">
+    <div class="faq-container">
+      <div class="faq-header">
+        <h2>Technical FAQ</h2>
+        <p>Everything you need to know about our infrastructure and deployment.</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item" data-aos="fade-up">
+          <div class="faq-question">
+            <h4>What's your API response time in production?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>P50 latency under 50ms globally. Production plan guarantees P99 under 50ms. Enterprise deployments can achieve sub-10ms with dedicated infrastructure.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="50">
+          <div class="faq-question">
+            <h4>Can we deploy on-premise or in our own VPC?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes. Production plan supports AWS VPC deployment. Enterprise can run fully on-premise with your own infrastructure, or in any cloud environment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="faq-question">
+            <h4>What authentication methods do you support?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>API keys, OAuth 2.0, SAML 2.0 (Enterprise), mTLS certificates, and JWT. All support rotate without downtime. Enterprise includes SSO integration.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="150">
+          <div class="faq-question">
+            <h4>What happens if we hit rate limits?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Developer plan has fixed limits. Production and Enterprise support custom rate limits and burst capacity. We'll work with you to scale before hitting limits.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="faq-question">
+            <h4>How is billing calculated? Can we commit to annual usage?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Fixed tier pricing for Developer/Production. Enterprise has usage-based or committed pricing. Annual commitments provide 20-30% savings. No overage charges.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="250">
+          <div class="faq-question">
+            <h4>Do you support data residency compliance?</h4>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>Production plan supports regional data residency. Enterprise can enforce data locality, GDPR compliance, HIPAA requirements, and custom compliance frameworks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="pricing-cta" class="cta-section">
+    <div class="cta-container">
+      <h2>Ready to build?</h2>
+      <p>Start with Developer plan. Scale to Production. Call us for Enterprise.</p>
+      <button class="cta-button">Get an API Key Today</button>
+      <p class="cta-note">No credit card required • Full feature access</p>
+    </div>
+  </section>
+
+  <button id="scroll-to-top">Back to Top</button>
+  <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+  <script src="/assets/js/components/back-to-top.js"></script>
+
+  <div id="footer-container"></div>
+  <script src="/assets/js/components/footer.js"></script>
+  <link rel="stylesheet" href="/assets/css/components/footer.css">
+
+  <script>
+    // Billing toggle
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        const billing = this.dataset.billing;
+        document.querySelectorAll('.plan-card').forEach(card => {
+          const monthlyAmounts = card.querySelectorAll('.amount.monthly');
+          const annualAmounts = card.querySelectorAll('.amount.annual');
+
+          if (billing === 'annual') {
+            monthlyAmounts.forEach(el => el.style.display = 'none');
+            annualAmounts.forEach(el => el.style.display = 'inline');
+          } else {
+            monthlyAmounts.forEach(el => el.style.display = 'inline');
+            annualAmounts.forEach(el => el.style.display = 'none');
+          }
+        });
+      });
+    });
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+        
+        const answer = this.nextElementSibling;
+        if (item.classList.contains('active')) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          this.querySelector('.faq-toggle').textContent = '−';
+        } else {
+          answer.style.maxHeight = '0';
+          this.querySelector('.faq-toggle').textContent = '+';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

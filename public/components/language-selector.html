@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/assets/css/components/language-selector.css">
+
+<div class="language-selector-container">
+  <div class="language-selector-wrapper">
+    <button class="language-toggle-btn" id="languageToggleBtn" title="Change Language">
+      <span class="material-symbols-outlined">language</span>
+      <span class="language-code" id="currentLanguageCode">EN</span>
+    </button>
+    
+    <div class="language-menu" id="languageMenu">
+      <div class="language-menu-header">
+        <span class="material-symbols-outlined">language</span>
+        <span data-i18n="language"></span>
+      </div>
+      <div class="language-menu-items">
+        <button class="language-menu-item active" data-lang="en" data-label="English">
+          <span class="flag">🇬🇧</span>
+          <span>English</span>
+        </button>
+        <button class="language-menu-item" data-lang="es" data-label="Español">
+          <span class="flag">🇪🇸</span>
+          <span>Español</span>
+        </button>
+        <button class="language-menu-item" data-lang="fr" data-label="Français">
+          <span class="flag">🇫🇷</span>
+          <span>Français</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

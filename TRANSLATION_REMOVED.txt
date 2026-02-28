@@ -1,0 +1,26 @@
+TRANSLATION SYSTEM - REMOVED
+
+All translation logic has been removed from the codebase on February 27, 2026.
+
+Removed Components:
+- GTranslate library scripts from all pages
+- Language selector buttons from navbar and account settings
+- Language selection JavaScript handlers
+- Language selector CSS styling
+- /api/set-language backend endpoint
+- Language column migration from database initialization
+- Language preference storage in session
+
+Files Cleaned:
+- public/index.html
+- public/login/index.html
+- public/account/index.html
+- public/navbar.html
+- public/assets/css/pages/page-account.css
+- public/assets/js/components/navbar.js
+- index.js (backend API)
+
+Notes:
+- The database may still have a 'language' column if it was previously migrated
+- No translation features are currently available
+- All pages now display in English only

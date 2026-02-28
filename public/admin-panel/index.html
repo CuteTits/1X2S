@@ -261,6 +261,20 @@
       padding: 10px;
       cursor: pointer;
       transition: all 0.2s;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .list-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: transparent;
+      border-radius: 4px 0 0 4px;
+      transition: background 0.2s ease;
     }
 
     .list-item:hover {
@@ -271,6 +285,11 @@
     .list-item.active {
       background: #1f1f1f;
       border-color: #ff4f4f;
+      box-shadow: 0 0 0 1px rgba(255, 79, 79, 0.2), 0 6px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .list-item.active::before {
+      background: #ff4f4f;
     }
 
     .list-item h4 {
@@ -339,6 +358,27 @@
       padding: 10px;
       margin-bottom: 8px;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+    }
+
+    .dropdown-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: rgba(255, 79, 79, 0.5);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .dropdown-item:focus-within {
+      box-shadow: 0 0 0 1px rgba(255, 79, 79, 0.15), 0 6px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .dropdown-toggle-header {
+      border-bottom: 1px solid #2a2a2a;
     }
 
     .dropdown-item.state-win {
@@ -346,9 +386,17 @@
       box-shadow: 0 0 8px rgba(34, 197, 94, 0.15);
     }
 
+    .dropdown-item.state-win::before {
+      background: rgba(34, 197, 94, 0.6);
+    }
+
     .dropdown-item.state-loss {
       border-color: rgba(239, 68, 68, 0.35);
       box-shadow: 0 0 8px rgba(239, 68, 68, 0.15);
+    }
+
+    .dropdown-item.state-loss::before {
+      background: rgba(239, 68, 68, 0.6);
     }
 
     .dropdown-item.state-open {
@@ -356,13 +404,47 @@
       box-shadow: 0 0 8px rgba(59, 130, 246, 0.15);
     }
 
+    .dropdown-item.state-open::before {
+      background: rgba(59, 130, 246, 0.6);
+    }
+
     .dropdown-item.state-void {
       border-color: rgba(107, 114, 128, 0.35);
       box-shadow: 0 0 8px rgba(107, 114, 128, 0.12);
     }
 
+    .dropdown-item.state-void::before {
+      background: rgba(107, 114, 128, 0.6);
+    }
+
     .parent-container {
       transition: border-color 0.3s ease;
+      position: relative;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .parent-container::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: rgba(255, 79, 79, 0.6);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .parent-container:hover {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .parent-container:focus-within {
+      box-shadow: 0 0 0 1px rgba(255, 79, 79, 0.18), 0 10px 22px rgba(0, 0, 0, 0.4);
+    }
+
+    .parent-header {
+      border-bottom: 1px solid #2a2a2a;
+      box-shadow: inset 3px 0 0 rgba(255, 79, 79, 0.5);
     }
 
     .parent-container.state-win {
@@ -370,9 +452,25 @@
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.16);
     }
 
+    .parent-container.state-win::before {
+      background: rgba(34, 197, 94, 0.7);
+    }
+
+    .parent-container.state-win .parent-header {
+      box-shadow: inset 3px 0 0 rgba(34, 197, 94, 0.7);
+    }
+
     .parent-container.state-loss {
       border-color: rgba(239, 68, 68, 0.35) !important;
       box-shadow: 0 0 12px rgba(239, 68, 68, 0.16);
+    }
+
+    .parent-container.state-loss::before {
+      background: rgba(239, 68, 68, 0.7);
+    }
+
+    .parent-container.state-loss .parent-header {
+      box-shadow: inset 3px 0 0 rgba(239, 68, 68, 0.7);
     }
 
     .parent-container.state-open {
@@ -380,9 +478,25 @@
       box-shadow: 0 0 12px rgba(59, 130, 246, 0.16);
     }
 
+    .parent-container.state-open::before {
+      background: rgba(59, 130, 246, 0.7);
+    }
+
+    .parent-container.state-open .parent-header {
+      box-shadow: inset 3px 0 0 rgba(59, 130, 246, 0.7);
+    }
+
     .parent-container.state-void {
       border-color: rgba(107, 114, 128, 0.35) !important;
       box-shadow: 0 0 12px rgba(107, 114, 128, 0.16);
+    }
+
+    .parent-container.state-void::before {
+      background: rgba(107, 114, 128, 0.7);
+    }
+
+    .parent-container.state-void .parent-header {
+      box-shadow: inset 3px 0 0 rgba(107, 114, 128, 0.7);
     }
 
     .parent-state-badge {
@@ -541,6 +655,28 @@
     .fixed-actions .btn-duplicate:hover {
       background: #1f4a4a;
       border-color: #4ade80;
+    }
+
+    .fixed-actions .btn-export-json {
+      background: #1a2a3a;
+      color: #60a5fa;
+      border: 1px solid #2a4a5a;
+    }
+
+    .fixed-actions .btn-export-json:hover {
+      background: #1f3a5a;
+      border-color: #60a5fa;
+    }
+
+    .fixed-actions .btn-export-csv {
+      background: #2a1a3a;
+      color: #c084fc;
+      border: 1px solid #3a2a5a;
+    }
+
+    .fixed-actions .btn-export-csv:hover {
+      background: #3a1f5a;
+      border-color: #c084fc;
     }
 
     .btn-duplicate {
@@ -718,6 +854,8 @@
       </div>
       <button class="btn-primary" onclick="createNewCard()" style="margin-top: 15px;">+ New Card</button>
       <button class="btn-primary" onclick="loadCards()" style="margin-top: 10px;"><span class="material-symbols-outlined">refresh</span> Refresh</button>
+      <input type="file" id="upload-card-file" accept=".json,.csv" style="display: none;" onchange="uploadCardFromFile(event)">
+      <button class="btn-primary" onclick="document.getElementById('upload-card-file').click()" style="margin-top: 10px;"><span class="material-symbols-outlined">upload_file</span> Upload Card</button>
     </div>
 
     <!-- MAIN SECTION: Edit Card -->
@@ -1794,8 +1932,8 @@ async function saveCard() {
     }
 
     if (parentTitle || parentText || dropdowns.length > 0) {
-      const oddsMode = parentContainer.querySelector('.parent-odds-mode')?.value || 'auto';
-      const oddsValue = parentContainer.querySelector('.parent-odds-manual')?.value || '';
+      const oddsMode = parentEl.querySelector('.parent-odds-mode')?.value || 'auto';
+      const oddsValue = parentEl.querySelector('.parent-odds-manual')?.value || '';
       
       parents.push({
         title: parentTitle,
@@ -2055,11 +2193,15 @@ function updateFixedActionsVisibility() {
   
   if (form.style.display !== 'none') {
     actions.classList.remove('hidden');
-    // Show/hide delete and duplicate buttons only when editing existing card
+    // Show/hide delete, duplicate and export buttons only when editing existing card
     const deleteBtn = actions.querySelector('.btn-delete');
     const duplicateBtn = actions.querySelector('.btn-duplicate');
+    const exportJsonBtn = actions.querySelector('.btn-export-json');
+    const exportCsvBtn = actions.querySelector('.btn-export-csv');
     if (deleteBtn) deleteBtn.style.display = editingCardId ? 'flex' : 'none';
     if (duplicateBtn) duplicateBtn.style.display = editingCardId ? 'flex' : 'none';
+    if (exportJsonBtn) exportJsonBtn.style.display = editingCardId ? 'flex' : 'none';
+    if (exportCsvBtn) exportCsvBtn.style.display = editingCardId ? 'flex' : 'none';
   } else {
     actions.classList.add('hidden');
   }
@@ -2073,6 +2215,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fixedActions.innerHTML = `
     <button class="btn-save" onclick="saveCard()" title="Save (Ctrl+S)"><span class="material-symbols-outlined">save</span> Save</button>
     <button class="btn-duplicate" onclick="duplicateCard()" title="Duplicate card"><span class="material-symbols-outlined">content_copy</span> Duplicate</button>
+    <button class="btn-export-json" onclick="downloadCardAsJSON()" title="Export as JSON"><span class="material-symbols-outlined">download</span> JSON</button>
+    <button class="btn-export-csv" onclick="downloadCardAsCSV()" title="Export as CSV"><span class="material-symbols-outlined">download</span> CSV</button>
     <button class="btn-delete" onclick="deleteCard()" title="Delete"><span class="material-symbols-outlined">delete</span> Delete</button>
   `;
   document.body.appendChild(fixedActions);
@@ -2090,7 +2234,17 @@ async function duplicateCard() {
 
   try {
     const response = await fetch(`/api/carousel/insights/${editingCardId}`);
-    const result = await response.json();
+    
+    if (response.status === 404) {
+      showMessage('carousel-message', 'Card not found (ID: ' + editingCardId + '). It may have been deleted. Refreshing list...', 'error');
+      loadCards();
+      document.getElementById('edit-card-form').style.display = 'none';
+      document.getElementById('no-card-selection').style.display = 'block';
+      editingCardId = null;
+      return;
+    }
+    
+    const result = await safeJsonResponse(response, 'Duplicate Card');
 
     if (!result.success || !result.data) {
       showMessage('carousel-message', 'Error loading card data', 'error');
@@ -2113,7 +2267,7 @@ async function duplicateCard() {
       body: JSON.stringify(newCardData)
     });
 
-    const saveResult = await saveResponse.json();
+    const saveResult = await safeJsonResponse(saveResponse, 'Save Duplicated Card');
 
     if (!saveResult.success) {
       showMessage('carousel-message', 'Error: ' + saveResult.error, 'error');
@@ -2182,6 +2336,332 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// ========== EXPORT/IMPORT FUNCTIONS ==========
+
+async function downloadCardAsJSON() {
+  if (!editingCardId) {
+    showMessage('carousel-message', 'No card selected to export', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/carousel/insights/${editingCardId}`);
+    
+    if (response.status === 404) {
+      showMessage('carousel-message', 'Card not found (ID: ' + editingCardId + '). It may have been deleted. Refreshing list...', 'error');
+      loadCards();
+      document.getElementById('edit-card-form').style.display = 'none';
+      document.getElementById('no-card-selection').style.display = 'block';
+      editingCardId = null;
+      return;
+    }
+    
+    const result = await safeJsonResponse(response, 'Export JSON');
+
+    if (!result.success || !result.data) {
+      showMessage('carousel-message', 'Error loading card data', 'error');
+      return;
+    }
+
+    const cardData = result.data;
+    const jsonString = JSON.stringify(cardData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `card_${cardData.id}_${cardData.title.replace(/[^a-z0-9]/gi, '_')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card exported as JSON!', 'success');
+  } catch (error) {
+    console.error('Error exporting card as JSON:', error);
+    showMessage('carousel-message', 'Error: ' + error.message, 'error');
+  }
+}
+
+async function downloadCardAsCSV() {
+  if (!editingCardId) {
+    showMessage('carousel-message', 'No card selected to export', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/carousel/insights/${editingCardId}`);
+    
+    if (response.status === 404) {
+      showMessage('carousel-message', 'Card not found (ID: ' + editingCardId + '). It may have been deleted. Refreshing list...', 'error');
+      loadCards();
+      document.getElementById('edit-card-form').style.display = 'none';
+      document.getElementById('no-card-selection').style.display = 'block';
+      editingCardId = null;
+      return;
+    }
+    
+    const result = await safeJsonResponse(response, 'Export CSV');
+
+    if (!result.success || !result.data) {
+      showMessage('carousel-message', 'Error loading card data', 'error');
+      return;
+    }
+
+    const cardData = result.data;
+    let csv = '';
+
+    // Card metadata
+    csv += 'CARD_METADATA\\n';
+    csv += 'Field,Value\\n';
+    csv += `ID,${cardData.id || ''}\\n`;
+    csv += `Date,${cardData.date || ''}\\n`;
+    csv += `Title,"${(cardData.title || '').replace(/"/g, '""')}"\\n`;
+    csv += `Subtitle,"${(cardData.subtitle || '').replace(/"/g, '""')}"\\n`;
+    csv += `Description,"${(cardData.description || '').replace(/"/g, '""')}"\\n`;
+    csv += '\\n';
+
+    // Parents and dropdowns
+    if (cardData.parents && cardData.parents.length > 0) {
+      csv += 'SECTIONS_AND_PREDICTIONS\\n';
+      csv += 'Section_Title,Section_Text,Section_State,Section_Odds_Mode,Section_Total_Odds,Match_Header,Match_Subheader,Match_Location,Match_GMT_Time,Match_Competition_ID,Match_Subheader2,Match_Text,Match_Link,Match_Total_Odds,Match_State\\n';
+
+      cardData.parents.forEach(parent => {
+        if (parent.dropdowns && parent.dropdowns.length > 0) {
+          parent.dropdowns.forEach(dropdown => {
+            csv += `"${(parent.title || '').replace(/"/g, '""')}",`;
+            csv += `"${(parent.text || '').replace(/"/g, '""')}",`;
+            csv += `"${parent.state || 'open'}",`;
+            csv += `"${parent.odds_mode || 'auto'}",`;
+            csv += `"${parent.total_odds || ''}",`;
+            csv += `"${(dropdown.header || '').replace(/"/g, '""')}",`;
+            csv += `"${(dropdown.subheader || '').replace(/"/g, '""')}",`;
+            csv += `"${(dropdown.location || '').replace(/"/g, '""')}",`;
+            csv += `"${dropdown.gmt_time || ''}",`;
+            csv += `"${dropdown.competition_id || ''}",`;
+            csv += `"${(dropdown.subheader2 || '').replace(/"/g, '""')}",`;
+            csv += `"${(dropdown.text || '').replace(/"/g, '""')}",`;
+            csv += `"${(dropdown.link || '').replace(/"/g, '""')}",`;
+            csv += `"${dropdown.total_odds || ''}",`;
+            csv += `"${dropdown.state || 'open'}"\\n`;
+          });
+        } else {
+          // Parent without dropdowns
+          csv += `"${(parent.title || '').replace(/"/g, '""')}",`;
+          csv += `"${(parent.text || '').replace(/"/g, '""')}",`;
+          csv += `"${parent.state || 'open'}",`;
+          csv += `"${parent.odds_mode || 'auto'}",`;
+          csv += `"${parent.total_odds || ''}",`;
+          csv += ',,,,,,,,,,\\n';
+        }
+      });
+    }
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `card_${cardData.id}_${cardData.title.replace(/[^a-z0-9]/gi, '_')}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card exported as CSV!', 'success');
+  } catch (error) {
+    console.error('Error exporting card as CSV:', error);
+    showMessage('carousel-message', 'Error: ' + error.message, 'error');
+  }
+}
+
+async function uploadCardFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const fileName = file.name.toLowerCase();
+  const isJSON = fileName.endsWith('.json');
+  const isCSV = fileName.endsWith('.csv');
+
+  if (!isJSON && !isCSV) {
+    showMessage('carousel-message', 'Please upload a JSON or CSV file', 'error');
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    try {
+      let cardData;
+
+      if (isJSON) {
+        cardData = JSON.parse(e.target.result);
+      } else {
+        cardData = parseCSVToCard(e.target.result);
+      }
+
+      // Remove the ID to create a new card
+      delete cardData.id;
+      cardData.title = cardData.title + ' (Imported)';
+
+      // Save the imported card
+      const response = await fetch('/api/carousel/insights', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cardData)
+      });
+
+      const result = await safeJsonResponse(response, 'Import Card');
+
+      if (!result.success) {
+        showMessage('carousel-message', 'Error importing card: ' + result.error, 'error');
+        return;
+      }
+
+      showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card imported successfully!', 'success');
+      loadCards();
+
+      // Select the newly imported card
+      setTimeout(async () => {
+        const newCardId = result.data?.id;
+        if (newCardId) {
+          const fetchResponse = await fetch(`/api/carousel/insights/${newCardId}`);
+          const fetchResult = await safeJsonResponse(fetchResponse, 'Load Imported Card');
+          if (fetchResult.success && fetchResult.data) {
+            selectCard(fetchResult.data);
+          }
+        }
+      }, 500);
+
+    } catch (error) {
+      console.error('Error importing card:', error);
+      showMessage('carousel-message', 'Error parsing file: ' + error.message, 'error');
+    }
+
+    event.target.value = '';
+  };
+
+  reader.readAsText(file);
+}
+
+function parseCSVToCard(csvText) {
+  const lines = csvText.split('\\n').map(line => line.trim()).filter(line => line);
+  
+  const cardData = {
+    date: new Date().toISOString().split('T')[0],
+    title: '',
+    subtitle: '',
+    description: '',
+    parents: []
+  };
+
+  let section = null;
+  let isMetadata = false;
+  let isPredictions = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (line === 'CARD_METADATA') {
+      isMetadata = true;
+      isPredictions = false;
+      continue;
+    }
+
+    if (line === 'SECTIONS_AND_PREDICTIONS') {
+      isMetadata = false;
+      isPredictions = true;
+      continue;
+    }
+
+    if (isMetadata) {
+      if (line === 'Field,Value') continue;
+
+      const match = line.match(/^([^,]+),(.*)$/);
+      if (match) {
+        const field = match[1].trim();
+        const value = match[2].trim().replace(/^"|"$/g, '').replace(/""/g, '"');
+
+        if (field === 'Date') cardData.date = value;
+        else if (field === 'Title') cardData.title = value;
+        else if (field === 'Subtitle') cardData.subtitle = value;
+        else if (field === 'Description') cardData.description = value;
+      }
+    }
+
+    if (isPredictions) {
+      if (line.startsWith('Section_Title,')) continue; // Skip header
+
+      const values = parseCSVLine(line);
+      if (values.length < 15) continue;
+
+      const [
+        sectionTitle, sectionText, sectionState, sectionOddsMode, sectionTotalOdds,
+        matchHeader, matchSubheader, matchLocation, matchGMTTime, matchCompetitionID,
+        matchSubheader2, matchText, matchLink, matchTotalOdds, matchState
+      ] = values;
+
+      // Find or create parent section
+      let parent = cardData.parents.find(p => p.title === sectionTitle);
+      if (!parent) {
+        parent = {
+          title: sectionTitle,
+          text: sectionText,
+          state: sectionState || 'open',
+          odds_mode: sectionOddsMode || 'auto',
+          total_odds: sectionTotalOdds || '',
+          dropdowns: []
+        };
+        cardData.parents.push(parent);
+      }
+
+      // Add dropdown if it has content
+      if (matchHeader || matchSubheader || matchText) {
+        parent.dropdowns.push({
+          header: matchHeader,
+          subheader: matchSubheader,
+          location: matchLocation,
+          gmt_time: matchGMTTime,
+          competition_id: matchCompetitionID ? parseInt(matchCompetitionID) : null,
+          subheader2: matchSubheader2,
+          text: matchText,
+          link: matchLink,
+          total_odds: matchTotalOdds,
+          state: matchState || 'open'
+        });
+      }
+    }
+  }
+
+  return cardData;
+}
+
+function parseCSVLine(line) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && nextChar === '"') {
+        current += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      result.push(current);
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+
+  result.push(current);
+  return result;
+}
 </script>
 
 </body>

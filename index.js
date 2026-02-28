@@ -115,6 +115,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// --- Session middleware (must be BEFORE routes that use req.session) ---
+app.use(session({
+  name: 'sid', // 👈 shorter cookie name
+  secret: process.env.SESSION_SECRET || 'supersecretkey',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { httpOnly: true, secure: false }
+}));
+
 // ✅ Serve CSS with no-cache headers
 app.use(
   '/pagecontent/stylesheets',
@@ -128,6 +137,12 @@ app.use(
     }
   })
 );
+
+// ✅ Serve locales (translation files)
+app.use('/locales', express.static(path.join(__dirname, 'locales')));
+
+// ✅ Serve components (reusable HTML components)
+app.use('/components', express.static(path.join(__dirname, 'public', 'components')));
 
 // ✅ Serve all other static files normally
 app.use(express.static(path.join(__dirname, 'public')));
@@ -168,15 +183,6 @@ app.get('/db-test', async (req, res) => {
 
 // Example signup endpoint (store email + password)
 // Signup endpoint (store name, email + hashed password)
-
-// --- session endpoint ---
-app.use(session({
-  name: 'sid', // 👈 shorter cookie name
-  secret: process.env.SESSION_SECRET || 'supersecretkey',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { httpOnly: true, secure: false }
-}));
 
 // --- Session status ---
 app.get('/api/session', (req, res) => {
@@ -588,7 +594,102 @@ app.get('/api/carousel/insights', async (req, res) => {
 
 // ========== CAROUSEL MANAGEMENT ENDPOINTS ==========
 
-// ========== CAROUSEL MANAGEMENT ENDPOINTS ==========
+// Get single carousel card by ID
+app.get('/api/carousel/insights/:id', async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const [rows] = await db.query(
+      'SELECT * FROM carousel_insights WHERE id = ?',
+      [id]
+    );
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ success: false, error: 'Card not found' });
+    }
+    
+    const row = rows[0];
+    let parsedData = {
+      id: row.id,
+      title: row.title,
+      date: row.date || null,
+      subtitle: row.subtitle || row.header || '',
+      description: row.description || row.subheader || '',
+      parents: [],
+      dropdowns: [] // Fallback for old data
+    };
+
+    // Try to parse dropdowns (now contains parents or flat dropdowns)
+    if (row.dropdowns) {
+      try {
+        let parsed;
+        if (typeof row.dropdowns === 'string') {
+          parsed = JSON.parse(row.dropdowns);
+        } else {
+          parsed = row.dropdowns;
+        }
+        
+        // Check if it's the new hierarchical structure (parents)
+        if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].title !== undefined && parsed[0].dropdowns !== undefined) {
+          // New structure: array of parent objects
+          parsedData.parents = parsed;
+          
+          // Enhance each dropdown in each parent with competition details
+          for (let parent of parsedData.parents) {
+            if (parent.dropdowns && Array.isArray(parent.dropdowns)) {
+              for (let dropdown of parent.dropdowns) {
+                if (dropdown.competition_id) {
+                  try {
+                    const [compRows] = await db.query(
+                      'SELECT id, name, icon FROM competitions WHERE id = ?',
+                      [dropdown.competition_id]
+                    );
+                    if (compRows.length > 0) {
+                      dropdown.competition_name = compRows[0].name;
+                      dropdown.competition_icon = compRows[0].icon;
+                    }
+                  } catch (err) {
+                    console.warn('Failed to fetch competition for dropdown');
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          // Old structure: flat dropdowns array
+          parsedData.dropdowns = parsed;
+          
+          // Enhance each dropdown with competition details
+          for (let dropdown of parsedData.dropdowns) {
+            if (dropdown.competition_id) {
+              try {
+                const [compRows] = await db.query(
+                  'SELECT id, name, icon FROM competitions WHERE id = ?',
+                  [dropdown.competition_id]
+                );
+                if (compRows.length > 0) {
+                  dropdown.competition_name = compRows[0].name;
+                  dropdown.competition_icon = compRows[0].icon;
+                }
+              } catch (err) {
+                console.warn('Failed to fetch competition for dropdown');
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to parse dropdowns for card', row.id);
+        parsedData.parents = [];
+        parsedData.dropdowns = [];
+      }
+    }
+
+    res.json({ success: true, data: parsedData });
+  } catch (err) {
+    console.error('Error fetching carousel card:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Create a new carousel card (PROTECTED - ADMIN ONLY)
 app.post('/api/carousel/insights', requireAdminRole, async (req, res) => {

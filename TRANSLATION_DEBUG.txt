@@ -1,0 +1,37 @@
+// Translation System - Initialization Flow Debug Guide
+// ===================================================
+// 
+// Expected console log sequence on page load:
+// 
+// 1. 📦 Translator instance created, initializing...
+// 2. 🔄 DOMContentLoaded - initializing translator...
+// 3. [loading /locales/translations.json...]
+// 4. ✅ Translation system fully initialized. Available languages: en,es,fr
+// 5. 🔔 translatorReady event dispatched
+// 6. 🔄 Loading navbar component...
+// 7. ✅ Navbar HTML loaded
+// 8. 🌍 Initializing language selector...
+// 9. ✅ Language selector ready. Available languages: en,es,fr
+// 10. ✅ Language selector event listeners attached
+// 11. 🔔 navbarLoaded event dispatched
+// 12. [session check...]
+// 13. ✅ Banner initialized
+//
+// If you see:
+// ⚠️ Translator not available yet in settings, waiting for translatorReady event...
+// This means the settings tab is trying to initialize before translator is ready.
+// It will wait for the translatorReady event and then initialize.
+//
+// If settings language selector doesn't initialize, check:
+// 1. Open browser console (F12)
+// 2. Search for "🌍 Settings language selector"
+// 3. Should show it waiting for translatorReady, then initializing
+// 4. When you click settings tab, it should show initialization messages
+//
+// Testing the language selector:
+// 1. Click the language button in navbar (should show EN/ES/FR)
+// 2. Click a language option
+// 3. Should see ✅ Language changed to [lang]
+// 4. Page should retranslate
+// 5. Use Account >> Settings >> Language selector to change again
+//

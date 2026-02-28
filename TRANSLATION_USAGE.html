@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translation System - Using GTranslate</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .language-selector {
+      margin-bottom: 20px;
+    }
+    .example-section {
+      background: #f5f5f5;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .note {
+      background: #e3f2fd;
+      border-left: 4px solid #2196F3;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+  <!-- GTranslate -->
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,fr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <h1>Translation System - Now Using GTranslate</h1>
+
+  <div class="note">
+    ✅ <strong>System Migrated:</strong> We've switched from a custom translation system to Google Translate (GTranslate) for automatic, reliable, and free translations.
+  </div>
+
+  <div id="google_translate_element" class="language-selector"></div>
+
+  <div class="example-section">
+    <h2>How Translation Works Now</h2>
+    
+    <h3>📍 Location of Language Selector:</h3>
+    <ul>
+      <li><strong>Navigation Bar:</strong> Look for the language selector in the top navigation (shows flags)</li>
+      <li><strong>Account Settings:</strong> Instructions to use navbar selector</li>
+      <li><strong>All Pages:</strong> Translation is automatic once a language is selected</li>
+    </ul>
+
+    <h3>🌐 Supported Languages:</h3>
+    <ul>
+      <li>🇬🇧 English (en)</li>
+      <li>🇪🇸 Spanish (es)</li>
+      <li>🇫🇷 French (fr)</li>
+    </ul>
+
+    <h3>✨ How to Add GTranslate to a New Page:</h3>
+    <pre><code>&lt;!-- Add to &lt;head&gt; section --&gt;
+&lt;script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"&gt;&lt;/script&gt;
+&lt;script&gt;
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,es,fr',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+&lt;/script&gt;
+
+&lt;!-- Add where you want the selector to appear --&gt;
+&lt;div id="google_translate_element"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>🎯 Benefits of GTranslate:</h3>
+    <ul>
+      <li><strong>Automatic:</strong> No need to maintain translation files</li>
+      <li><strong>Accurate:</strong> Powered by Google's machine learning</li>
+      <li><strong>Free:</strong> No licensing costs</li>
+      <li><strong>Easy:</strong> Works with existing HTML without modifications</li>
+      <li><strong>Persistent:</strong> User language preference is saved</li>
+    </ul>
+
+    <h3>📝 Deprecated Files (Safe to Remove):</h3>
+    <ul>
+      <li>/public/assets/js/translation.js</li>
+      <li>/locales/translations.json</li>
+      <li>/public/assets/js/components/language-selector.js</li>
+      <li>/public/assets/css/components/language-selector.css</li>
+      <li>/public/components/language-selector.html</li>
+      <li>API Endpoint: /api/set-language (no longer needed)</li>
+    </ul>
+
+    <h3>🔧 Implementation Details:</h3>
+    <p>The translation system is now handled entirely by Google Translate. Simply:</p>
+    <ol>
+      <li>Include the GTranslate script in the page head</li>
+      <li>Add the initialization function</li>
+      <li>Add a div with id="google_translate_element" where you want the selector</li>
+      <li>Users select their preferred language</li>
+      <li>Page automatically translates and persists the choice</li>
+    </ol>
+  </div>
+</body>
+</html>
