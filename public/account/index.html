@@ -967,49 +967,6 @@ fill="#ffffff" viewBox="0 0 24 24" >
   </div>
 
 <script>
-  /* ==================================================================================
-   * STRIPE INTEGRATION - TEST MODE (100% FREE, NO COSTS)
-   * ==================================================================================
-   * 
-   * SETUP:
-   * ✅ Publishable Key: Used here (SAFE for frontend)
-   * ⚠️  Secret Key: MUST be on backend server (NEVER in frontend!)
-   * 
-   * YOUR SECRET KEY (for backend only):
-   * sk_test_51T4iPkGWFtb77R0vlN0jwkm4KwkwrZES8bHfQoV785LEZlltNl56Bf1VDQMLOY4RaHdonpy54QygRnMyQGunsVSM0036IOpJ13
-   * 
-   * COST: $0 - Test mode never charges real money
-   * 
-   * HOW IT WORKS:
-   * 1. Frontend (this file): Tokenizes card → creates PaymentMethod ID
-   * 2. Backend (you need to create): Uses PaymentMethod ID + secret key to charge
-   * 
-   * BACKEND EXAMPLE (Node.js):
-   * ---
-   * const stripe = require('stripe')('sk_test_51T4iPkGWFtb77R0v...');
-   * 
-   * app.post('/api/charge', async (req, res) => {
-   *   const { paymentMethodId, amount } = req.body;
-   *   
-   *   const paymentIntent = await stripe.paymentIntents.create({
-   *     amount: amount, // in cents
-   *     currency: 'usd',
-   *     payment_method: paymentMethodId,
-   *     confirm: true,
-   *   });
-   *   
-   *   res.json({ success: true });
-   * });
-   * ---
-   * 
-   * STRIPE TEST CARDS:
-   * - Success: 4242 4242 4242 4242
-   * - Decline: 4000 0000 0000 0002
-   * - 3D Secure: 4000 0025 0000 3155
-   * (Use any future expiry + any CVV)
-   * 
-   * DOCS: https://stripe.com/docs/testing
-   * =============================================================================== */
   
   document.addEventListener("DOMContentLoaded", () => {
     // ========================================
