@@ -201,6 +201,13 @@ app.get('/api/session', (req, res) => {
   }
 });
 
+// --- Stripe Configuration ---
+app.get('/api/stripe-config', (req, res) => {
+  res.json({
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
+  });
+});
+
 // --- Signup endpoint ---
 app.post('/api/signup', async (req, res) => {
   const { name, email, password } = req.body;

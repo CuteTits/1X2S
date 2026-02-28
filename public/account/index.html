@@ -1126,40 +1126,55 @@ fill="#ffffff" viewBox="0 0 24 24" >
     // ========================================
     // STRIPE INITIALIZATION (TEST MODE - $0 COST)
     // ========================================
-    const STRIPE_PUBLISHABLE_KEY = 'pk_test_51T4iPkGWFtb77R0vdeukQnxwJ9bVxTZM79VeqcDgPfKDg8t9FJ1hihVaQnHHVqwi6oR9R15S18unbUc3HfF02CMJ004DQeiNEw';
-    const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-    const elements = stripe.elements();
-    
-    // Create Stripe Card Element with custom styling
-    const cardElement = elements.create('card', {
-      style: {
-        base: {
-          color: '#ffffff',
-          fontFamily: 'montserrat, sans-serif',
-          fontSize: '13px',
-          '::placeholder': {
-            color: '#5a5a5a',
+    let stripe;
+    let elements;
+    let cardElement;
+
+    // Fetch Stripe configuration from server
+    async function initializeStripe() {
+      try {
+        const response = await fetch('/api/stripe-config');
+        const config = await response.json();
+        
+        stripe = Stripe(config.publishableKey);
+        elements = stripe.elements();
+        
+        // Create Stripe Card Element with custom styling
+        cardElement = elements.create('card', {
+          style: {
+            base: {
+              color: '#ffffff',
+              fontFamily: 'montserrat, sans-serif',
+              fontSize: '13px',
+              '::placeholder': {
+                color: '#5a5a5a',
+              },
+            },
+            invalid: {
+              color: '#f87171',
+              iconColor: '#f87171',
+            },
           },
-        },
-        invalid: {
-          color: '#f87171',
-          iconColor: '#f87171',
-        },
-      },
-    });
-    
-    // Mount Stripe Card Element
-    cardElement.mount('#stripe-card-element');
-    
-    // Handle real-time validation errors
-    cardElement.on('change', (event) => {
-      const displayError = document.getElementById('stripe-card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
+        });
+        
+        cardElement.mount('#stripe-card-element');
+        
+        cardElement.on('change', function(event) {
+          const displayError = document.getElementById('stripe-card-errors');
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        });
+      } catch (error) {
+        console.error('Error initializing Stripe:', error);
+        alert('Failed to load payment processor. Please refresh the page.');
       }
-    });
+    }
+
+    // Initialize Stripe when DOM is ready
+    document.addEventListener('DOMContentLoaded', initializeStripe);
     
     // Payment mode toggle with smooth transitions
     const paymentModeRadios = document.querySelectorAll('input[name="paymentMode"]');
