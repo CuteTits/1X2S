@@ -213,8 +213,16 @@ app.get('/api/session', (req, res) => {
 
 // --- Stripe Configuration ---
 app.get('/api/stripe-config', (req, res) => {
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+
+  if (!publishableKey || typeof publishableKey !== 'string' || !publishableKey.trim()) {
+    return res.status(500).json({
+      error: 'Stripe publishable key is not configured on server'
+    });
+  }
+
   res.json({
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
+    publishableKey: publishableKey.trim()
   });
 });
 

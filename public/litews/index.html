@@ -58,6 +58,284 @@ vertical-align: middle;
 color: gray;
 cursor: help;
 }
+
+/* Enhanced Section Styles */
+#reach-section,
+#use-cases-section {
+    font-family: inter, montserrat, sans-serif;
+}
+
+#reach-section h1,
+#use-cases-section h1 {
+    font-family: inter, montserrat, sans-serif;
+    font-size: clamp(1.8rem, 4.2vw, 2.5rem);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.85rem 0;
+}
+
+.section-shell {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.section-lead {
+    max-width: 760px;
+    font-size: clamp(0.92rem, 1.45vw, 1.02rem);
+    color: #9f9f9f;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    margin: 0 0 2rem 0;
+}
+
+#reach-section {
+  background: linear-gradient(135deg, rgba(255, 54, 54, 0.01) 0%, rgba(10, 10, 10, 0.5) 100%), #0f0f0f;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4rem 2rem;
+}
+
+#reach-section h1 {
+  background: linear-gradient(to left, rgb(100, 100, 100), rgb(180, 180, 180));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+    font-weight: 650;
+}
+
+#reach-section .reach-timeline {
+  position: relative;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  margin-top: 2rem;
+}
+
+#reach-section .reach-timeline::before {
+  content: '';
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+#reach-section .timeline-item {
+  position: relative;
+    margin-bottom: 1.35rem;
+  padding-left: 100px;
+  display: flex;
+    border-radius: 12px;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+#reach-section .timeline-item:hover {
+    transform: translateX(6px);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#reach-section .timeline-marker {
+  position: absolute;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+        font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  color: #b8b8b8;
+  transition: all 0.3s ease;
+}
+
+#reach-section .timeline-item:hover .timeline-marker {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+#reach-section .timeline-content {
+  flex: 1;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.015);
+}
+
+#reach-section .timeline-content h3 {
+    font-size: 1.02rem;
+  margin: 0 0 0.5rem 0;
+    color: #c0c0c0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+#reach-section .timeline-content h3 span {
+  color: #a0a0a0;
+    font-size: 1.15rem;
+}
+
+#reach-section .timeline-content p {
+  margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.68;
+  color: #c1c1c1;
+}
+
+/* Use Cases Section */
+#use-cases-section {
+  background: linear-gradient(135deg, rgba(255, 54, 54, 0.01) 0%, rgba(10, 10, 10, 0.5) 100%), #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4rem 2rem;
+}
+
+#use-cases-section h1 {
+  background: linear-gradient(to left, rgb(100, 100, 100), rgb(180, 180, 180));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+    font-weight: 650;
+}
+
+#use-cases-section .use-cases-tabs {
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  margin-top: 2rem;
+}
+
+#use-cases-section .use-case-toggle {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+#use-cases-section .use-case-toggle:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+    transform: translateX(4px);
+}
+
+#use-cases-section .use-case-toggle.active {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.045);
+}
+
+#use-cases-section .toggle-header {
+    padding: 1rem 1.15rem;
+  display: flex;
+  align-items: center;
+    gap: 0.8rem;
+  cursor: pointer;
+  user-select: none;
+    transition: background-color 0.25s ease;
+}
+
+#use-cases-section .toggle-header:focus-visible {
+    outline: 1px solid rgba(255, 255, 255, 0.26);
+    outline-offset: -1px;
+    border-radius: 10px;
+}
+
+#use-cases-section .toggle-header span:first-child {
+    font-size: 1.1rem;
+    color: #a8a8a8;
+    min-width: 1.25rem;
+    width: 1.85rem;
+    height: 1.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#use-cases-section .toggle-title {
+    font-size: 0.97rem;
+  font-weight: 600;
+    color: #c3c3c3;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+  flex: 1;
+}
+
+#use-cases-section .material-symbols-outlined {
+    font-size: 1.1rem;
+  color: #a0a0a0;
+  transition: transform 0.3s ease;
+}
+
+#use-cases-section .use-case-toggle.active .material-symbols-outlined {
+  transform: rotate(90deg);
+}
+
+#use-cases-section .use-case-toggle.active .toggle-title {
+    color: #d2d2d2;
+}
+
+#use-cases-section .toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  opacity: 0;
+}
+
+#use-cases-section .use-case-toggle.active .toggle-content {
+  max-height: 300px;
+  opacity: 1;
+    padding: 0 1.15rem 1.1rem 3.15rem;
+}
+
+#use-cases-section .toggle-content p {
+  margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.68;
+    letter-spacing: 0.01em;
+  color: #c1c1c1;
+}
+
+@media (max-width: 768px) {
+    #reach-section,
+    #use-cases-section {
+        padding: 3rem 1rem;
+    }
+
+    #reach-section .timeline-item {
+        padding-left: 74px;
+    }
+
+    #reach-section .timeline-marker {
+        width: 46px;
+        height: 46px;
+        font-size: 0.88rem;
+    }
+
+    #reach-section .timeline-content {
+        padding: 0.75rem 0.85rem;
+    }
+
+    #use-cases-section .toggle-header {
+        padding: 0.9rem 0.95rem;
+    }
+
+    #use-cases-section .use-case-toggle.active .toggle-content {
+        padding: 0 0.95rem 1rem 2.95rem;
+    }
+}
 </style>
 
 
@@ -99,36 +377,79 @@ cursor: help;
 </section>
 
 
-<section class="what-is-section">
-    <div class="what-is-container">
-        <h1>What is LiteWS?</h1>
-        <p>LiteWS is a powerful web retrieval and source aggregation API designed to bring real-time web access to AI models and applications.</p>
-        
-        <div class="what-is-features">
-            <div class="feature" data-number="01">
-                <div class="feature-number">01</div>
-                <h3>Intelligent Data Collection</h3>
-                <p>Aggregates web results, search results, RSS/XML feeds, and structured data (HTML/JSON/CSV) using deep web scraping, SERP results, and advanced search crawling techniques.</p>
-            </div>
-            
-            <div class="feature" data-number="02">
-                <div class="feature-number">02</div>
-                <h3>Query-Driven Intelligence</h3>
-                <p>Analyzes queries and prompts to detect intent, extract contextual signals, and isolate relevant keywords. Returns context-aware, time-relevant results tailored to user needs.</p>
-            </div>
-            
-            <div class="feature" data-number="03">
-                <div class="feature-number">03</div>
-                <h3>Smart Filtering & Ranking</h3>
-                <p>Uses keyword matching, semantic relevance, and contextual filtering to surface high-value data aligned with user intent, ensuring only the most pertinent information is returned.</p>
-            </div>
-            
-            <div class="feature" data-number="04">
-                <div class="feature-number">04</div>
-                <h3>LLM-Ready Integration</h3>
-                <p>Built for self-hosted and API-only LLMs (Gemini, LLaMA, etc.) that lack native web browsing. Integrates seamlessly into various AI models on any deployment.</p>
+<section id="reach-section">
+    <div class="section-shell">
+    <h1>Reach</h1>
+    <p class="section-lead">Comprehensive data discovery across multiple sources and search engines</p>
+    <div class="reach-timeline">
+        <div class="timeline-item">
+            <div class="timeline-marker">01</div>
+            <div class="timeline-content">
+                <h3><span class="material-symbols-outlined">language</span> Multi-Engine Search</h3>
+                <p>Dynamic searches via GDELT, SearX, DuckDuckGo, Wikipedia, and proprietary databases for broader coverage</p>
             </div>
         </div>
+        <div class="timeline-item">
+            <div class="timeline-marker">02</div>
+            <div class="timeline-content">
+                <h3><span class="material-symbols-outlined">rss_feed</span> Real-Time Feeds</h3>
+                <p>RSS and News feed ingestion from open sources ensuring up-to-date information delivery</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-marker">03</div>
+            <div class="timeline-content">
+                <h3><span class="material-symbols-outlined">public</span> Deep Web Access</h3>
+                <p>Advanced deep web search capabilities for alternative and uncensored data sources</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-marker">04</div>
+            <div class="timeline-content">
+                <h3><span class="material-symbols-outlined">search</span> Intelligent Crawling</h3>
+                <p>Per-site crawling for targeted data extraction and intelligent information aggregation</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section id="use-cases-section">
+    <div class="section-shell">
+    <h1>Use Cases</h1>
+    <p class="section-lead">Powerful data intelligence across diverse industries and domains</p>
+    <div class="use-cases-tabs">
+        <div class="use-case-toggle" data-tab="sports">
+            <div class="toggle-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="material-symbols-outlined">sports_soccer</span>
+                <span class="toggle-title">Sports & Gaming</span>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </div>
+            <div class="toggle-content">
+                <p>Real-time sports statistics, game updates, transfer news, and injury reports from news feeds, official websites, and stats databases. Perfect for odds calculation, prediction AI models, and sports-oriented application grounding.</p>
+            </div>
+        </div>
+        <div class="use-case-toggle" data-tab="finance">
+            <div class="toggle-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="material-symbols-outlined">trending_up</span>
+                <span class="toggle-title">Financial & Stocks</span>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </div>
+            <div class="toggle-content">
+                <p>Investment intelligence through aggregated financial news, company earnings reports, ticker monitoring, and exchange price tracking. Enable accurate market sentiment analysis and informed investment decision-making.</p>
+            </div>
+        </div>
+        <div class="use-case-toggle" data-tab="news">
+            <div class="toggle-header" role="button" tabindex="0" aria-expanded="false">
+                <span class="material-symbols-outlined">newspaper</span>
+                <span class="toggle-title">News & Media</span>
+                <span class="material-symbols-outlined">chevron_forward</span>
+            </div>
+            <div class="toggle-content">
+                <p>Advanced news aggregation combining deep search crawling, RSS feeds, CSV imports, and per-site collection. Surface the latest breaking news and trending topics with comprehensive global coverage.</p>
+            </div>
+        </div>
+    </div>
     </div>
 </section>
 
@@ -155,7 +476,7 @@ cursor: help;
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon expand-icon">chevron_forward</span>
                     <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
@@ -179,7 +500,7 @@ cursor: help;
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon expand-icon">chevron_forward</span>
                     <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
@@ -199,7 +520,7 @@ cursor: help;
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon expand-icon">chevron_forward</span>
                     <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
@@ -218,7 +539,7 @@ cursor: help;
                 </div>
                 <!-- Material Symbol Icons -->
                 <div class="material-icon-container">
-                    <span class="material-icon expand-icon">chevron_right</span>
+                    <span class="material-icon expand-icon">chevron_forward</span>
                     <span class="material-icon collapse-icon">close</span>
                 </div>
             </div>
@@ -359,7 +680,54 @@ cursor: help;
 
 </section>
 
+<script>
+/* Use Cases Toggle Functionality */
+(() => {
+    const toggles = document.querySelectorAll('.use-case-toggle');
 
+    const setExpandedState = (toggle, expanded) => {
+        const header = toggle.querySelector('.toggle-header');
+        if (header) {
+            header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        }
+    };
+
+    const closeOthers = (currentToggle) => {
+        toggles.forEach(t => {
+            if (t !== currentToggle) {
+                t.classList.remove('active');
+                setExpandedState(t, false);
+            }
+        });
+    };
+
+    const togglePanel = (toggle) => {
+        const willExpand = !toggle.classList.contains('active');
+        closeOthers(toggle);
+        toggle.classList.toggle('active', willExpand);
+        setExpandedState(toggle, willExpand);
+    };
+
+    toggles.forEach(toggle => {
+        setExpandedState(toggle, toggle.classList.contains('active'));
+    });
+    
+    toggles.forEach(toggle => {
+        const header = toggle.querySelector('.toggle-header');
+        
+        header.addEventListener('click', () => {
+            togglePanel(toggle);
+        });
+
+        header.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                togglePanel(toggle);
+            }
+        });
+    });
+})();
+</script>
 
     <button id="scroll-to-top">Back to Top</button>
             <link rel="stylesheet" href="/assets/css/components/back-to-top.css">

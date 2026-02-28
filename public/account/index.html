@@ -1091,9 +1091,19 @@ fill="#ffffff" viewBox="0 0 24 24" >
     async function initializeStripe() {
       try {
         const response = await fetch('/api/stripe-config');
+        if (!response.ok) {
+          const errorPayload = await response.json().catch(() => ({}));
+          throw new Error(errorPayload.error || 'Unable to load Stripe configuration');
+        }
+
         const config = await response.json();
+        const publishableKey = typeof config.publishableKey === 'string' ? config.publishableKey.trim() : '';
+
+        if (!publishableKey) {
+          throw new Error('Missing Stripe publishable key (STRIPE_PUBLISHABLE_KEY)');
+        }
         
-        stripe = Stripe(config.publishableKey);
+        stripe = Stripe(publishableKey);
         elements = stripe.elements();
         
         // Create Stripe Card Element with custom styling
@@ -1129,7 +1139,7 @@ fill="#ffffff" viewBox="0 0 24 24" >
         return true;
       } catch (error) {
         console.error('Error initializing Stripe:', error);
-        alert('Failed to load payment processor. Please refresh the page.');
+        alert('Stripe is not configured on this deployment. Please set STRIPE_PUBLISHABLE_KEY in server environment variables.');
         return false;
       }
     }
