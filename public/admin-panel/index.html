@@ -50,28 +50,30 @@
 
     body {
       font-family: 'montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0B0B0B;
+      background: radial-gradient(circle at 10% -10%, rgba(255, 255, 255, 0.06), transparent 40%), #0B0B0B;
       min-height: 100vh;
       padding: 15px;
       color: #d4d4d4;
+      letter-spacing: 0.1px;
     }
 
     .container {
       max-width: 1600px;
       margin: 0 auto;
-      background: #141414;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      background: rgba(23, 23, 23, 0.78);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
       overflow: hidden;
-      border: 1px solid #2a2a2a;
+      border: 1px solid #242424;
+      backdrop-filter: blur(6px);
     }
 
     header {
-      background: #1a1a1a;
+      background: rgba(18, 18, 18, 0.7);
       color: white;
       padding: 20px 24px;
       text-align: left;
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid #242424;
     }
 
     header h1 {
@@ -89,31 +91,34 @@
 
     .tabs {
       display: flex;
-      background: #1a1a1a;
-      border-bottom: 1px solid #2a2a2a;
-      padding: 0 24px;
+      flex-wrap: wrap;
+      background: rgba(18, 18, 18, 0.7);
+      border-bottom: 1px solid #242424;
+      padding: 10px 24px 12px;
       gap: 8px;
     }
 
     .tab-button {
-      padding: 12px 16px;
-      border: none;
-      background: none;
+      padding: 8px 14px;
+      border: 1px solid #1f1f1f;
+      border-radius: 999px;
+      background: #121212;
       cursor: pointer;
-      font-size: 0.85em;
+      font-size: 0.8em;
       font-weight: 500;
-      color: #808080;
+      color: #cfcfcf;
       transition: all 0.2s;
-      border-bottom: 2px solid transparent;
     }
 
     .tab-button:hover {
-      color: #d4d4d4;
+      color: #ffffff;
+      background: #171717;
     }
 
     .tab-button.active {
-      color: #ffffff;
-      border-bottom-color: #ff4f4f;
+      background: #ffffff;
+      color: #111111;
+      border-color: #ffffff;
     }
 
     .content {
@@ -124,8 +129,8 @@
     }
 
     .sidebar {
-      background: #1a1a1a;
-      border-right: 1px solid #2a2a2a;
+      background: rgba(20, 20, 20, 0.65);
+      border-right: 1px solid #242424;
       padding: 16px;
       overflow-y: auto;
       max-height: calc(100vh - 200px);
@@ -144,7 +149,7 @@
       padding: 24px;
       overflow-y: auto;
       max-height: calc(100vh - 200px);
-      background: #141414;
+      background: transparent;
     }
 
     .form-group {
@@ -168,11 +173,11 @@
     select,
     textarea {
       padding: 8px 10px;
-      border: 1px solid #2a2a2a;
-      border-radius: 4px;
+      border: 1px solid #2b2b2b;
+      border-radius: 10px;
       font-family: inherit;
       font-size: 0.85em;
-      background: #1a1a1a;
+      background: #121212;
       color: #d4d4d4;
       transition: all 0.2s;
     }
@@ -185,8 +190,8 @@
     select:focus,
     textarea:focus {
       outline: none;
-      border-color: #ff4f4f;
-      background: #1f1f1f;
+      border-color: #ffffff;
+      background: #151515;
     }
 
     textarea {
@@ -197,9 +202,10 @@
     button {
       padding: 8px 14px;
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       font-size: 0.8em;
       font-weight: 500;
+      font-family: inherit;
       cursor: pointer;
       transition: all 0.2s;
       display: flex;
@@ -213,39 +219,40 @@
     }
 
     .btn-primary {
-      background: #ff4f4f;
-      color: white;
+      background: #ffffff;
+      color: #111111;
       width: 100%;
       margin-bottom: 8px;
+      border: 1px solid #ffffff;
     }
 
     .btn-primary:hover {
-      background: #ff3838;
+      background: #f1f1f1;
     }
 
     .btn-danger {
-      background: #2a2a2a;
-      color: #ff4f4f;
-      border: 1px solid #3a3a3a;
+      background: #141414;
+      color: #ff6666;
+      border: 1px solid #303030;
       width: 100%;
     }
 
     .btn-danger:hover {
-      background: #333333;
-      border-color: #ff4f4f;
+      background: #1a1a1a;
+      border-color: #ff6666;
     }
 
     .btn-add {
-      background: #1a1a1a;
-      color: #ff4f4f;
-      border: 1px dashed #3a3a3a;
+      background: #121212;
+      color: #d9d9d9;
+      border: 1px dashed #313131;
       width: 100%;
       margin-top: 8px;
     }
 
     .btn-add:hover {
-      background: #222222;
-      border-color: #ff4f4f;
+      background: #181818;
+      border-color: #4a4a4a;
     }
 
     .list {
@@ -255,14 +262,14 @@
     }
 
     .list-item {
-      background: #141414;
-      border: 1px solid #2a2a2a;
-      border-radius: 4px;
+      background: #121212;
+      border: 1px solid #242424;
+      border-radius: 12px;
       padding: 10px;
       cursor: pointer;
       transition: all 0.2s;
       position: relative;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
     }
 
     .list-item::before {
@@ -278,18 +285,18 @@
     }
 
     .list-item:hover {
-      background: #1f1f1f;
-      border-color: #3a3a3a;
+      background: #161616;
+      border-color: #343434;
     }
 
     .list-item.active {
-      background: #1f1f1f;
-      border-color: #ff4f4f;
-      box-shadow: 0 0 0 1px rgba(255, 79, 79, 0.2), 0 6px 14px rgba(0, 0, 0, 0.35);
+      background: #191919;
+      border-color: #ffffff;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 10px 22px rgba(0, 0, 0, 0.4);
     }
 
     .list-item.active::before {
-      background: #ff4f4f;
+      background: #ffffff;
     }
 
     .list-item h4 {
@@ -309,6 +316,40 @@
       color: #a0a0a0;
     }
 
+    /* Drag and drop styles */
+    .list-item[draggable="true"] {
+      user-select: none;
+    }
+
+    .list-item:hover {
+      cursor: grab;
+    }
+
+    .list-item:active {
+      cursor: grabbing;
+    }
+
+    .list-item.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+
+    .drag-handle {
+      cursor: grab;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      color: #666;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .list-item:hover .drag-handle {
+      color: #ffffff;
+    }
+
     .message {
       padding: 10px 12px;
       border-radius: 4px;
@@ -322,15 +363,15 @@
     }
 
     .message.success {
-      background: #1a2e1a;
-      color: #4ade80;
-      border: 1px solid #2a4a2a;
+      background: rgba(34, 197, 94, 0.1);
+      color: #8bf0b5;
+      border: 1px solid rgba(34, 197, 94, 0.35);
     }
 
     .message.error {
-      background: #2e1a1a;
-      color: #ff4f4f;
-      border: 1px solid #4a2a2a;
+      background: rgba(239, 68, 68, 0.1);
+      color: #ff7f7f;
+      border: 1px solid rgba(239, 68, 68, 0.35);
     }
 
     .no-selection {
@@ -352,9 +393,9 @@
     }
 
     .dropdown-item {
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      border-radius: 4px;
+      background: #161616;
+      border: 1px solid #292929;
+      border-radius: 10px;
       padding: 10px;
       margin-bottom: 8px;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -378,7 +419,7 @@
     }
 
     .dropdown-toggle-header {
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid #252525;
     }
 
     .dropdown-item.state-win {
@@ -420,7 +461,7 @@
     .parent-container {
       transition: border-color 0.3s ease;
       position: relative;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
     }
 
     .parent-container::before {
@@ -443,7 +484,7 @@
     }
 
     .parent-header {
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid #252525;
       box-shadow: inset 3px 0 0 rgba(255, 79, 79, 0.5);
     }
 
@@ -559,7 +600,7 @@
       color: #808080;
       font-size: 0.75em;
       padding: 4px 8px;
-      border: 1px solid #2a2a2a;
+      border: 1px solid #2f2f2f;
       width: auto;
       margin-top: 0;
       display: flex;
@@ -568,9 +609,9 @@
     }
 
     .btn-remove:hover {
-      background: #2a2a2a;
-      color: #ff4f4f;
-      border-color: #3a3a3a;
+      background: #1f1f1f;
+      color: #ffffff;
+      border-color: #4a4a4a;
     }
 
     .tab-content {
@@ -590,15 +631,15 @@
     }
 
     .btn-manage-comp {
-      background: #2a2a2a;
+      background: #161616;
       color: #d4d4d4;
-      border: 1px solid #3a3a3a;
+      border: 1px solid #2f2f2f;
       font-size: 0.75em;
       padding: 7px 10px;
     }
 
     .btn-manage-comp:hover {
-      background: #333333;
+      background: #1d1d1d;
       border-color: #4a4a4a;
     }
 
@@ -625,64 +666,64 @@
     }
 
     .fixed-actions .btn-save {
-      background: #ff4f4f;
-      color: white;
-      border: none;
+      background: #ffffff;
+      color: #111111;
+      border: 1px solid #ffffff;
     }
 
     .fixed-actions .btn-save:hover {
-      background: #ff3838;
-      box-shadow: 0 4px 12px rgba(255, 79, 79, 0.3);
+      background: #f1f1f1;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
     }
 
     .fixed-actions .btn-delete {
-      background: #2a2a2a;
-      color: #ff4f4f;
-      border: 1px solid #3a3a3a;
+      background: #141414;
+      color: #ff6666;
+      border: 1px solid #303030;
     }
 
     .fixed-actions .btn-delete:hover {
-      background: #333333;
-      border-color: #ff4f4f;
+      background: #1a1a1a;
+      border-color: #ff6666;
     }
 
     .fixed-actions .btn-duplicate {
-      background: #1a3a3a;
-      color: #4ade80;
-      border: 1px solid #2a5a5a;
+      background: #141b17;
+      color: #8bf0b5;
+      border: 1px solid #2f4338;
     }
 
     .fixed-actions .btn-duplicate:hover {
-      background: #1f4a4a;
-      border-color: #4ade80;
+      background: #1a241f;
+      border-color: #8bf0b5;
     }
 
     .fixed-actions .btn-export-json {
-      background: #1a2a3a;
-      color: #60a5fa;
-      border: 1px solid #2a4a5a;
+      background: #141a22;
+      color: #9bc2fb;
+      border: 1px solid #2d3a4d;
     }
 
     .fixed-actions .btn-export-json:hover {
-      background: #1f3a5a;
-      border-color: #60a5fa;
+      background: #1a2432;
+      border-color: #9bc2fb;
     }
 
     .fixed-actions .btn-export-csv {
-      background: #2a1a3a;
-      color: #c084fc;
-      border: 1px solid #3a2a5a;
+      background: #1f1725;
+      color: #d4a6fc;
+      border: 1px solid #40304d;
     }
 
     .fixed-actions .btn-export-csv:hover {
-      background: #3a1f5a;
-      border-color: #c084fc;
+      background: #2a1f33;
+      border-color: #d4a6fc;
     }
 
     .btn-duplicate {
-      background: #1a3a3a;
-      color: #4ade80;
-      border: 1px solid #2a5a5a;
+      background: #141b17;
+      color: #8bf0b5;
+      border: 1px solid #2f4338;
       font-size: 0.75em;
       padding: 4px 8px;
       width: auto;
@@ -692,8 +733,8 @@
     }
 
     .btn-duplicate:hover {
-      background: #1f4a4a;
-      border-color: #4ade80;
+      background: #1a241f;
+      border-color: #8bf0b5;
     }
 
     .fixed-actions.hidden {
@@ -815,7 +856,6 @@
       font-size: 0.8em;
     }
 
-  </style>
   </style>
 </head>
 <body>
@@ -944,12 +984,12 @@
 
         <div class="form-group">
           <label for="user-uid">User UID (Read-only)</label>
-          <input type="text" id="user-uid" placeholder="Auto-generated" readonly style="background: #f0f0f0; cursor: not-allowed;">
+          <input type="text" id="user-uid" placeholder="Auto-generated" readonly style="background: #101010; color: #9a9a9a; border: 1px solid #242424; cursor: not-allowed;">
         </div>
 
         <div class="form-group">
           <label for="user-created">Created At (Read-only)</label>
-          <input type="text" id="user-created" placeholder="Auto-generated" readonly style="background: #f0f0f0; cursor: not-allowed;">
+          <input type="text" id="user-created" placeholder="Auto-generated" readonly style="background: #101010; color: #9a9a9a; border: 1px solid #242424; cursor: not-allowed;">
         </div>
 
         <div class="section-title" style="margin-top: 30px;">Actions</div>
@@ -1250,21 +1290,138 @@ async function loadCards() {
     result.data.forEach(card => {
       const cardEl = document.createElement('div');
       cardEl.className = 'list-item';
+      cardEl.draggable = true;
+      cardEl.dataset.cardId = card.id;
       cardEl.onclick = () => selectCard(card);
 
       const dateStr = card.date ? new Date(card.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'No date';
 
       cardEl.innerHTML = `
-        <h4>${card.title}</h4>
-        <p>${dateStr} • ID: ${card.id}</p>
-        <p>${card.dropdowns?.length || 0} dropdowns</p>
+        <span class="drag-handle" style="margin-right: 8px; cursor: grab; color: #666;">⋮⋮</span>
+        <div style="flex: 1;">
+          <h4>${card.title}</h4>
+          <p>${dateStr} • ID: ${card.id}</p>
+          <p>${card.dropdowns?.length || 0} dropdowns</p>
+        </div>
       `;
+      
+      // Make list item a flex container
+      cardEl.style.display = 'flex';
+      cardEl.style.alignItems = 'center';
+
+      // Drag event listeners
+      cardEl.addEventListener('dragstart', handleCardDragStart);
+      cardEl.addEventListener('dragover', handleCardDragOver);
+      cardEl.addEventListener('drop', handleCardDrop);
+      cardEl.addEventListener('dragend', handleCardDragEnd);
+      cardEl.addEventListener('dragenter', handleCardDragEnter);
+      cardEl.addEventListener('dragleave', handleCardDragLeave);
 
       cardsList.appendChild(cardEl);
     });
   } catch (error) {
     console.error('Error loading cards:', error);
     showMessage('carousel-message', 'Error: ' + error.message, 'error');
+  }
+}
+
+// Drag and drop handlers for card reordering
+let draggedCard = null;
+
+function handleCardDragStart(e) {
+  draggedCard = this;
+  this.style.opacity = '0.5';
+  this.style.transform = 'scale(0.95)';
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleCardDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function handleCardDragEnter(e) {
+  if (this !== draggedCard) {
+    this.style.borderTop = '3px solid #ff4f4f';
+    this.style.paddingTop = '8px';
+  }
+}
+
+function handleCardDragLeave(e) {
+  this.style.borderTop = 'none';
+  this.style.paddingTop = '0';
+}
+
+function handleCardDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation();
+  }
+
+  if (draggedCard !== this) {
+    // Swap the cards
+    const allCards = Array.from(document.querySelectorAll('#cards-list .list-item'));
+    const draggedIndex = allCards.indexOf(draggedCard);
+    const targetIndex = allCards.indexOf(this);
+    
+    if (draggedIndex < targetIndex) {
+      this.parentNode.insertBefore(draggedCard, this.nextSibling);
+    } else {
+      this.parentNode.insertBefore(draggedCard, this);
+    }
+    
+    // Save the new order
+    saveCardOrder();
+  }
+
+  this.style.borderTop = 'none';
+  this.style.paddingTop = '0';
+  return false;
+}
+
+function handleCardDragEnd(e) {
+  this.style.opacity = '1';
+  this.style.transform = 'scale(1)';
+  
+  // Clean up all borders
+  document.querySelectorAll('#cards-list .list-item').forEach(card => {
+    card.style.borderTop = 'none';
+    card.style.paddingTop = '0';
+  });
+  
+  draggedCard = null;
+}
+
+async function saveCardOrder() {
+  try {
+    const cardItems = document.querySelectorAll('#cards-list .list-item');
+    const order = Array.from(cardItems).map((item, index) => ({
+      id: parseInt(item.dataset.cardId),
+      order: index
+    }));
+
+    const response = await fetch('/api/carousel/reorder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ order })
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      showMessage('carousel-message', 'Error saving order: ' + result.error, 'error');
+      loadCards(); // Reload to revert changes
+      return;
+    }
+
+    showMessage('carousel-message', '<span class="material-symbols-outlined" style="font-size: 16px;">check</span> Card order saved!', 'success');
+  } catch (error) {
+    console.error('Error saving card order:', error);
+    showMessage('carousel-message', 'Error: ' + error.message, 'error');
+    loadCards(); // Reload to revert changes
   }
 }
 
@@ -1681,33 +1838,34 @@ function openCompetitionManager(event) {
 
   const dialog = document.createElement('div');
   dialog.style.cssText = `
-    background: #0B0B0B;
-    border: 2px solid #ff2525;
-    border-radius: 10px;
-    padding: 30px;
+    background: rgba(18, 18, 18, 0.95);
+    border: 1px solid #2d2d2d;
+    border-radius: 14px;
+    padding: 24px;
     max-width: 500px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-    color: #ccc;
+    color: #d4d4d4;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
   `;
 
   dialog.innerHTML = `
-    <h2 style="color: #ff2525; margin-bottom: 20px;">Manage Competitions</h2>
+    <h2 style="color: #ffffff; margin-bottom: 18px; font-size: 1.1em;">Manage Competitions</h2>
     
     <div style="margin-bottom: 20px;">
-      <h3 style="color: #fff; font-size: 1em; margin-bottom: 10px;">Add New Competition</h3>
-      <input type="text" id="new-comp-name" placeholder="Competition name" style="width: 100%; padding: 8px; margin-bottom: 8px; background: #222; border: 1px solid #333; color: #fff; border-radius: 5px;">
-      <input type="text" id="new-comp-icon" placeholder="Icon filename (e.g., en-premierleague.png)" style="width: 100%; padding: 8px; margin-bottom: 8px; background: #222; border: 1px solid #333; color: #fff; border-radius: 5px;">
-      <button onclick="addNewCompetition()" style="width: 100%; padding: 10px; background: #ff2525; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">+ Add Competition</button>
+      <h3 style="color: #fff; font-size: 0.95em; margin-bottom: 10px;">Add New Competition</h3>
+      <input type="text" id="new-comp-name" placeholder="Competition name" style="width: 100%; padding: 9px 10px; margin-bottom: 8px; background: #121212; border: 1px solid #2b2b2b; color: #fff; border-radius: 10px;">
+      <input type="text" id="new-comp-icon" placeholder="Icon filename (e.g., en-premierleague.png)" style="width: 100%; padding: 9px 10px; margin-bottom: 8px; background: #121212; border: 1px solid #2b2b2b; color: #fff; border-radius: 10px;">
+      <button onclick="addNewCompetition()" style="width: 100%; padding: 10px; background: #ffffff; color: #111111; border: 1px solid #fff; border-radius: 10px; cursor: pointer; font-weight: 600;">+ Add Competition</button>
     </div>
 
-    <div style="border-top: 1px solid #333; padding-top: 20px;">
-      <h3 style="color: #fff; font-size: 1em; margin-bottom: 10px;">Existing Competitions</h3>
+    <div style="border-top: 1px solid #2a2a2a; padding-top: 18px;">
+      <h3 style="color: #fff; font-size: 0.95em; margin-bottom: 10px;">Existing Competitions</h3>
       <div id="competitions-list" style="max-height: 300px; overflow-y: auto;"></div>
     </div>
 
-    <button onclick="closeCompetitionManager()" style="width: 100%; padding: 10px; margin-top: 20px; background: #333; color: #ccc; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Close</button>
+    <button onclick="closeCompetitionManager()" style="width: 100%; padding: 10px; margin-top: 18px; background: #171717; color: #ccc; border: 1px solid #2f2f2f; border-radius: 10px; cursor: pointer; font-weight: 600;">Close</button>
   `;
 
   modal.appendChild(dialog);
@@ -1729,31 +1887,31 @@ async function loadCompetitionsIntoManager() {
     result.data.forEach(comp => {
       const item = document.createElement('div');
       item.style.cssText = `
-        background: #222;
+        background: #161616;
         padding: 10px;
         margin-bottom: 8px;
-        border-radius: 5px;
+        border-radius: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-left: 3px solid #ff2525;
+        border: 1px solid #2a2a2a;
       `;
 
       const info = document.createElement('div');
       info.style.cssText = 'flex: 1;';
       info.innerHTML = `
         <div style="color: #fff; font-weight: 600;">${comp.name}</div>
-        <div style="color: #888; font-size: 0.85em;">${comp.icon || 'No icon'}</div>
+        <div style="color: #9a9a9a; font-size: 0.85em;">${comp.icon || 'No icon'}</div>
       `;
 
       const deleteBtn = document.createElement('button');
       deleteBtn.innerHTML = '<span class="material-symbols-outlined">close</span> Delete';
       deleteBtn.style.cssText = `
         padding: 5px 10px;
-        background: #c0392b;
-        color: white;
-        border: none;
-        border-radius: 3px;
+        background: #1a1a1a;
+        color: #ff8a8a;
+        border: 1px solid #3a2a2a;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 0.85em;
         display: flex;

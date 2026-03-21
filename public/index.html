@@ -77,238 +77,84 @@
   <section id="hero">
     <div class="hero__container">
       <div class="hero__content">
-        <h2>The World Wide Web in One Call</h2>
-        <h3>Context-aware web retrieval and grounding stack that supplies AI systems with fast, structured, and time-relevant web data.</h3>
+        <div class="hero__content-title">
+          <h2>Back your <span class="dynamic-text-container__js">-</span></h2>
+        </div>
+          <h3>Context-aware web retrieval and grounding stack that supplies AI systems with fast, structured, and time-relevant web data.</h3>
       </div>
-      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">LiteWS version 1.2.0.6 Chrome</p>
+      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">1EX version 1.2.0.6 Chrome</p>
     </div>
   </section>
 
-  <section id="query-demo" class="section section--dynamic section--vh400">
-    <div class="section__container section__container--dynamic">
-      <div class="query-demo__wrapper">
-        <div class="query-demo__text">
-          <h4 data-aos="fade-up">Scale the Web</h4>
-          <h1 data-aos="fade-up" id="query-demo-dynamic-text" class="query-demo__dynamic-text" style="margin-bottom: 25px;">...Ask anything</h1>
-          <script>
-            const dynamicText = document.getElementById('query-demo-dynamic-text');
-            const section1_2 = document.getElementById('query-demo');
+<script>
+  (function rotateHeroWords() {
+    const dynamicText = document.querySelector('.dynamic-text-container__js');
+    if (!dynamicText) return;
 
-            const startPhrase = '...Ask anything';
-            const phrases = [
-              'Sports Insights',
-              'World News',
-              'Reddit Threads',
-              'Stock Updates',
-              'Match Lineups',
-              'Tech Trends',
-              'ECom Data',
-              'Health News',
-            ];
+    const words = ['insights', 'decisions', 'strategy', 'results','trades','research','plays'];
+    let currentIndex = 0;
 
-            const startDelay = 0.3;
-            let toggled = false;
+    const setWord = (index) => {
+      dynamicText.classList.remove('dynamic-text-container__js--slide');
+      void dynamicText.offsetWidth;
+      dynamicText.textContent = words[index];
+      dynamicText.classList.add('dynamic-text-container__js--slide');
+    };
 
-            function isInViewport(el) {
-              const rect = el.getBoundingClientRect();
-              return rect.top < window.innerHeight && rect.bottom > 0;
-            }
+    setWord(currentIndex);
 
-            function getScrollPercent(el) {
-              const rect = el.getBoundingClientRect();
-              const totalHeight = rect.height + window.innerHeight;
-              const scrollY = window.innerHeight - rect.top;
-              return Math.min(Math.max(scrollY / totalHeight, 0), 1);
-            }
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % words.length;
+      setWord(currentIndex);
+    }, 1200);
+  })();
 
-            function startToggling() {
-              if (toggled) return;
-              toggled = true;
+</script>
 
-              let index = 0;
-              dynamicText.textContent = phrases[index];
 
-              const interval = setInterval(() => {
-                index = (index + 1) % phrases.length;
-                dynamicText.textContent = phrases[index];
-              }, 1500); // change phrase every 2s
-            }
 
-            window.addEventListener('scroll', () => {
-              if (isInViewport(section1_2) && getScrollPercent(section1_2) >= startDelay) {
-                startToggling();
-              }
-            });
-          </script>
- 
-        </div>
 
-        <div class="query-demo__textbox">
-          <div class="query-demo__typing" id="query-demo-typing">
-            <div class="query-demo__typing-content">
-              <p>List <span>Arsenal's Current Injuries</span>.</p>
-            </div>
-          </div>
-          <span class="material-symbols-outlined">send</span>
-        </div>
-        <div class="query-demo__examples" data-aos="flip-down" data-aos-delay="1200">
-          <div id="query-demo-arrow"></div>
-          <div class="query-demo__example query-demo__example--r1">
-            <h1>Keyword Filtering</h1>
-            <p>Use queries and keywords without comprimising accuracy.</p>
-            <p>Advanced query-handling allows for natural language input.</p>
-          </div>
-          <div class="query-demo__example query-demo__example--r2">
-            <h1>Relevancy Sorting</h1>
-            <p>Analyzes verb tenses to interpret time context and fetches the most relevant, time-appropriate results.</p>
-          </div>
-          <div class="query-demo__example query-demo__example--r3">
-            <h1>Data Extraction</h1>
-            <p>
-              Combines full-query parsing with keyword-based searches to efficiently crawl the web for high-relevance content.
-              Engineered for broad data coverage and optimized for large-scale data extraction.
-            </p>
-          </div>
-        </div>
-        <script>
-          const section = document.getElementById('query-demo');
-          const examples = Array.from(section.querySelectorAll('.query-demo__example'));
-          const arrow = document.getElementById('query-demo-arrow');
 
-          // Define custom widths for each example (in vw)
-          const arrowWidths = [25, 17, 0]; // <-- editable intervals, one per example
 
-          window.addEventListener('scroll', () => {
-            const rect = section.getBoundingClientRect();
-            const sectionTop = window.scrollY + rect.top;
-            const sectionHeight = rect.height;
-            const scrollY = window.scrollY;
-
-            if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
-              const scrollInSection = scrollY - sectionTop;
-              const scrollPercent = scrollInSection / sectionHeight;
-
-              // Determine visible example
-              const index = Math.min(examples.length - 1, Math.floor(scrollPercent * examples.length));
-
-              examples.forEach((el, i) => {
-                if (i === index) {
-                  el.classList.add('visible');
-
-                  // Update arrow position
-                  const elRect = el.getBoundingClientRect();
-                  const elCenter = elRect.left + elRect.width / 2 + window.scrollX;
-
-                  // Align right edge to center of element
-                  arrow.style.right = (window.innerWidth - elCenter) + 'px';
-
-                  // Apply custom width from array
-                  arrow.style.width = arrowWidths[i] + 'vw';
-                } else {
-                  el.classList.remove('visible');
-                }
-              });
-            } else {
-              examples.forEach(el => el.classList.remove('visible'));
-            }
-          });
-        </script>
-      </div>
-    </div>
-
-    <script>
-      const container = document.getElementById('query-demo-typing');
-      const originalContent = container.querySelector('.query-demo__typing-content').innerHTML;
-      container.innerHTML = '';
-
-      function parseHTMLToChars(html) {
-        const div = document.createElement('div');
-        div.innerHTML = html;
-        const chars = [];
-        function traverse(node) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent.split('').forEach(c => chars.push(c));
-          } else if (node.nodeType === Node.ELEMENT_NODE) {
-            const openTag = `<${node.tagName.toLowerCase()}${[...node.attributes].map(a => ` ${a.name}="${a.value}"`).join('')}>`;
-            chars.push(openTag);
-            node.childNodes.forEach(traverse);
-            const closeTag = `</${node.tagName.toLowerCase()}>`;
-            chars.push(closeTag);
-          }
-        }
-        div.childNodes.forEach(traverse);
-        return chars;
-      }
-
-      const chars = parseHTMLToChars(originalContent);
-
-      function updateScrollEffects() {
-        // Get section and scroll position
-        const section = document.getElementById('query-demo');
-        const sectionRect = section.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // --- Scroll typing ---
-        let progress = 0;
-        if (sectionRect.top < windowHeight && sectionRect.bottom > 0) {
-          const delay = 500; // pixels
-          const scrolledPx = Math.max(0, windowHeight - sectionRect.top - delay);
-
-          if (scrolledPx > 0) { // only start after 200px is reached
-            progress = Math.min(1, scrolledPx / (sectionRect.height + windowHeight));
-            progress = Math.min(1, progress * 5); // change speed
-            const charsToShow = Math.floor(progress * chars.length);
-            container.innerHTML =
-              '<span class="query-demo__text-typed">' +
-              chars.slice(0, charsToShow).join('') +
-              '</span>';
-          }
-        }
-
-        // --- Expand textbox on scroll ---
-        const textbox = document.querySelector('.query-demo__textbox');
-        if (textbox) {
-          if (!textbox.classList.contains('expanded') && window.scrollY > 50) {
-            textbox.classList.add('expanded');
-          } else if (textbox.classList.contains('expanded') && window.scrollY <= 50) {
-            textbox.classList.remove('expanded');
-          }
-        }
-      }
-
-      window.addEventListener('scroll', updateScrollEffects);
-      window.addEventListener('resize', updateScrollEffects);
-      updateScrollEffects();
-    </script>
-  </section>
 
   <section style="height: 2.5vh;"></section>
 
   <section id="results-summary" class="section section--dynamic section--vh250">
+
+
     <div class="section__container section__container--dynamic">
+      <div class="results-summary-title__container">
+        <h1>Intelligent WEB retrival</h1>
+        <span>DEMO</span>
+      </div>
       <div class="results-summary__wrapper">
         <div class="results-summary__panel" style="padding: 20px;">
-          <h1>Result Summaries | <span>✦ Gemini API</span></h1>
-          <div class="results-summary__tags">
-            <span>Arsenal</span><span>Football</span><span>Sports</span><span>Injuries</span><span>Updates</span><span>News</span>
-            <span>Now</span><span>Report</span>
-          </div>
-          <div class="results-summary__text results-summary__text--progressive">
-            <p>Arsenal currently face several injury concerns as of 11-20-2025.</p>
-            <P>Key injuries include:</P>
-            <ul>
-              <li>Gabriel Jesus (Forward) - Hamstring injury, expected return in 2 weeks.</li>
-              <li>Martin Ødegaard (Midfielder) - Ankle sprain, out for 3 weeks.</li>
-              <li>Ben White (Defender) - Muscle strain, likely to miss 1 week.</li>
-              <li>Takehiro Tomiyasu (Defender) - Knee injury, under evaluation for return date.</li>
-            </ul>
-            <p>The team is managing these injuries with a focus on recovery and rehabilitation to ensure</p>
-            <p>players return to full fitness as soon as possible.</p>
-            <p>The players will be unlikely to participate in the upcoming fixture</p>
-            <p>against Manchester United on 11-25-2025.</p>
+          <h1>POST https://api.1ex.io/v1/search</h1>
+
+            <div class="json__container">
+              <div class="json__section" data-json="{ 
+                      &quot;query&quot;: &quot;Apple stock forecast&quot;,
+                      &quot;location&quot;: &quot;United States&quot;,
+                      &quot;max_results&quot;: 5,
+                      &quot;include_context_sources&quot;: true,
+                      &quot;filters&quot;: {
+                        &quot;domains&quot;: [&quot;finance&quot;, &quot;stocks&quot;, &quot;technology&quot;],
+                        &quot;recency&quot;: &quot;latest&quot;,
+                        &quot;source_priority&quot;: [&quot;Bing&quot;, &quot;Brave&quot;, &quot;SearXNG&quot;, &quot;RSS&quot;]
+                      }
+          }">
+            </div>
+            <h3>Query Relevant Sources</h3>
+            <p>Returns Query-Specific sources that contains direct and query-relevant content and grounding</p>
+            <h3>Context Sources</h3>
+            <p>Always returns context grounding sources such as Wikipedia, GDELT and DDGS</p>
+
+            <h3>Source Filtering</h3>
+            <p>Filters and Ranks sources based on time-relevancy, key words, query relevancy and trustworthieness.</p>
+
+
           </div>
         </div>
-
 
         <div class="divider divider--vertical divider--light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
 
@@ -318,7 +164,7 @@
           <section class="results-summary__scroll" id="results-scroll">
             <div class="results-summary__scroll-inner">
               <div class="json__container">
-                  <div class="json__section" data-json="{
+                  <div class="json__section" data-json="{ 
                     &quot;query&quot;: &quot;List Arsenal's current injuries&quot;,
                     &quot;filters&quot;: {
                       &quot;sport&quot;: &quot;football&quot;,
@@ -429,14 +275,6 @@
                       <img src="/assets/images/logo-gdelt.png" alt="GDELT Logo">
                       <p>GDELT</p>
                     </div>
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-statsbomb.png" alt="StatsBomb Logo">
-                      <p>StatsBomb</p>
-                    </div>
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-espn.png" alt="ESPN Logo">
-                      <p>ESPN</p>
-                    </div>
 
                   </div>  
               </div>
@@ -539,64 +377,12 @@
             });
           </script>
         </div>
-                          <div class="results-summary__mask"></div>
+                  <div class="results-summary__mask"></div>
 
       </div>
 
 
-      <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const container = document.querySelector(".results-summary__text--progressive");
-          let lines = [];
-
-          Array.from(container.children).forEach(child => {
-            if (child.tagName === "UL") {
-              lines = lines.concat(Array.from(child.children).filter(li => li.tagName !== "SPAN"));
-            } else if (child.tagName !== "SPAN") {
-              lines.push(child);
-            }
-          });
-
-          let typingSpeed = 100; // ms per line
-          let index = 0;
-          let hasPlayed = false;
-
-          // Hide all lines initially
-          lines.forEach(line => {
-            line.style.opacity = "0";
-            line.style.transition = "opacity 1s ease-in-out";
-          });
-
-          const revealLines = () => {
-            if (index < lines.length) {
-              setTimeout(() => {
-                lines[index].style.opacity = "1";
-                lines[index].style.backgroundColor = "transparent";
-              }, 10);
-              index++;
-              setTimeout(revealLines, typingSpeed);
-            }
-          };
-
-          function checkScrollStart() {
-            const section = document.getElementById('results-summary');
-            const rect = section.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const sectionHeight = rect.height;
-            const scrolledPx = windowHeight - rect.top;
-            const scrollPercent = scrolledPx / sectionHeight;
-
-            if (scrollPercent >= 0.2 && !hasPlayed && rect.bottom > 0 && rect.top < windowHeight) {
-              hasPlayed = true;
-              revealLines();
-            }
-          }
-
-          window.addEventListener('scroll', checkScrollStart);
-          window.addEventListener('resize', checkScrollStart);
-          checkScrollStart();
-        });
-      </script>
+ 
           <p style="z-index: 200; opacity: 0.2; font-family: inter; font-size: 12px;">* Following is for reference only and should not be used as actual data.</p>
 
     </div>
@@ -638,7 +424,7 @@
 
       <button><a href="/litews" target="_self">How to Integrate</a><span class="material-symbols-outlined">arrow_forward_ios</span></button>
 
-      <p>*LiteWS is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
+      <p>*1EX is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
         Proprietary or closed APIs that do not permit external plugin integration may not be supported.</p>
 
     </div>
@@ -1013,8 +799,8 @@
     </div>
     <div class="cta__cards" data-aos="fade-up">
       <div class="cta__card">
-        <h2>LiteWS</h2>
-        <p>Read more about LiteWS, explore API plans or get started with your development.</p>
+        <h2>1EX</h2>
+        <p>Read more about 1EX, explore API plans or get started with your development.</p>
         <div class="cta__buttons">
           <a href="/login/?mode=login"><button>API Dashboard</button></a>
           <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
@@ -1035,13 +821,12 @@
     // Add all section IDs you want sticky behavior for
     const stickySections = [
       'section1-1',
-      'query-demo',
       'results-summary'
     ];
 
     // Sticky config
-    const stickyActivationOffset = -150;
-    const stickyReleaseOffset = 150;
+    const stickyActivationOffset = -100; // same value as dynamic_container.style.top
+    const stickyReleaseOffset = 100; // same value as dynamic_container.style.top
 
     function handleStickyContent() {
       const scrollY = window.scrollY;
@@ -1063,7 +848,7 @@
           scrollY < sectionBottom - contentHeight - stickyReleaseOffset
         ) {
           dynamic_container.style.position = 'fixed';
-          dynamic_container.style.top = '150px';
+          dynamic_container.style.top = '100px'; // same value as stickyActivationOffset & stickyReleaseOffset 
           dynamic_container.style.left = '50%';
           dynamic_container.style.transform = 'translateX(-50%)';
           dynamic_container.style.width = '100%';

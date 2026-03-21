@@ -1,0 +1,452 @@
+/* ===================================
+   MOBILE NAVBAR - SLEEK & MODERN
+   =================================== */
+
+:root {
+  --mobile-nav-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --mobile-nav-overlay: rgba(0, 0, 0, 0.6);
+  --mobile-nav-text: #ffffff;
+  --mobile-nav-text-secondary: rgba(255, 255, 255, 0.8);
+  --mobile-nav-hover: rgba(255, 255, 255, 0.15);
+  --mobile-nav-active: rgba(255, 255, 255, 0.25);
+  --mobile-nav-border: rgba(255, 255, 255, 0.1);
+  --mobile-nav-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --mobile-nav-width: 300px;
+  --mobile-nav-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   TOGGLE BUTTON (HAMBURGER)
+   =================================== */
+
+.mobile-nav-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all var(--mobile-nav-transition);
+}
+
+.mobile-nav-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.95);
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 24px;
+  height: 18px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--mobile-nav-text);
+  border-radius: 3px;
+  transition: all var(--mobile-nav-transition);
+}
+
+.mobile-nav-toggle:hover .hamburger-icon span:nth-child(1) {
+  transform: translateX(-3px);
+}
+
+.mobile-nav-toggle:hover .hamburger-icon span:nth-child(3) {
+  transform: translateX(3px);
+}
+
+/* Hide toggle when sidebar is open */
+.mobile-sidebar.open ~ .mobile-nav-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===================================
+   OVERLAY
+   =================================== */
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--mobile-nav-overlay);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--mobile-nav-transition);
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===================================
+   SIDEBAR
+   =================================== */
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--mobile-nav-width);
+  height: 100%;
+  background: var(--mobile-nav-bg);
+  box-shadow: var(--mobile-nav-shadow);
+  z-index: 1300;
+  transform: translateX(-100%);
+  transition: transform var(--mobile-nav-transition);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mobile-sidebar.open {
+  transform: translateX(0);
+}
+
+/* ===================================
+   SIDEBAR HEADER
+   =================================== */
+
+.mobile-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--mobile-nav-border);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.mobile-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-sidebar-logo img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mobile-nav-text);
+  letter-spacing: -0.5px;
+}
+
+.mobile-nav-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--mobile-nav-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.mobile-nav-close .material-symbols-outlined {
+  font-size: 24px;
+  color: var(--mobile-nav-text);
+}
+
+/* ===================================
+   SIDEBAR CONTENT
+   =================================== */
+
+.mobile-sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.mobile-sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.mobile-sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===================================
+   NAVIGATION LINKS
+   =================================== */
+
+.mobile-nav-link,
+.mobile-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  color: var(--mobile-nav-text-secondary);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mobile-nav-link:hover,
+.mobile-dropdown-toggle:hover {
+  background: var(--mobile-nav-hover);
+  color: var(--mobile-nav-text);
+  padding-left: 28px;
+}
+
+.mobile-nav-link:active,
+.mobile-dropdown-toggle:active {
+  background: var(--mobile-nav-active);
+}
+
+.mobile-nav-link .material-symbols-outlined,
+.dropdown-icon .material-symbols-outlined {
+  font-size: 24px;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.link-text {
+  flex: 1;
+}
+
+/* Active Page Highlight */
+.mobile-nav-link.active-page {
+  background: var(--mobile-nav-active);
+  color: var(--mobile-nav-text);
+  font-weight: 600;
+  border-left: 4px solid var(--mobile-nav-text);
+  padding-left: 20px;
+}
+
+.mobile-nav-link.active-page .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ===================================
+   DROPDOWN
+   =================================== */
+
+.mobile-dropdown-toggle {
+  position: relative;
+  justify-content: space-between;
+}
+
+.dropdown-icon {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.mobile-dropdown-toggle .chevron {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-dropdown.open .mobile-dropdown-toggle .chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.mobile-dropdown.open .mobile-dropdown-menu {
+  max-height: 300px;
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px 12px 56px;
+  color: var(--mobile-nav-text-secondary);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--mobile-nav-hover);
+  color: var(--mobile-nav-text);
+  padding-left: 60px;
+}
+
+.dropdown-item .material-symbols-outlined {
+  font-size: 20px;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+
+.dropdown-item.active-page {
+  background: var(--mobile-nav-active);
+  color: var(--mobile-nav-text);
+  font-weight: 500;
+}
+
+/* ===================================
+   SIDEBAR FOOTER (AUTH BUTTONS)
+   =================================== */
+
+.mobile-sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid var(--mobile-nav-border);
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.login-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--mobile-nav-text);
+  border-color: var(--mobile-nav-border);
+}
+
+.login-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.signup-btn {
+  background: rgba(255, 255, 255, 0.95);
+  color: #667eea;
+}
+
+.signup-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-auth-btn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+@media (max-width: 400px) {
+  .mobile-sidebar {
+    width: 280px;
+  }
+
+  .mobile-nav-toggle {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    left: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav-toggle,
+  .mobile-sidebar,
+  .mobile-overlay {
+    display: none;
+  }
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.mobile-sidebar.open {
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth scroll for iOS */
+.mobile-sidebar-content {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent body scroll when sidebar is open */
+body.mobile-nav-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}

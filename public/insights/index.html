@@ -46,9 +46,9 @@
 <section id="section1">
 
   <h1>Weekly Insights</h1>
-  <h3><span class="material-symbols-outlined">bolt</span>Powered by <b>LiteWS Sport</b> and Google <span>Gemini</span></h3>
+  <h3><span class="material-symbols-outlined">bolt</span>Powered by <b>1EX Sport</b> and Google <span>Gemini</span></h3>
   <p style="margin-top: 1.5rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
-    Our insights leverage LiteWS technology to analyze user queries and detect intent, extracting contextual signals and determining time sensitivity. 
+    Our insights leverage 1EX technology to analyze user queries and detect intent, extracting contextual signals and determining time sensitivity. 
     Using modular retrieval engines including SearXNG, GDELT, DDGS, and Bing Search API, the system performs intelligent, query-driven crawling across websites, RSS feeds, and URLs to discover and extract relevant sports information. 
     Advanced ranking algorithms prioritize content based on relevance, credibility, and freshness, delivering results in multiple output modes optimized for different applications.
   </p>
@@ -66,27 +66,34 @@
 
 
 <div class="side-element-container__absolute">
+  <div class="side-element-copy">
+    <span class="side-element-kicker">Market pulse</span>
+    <h2>Track live sentiment alongside weekly insights</h2>
+    <p>
+      Follow current Polymarket pricing without leaving the page. The panel rotates featured markets and keeps a second event pinned for quick comparison.
+    </p>
+    <a href="https://polymarket.com/" target="_blank" rel="noopener noreferrer" class="redirect__button">
+      <span class="redirect__button-brand">
+        <img src="/assets/images/logo-polymarket.png" alt="polymarket logo icon" style="width: 18px;">
+        <span>polymarket.com</span>
+      </span>
+      <span class="material-symbols-outlined">arrow_outward</span>
+    </a>
+  </div>
+
+  <div class="side-element-embeds">
     <iframe
       id="polymarket-iframe-primary"
       title="polymarket-market-iframe"
-      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark" 
-      width="400"
-      height="180"
+      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark"
       frameBorder="0"
-    /></iframe> <!-- Dynamic -->
+    ></iframe>
     <iframe
-      title="polymarket-market-iframe"
-    	src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
-      width="400"
-      height="180"
+      title="polymarket-market-iframe-secondary"
+      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
       frameBorder="0"
-      background-color="0f0f0f"
-    /></iframe>
-
-    <a href="https://polymarket.com/" target="_blank" class="redirect__button" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
-      <img src="/assets/images/logo-polymarket.png" alt="polymarket logo icon" style="width: 20px;">
-      <span>polymarket.com</span><span class="material-symbols-outlined">arrow_outward</span>
-    </a>
+    ></iframe>
+  </div>
 </div>
 
 <style>

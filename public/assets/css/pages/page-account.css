@@ -1017,6 +1017,375 @@ padding: 0;
   font-size: 16px;
 }
 
+/* Current Payment Method Card */
+.current-payment-card {
+  margin-bottom: 20px;
+  perspective: 1200px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.current-payment-header {
+  margin-bottom: 16px;
+}
+
+.current-payment-header h3 {
+  color: #ffffff;
+  font-family: montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.current-payment-info {
+  position: relative;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  width: 420px;
+  height: 262px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 420px;
+  transform: scale(0.85) rotateX(30deg) rotateY(-15deg) rotateZ(10deg);
+  transform-origin: center;
+  border-bottom: solid 4px #343434;
+  border-right: solid 4px #343434;
+  background:
+    linear-gradient(#050505c3) padding-box,
+    linear-gradient(137deg, #0e0e0e00 25%, #72727292 50%, #0e0e0e00 75%) border-box;
+    background-size: 100% 100%, 200% 100%;
+    background-position: 0 0, 200% 50%;
+    animation: shine 2s linear infinite;
+    box-shadow: #0000006e 5px 5px 20px 5px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  @keyframes shine {
+0%   { background-position: 0 0, 200% 50%; }
+100% { background-position: 0 0, 0% 50%; }
+}
+
+
+.current-payment-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.current-payment-info::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+}
+
+.current-payment-card:hover .current-payment-info {
+  opacity: .5;
+  transform: scale(0.85) rotateX(0) rotateY(0) translateY(-8px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-bottom: solid 4px #0e0e0e;
+  border-right: solid 4px #0e0e0e;
+  animation: none;
+  backdrop-filter: blur(5px);
+}
+
+.current-payment-card:hover .current-payment-info::after {
+  opacity: 1;
+}
+
+/* Card Hover Actions */
+.card-hover-actions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, pointer-events 0s linear 0.3s;
+}
+
+.current-payment-card:hover .card-hover-actions {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.3s ease, pointer-events 0s linear 0s;
+}
+
+.card-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: montserrat;
+  font-size: 20px;
+  font-weight: 200;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  background: none;
+  z-index: 201;
+  pointer-events: all;
+  position: relative;
+}
+
+.card-action-btn .material-symbols-outlined {
+  font-size: 1em;
+}
+.card-action-btn.primary-btn {
+  opacity: 1;
+  color: #ffffff;
+  border: solid 1px white;
+  border-radius: 5px;
+  padding: 5px 12px;
+}
+.card-action-btn.primary-btn:hover {
+  opacity: .5;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+.card-action-btn.remove-btn {
+  opacity: 1;
+  color: #ffffff;
+  border: solid 1px white;
+  border-radius: 5px;
+  padding: 5px 12px;
+}
+.card-action-btn.remove-btn:hover {
+  opacity: .5;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Header - Logo and Chip */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-brand img{
+width: 60px;
+position: absolute;
+top: 20px;
+}
+
+.card-brand-icon {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  bottom: -40px;
+  right: -20px;
+}
+
+.card-brand svg {
+  width: 48px;
+  height: 48px;
+}
+
+.card-brand-icon .material-symbols-outlined {
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+}
+
+.card-brand-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Card Middle - Card Number */
+.card-number-section {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+
+.card-number-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: montserrat;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.card-number {
+  color: #ffffff;
+  font-family: 'JetBrainsMono', monospace;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Card Bottom - Holder Name and Address */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-holder {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-holder-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: montserrat;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.card-holder-name {
+  color: #ffffff;
+  font-family: montserrat;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-address {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.card-address-line {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: montserrat;
+  font-size: 10px;
+  line-height: 1.3;
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-address-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: montserrat;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-info-grid {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .current-payment-info {
+    width: min(100%, 360px);
+    height: 225px;
+    padding: 18px;
+  }
+
+  .card-top {
+    margin-bottom: 16px;
+  }
+
+  .card-number {
+    font-size: 18px;
+  }
+
+  .card-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-address {
+    text-align: left;
+  }
+}
+
+.payment-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-row:hover {
+  background: #141414;
+  border-color: #2a2a3e;
+}
+
+.payment-row.selected {
+  background: #1a1a2e;
+  border-color: #4a4a6e;
+  box-shadow: 0 0 0 2px rgba(74, 74, 110, 0.3);
+}
+
 .payment-row {
   display: flex;
   align-items: center;
@@ -1056,6 +1425,12 @@ padding: 0;
 .payment-icon svg {
   width: 100%;
   height: 100%;
+}
+
+.payment-icon .material-symbols-outlined {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 
 .payment-meta {
@@ -1133,7 +1508,7 @@ padding: 0;
 }
 
 .billing-plans {
-  margin-top: 16px;
+  margin: 16px 0px;
 }
 
 .plan-grid {
@@ -1224,13 +1599,20 @@ padding: 0;
 
 @media (max-width: 640px) {
   .payment-row {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .payment-details {
+    flex: 1;
+    min-width: 0;
   }
   
   .payment-actions {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    order: 3;
+    justify-content: flex-end;
   }
 }
 

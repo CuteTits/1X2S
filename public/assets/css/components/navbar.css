@@ -405,11 +405,9 @@ border: solid 1px transparent;
 }
 
 .nav-dropdown-menu li a:hover {
-box-shadow:  #dd3131 0 0 5px 1px ;
 color: white;
-background-color: rgb(13, 13, 13);
-border-radius: 2px;
-border: solid 1px rgb(26, 26, 26);
+background-color: rgb(26, 26, 26);
+border-radius: 5px;
 }
 
 /* Show menu on hover */
@@ -516,11 +514,9 @@ box-sizing: border-box;
 }
 
 .user-options-dropdown-menu ul li a:hover {
-box-shadow:  #dd3131 0 0 5px 1px ;
 color: white;
-background-color: rgb(13, 13, 13);
+background-color: rgb(22, 22, 22);
 border-radius: 2px;
-border: solid 1px rgb(26, 26, 26);
 }
 
 

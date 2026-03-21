@@ -81,7 +81,8 @@ async function runMigrations() {
       { name: 'location', def: 'VARCHAR(255)' },
       { name: 'gmt_time', def: 'TIME' },
       { name: 'competition_id', def: 'INT' },
-      { name: 'link', def: 'VARCHAR(500)' }
+      { name: 'link', def: 'VARCHAR(500)' },
+      { name: 'card_order', def: 'INT DEFAULT 0' }
     ];
     
     for (const col of columns) {
@@ -133,6 +134,33 @@ app.use(session({
   saveUninitialized: false,
   cookie: { httpOnly: true, secure: false }
 }));
+
+// --- Stock Price API (Finnhub) - BEFORE static middleware ---
+app.get("/api/stock-price", async (req, res) => {
+    const symbol = req.query.symbol || 'AAPL';
+    const apiKey = process.env.FINNHUB_API_KEY;
+    
+    if (!apiKey || apiKey === 'YOUR_FINNHUB_API_KEY_HERE') {
+        return res.status(400).json({ error: "Finnhub API key not configured" });
+    }
+    
+    try {
+        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.c !== undefined) {
+            // c = current price
+            const price = '$' + parseFloat(data.c).toFixed(2);
+            res.json({ success: true, price, symbol, change: data.d, changePercent: data.dp });
+        } else {
+            res.status(400).json({ error: "Invalid stock symbol or API error", data });
+        }
+    } catch (error) {
+        console.error("Error calling Finnhub API:", error);
+        res.status(500).json({ error: "Error fetching stock price" });
+    }
+});
 
 // ✅ Serve CSS with no-cache headers
 app.use(
@@ -522,7 +550,7 @@ app.delete('/api/competitions/:id', requireAdminRole, async (req, res) => {
 app.get('/api/carousel/insights', async (req, res) => {
   try {
     const [rows] = await db.query(
-      'SELECT * FROM carousel_insights ORDER BY id'
+      'SELECT * FROM carousel_insights ORDER BY card_order ASC, id ASC'
     );
     
     // Parse JSON fields and provide defaults
@@ -765,6 +793,30 @@ app.delete('/api/carousel/insights/:id', requireAdminRole, async (req, res) => {
     res.json({ success: true, message: 'Card deleted' });
   } catch (err) {
     console.error('Error deleting carousel card:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Reorder carousel cards (PROTECTED - ADMIN ONLY)
+app.post('/api/carousel/reorder', requireAdminRole, async (req, res) => {
+  const { order } = req.body; // Array of { id, order } objects
+
+  if (!Array.isArray(order)) {
+    return res.status(400).json({ success: false, error: 'Order must be an array of {id, order} objects' });
+  }
+
+  try {
+    // Update all card orders in a transaction
+    for (const item of order) {
+      await db.query(
+        'UPDATE carousel_insights SET card_order = ? WHERE id = ?',
+        [item.order, item.id]
+      );
+    }
+    
+    res.json({ success: true, message: 'Cards reordered successfully' });
+  } catch (err) {
+    console.error('Error reordering cards:', err);
     res.status(500).json({ success: false, error: err.message });
   }
 });

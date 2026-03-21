@@ -296,6 +296,25 @@
       <section id="tab-billing" class="tab-panel" role="tabpanel">
         <div class="container billing">
           <h1><span class="material-symbols-outlined">payments</span>Billing overview</h1>
+          
+          <!-- Current Payment Method Card -->
+          <div class="current-payment-card">
+            <div class="current-payment-header">
+              <h3></h3>
+            </div>
+            <div id="currentPaymentInfo" class="current-payment-info">
+              <!-- Payment info will be populated by JavaScript -->
+            </div>
+            <div class="card-hover-actions">
+              <button class="card-action-btn primary-btn" id="cardSetPrimaryBtn">
+                Set to Primary
+              </button>
+              <button class="card-action-btn remove-btn" id="cardRemoveBtn">
+                Remove
+              </button>
+            </div>
+          </div>
+
           <div class="billing-grid">
             <div class="billing-card">
               <h3>Account balance</h3>
@@ -393,6 +412,9 @@
               <button class="btn-ghost">Contact sales</button>
             </div>
           </div>
+
+          <button class="class-redirect-plans">Explore Plans</button>
+
         </div>
       </section>
 
@@ -1983,12 +2005,37 @@ fill="#ffffff" viewBox="0 0 24 24" >
 
     // SVG Icons for payment methods
     const paymentIcons = {
-      paypal: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path></svg>',
-      googlepay: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path></svg>',
-      bitcoin: '<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor" viewBox="0 0 24 24" ><path d="m11.953 8.819-.547 2.19c.619.154 2.529.784 2.838-.456.322-1.291-1.673-1.579-2.291-1.734m-.822 3.296-.603 2.415c.743.185 3.037.921 3.376-.441.355-1.422-2.029-1.789-2.773-1.974"></path><path d="M14.421 2.299C9.064.964 3.641 4.224 2.306 9.581.97 14.936 4.23 20.361 9.583 21.697c5.357 1.335 10.783-1.924 12.117-7.281 1.336-5.356-1.924-10.781-7.279-12.117m1.991 8.275c-.145.974-.686 1.445-1.402 1.611.985.512 1.485 1.298 1.009 2.661-.592 1.691-1.998 1.834-3.87 1.48l-.454 1.82-1.096-.273.447-1.794a45 45 0 0 1-.875-.228l-.449 1.804-1.095-.275.454-1.823c-.257-.066-.517-.136-.782-.202L6.87 15l.546-1.256s.808.215.797.199c.311.077.448-.125.502-.261l.719-2.875.115.029a1 1 0 0 0-.114-.037l.512-2.053c.013-.234-.066-.528-.511-.639.018-.011-.797-.198-.797-.198l.291-1.172 1.514.378-.001.005q.341.085.7.165l.449-1.802 1.097.273-.44 1.766c.294.067.591.135.879.207l.438-1.755 1.097.273-.449 1.802c1.384.479 2.396 1.195 2.198 2.525"></path></svg>',
-      sepa: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
-      banktransfer: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 24 24"><path d="M11.5 1L2 6v2h19V6l-9.5-5zM4 8v11h3v-11H4zm5 0v11h3V8H9zm5 0v11h3V8h-3zM2 20v2h19v-2H2z"/></svg>'
+      visa: '<svg  xmlns="http://www.w3.org/2000/svg" width="64" height="60" fill="white" viewBox="0 0 24 24" ><path d="M16.539 9.186a4.2 4.2 0 0 0-1.451-.251c-1.6 0-2.73.806-2.738 1.963-.01.85.803 1.329 1.418 1.613.631.292.842.476.84.737-.004.397-.504.577-.969.577-.639 0-.988-.089-1.525-.312l-.199-.093-.227 1.332c.389.162 1.09.301 1.814.313 1.701 0 2.813-.801 2.826-2.032.014-.679-.426-1.192-1.352-1.616-.563-.275-.912-.459-.912-.738 0-.247.299-.511.924-.511a2.95 2.95 0 0 1 1.213.229l.15.067.227-1.287zm4.152-.143h-1.25c-.389 0-.682.107-.852.493l-2.404 5.446h1.701l.34-.893 2.076.002c.049.209.199.891.199.891h1.5zm-10.642-.05h1.621l-1.014 5.942H9.037l1.012-5.944zm-4.115 3.275.168.825 1.584-4.05h1.717l-2.551 5.931H5.139l-1.4-5.022a.34.34 0 0 0-.149-.199 7 7 0 0 0-1.592-.589l.022-.125h2.609c.354.014.639.125.734.503l.57 2.729v-.003zm12.757.606.646-1.662c-.008.018.133-.343.215-.566l.111.513.375 1.714H18.69z"></path></svg>',
+      mastercard: '<svg xmlns="http://www.w3.org/2000/svg"  width="64" height="60" viewBox="0 0 32 24" fill="none"><rect  width="64" height="60" rx="4" fill="none"/><circle cx="11" cy="12" r="6.5" fill="white"/><circle cx="21" cy="12" r="6.5" fill="white"/></svg>',
+      amex: '<svg  xmlns="http://www.w3.org/2000/svg" width="64" height="44" fill="white" viewBox="0 0 24 24" ><path d="m20.31 16.93-.9-1-.93 1h-5.66v-4.55h-1.86l2.28-5.14h2.21L16.24 9V7.24h2.72l.45 1.34.45-1.34h2.07v-.76c0-.45-.38-.86-.86-.86H2.86c-.48.03-.86.41-.86.86v11.03c0 .45.38.86.86.86h18.28c.45 0 .86-.38.86-.86v-.55z"></path><path d="M20.55 16.41h1.42l-1.87-2 1.87-1.96h-1.38l-1.21 1.27-1.14-1.27h-1.45l1.9 2-1.9 1.96h1.38l1.21-1.27zm-6.03-.93v-.58h2.2v-.93h-2.2v-.59h2.27v-.93h-3.38v3.96h3.38v-.93zm6.38-3.62h1.07v-4l-1.66.04-.9 2.48-.89-2.48h-1.73v3.96h1.11V9.07l1.03 2.79h.97l1-2.79zM15.03 7.9h-1.41l-1.76 4h1.21l.31-.83h1.83l.34.83h1.24zm-1.28 2.28.52-1.31.52 1.31h-1.03Z"></path><path d="m20.97 14.31 1 1.07.03-2.17z"></path></svg>',
+      discover: '<svg  xmlns="http://www.w3.org/2000/svg" width="64" height="64"  fill="white" viewBox="0 0 24 24" ><path d="M21.33 5.61H2.67c-.37 0-.67.3-.67.67v11.44c0 .37.3.67.67.67h18.67c.37 0 .67-.3.67-.67V6.26c0-.37-.3-.65-.67-.65ZM21.01 12c0 3.4-2.75 6.18-6.18 6.18H2.67c-.25 0-.44-.19-.44-.44V6.28c0-.25.19-.44.44-.44h12.18c3.4-.02 6.18 2.75 6.18 6.16Z"></path><path d="M3.72 10.61h-.77v2.72h.77c.4 0 .7-.11.96-.32.32-.26.49-.65.49-1.04 0-.81-.6-1.37-1.46-1.37Zm.61 2.04c-.16.16-.39.21-.72.21h-.14v-1.79h.14c.33 0 .54.05.72.23.18.16.3.42.3.68 0 .25-.11.51-.3.67m1.09-2.04h.53v2.72h-.53zm1.83 1.04c-.32-.12-.4-.19-.4-.33 0-.18.16-.3.39-.3.16 0 .28.07.42.23l.28-.37c-.23-.19-.51-.3-.79-.3-.47 0-.84.33-.84.77 0 .37.18.56.67.74.21.07.32.12.37.16.11.07.16.18.16.28 0 .23-.18.39-.4.39-.25 0-.46-.12-.58-.37l-.33.33c.25.35.54.51.95.51.54 0 .93-.37.93-.89-.04-.42-.21-.61-.81-.84Zm.94.31c0 .79.63 1.42 1.44 1.42.23 0 .42-.05.67-.16v-.63c-.21.21-.4.3-.63.3-.53 0-.91-.39-.91-.93s.39-.93.89-.93c.25 0 .44.09.67.3v-.63c-.23-.12-.42-.18-.65-.18-.82.02-1.47.65-1.47 1.44Zm6.3.48-.72-1.83h-.58l1.14 2.79h.28l1.18-2.79h-.56zm1.55.89h1.5v-.47h-.98v-.72h.95v-.47h-.95v-.6h.98v-.46h-1.5zm3.59-1.93c0-.51-.35-.81-.96-.81h-.79v2.74h.53v-1.09h.07l.74 1.09h.65l-.86-1.14c.42-.09.63-.37.63-.79Zm-1.05.46h-.16v-.82h.16c.33 0 .51.14.51.4 0 .28-.18.42-.51.42m1.47-1.11c0-.05-.04-.07-.09-.07h-.07v.25h.05v-.09l.07.09h.07l-.07-.11s.04-.04.04-.07m-.11.04-.02-.07h.02s.04.02.04.04c.02.02 0 .04-.04.04Z"></path><path d="M19.98 10.6c-.12 0-.21.09-.21.21s.09.21.21.21c.11 0 .21-.09.21-.21-.02-.12-.11-.21-.21-.21m0 .37c-.09 0-.16-.07-.16-.18 0-.09.07-.18.16-.18s.16.07.16.18-.07.18-.16.18m-6.65.99c0 .79-.65 1.44-1.44 1.44s-1.44-.65-1.44-1.44.65-1.44 1.44-1.44 1.44.65 1.44 1.44"></path></svg>',
+      paypal: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="60" fill="#ffffff" viewBox="0 0 24 24"><path d="M19.554 9.488q.18.844-.04 2.051-.873 4.467-5.683 4.466h-.442a.67.67 0 0 0-.444.166.72.72 0 0 0-.239.427l-.041.189-.553 3.479-.021.151a.7.7 0 0 1-.247.426.67.67 0 0 1-.447.166H8.874a.4.4 0 0 1-.331-.15.46.46 0 0 1-.09-.363q.09-.561.267-1.689.175-1.126.267-1.689c.092-.563.15-.938.272-1.685q.182-1.122.271-1.685.05-.371.433-.371h1.316q1.338.02 2.375-.211 1.758-.392 2.886-1.449 1.026-.956 1.56-2.473.241-.706.352-1.338.009-.062.025-.074.014-.016.035-.011a.4.4 0 0 1 .062.035c.524.398.854.941.98 1.632m-1.728-2.836q0 1.075-.465 2.374-.804 2.343-3.037 3.168-1.136.401-2.535.425 0 .008-.904.007l-.903-.007q-1.008-.001-1.187.964-.02.08-.855 5.329-.012.1-.121.102H4.854a.47.47 0 0 1-.369-.165.47.47 0 0 1-.115-.39L6.702 3.664a.78.78 0 0 1 .276-.483.8.8 0 0 1 .519-.19h6.014q.342 0 .979.131c.428.084.801.194 1.123.321q1.077.412 1.645 1.237t.568 1.972"></path></svg>',
+      googlepay: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="60" fill="#ffffff" viewBox="0 0 24 24"><path d="M13.93 9a1.84 1.84 0 0 0-1.28-.5h-2v5.74h.75V11.9h1.2a1.85 1.85 0 0 0 1.28-.5 1.63 1.63 0 0 0 .52-1.23A1.58 1.58 0 0 0 13.93 9m-.5 1.9a1 1 0 0 1-.73.3h-1.25v-2h1.25a.9.9 0 0 1 .73.3 1 1 0 0 1 0 1.38zm2.75-.72a1.92 1.92 0 0 0-1.63.77l.65.4a1.09 1.09 0 0 1 1-.52 1.1 1.1 0 0 1 .72.27.81.81 0 0 1 .3.65v.18a1.9 1.9 0 0 0-1.07-.25 1.9 1.9 0 0 0-1.25.32 1.2 1.2 0 0 0-.45 1 1.35 1.35 0 0 0 .45 1 1.74 1.74 0 0 0 1.1.37 1.45 1.45 0 0 0 1.23-.67v.54H18v-2.41a1.56 1.56 0 0 0-.47-1.2 1.84 1.84 0 0 0-1.35-.45m.7 3.17a1.18 1.18 0 0 1-.83.35.94.94 0 0 1-.57-.2.56.56 0 0 1-.25-.47.6.6 0 0 1 .3-.53 1.2 1.2 0 0 1 .75-.22 1.58 1.58 0 0 1 1 .27 1 1 0 0 1-.4.8M22 10.33v-.03l-.01.03zm-1.92 2.82h-.03l-1.17-2.82h-.8L19.7 14l-.92 1.97h.75l2.46-5.64h-.76zM5.31 10.73V12h1.77a1.52 1.52 0 0 1-.65 1 2 2 0 0 1-3-1.05 1.9 1.9 0 0 1 0-1.27 1.91 1.91 0 0 1 1.88-1.35 1.83 1.83 0 0 1 1.27.5l1-.95A3.14 3.14 0 0 0 5.33 8 3.26 3.26 0 0 0 2.4 9.83a3.24 3.24 0 0 0 0 3 3.28 3.28 0 0 0 2.95 1.82 3.24 3.24 0 0 0 2.19-.79 3.22 3.22 0 0 0 1-2.43c0-.22 0-.45-.05-.67z"></path></svg>',
+      bitcoin: '<svg  xmlns="http://www.w3.org/2000/svg" width="64" height="60"  fill="white" viewBox="0 0 24 24" ><path d="m11.953 8.819-.547 2.19c.619.154 2.529.784 2.838-.456.322-1.291-1.673-1.579-2.291-1.734m-.822 3.296-.603 2.415c.743.185 3.037.921 3.376-.441.355-1.422-2.029-1.789-2.773-1.974"></path><path d="M14.421 2.299C9.064.964 3.641 4.224 2.306 9.581.97 14.936 4.23 20.361 9.583 21.697c5.357 1.335 10.783-1.924 12.117-7.281 1.336-5.356-1.924-10.781-7.279-12.117m1.991 8.275c-.145.974-.686 1.445-1.402 1.611.985.512 1.485 1.298 1.009 2.661-.592 1.691-1.998 1.834-3.87 1.48l-.454 1.82-1.096-.273.447-1.794a45 45 0 0 1-.875-.228l-.449 1.804-1.095-.275.454-1.823c-.257-.066-.517-.136-.782-.202L6.87 15l.546-1.256s.808.215.797.199c.311.077.448-.125.502-.261l.719-2.875.115.029a1 1 0 0 0-.114-.037l.512-2.053c.013-.234-.066-.528-.511-.639.018-.011-.797-.198-.797-.198l.291-1.172 1.514.378-.001.005q.341.085.7.165l.449-1.802 1.097.273-.44 1.766c.294.067.591.135.879.207l.438-1.755 1.097.273-.449 1.802c1.384.479 2.396 1.195 2.198 2.525"></path></svg>',
+      sepa: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="60" fill="#ffffff" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
+      banktransfer: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="60" fill="#ffffff" viewBox="0 0 24 24"><path d="M11.5 1L2 6v2h19V6l-9.5-5zM4 8v11h3v-11H4zm5 0v11h3V8H9zm5 0v11h3V8h-3zM2 20v2h19v-2H2z"/></svg>'
     };
+
+    function getPaymentIcon(brand) {
+      const iconMap = {
+        'Visa': paymentIcons.visa,
+        'Mastercard': paymentIcons.mastercard,
+        'American Express': paymentIcons.amex,
+        'Amex': paymentIcons.amex,
+        'Discover': paymentIcons.discover,
+        'PayPal': paymentIcons.paypal,
+        'Google Pay': paymentIcons.googlepay,
+        'Bitcoin': paymentIcons.bitcoin,
+        'SEPA': paymentIcons.sepa,
+        'Bank Transfer': paymentIcons.banktransfer
+      };
+      
+      if (iconMap[brand]) {
+        return iconMap[brand];
+      }
+      
+      return '<span class="material-symbols-outlined" style="font-size: 24px; color: #ffffff;">payment_card</span>';
+    }
 
     function renderCards() {
       const container = document.getElementById('savedCardsList');
@@ -2000,27 +2047,22 @@ fill="#ffffff" viewBox="0 0 24 24" >
       }
 
       container.innerHTML = savedCards.map(card => {
-        // Determine icon based on payment type
-        let icon = '💳';
+        // Determine icon and meta text based on payment type
+        let icon = getPaymentIcon(card.brand);
         let metaText = `Ending in ${card.lastFour} • Expires ${card.expiry}`;
         
         if (card.brand === 'PayPal') {
-          icon = paymentIcons.paypal;
           metaText = card.email || 'PayPal Account';
         } else if (card.brand === 'Google Pay') {
-          icon = paymentIcons.googlepay;
           metaText = card.email || 'Google Pay Account';
         } else if (card.brand === 'Bitcoin') {
-          icon = paymentIcons.bitcoin;
           const shortAddr = card.walletAddress 
             ? card.walletAddress.substring(0, 8) + '...' + card.walletAddress.substring(card.walletAddress.length - 6)
             : `...${card.lastFour}`;
           metaText = `${card.addressType || 'Wallet'}: ${shortAddr}`;
         } else if (card.brand === 'SEPA') {
-          icon = paymentIcons.sepa;
           metaText = card.iban ? `IBAN: ${card.iban.substring(0, 4)}...${card.iban.substring(card.iban.length - 4)}` : 'SEPA Account';
         } else if (card.brand === 'Bank Transfer') {
-          icon = paymentIcons.banktransfer;
           metaText = card.accountNumber ? `${card.bankName || 'Bank'} •••• ${card.accountNumber.slice(-4)}` : 'Bank Account';
         }
         
@@ -2058,24 +2100,171 @@ fill="#ffffff" viewBox="0 0 24 24" >
           removeCard(cardId);
         });
       });
+
+      // Add click listeners to payment rows to switch current payment display
+      container.querySelectorAll('.payment-row').forEach(row => {
+        row.addEventListener('click', (e) => {
+          // Don't trigger if clicking on a button
+          if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+          
+          const cardId = parseInt(row.dataset.cardId);
+          updateCurrentPaymentDisplay(cardId);
+          
+          // Highlight selected row
+          container.querySelectorAll('.payment-row').forEach(r => r.classList.remove('selected'));
+          row.classList.add('selected');
+        });
+      });
     }
 
     function setPrimaryCard(cardId) {
+      console.log('setPrimaryCard called with ID:', cardId);
+      console.log('savedCards before update:', savedCards);
+      
       savedCards.forEach(card => {
         card.isPrimary = card.id === cardId;
       });
+      
+      console.log('savedCards after update:', savedCards);
       renderCards();
+      updateCurrentPaymentDisplay(cardId);
+      
       // Here you would normally make an API call to update the primary card
       console.log('Primary card set to:', cardId);
     }
 
+    function updateCurrentPaymentDisplay(cardId) {
+      const card = savedCards.find(c => c.id === cardId);
+      if (!card) return;
+
+      const container = document.getElementById('currentPaymentInfo');
+      if (!container) return;
+
+      // Get default address
+      const defaultAddress = savedAddresses.find(addr => addr.isDefault) || savedAddresses[0];
+
+      // Determine payment icon and card number format
+      let icon = getPaymentIcon(card.brand);
+      let cardNumber = `•••• •••• •••• ${card.lastFour}`;
+      let cardType = card.brand;
+      let showChip = true;
+      let showExpiry = true;
+      
+      if (card.brand === 'PayPal') {
+        cardNumber = card.email || 'PayPal Account';
+        showChip = false;
+        showExpiry = false;
+      } else if (card.brand === 'Google Pay') {
+        cardNumber = card.email || 'Google Pay Account';
+        showChip = false;
+        showExpiry = false;
+      } else if (card.brand === 'Bitcoin') {
+        const shortAddr = card.walletAddress 
+          ? card.walletAddress.substring(0, 8) + '...' + card.walletAddress.substring(card.walletAddress.length - 6)
+          : `...${card.lastFour}`;
+        cardNumber = shortAddr;
+        cardType = `${card.brand} (${card.addressType || 'Wallet'})`;
+        showChip = false;
+        showExpiry = false;
+      } else if (card.brand === 'SEPA') {
+        cardNumber = card.iban ? `•••• •••• •••• ${card.iban.substring(card.iban.length - 4)}` : 'SEPA Account';
+        showChip = false;
+        showExpiry = false;
+      } else if (card.brand === 'Bank Transfer') {
+        cardNumber = card.accountNumber ? `•••• •••• •••• ${card.accountNumber.slice(-4)}` : 'Bank Account';
+        showChip = false;
+        showExpiry = false;
+      }
+
+      // Get first line of address
+      const addressLine1 = defaultAddress ? defaultAddress.street : '';
+      const addressLine2 = defaultAddress ? `${defaultAddress.city}, ${defaultAddress.state} ${defaultAddress.postalCode}` : '';
+
+      // Store current card ID for button actions
+      container.setAttribute('data-current-card-id', cardId);
+
+      container.innerHTML = `
+        <div class="card-top">
+          <div class="card-brand">
+            <img src="/assets/images/logo.png"></img>
+          </div>
+        </div>
+
+        <div class="card-number-section">
+          <div class="card-number">${cardNumber}</div>
+                    <div class="card-holder">
+            <span class="card-holder-name">${card.holderName}${showExpiry ? `<span class="card-holder-label" style="margin-top: 8px;">Expires ${card.expiry}</span>` : ''}
+        </span>
+            
+          </div>
+        </div>
+
+        <div class="card-bottom">
+
+          ${defaultAddress ? `
+          <div class="card-address">
+              <span class="card-address-line">${addressLine1}</span>
+            <span class="card-address-line">${addressLine2}</span>
+          </div>
+          ` : ''}
+                      <div class="card-brand-icon">${icon}</div>
+
+        </div>
+      `;
+
+      // Update button visibility based on card status
+      const setPrimaryBtn = document.getElementById('cardSetPrimaryBtn');
+      
+      console.log('updateCurrentPaymentDisplay - Card:', card.brand, 'ID:', card.id, 'isPrimary:', card.isPrimary);
+      console.log('setPrimaryBtn element:', setPrimaryBtn);
+      
+      if (setPrimaryBtn) {
+        if (card.isPrimary) {
+          console.log('Hiding Set to Primary button (card is primary)');
+          setPrimaryBtn.style.display = 'none';
+        } else {
+          console.log('Showing Set to Primary button (card is not primary)');
+          setPrimaryBtn.style.display = 'flex';
+        }
+      } else {
+        console.error('setPrimaryBtn element not found!');
+      }
+    }
+
+    function renderCurrentPaymentInfo() {
+      // Display primary card by default
+      console.log('renderCurrentPaymentInfo called');
+      console.log('Current savedCards:', savedCards);
+      
+      const primaryCard = savedCards.find(card => card.isPrimary) || savedCards[0];
+      console.log('Primary card found:', primaryCard);
+      
+      if (primaryCard) {
+        updateCurrentPaymentDisplay(primaryCard.id);
+      } else {
+        console.log('No cards available to display');
+        const container = document.getElementById('currentPaymentInfo');
+        if (container) {
+          container.innerHTML = '<p style="color: #8f8f8f; text-align: center; padding: 40px;">No payment methods available</p>';
+        }
+      }
+    }
+
     function removeCard(cardId) {
+      console.log('removeCard called with ID:', cardId);
+      console.log('savedCards before removal:', savedCards.length);
+      
       if (!confirm('Are you sure you want to remove this payment method?')) {
         return;
       }
       
       savedCards = savedCards.filter(card => card.id !== cardId);
+      console.log('savedCards after removal:', savedCards.length);
+      console.log('Remaining cards:', savedCards);
+      
       renderCards();
+      renderCurrentPaymentInfo();
+      
       // Here you would normally make an API call to remove the card
       console.log('Card removed:', cardId);
     }
@@ -2353,6 +2542,47 @@ fill="#ffffff" viewBox="0 0 24 24" >
     // Initial render of cards and addresses
     renderCards();
     renderAddresses();
+    renderCurrentPaymentInfo();
+
+    // Setup event listeners for card action buttons (one-time setup)
+    const setPrimaryBtn = document.getElementById('cardSetPrimaryBtn');
+    const removeBtn = document.getElementById('cardRemoveBtn');
+
+    if (setPrimaryBtn) {
+      setPrimaryBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Set to Primary clicked');
+        const container = document.getElementById('currentPaymentInfo');
+        const cardIdStr = container?.getAttribute('data-current-card-id');
+        console.log('Current card ID (string):', cardIdStr);
+        if (cardIdStr) {
+          const cardId = parseInt(cardIdStr, 10);
+          console.log('Current card ID (parsed):', cardId);
+          setPrimaryCard(cardId);
+        }
+      });
+    } else {
+      console.error('setPrimaryBtn not found');
+    }
+
+    if (removeBtn) {
+      removeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Remove clicked');
+        const container = document.getElementById('currentPaymentInfo');
+        const cardIdStr = container?.getAttribute('data-current-card-id');
+        console.log('Current card ID (string):', cardIdStr);
+        if (cardIdStr) {
+          const cardId = parseInt(cardIdStr, 10);
+          console.log('Current card ID (parsed):', cardId);
+          removeCard(cardId);
+        }
+      });
+    } else {
+      console.error('removeBtn not found');
+    }
 
 
     const initialTab = new URLSearchParams(window.location.search).get('tab');
