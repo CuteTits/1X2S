@@ -1,893 +1,1939 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <link rel="icon" href="/assets/images/logo.png">
-  <title>1X2S</title>
-  <link rel="stylesheet" href="/assets/css/core/global.css">
-  <link rel="stylesheet" href="/assets/css/core/fonts.css">
-  <link rel="stylesheet" href="/assets/css/pages/page-home.css">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200" rel="stylesheet" />
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script>
-    document.documentElement.classList.add('js');
-    window.addEventListener('load', function () {
-      document.body.classList.add('fade-in');
-    });
-  </script>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" href="/assets/images/logo.png">
+<title>1X2S</title>
+<link rel="stylesheet" href="/assets/css/core/global.css">
+<link rel="stylesheet" href="/assets/css/core/fonts.css">
+<link rel="stylesheet" href="/assets/css/pages/page-lite-scores.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://unpkg.com/@boxicons/js@latest"></script>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
-<body>
-  <script>
-    AOS.init();
-  </script>
 
-  <nav>
-    <div id="navbar"></div>
-    <script src="/assets/js/components/navbar.js"></script>
-    <link rel="stylesheet" href="/assets/css/components/navbar.css">
-  </nav>
-  <mobilenav>
-    <div id="mobilenavbar"></div>
-    <script src="/assets/js/components/mobile-navbar.js"></script>
-    <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
-  </mobilenav>
 
-  <div class="background-video background-video--fixed">
-    <video autoplay muted loop id="background-video">
-      <source src="/assets/videos/7094565-ix-uhd_3840_2160_25fps.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <script>
-    let lastScrollTop = 0;
-    let isScrolling;
-    const video = document.getElementById('background-video');
-    video.pause(); 
-    video.currentTime = 0;
 
-    window.addEventListener('scroll', function() {
-      clearTimeout(isScrolling);
+    </head>
+    <body>  
+    <page class="page-content-on-load-true">
 
-      const st = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollDiff = st - lastScrollTop;
 
-      if (scrollDiff > 0) {
-        // Scrolling down
-        video.play();
-        video.playbackRate = 1.0;
-      } else if (scrollDiff < 0) {
-        // Scrolling up - reverse manually
-        video.pause();
-        const step = 0.03; // Adjust speed here
-        video.currentTime = Math.max(0, video.currentTime - step);
-      }
+    <nav>
+        <div id="navbar"></div>
+        <script src="/assets/js/components/navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/navbar.css">
+    </nav>
+    <mobilenav>
+        <div id="mobilenavbar"></div>
+        <script src="/assets/js/components/mobile-navbar.js"></script>
+        <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
+    </mobilenav>  
 
-      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 
-      // Pause after scrolling stops
-      isScrolling = setTimeout(function() {
-        video.pause();
-      }, 150);
-    });
-  </script>
 
-  <section id="hero">
-    <div class="hero__container">
-      <div class="hero__content">
-        <div class="hero__content-title">
-          <h2>Back your <span class="dynamic-text-container__js">-</span></h2>
+
+<section id="litews-hero">
+<div class="litews-hero__container" data-litews-hero>
+
+
+
+    <div class="litews-hero__content">
+
+
+        <span class="litews-hero__eyebrow">Web Intelligence API</span>
+        <h1>Live web context, delivered cleanly.</h1>
+        <p class="litews-hero__lead">
+        1EX enables AI systems, marketing teams, day-traders, and analysts to retrieve real-time,
+         intent-driven results with a privacy-first approach —
+        delivering structured JSON that’s ready for production.
+                </p>
+        <p class="litews-hero__meta">POST https://api.1ex.io/v1/search</p>
+        <div class="litews-hero__actions">
+            <a class="litews-btn--primary litews-hero__cta" href="#interact-section">Try Demo</a>
         </div>
-          <h3>Context-aware web retrieval and grounding stack that supplies AI systems with fast, structured, and time-relevant web data.</h3>
-      </div>
-      <p style="color: rgb(65, 65, 65); font-family: montserrat; font-weight: 200; font-size: 16px;">1EX version 1.2.0.6 Chrome</p>
     </div>
-  </section>
+
+    <aside class="litews-hero__panel" aria-label="Usage mode preview">
+        <div class="litews-hero__mode-switcher" role="tablist" aria-label="Usage modes">
+            <button class="litews-hero__mode-btn active" type="button" role="tab" aria-selected="true" data-mode="realtime">Realtime</button>
+            <button class="litews-hero__mode-btn" type="button" role="tab" aria-selected="false" data-mode="precision">Precision</button>
+            <button class="litews-hero__mode-btn" type="button" role="tab" aria-selected="false" data-mode="monitoring">Monitoring</button>
+        </div>
+        <div class="litews-hero__preview" aria-live="polite">
+            <p class="litews-hero__preview-label">Mode Preview</p>
+            <h3 id="litews-hero-mode-title">Realtime Discovery</h3>
+            <p id="litews-hero-mode-copy">Surface fresh, relevant context in seconds for assistants and live-answer workflows.</p>
+        </div>
+    </aside>
+</div>
+
+</section>
 
 <script>
-  (function rotateHeroWords() {
-    const dynamicText = document.querySelector('.dynamic-text-container__js');
-    if (!dynamicText) return;
+(() => {
+    const hero = document.querySelector('[data-litews-hero]');
+    if (!hero) return;
 
-    const words = ['insights', 'decisions', 'strategy', 'results','trades','research','plays'];
-    let currentIndex = 0;
+    const modeButtons = [...hero.querySelectorAll('.litews-hero__mode-btn')];
+    const titleEl = hero.querySelector('#litews-hero-mode-title');
+    const copyEl = hero.querySelector('#litews-hero-mode-copy');
 
-    const setWord = (index) => {
-      dynamicText.classList.remove('dynamic-text-container__js--slide');
-      void dynamicText.offsetWidth;
-      dynamicText.textContent = words[index];
-      dynamicText.classList.add('dynamic-text-container__js--slide');
+    if (!modeButtons.length || !titleEl || !copyEl) return;
+
+    const modeContent = {
+        realtime: {
+            title: 'Realtime Discovery',
+            copy: 'Surface fresh, relevant context in seconds for assistants and live-answer workflows.'
+        },
+        precision: {
+            title: 'Precision Retrieval',
+            copy: 'Control result quality with focused filtering and intent alignment to reduce noisy outputs.'
+        },
+        monitoring: {
+            title: 'Continuous Monitoring',
+            copy: 'Track evolving topics and feed stable, structured updates into dashboards and automations.'
+        }
     };
 
-    setWord(currentIndex);
+    const setMode = (mode) => {
+        const selected = modeContent[mode];
+        if (!selected) return;
 
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % words.length;
-      setWord(currentIndex);
-    }, 1200);
-  })();
+        titleEl.textContent = selected.title;
+        copyEl.textContent = selected.copy;
 
+        modeButtons.forEach((button) => {
+            const isActive = button.dataset.mode === mode;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-selected', String(isActive));
+        });
+    };
+
+    modeButtons.forEach((button) => {
+        button.addEventListener('click', () => setMode(button.dataset.mode));
+    });
+
+    setMode('realtime');
+})();
 </script>
 
 
+<!-- API Request Lifecycle Section -->
+<section id="api-lifecycle-section">
+    <div class="section-shell">
+        <h1>API Request Lifecycle</h1>
+        <p class="section-lead">POST https://api.1ex.io/v1/search</p>
 
-
-
-
-
-  <section style="height: 2.5vh;"></section>
-
-  <section id="results-summary" class="section section--dynamic section--vh250">
-
-
-    <div class="section__container section__container--dynamic">
-      <div class="results-summary-title__container">
-        <h1>Intelligent WEB retrival</h1>
-        <span>DEMO</span>
-      </div>
-      <div class="results-summary__wrapper">
-        <div class="results-summary__panel" style="padding: 20px;">
-          <h1>POST https://api.1ex.io/v1/search</h1>
-
-            <div class="json__container">
-              <div class="json__section" data-json="{ 
-                      &quot;query&quot;: &quot;Apple stock forecast&quot;,
-                      &quot;location&quot;: &quot;United States&quot;,
-                      &quot;max_results&quot;: 5,
-                      &quot;include_context_sources&quot;: true,
-                      &quot;filters&quot;: {
-                        &quot;domains&quot;: [&quot;finance&quot;, &quot;stocks&quot;, &quot;technology&quot;],
-                        &quot;recency&quot;: &quot;latest&quot;,
-                        &quot;source_priority&quot;: [&quot;Bing&quot;, &quot;Brave&quot;, &quot;SearXNG&quot;, &quot;RSS&quot;]
-                      }
-          }">
-            </div>
-            <h3>Query Relevant Sources</h3>
-            <p>Returns Query-Specific sources that contains direct and query-relevant content and grounding</p>
-            <h3>Context Sources</h3>
-            <p>Always returns context grounding sources such as Wikipedia, GDELT and DDGS</p>
-
-            <h3>Source Filtering</h3>
-            <p>Filters and Ranks sources based on time-relevancy, key words, query relevancy and trustworthieness.</p>
-
-
-          </div>
+        <div class="api-lifecycle-track" data-lifecycle-track>
+            <span class="lifecycle-hover-line" aria-hidden="true"></span>
+            <span class="lifecycle-cursor" aria-hidden="true"></span>
+            <ul class="api-lifecycle-steps" role="list">
+                <li class="api-lifecycle-step active" data-step-title="01 Query Submission" data-step-meta="input" data-step-body="The client sends a request to the 1EX API with a query plus optional parameters like location, recency, and result limits." data-step-code="{&#10;  &quot;query&quot;: &quot;Apple stock forecast&quot;,&#10;  &quot;location&quot;: &quot;United States&quot;,&#10;  &quot;max_results&quot;: 5&#10;}">
+                    <span class="lifecycle-label lifecycle-label--above">01 Submit</span>
+                    <button class="lifecycle-node" type="button" aria-label="Query submission" aria-expanded="true"></button>
+                    <span class="lifecycle-step-meta">input</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="02 Query Analysis" data-step-meta="parse" data-step-body="1EX analyzes keywords, entities, intent type, and time relevance so search routing matches user intent.">
+                    <span class="lifecycle-label lifecycle-label--above">02 Analyze</span>
+                    <button class="lifecycle-node" type="button" aria-label="Query analysis" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">parse</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="03 Context Filtering" data-step-meta="filter" data-step-body="Context filters are applied for domain categories, geographic relevance, and recency requirements to refine result quality.">
+                    <span class="lifecycle-label lifecycle-label--above">03 Filter</span>
+                    <button class="lifecycle-node" type="button" aria-label="Context filtering" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">filter</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="04 Multi-Source Search" data-step-meta="parallel" data-step-body="1EX queries multiple sources in parallel, including search engines, RSS/XML feeds, trusted websites, event databases, and specialized providers.">
+                    <span class="lifecycle-label lifecycle-label--above">04 Search</span>
+                    <button class="lifecycle-node" type="button" aria-label="Multi-source search" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">parallel</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="05 Source Processing" data-step-meta="quality" data-step-body="Collected results are processed by deduplication, spam filtering, authority prioritization, and relevance ranking.">
+                    <span class="lifecycle-label lifecycle-label--above">05 Process</span>
+                    <button class="lifecycle-node" type="button" aria-label="Source processing" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">quality</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="06 Context Enrichment" data-step-meta="enrich" data-step-body="When enabled, 1EX adds supporting context such as official websites, Wikipedia pages, and reference resources.">
+                    <span class="lifecycle-label lifecycle-label--above">06 Enrich</span>
+                    <button class="lifecycle-node" type="button" aria-label="Context enrichment" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">enrich</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="07 Optional Summary Generation" data-step-meta="summary" data-step-body="If summary mode is on, 1EX synthesizes a concise overview from multiple sources for AI models, dashboards, and automations.">
+                    <span class="lifecycle-label lifecycle-label--above">07 Summarize</span>
+                    <button class="lifecycle-node" type="button" aria-label="Optional summary generation" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">summary</span>
+                </li>
+                <li class="api-lifecycle-step" data-step-title="08 Structured Response Delivery" data-step-meta="output" data-step-body="The final response is returned as structured JSON with query metadata, detected context, ranked results, optional enrichment and summary, plus processing time.">
+                    <span class="lifecycle-label lifecycle-label--above">08 Deliver</span>
+                    <button class="lifecycle-node" type="button" aria-label="Structured response delivery" aria-expanded="false"></button>
+                    <span class="lifecycle-step-meta">output</span>
+                </li>
+            </ul>
         </div>
 
-        <div class="divider divider--vertical divider--light" style="width: 1px; height: 100%; background-color: rgb(30, 30, 30);"></div>
+        <div class="lifecycle-detail-card" aria-live="polite">
+            <div class="lifecycle-detail-top">
+                <h3 id="lifecycle-detail-title">01 Query Submission</h3>
+                <span id="lifecycle-detail-tag">input</span>
+            </div>
+            <p id="lifecycle-detail-body">The client sends a request to the 1EX API with a query plus optional parameters like location, recency, and result limits.</p>
+            <div id="lifecycle-detail-code-wrap">
+                <pre id="lifecycle-detail-code">{
+  "query": "Apple stock forecast",
+  "location": "United States",
+  "max_results": 5
+}</pre>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div class="results-summary__panel results-summary__panel--mobile-hide">
-          <h1 style="margin: 20px 0 0 20px;">JSON</h1>
-          <a style="margin-left: 20px;"><span>●</span> online</a>
-          <section class="results-summary__scroll" id="results-scroll">
-            <div class="results-summary__scroll-inner">
-              <div class="json__container">
-                  <div class="json__section" data-json="{ 
-                    &quot;query&quot;: &quot;List Arsenal's current injuries&quot;,
-                    &quot;filters&quot;: {
-                      &quot;sport&quot;: &quot;football&quot;,
-                      &quot;competition&quot;: &quot;Premier League&quot;,
-                      &quot;team&quot;: &quot;Arsenal&quot;,
-                      &quot;time_window&quot;: &quot;last_24_hours&quot;,
-                      &quot;location&quot;: &quot;United Kingdom&quot;
-                    },
-                    &quot;options&quot;: {
-                      &quot;max_results&quot;: 5,
-                      &quot;source_priority&quot;: [&quot;SearXNG&quot;, &quot;RSS&quot;, &quot;Crawl&quot;],
-                      &quot;return_summary&quot;: true
-                    }
-                  }">
-                    <pre class="json-container"><code>{
-                    <span class="json-key">"query"</span>: <span class="json-string">"List Arsenal's current injuries"</span>,
-                    <span class="json-key">"filters"</span>: {
-                      <span class="json-key">"sport"</span>: <span class="json-string">"football"</span>,
-                      <span class="json-key">"competition"</span>: <span class="json-string">"Premier League"</span>,
-                      <span class="json-key">"team"</span>: <span class="json-string">"Arsenal"</span>,
-                      <span class="json-key">"time_window"</span>: <span class="json-string">"last_24_hours"</span>,
-                      <span class="json-key">"location"</span>: <span class="json-string">"United Kingdom"</span>
-                    },
-                    <span class="json-key">"options"</span>: {
-                      <span class="json-key">"max_results"</span>: <span class="json-number">5</span>,
-                      <span class="json-key">"source_priority"</span>: [<span class="json-string">"SearXNG"</span>, <span class="json-string">"RSS"</span>, <span class="json-string">"Crawl"</span>],
-                      <span class="json-key">"return_summary"</span>: <span class="json-boolean">true</span>
-                    }
-                  }</code></pre>
-                  </div>
 
-                <div class="json__arrow json__arrow--var1">
-                  <div class="json__arrow-line"></div>
-                  <h1>Detailed Metadata</h1>
-                  <p>Smart metadata handling for quick and easy integration.</p>
+<section class="ai-display-section">
+    <div class="features__display-container">
+      <div class="features__display-title" data-aos="fade-up">
+        <h1>Reinforce the Best</h1>
+        <h2>Search grounding and web retrieval for LLM's and AI Agents.</h2>
+      </div>
+  
+        <div class="features__display-grid" data-aos="fade-up">        
+          <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT 5.2</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek R1</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V3.2</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 3</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 3</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/kimi-white-logo-png.png"><h1>Kimi K2</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Opus 4.5</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Sonnet 4.5</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/minimax-white-logo-png.png"><h1>Minimax M2.1</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 2.5</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemma 3</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mistral 3 Large</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-4</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 4</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 2.5</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mixtral 8</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT OSS</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V2.5</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/ai21-white-logo-png.png"><h1>Maestro</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 3.1</h1></div>
+          <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-2</h1></div>
+        </div>
+  
+        <button><a href="/litews" target="_self">How to Integrate</a><span class="material-symbols-outlined">arrow_forward_ios</span></button>
+  
+        <p>*1EX is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
+          Proprietary or closed APIs that do not permit external plugin integration may not be supported.</p>
+  
+      </div>
+    </div>
+  
+  
+    </section>
+
+
+
+
+<!-- Core Capabilities Section -->
+<section id="capabilities-section">
+    <div class="section-shell">
+        <h1>Core Capabilities</h1>
+        <p class="section-lead">A production-oriented intelligence layer that turns noisy web data into structured, decision-ready context</p>
+        <div class="capabilities-grid">
+            <div class="capability-item">
+                <div class="capability-head">
+                    <div class="capability-icon">
+                        <span class="material-symbols-outlined">dynamic_feed</span>
+                    </div>
+                    <h3>Multi-Source Retrieval</h3>
                 </div>
-              </div>
-
-              <div class="json__container">
-                <div class="json__section" data-json="{
-                  &quot;summary&quot;: &quot;Arsenal currently face several injury concerns as of 11-20-2025.\nKey injuries include:\nBukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.\nKai Havertz - Knee injury, expected to be back in January.\nGabriel Magalhaes - Thigh injury, expected to be back by February 2026.\nRiccardo Calafiori - Calf injury, will be back by the end of November.\nNoni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.\n\nViktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley.&quot;
-                }">
-                  <pre class="json-container"><code>{
-                    <span class="json-key">"summary":</span> <span class="json-string">"Arsenal currently face several injury concerns as of 11-20-2025.<br>Key injuries include:<br>Bukayo Saka - Ankle Injury, back in training but will be back playing before the end of November.<br>Kai Havertz - Knee injury, expected to be back in January.<br>Gabriel Magalhaes - Thigh injury, expected to be back by February 2026.<br>Riccardo Calafiori - Calf injury, will be back by the end of November.<br>Noni Madueke - Ankle injury, scheduled to undergo surgery and expected to be back in January.<br><br>Viktor Gyökeres is also recovering from an injury but has returned to training and will likely play in the upcoming fixture against Burnley."</span>
-                  }</code></pre>
+                <p class="capability-summary">Unify live search, event streams, feeds, and crawler results into one reliable ingestion flow.</p>
+                <details class="capability-details">
+                    <summary>
+                        <span>View core features</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <ul class="capability-points">
+                        <li>Combines SearXNG, Bing API, Brave API, DuckDuckGo, GDELT, RSS/XML, and direct crawl sources.</li>
+                        <li>Supports per-source prioritization, blending, and source-level filtering rules.</li>
+                        <li>Maintains traceability across each retrieved record.</li>
+                    </ul>
+                </details>
+                <p class="capability-outcome">Outcome: broader coverage without fragmented integrations.</p>
+            </div>
+            <div class="capability-item">
+                <div class="capability-head">
+                    <div class="capability-icon">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <h3>Intelligent Query Processing</h3>
                 </div>
-                <div class="json__arrow json__arrow--var2">
-                  <div class="json__arrow-line"></div>
-                  <div class="json__arrow-text">
-                    <h1>Per-source Summary</h1>
-                    <p>Per source summary for easy LM digestion.</p>
-                  </div>
+                <p class="capability-summary">Interpret user intent before retrieval so each query resolves to precise, context-aware results.</p>
+                <details class="capability-details">
+                    <summary>
+                        <span>View core features</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <ul class="capability-points">
+                        <li>Extracts high-signal keywords and classifies query intent automatically.</li>
+                        <li>Parses recency windows such as today, this week, and rolling time ranges.</li>
+                        <li>Applies location, domain, and relevance constraints pre-aggregation.</li>
+                    </ul>
+                </details>
+                <p class="capability-outcome">Outcome: fewer irrelevant records and higher precision per request.</p>
+            </div>
+            <div class="capability-item">
+                <div class="capability-head">
+                    <div class="capability-icon">
+                        <span class="material-symbols-outlined">language</span>
+                    </div>
+                    <h3>Web Crawling &amp; Extraction</h3>
                 </div>
-              </div>
-
-              <div class="json__container">
-                  <pre class="json__code"><code>{
-                    <span class="json-key">"sources"</span>: [
-                        <span class="json-key">"title"</span>: <span class="json-string">"Arsenal Injury Update — Key Players Assessed"</span>,
-                        <span class="json-key">"link"</span>: <span class="json-string">"https://www.bbc.co.uk/sport/epl/arsenal/arsenal-injury-update"</span>,
-                        <span class="json-key">"snippet"</span>: <span class="json-string">"Arsenal face several injury doubts as multiple key players undergo evaluations..."</span>,
-                        <span class="json-key">"published"</span>: <span class="json-string">"2025-11-18T12:10:00Z"</span>,
-                        <span class="json-key">"timestamp_utc"</span>: <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-                        <span class="json-key">"recency"</span>: <span class="json-string">"Today - 3 minutes ago"</span>
-                      },
-                      {
-                        <span class="json-key">"title"</span>: <span class="json-string">"Arsenal Latest Injury Report"</span>,
-                        <span class="json-key">"link"</span>: <span class="json-string">"https://arsenal.com/players/injuries"</span>,
-                        <span class="json-key">"snippet"</span>: <span class="json-string">"Latest player injuries listed"</span>,
-                        <span class="json-key">"published"</span>: <span class="json-string">"2025-11-18T09:45:00Z"</span>,
-                        <span class="json-key">"timestamp_utc"</span>: <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-                        <span class="json-key">"recency"</span>: <span class="json-string">"Yesterday - 18 hours ago"</span>
-                      },
-                      {
-                        <span class="json-key">"title"</span>: <span class="json-string">"Premier League Latest Injury News – Club by Club Updates"</span>,
-                        <span class="json-key">"link"</span>: <span class="json-string">"https://www.premierleague.com/en/latest-player-injuries"</span>,
-                        <span class="json-key">"snippet"</span>: <span class="json-string">"Latest Injury News"</span>,
-                        <span class="json-key">"published"</span>: <span class="json-string">"2025-11-17T18:20:00Z"</span>,
-                        <span class="json-key">"timestamp_utc"</span>: <span class="json-string">"2025-11-20T15:33:12Z"</span>,
-                        <span class="json-key">"recency"</span>: <span class="json-string">"Two days ago"</span>
-                      }
-                    ]
-                  }</code></pre>
-
-              </div>
-              <div class="json__textbox">
-                  <h2>Source References</h2>
-                  <p>Includes titles, links, snippets, and publication timestamps for traceability.</p>
-                  <p>Facilitates verification and further exploration of summarized content.</p>
-                  <p>Allows for easier source attribution and credibility assessment as well as enhanced crawling and indexing capabilities.</p>
-              
-
-
-                    <div class="json__logos">
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-ddgs.png" alt="DuckDuckGo Logo">
-                      <p>DuckDuckGo</p>
-                    </div>
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-wiki.png" alt="Wikipedia Logo">
-                      <p>Wikipedia</p>
-                    </div>
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-searx.png" alt="SearXNG Logo">
-                      <p>SearXNG</p>
-                    </div>
-                    <div class="json__logo">
-                      <img src="/assets/images/logo-gdelt.png" alt="GDELT Logo">
-                      <p>GDELT</p>
-                    </div>
-
-                  </div>  
-              </div>
+                <p class="capability-summary">Run focused crawling pipelines that transform raw pages into clean, normalized knowledge objects.</p>
+                <details class="capability-details">
+                    <summary>
+                        <span>View core features</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <ul class="capability-points">
+                        <li>Executes query-scoped crawling with extraction tuned for article-like and mixed page content.</li>
+                        <li>Performs deduplication, source tagging, and canonical metadata attachment.</li>
+                        <li>Enriches each item with time, author, domain, and credibility context.</li>
+                    </ul>
+                </details>
+                <p class="capability-outcome">Outcome: consistent downstream data quality for analytics and LLM workflows.</p>
             </div>
-          </section>
-
-          <script>
-            const parentSection = document.querySelector('#results-summary');
-            const innerContainers = parentSection.querySelectorAll('.json__container');
-
-            const intervalPx = 800; // show arrow every 250px
-            const showDuration = 800; // hide arrow after 100px
-
-            window.addEventListener('scroll', () => {
-              const rect = parentSection.getBoundingClientRect();
-              const windowHeight = window.innerHeight;
-
-              // Only run if section is in viewport
-              if (rect.top < windowHeight && rect.bottom > 0) {
-                const sectionHeight = rect.height;
-                const scrollIntoSection = windowHeight - rect.top; // how much we've scrolled into section
-
-                const triggerPx = sectionHeight * 0.30; // start after 10% scroll
-                if (scrollIntoSection >= triggerPx) {
-                  const scrolledSinceTrigger = scrollIntoSection - triggerPx;
-
-                  innerContainers.forEach((container, i) => {
-                    const arrow = container.querySelector('.json__arrow');
-                    if (!arrow) return;
-
-                    const intervalStart = i * intervalPx;
-                    const intervalEnd = intervalStart + showDuration;
-
-                    if (scrolledSinceTrigger >= intervalStart && scrolledSinceTrigger < intervalEnd) {
-                      arrow.classList.add('agshow');
-                      arrow.classList.remove('aghidden');
-                    } else {
-                      arrow.classList.add('aghidden');
-                      arrow.classList.remove('agshow');
-                    }
-                  });
-                }
-              }
-            });
-
-            const sectioncontrol = document.querySelector('#results-summary');
-            const inner = document.querySelector('.results-summary__scroll-inner');
-
-            const startAt = 0.1;
-            const scrollSensitivity = 2; // 0.5 = slower, 1 = normal, 2 = faster
-
-            window.addEventListener('scroll', () => {
-              const sectionTop = sectioncontrol.offsetTop;
-              const sectionHeight = sectioncontrol.offsetHeight;
-              const innerHeight = inner.offsetHeight;
-
-              // How far scrolled into the section (0 = top, 1 = bottom)
-              let scrollIntoSection = (window.scrollY - sectionTop) / sectionHeight;
-
-              // Only start effect after startAt
-              if (scrollIntoSection < startAt) {
-                inner.style.transform = `translateY(0px)`; // reset to start
-                return;
-              }
-
-              // Limit to maximum scrollable distance
-              const maxOffset = innerHeight - sectionHeight;
-
-              // Offset proportional to section scroll
-              let progress = (scrollIntoSection - startAt) / (1 - startAt);
-              progress = Math.min(Math.max(progress * scrollSensitivity, 0), 1);
-              if (progress > 1) progress = 1;
-
-              // Reversed translation
-              let offset = progress * maxOffset;
-
-              inner.style.transform = `translateY(${offset}px)`;
-            });
-
-            function syntaxHighlight(json) {
-              json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-              // Replace newline characters inside strings with <br>
-              json = json.replace(/\\n/g, "<br>");
-
-              return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+\-]?\d+)?)/g, match => {
-                let cls = "json-number";
-                if (/^"/.test(match)) cls = /:$/.test(match) ? "json-key" : "json-string";
-                else if (/true|false/.test(match)) cls = "json-boolean";
-                else if (/null/.test(match)) cls = "json-null";
-                return `<span class="${cls}">${match}</span>`;
-              });
-            }
-            document.querySelectorAll('.json__section').forEach(section => {
-              const rawJson = section.getAttribute('data-json');
-              const formattedJson = syntaxHighlight(JSON.stringify(JSON.parse(rawJson), null, 2));
-              section.innerHTML = `
-                <pre class="json__code"><code>${formattedJson}</code></pre>
-              `;
-            });
-          </script>
+            <div class="capability-item">
+                <div class="capability-head">
+                    <div class="capability-icon">
+                        <span class="material-symbols-outlined">data_object</span>
+                    </div>
+                    <h3>LLM-Ready Output</h3>
+                </div>
+                <p class="capability-summary">Deliver a structured response contract built for immediate ingestion into model and orchestration layers.</p>
+                <details class="capability-details">
+                    <summary>
+                        <span>View core features</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
+                    </summary>
+                    <ul class="capability-points">
+                        <li>Emits normalized JSON with query metadata, identified entities, and relevance scoring.</li>
+                        <li>Includes summary synthesis with explicit source citations.</li>
+                        <li>Supports direct handoff to RAG, copilots, and decisioning pipelines.</li>
+                    </ul>
+                </details>
+                <p class="capability-outcome">Outcome: shorter integration time from retrieval to AI response generation.</p>
+            </div>
         </div>
-                  <div class="results-summary__mask"></div>
+    </div>
+</section>
 
-      </div>
+<!-- Target Users & Use Cases Section -->
+<section id="target-users-section">
+    <div class="section-shell">
+     <h1>Built For</h1>
+     <p  class="section-lead">Actionable Results Where Its Needed the Most</p>
+     <p  class="section-lead">
+        “Reinforce market analysis, investment decisions, sentiment tracking, 
+        and AI models with real-time web data and millisecond-fresh search results.” 
+     </p>
+        <div class="tu-widget" id="tuWidget">
+
+            <!-- Tab row -->
+            <div class="tu-tablist" role="tablist" aria-label="User types">
+                <button class="tu-tab is-active" role="tab" aria-selected="true" data-tu="0">
+                    <span class="material-symbols-outlined" aria-hidden="true">code</span>
+                    <span class="tu-tab__label">Developers</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="1">
+                    <span class="material-symbols-outlined" aria-hidden="true">language</span>
+                    <span class="tu-tab__label">LLM Teams</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="2">
+                    <span class="material-symbols-outlined" aria-hidden="true">analytics</span>
+                    <span class="tu-tab__label">Research</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="3">
+                    <span class="material-symbols-outlined" aria-hidden="true">trending_up</span>
+                    <span class="tu-tab__label">Finance</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="4">
+                    <span class="material-symbols-outlined" aria-hidden="true">dashboard</span>
+                    <span class="tu-tab__label">BI &amp; Dashboards</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="5">
+                    <span class="material-symbols-outlined" aria-hidden="true">security</span>
+                    <span class="tu-tab__label">Enterprise</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="6">
+                    <span class="material-symbols-outlined" aria-hidden="true">query_stats</span>
+                    <span class="tu-tab__label">Analysts</span>
+                </button>
+                <button class="tu-tab" role="tab" aria-selected="false" data-tu="7">
+                    <span class="material-symbols-outlined" aria-hidden="true">sports_soccer</span>
+                    <span class="tu-tab__label">Sports</span>
+                </button>
+            </div>
 
 
- 
-          <p style="z-index: 200; opacity: 0.2; font-family: inter; font-size: 12px;">* Following is for reference only and should not be used as actual data.</p>
 
+            <!-- Panel area -->
+            <div class="tu-panels">
+                <div class="tu-panel is-active" role="tabpanel" data-tu-panel="0">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">code</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Developers Building AI Agents</h3>
+                        <p>Integrate real-time, structured web context into autonomous agents to reduce hallucinations and improve decision-making with verified, up-to-date information.</p>
+                        <ul class="tu-chips">
+                            <li>AI Agent Development</li>
+                            <li>RAG Pipelines</li>
+                            <li>Reduced Hallucinations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="1">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">language</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>LLM &amp; AI Teams</h3>
+                        <p>Ground internal or self-hosted language models with fresh, factual context without relying on third-party APIs or outdated training data.</p>
+                        <ul class="tu-chips">
+                            <li>LLM Grounding</li>
+                            <li>Self-Hosted Models</li>
+                            <li>Fresh Context</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="2">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">analytics</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Research &amp; Analytics Teams</h3>
+                        <p>Collect, aggregate, and summarize publications, coverage, and event-based data for faster research cycles and competitive intelligence.</p>
+                        <ul class="tu-chips">
+                            <li>Auto-Aggregation</li>
+                            <li>Competitive Intel</li>
+                            <li>Research Cycles</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="3">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">trending_up</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Finance &amp; Intelligence Teams</h3>
+                        <p>Monitor markets, competitors, regulatory changes, and product updates with real-time dashboards and automated alerts.</p>
+                        <ul class="tu-chips">
+                            <li>Market Monitoring</li>
+                            <li>Automated Alerts</li>
+                            <li>Competitor Tracking</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="4">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">dashboard</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Dashboard &amp; BI Teams</h3>
+                        <p>Build real-time news, market, or intelligence feeds that aggregate search results, RSS feeds, and crawled data into a single pane of glass.</p>
+                        <ul class="tu-chips">
+                            <li>Live Feeds</li>
+                            <li>Data Aggregation</li>
+                            <li>Single Pane View</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="5">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">security</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Enterprise &amp; Self-Hosted Teams</h3>
+                        <p>Deploy 1EX on your own infrastructure with zero external dependency on proprietary APIs, maintaining full data privacy and control.</p>
+                        <ul class="tu-chips">
+                            <li>Data Privacy</li>
+                            <li>On-Premise Deploy</li>
+                            <li>Zero API Lock-in</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="6">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">query_stats</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Data Analysts</h3>
+                        <p>Enrich analytical workflows with live, crawled data sources — combine structured query results with real-time web content for deeper, evidence-backed insights.</p>
+                        <ul class="tu-chips">
+                            <li>Live Data Enrichment</li>
+                            <li>Evidence-Backed Insights</li>
+                            <li>Structured Queries</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tu-panel" role="tabpanel" data-tu-panel="7">
+                    <div class="tu-panel__icon-wrap">
+                        <span class="material-symbols-outlined">sports_soccer</span>
+                    </div>
+                    <div class="tu-panel__content">
+                        <h3>Sports &amp; Betting Platforms</h3>
+                        <p>Pull real-time match data, odds, team news, and event coverage to power predictive models, live feeds, and sports intelligence applications.</p>
+                        <ul class="tu-chips">
+                            <li>Live Match Data</li>
+                            <li>Odds &amp; Event Coverage</li>
+                            <li>Predictive Models</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto-advance progress bar -->
+            <div class="tu-progress" aria-hidden="true">
+                <div class="tu-progress__fill" id="tuProgressFill"></div>
+            </div>
+
+        </div>
     </div>
 
-  </section>
 
-  <section class="section section--vh100 section--bg-dark">
-  <div class="features__display-container">
-    <div class="features__display-title" data-aos="fade-up">
-      <h1>Reinforce the Best</h1>
-      <h2>Search grounding and web retrieval for LLM's and AI Agents.</h2>
+
+
+
+</section>
+
+<!-- Privacy & Architecture Section -->
+<section id="privacy-architecture-section">
+    <div class="section-shell">
+        <h1>Privacy & Architecture</h1>
+        <p class="section-lead">Enterprise-grade privacy, scalability, and modular design</p>
+        <div class="privacy-architecture-content">
+            <div class="pa-column">
+                <h3><span class="material-symbols-outlined">lock</span> Privacy Model</h3>
+                <ul class="privacy-features">
+                    <li><strong>No Query Storage:</strong> User queries are not logged or retained</li>
+                    <li><strong>No Input Logging:</strong> Requests are processed without persistent storage</li>
+                    <li><strong>No API Key Logging:</strong> Credentials are kept confidential</li>
+                    <li><strong>Anonymous Metrics:</strong> Only aggregated, anonymous monitoring for system health</li>
+                    <li><strong>Third-Party Compliance:</strong> Third-party APIs follow their own privacy policies</li>
+                </ul>
+                <p style="margin-top: 1.5rem; font-size: 0.88rem; color: #a8a8a8;"><em>Privacy-first architecture is core to 1EX's positioning and design.</em></p>
+            </div>
+            <div class="pa-column">
+                <h3><span class="material-symbols-outlined">architecture</span> Technical Architecture</h3>
+                <ul class="architecture-features">
+                    <li><strong>API-First Design:</strong> REST/GraphQL endpoints for seamless integration</li>
+                    <li><strong>Async-First:</strong> I/O optimized for high concurrency and low latency</li>
+                    <li><strong>Python-Based:</strong> FastAPI recommended for production deployments</li>
+                    <li><strong>Modular Sources:</strong> Pluggable retrieval adapters for flexibility</li>
+                    <li><strong>Horizontally Scalable:</strong> Stateless design for cloud deployment</li>
+                    <li><strong>Redis Caching:</strong> High-performance result caching layer</li>
+                    <li><strong>Optional PostgreSQL:</strong> Metadata persistence and analytics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Ecosystem Section -->
+<section id="what-not-section">
+    <div class="section-shell">
+        <h1>Ecosystem</h1>
+        <p class="section-lead">Natively compatible with the tools your stack already relies on</p>
+        <div class="boxicons-svg-container">
+
+            <!-- Languages -->
+            <div class="svg-cat">
+                <div class="svg-cat__head">
+                    <span class="svg-cat__label">Languages</span>
+                    <span class="svg-cat__more">+2 more</span>
+                </div>
+                <div class="svg-cat__icons">
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/python.svg" alt="Python"><figcaption>Python</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/javascript.svg" alt="JavaScript"><figcaption>JavaScript</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/typescript.svg" alt="TypeScript"><figcaption>TypeScript</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/go-lang.svg" alt="Go"><figcaption>Go</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/java.svg" alt="Java"><figcaption>Java</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/c-sharp.svg" alt="C#"><figcaption>C#</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/c.svg" alt="C"><figcaption>C</figcaption></figure>
+                    <span class="svg-cat__and-more">and more...</span>
+                </div>
+            </div>
+
+            <!-- Frameworks & Runtimes -->
+            <div class="svg-cat">
+                <div class="svg-cat__head">
+                    <span class="svg-cat__label">Frameworks &amp; Runtimes</span>
+                    <span class="svg-cat__more">+4 more</span>
+                </div>
+                <div class="svg-cat__icons">
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/nodejs.svg" alt="Node.js"><figcaption>Node.js</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/express-js.svg" alt="Express"><figcaption>Express</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/nest-js.svg" alt="NestJS"><figcaption>NestJS</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/django.svg" alt="Django"><figcaption>Django</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/fastify.svg" alt="Fastify"><figcaption>Fastify</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/laravel.svg" alt="Laravel"><figcaption>Laravel</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/vuejs.svg" alt="Vue.js"><figcaption>Vue.js</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/payload-cms.svg" alt="Payload CMS"><figcaption>Payload</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/resend.svg" alt="Resend"><figcaption>Resend</figcaption></figure>
+                    <span class="svg-cat__and-more">and more...</span>
+                </div>
+            </div>
+
+            <!-- APIs & Data Layer -->
+            <div class="svg-cat">
+                <div class="svg-cat__head">
+                    <span class="svg-cat__label">APIs &amp; Data Layer</span>
+                    <span class="svg-cat__more">+2 more</span>
+                </div>
+                <div class="svg-cat__icons">
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/fastapi.svg" alt="FastAPI"><figcaption>FastAPI</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/graphql.svg" alt="GraphQL"><figcaption>GraphQL</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/prisma-orm.svg" alt="Prisma ORM"><figcaption>Prisma</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/drizzle-orm.svg" alt="Drizzle ORM"><figcaption>Drizzle</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/my-sql.svg" alt="MySQL"><figcaption>MySQL</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/react-query.svg" alt="React Query"><figcaption>React Query</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/jquery.svg" alt="jQuery"><figcaption>jQuery</figcaption></figure>
+                    <span class="svg-cat__and-more">and more...</span>
+                </div>
+            </div>
+
+            <!-- Infrastructure -->
+            <div class="svg-cat">
+                <div class="svg-cat__head">
+                    <span class="svg-cat__label">Infrastructure</span>
+                    <span class="svg-cat__more">+4 more</span>
+                </div>
+                <div class="svg-cat__icons">
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/docker.svg" alt="Docker"><figcaption>Docker</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/kubernetes.svg" alt="Kubernetes"><figcaption>Kubernetes</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/aws.svg" alt="AWS"><figcaption>AWS</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/google-cloud.svg" alt="GCP"><figcaption>GCP</figcaption></figure>
+                    <figure class="svg-icon"><img src="/assets/images/svg-icons/vercel.svg" alt="Vercel"><figcaption>Vercel</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/terraform.svg" alt="Terraform"><figcaption>Terraform</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/digitalocean.svg" alt="DigitalOcean"><figcaption>DigitalOcean</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/microsoft.svg" alt="Azure"><figcaption>Azure</figcaption></figure>
+                    <figure class="svg-icon svg-icon--overflow"><img src="/assets/images/svg-icons/ollama.svg" alt="Ollama"><figcaption>Ollama</figcaption></figure>
+                    <span class="svg-cat__and-more">and more...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="litews-secondary">
+
+    <div class="cards-section">
+        <div class="cards-section__container">
+            <!-- Card 1 -->
+            <div class="expandable-card expandable-card--1 expandable-card--active">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <span class="material-symbols-outlined">search</span>
+                    <h1>Intent & Query Intelligence</h1>
+                </div>
+                <div class="card-content">
+                    <p>1EX analyzes user queries, prompts, or keywords to detect intent, extract contextual signals, and determine time sensitivity.</p>
+                    <p>It then retrieves, filters, and ranks web data using the minimum required sources to return fast, structured, and context-relevant results.</p>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_forward</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="expandable-card expandable-card--2">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="material-symbols-outlined">code</span>
+                    <h1>Modular Retrieval Engines</h1>
+                </div>
+                <div class="card-content">
+                    <p>Uses SearXNG, GDELT, DDGS, Bing Search API, and Deep Search Crawling. Performs intelligent, query-driven crawling across websites and urls to discover, analyze, and extract relevant information. 
+                    <p>Deep Search Crawling. Performs intelligent, query-driven crawling across websites, RSS feeds and urls to discover, analyze, and extract relevant information. 
+                       Uses keyword matching, semantic relevance, and contextual filtering to surface high-value data aligned with user intent.
+                    With customizable crawling depth, frequency, and scope, 1EX ensures up-to-date and comprehensive coverage of the web.
+                    </p>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_forward</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="expandable-card expandable-card--3">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="material-symbols-outlined">deblur</span>
+                    <h1>Aggregation, Ranking & Normalization</h1>
+                </div>
+                <div class="card-content">
+                    <p>Advanced ranking algorithms prioritize content based on relevance, credibility, and freshness to ensure users receive the most pertinent information.</p>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_forward</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+            <div class="expandable-card expandable-card--4">
+                <div class="status-indicator"></div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="material-symbols-outlined">deployed_code</span>
+                    <h1>Output Modes</h1>
+                </div>
+                <div class="card-content">
+                    <p>SERP-Compatible Mode, LLM Context Mode, and Stream / Agent Mode</p>
+                    <p> Each mode tailors the output format to suit different applications, whether for direct user consumption, LLM integration, or real-time data streaming.</p>
+                </div>
+                <!-- Material Symbol Icons -->
+                <div class="material-icon-container">
+                    <span class="material-icon expand-icon">chevron_forward</span>
+                    <span class="material-icon collapse-icon">close</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-      <div class="features__display-grid" data-aos="fade-up">        
-        <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT 5.2</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek R1</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V3.2</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 3</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 3</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/kimi-white-logo-png.png"><h1>Kimi K2</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Opus 4.5</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/anthropic-white-logo-png.png"><h1>Claude Sonnet 4.5</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/minimax-white-logo-png.png"><h1>Minimax M2.1</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemini 2.5</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/gemini-white-logo-png.png"><h1>Gemma 3</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mistral 3 Large</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-4</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 4</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/qwen-white-logo-png.png"><h1>Qwen 2.5</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/mistral-white-logo-png.png"><h1>Mixtral 8</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/glm-white-logo-png.png"><h1>GLM 4.7</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/openai-white-logo-png.png"><h1>GPT OSS</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/deepseek-white-logo-png.png"><h1>DeepSeek V2.5</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/ai21-white-logo-png.png"><h1>Maestro</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/meta-white-logo-png.png"><h1>LLaMA 3.1</h1></div>
-        <div class="features__display-grid-item"><img src="/assets/images/xai-white-logo-png.png"><h1>Grok-2</h1></div>
-      </div>
-
-      <button><a href="/litews" target="_self">How to Integrate</a><span class="material-symbols-outlined">arrow_forward_ios</span></button>
-
-      <p>*1EX is designed for maximum flexibility, but integration may be limited to AI models that are self-hosted, open-source, or allow modification. 
-        Proprietary or closed APIs that do not permit external plugin integration may not be supported.</p>
-
-    </div>
-  </div>
 
 
-  </section>
-  <section class="section section--vh100 section--bg-dark" style="display: none;">
-    <div class="card-carousel__container">
-      <!-- Card 1 -->
-      <div class="card-carousel__card card-carousel__card--active" data-card="0">
-        <div class="card-carousel__content">
-          <h1>Real-time Data</h1>
-          <p>Access live web data with our advanced real-time retrieval system. Get the most current information instantly.</p>
-          <div class="card-carousel__features">
-            <div class="feature-item">
-              <span class="material-symbols-outlined">bolt</span>
-              <span>Lightning Fast</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">update</span>
-              <span>Always Fresh</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">verified</span>
-              <span>Verified Sources</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<script>
+(() => {
+    const cards = [...document.querySelectorAll('.expandable-card')];
+    let activeIndex = cards.findIndex(c =>
+        c.classList.contains('expandable-card--active')
+    );
 
-      <!-- Card 2 -->
-      <div class="card-carousel__card" data-card="1">
-        <div class="card-carousel__content">
-          <h1>AI-Powered Insights</h1>
-          <p>Intelligent analysis and summarization of complex data. Our AI extracts meaningful insights from vast information sources.</p>
-          <div class="card-carousel__features">
-            <div class="feature-item">
-              <span class="material-symbols-outlined">smart_toy</span>
-              <span>Machine Learning</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">analytics</span>
-              <span>Pattern Detection</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">auto_awesome</span>
-              <span>Smart Filtering</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card-carousel__card" data-card="2">
-        <div class="card-carousel__content">
-          <h1>Seamless Integration</h1>
-          <p>Easy implementation with your existing systems. Our APIs are designed for developers, by developers.</p>
-          <div class="card-carousel__features">
-            <div class="feature-item">
-              <span class="material-symbols-outlined">code</span>
-              <span>Clean APIs</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">library_books</span>
-              <span>Full Docs</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">sync</span>
-              <span>Real-time Sync</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card-carousel__card" data-card="3">
-        <div class="card-carousel__content">
-          <h1>Enterprise Scale</h1>
-          <p>Built for high-performance requirements. Handle thousands of requests with robust infrastructure built for scale.</p>
-          <div class="card-carousel__features">
-            <div class="feature-item">
-              <span class="material-symbols-outlined">storage</span>
-              <span>99.9% Uptime</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">security</span>
-              <span>Enterprise Security</span>
-            </div>
-            <div class="feature-item">
-              <span class="material-symbols-outlined">trending_up</span>
-              <span>Auto-scaling</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Navigation Dots -->
-      <div class="card-carousel__nav">
-        <button class="card-carousel__dot card-carousel__dot--active" data-index="0"></button>
-        <button class="card-carousel__dot" data-index="1"></button>
-        <button class="card-carousel__dot" data-index="2"></button>
-        <button class="card-carousel__dot" data-index="3"></button>
-      </div>
-    </div>
-
-    <style>
-      .card-carousel__container {
-        position: relative;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 20px;
-      }
-
-      .card-carousel__card {
-        position: absolute;
-        width: 90%;
-        max-width: 800px;
-        height: 75%;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        pointer-events: none;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        user-select: none;
-        background: #050505;
-      }
-
-      .card-carousel__card--active {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        border: 1px solid transparent;
-        background:
-        linear-gradient(#0e0e0e) padding-box,
-        linear-gradient(137deg, #0e0e0e00 45%, #72727292 50%, #0e0e0e00 55%) border-box;
-        background-size: 100% 100%, 200% 100%;
-        background-position: 0 0, 200% 50%;
-        animation: shine 5s linear infinite;
-        box-shadow: #0000006e 5px 5px 20px 5px;
-        cursor: pointer;
-        transition: all 0.5s ease;
-      }
-
-      .card-carousel__content {
-        text-align: center;
-        width: 100%;
-      }
-
-      .card-carousel__content h1 {
-        font-size: 3rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #ffffff;
-        letter-spacing: -1px;
-      }
-
-      .card-carousel__content p {
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 40px;
-        line-height: 1.6;
-        font-family: 'Inter', sans-serif;
-      }
-
-      .card-carousel__features {
-        display: flex;
-        gap: 30px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .feature-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.8);
-        transition: all 0.3s ease;
-      }
-
-      .feature-item:hover {
-        color: #ffffff;
-        transform: translateY(-5px);
-      }
-
-      .feature-item .material-symbols-outlined {
-        font-size: 2rem;
-        color: rgba(100, 200, 255, 0.8);
-      }
-
-      .feature-item:hover .material-symbols-outlined {
-        color: rgb(100, 200, 255);
-      }
-
-      .card-carousel__nav {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        z-index: 10;
-      }
-
-      .card-carousel__dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        background: transparent;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        padding: 0;
-      }
-
-      .card-carousel__dot:hover {
-        border-color: rgba(255, 255, 255, 0.6);
-        transform: scale(1.2);
-      }
-
-      .card-carousel__dot--active {
-        background: rgba(100, 200, 255, 0.9);
-        border-color: rgba(100, 200, 255, 0.9);
-        box-shadow: 0 0 15px rgba(100, 200, 255, 0.5);
-      }
-
-      @media (max-width: 768px) {
-        .card-carousel__card {
-          width: 95%;
-          height: 70%;
-          padding: 40px 25px;
-        }
-
-        .card-carousel__content h1 {
-          font-size: 2rem;
-        }
-
-        .card-carousel__content p {
-          font-size: 1rem;
-          margin-bottom: 30px;
-        }
-
-        .card-carousel__features {
-          gap: 15px;
-        }
-
-        .feature-item {
-          font-size: 0.85rem;
-        }
-
-        .feature-item .material-symbols-outlined {
-          font-size: 1.5rem;
-        }
-      }
-    </style>
-
-    <script>
-      let currentCard = 0;
-      const totalCards = 4;
-      const cards = document.querySelectorAll('.card-carousel__card');
-      const dots = document.querySelectorAll('.card-carousel__dot');
-      let isAnimating = false;
-      const clickDelay = 150; // milliseconds
-
-      function switchCard(index) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        setTimeout(() => {
-          currentCard = index % totalCards;
-
-          // Update cards
-          cards.forEach((card, i) => {
-            card.classList.remove('card-carousel__card--active');
-            if (i === currentCard) {
-              card.classList.add('card-carousel__card--active');
-            }
-          });
-
-          // Update dots
-          dots.forEach((dot, i) => {
-            dot.classList.remove('card-carousel__dot--active');
-            if (i === currentCard) {
-              dot.classList.add('card-carousel__dot--active');
-            }
-          });
-
-          isAnimating = false;
-        }, clickDelay);
-      }
-
-      // Add click listeners to cards
-      cards.forEach((card, index) => {
-        card.addEventListener('click', () => {
-          switchCard((currentCard + 1) % totalCards);
+    /* -----------------------------
+       Core state handler
+    ------------------------------ */
+    function setActiveCard(index, scroll = false) {
+        cards.forEach((card, i) => {
+            card.classList.toggle('expandable-card--active', i === index);
         });
-        card.style.cursor = 'pointer';
-      });
 
-      // Add click listeners to dots
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          switchCard(index);
-        });
-      });
+        activeIndex = index;
 
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-          switchCard((currentCard + 1) % totalCards);
-        } else if (e.key === 'ArrowLeft') {
-          switchCard((currentCard - 1 + totalCards) % totalCards);
+        if (scroll && cards[index]) {
+            cards[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
         }
-      });
-    </script>
-  </section>
-
-
- 
-
-  <section id="security-privacy" class="section section--vh80 section--bg-dark">
-    <div class="section__title">
-      <h1 data-aos="fade-up">Secure Endpoints</h1>
-      <div class="section__paragraph">
-        <p data-aos="fade-up">
-          Our API endpoints are secured using industry-leading providers, employing TLS 1.3 and HTTPS to protect both users and our infrastructure.
-          We leverage industry-standard security solutions to safeguard API operations without compromising efficiency or performance.
-        </p>
-      </div>
-      <div class="security-privacy__logos" style="width: 100%;
-        display: flex; opacity: .3; margin: 10px 0;
-        flex-direction: row; border-top: solid 1px rgb(255, 255, 255);
-        gap: 20px; align-items: center; justify-content: right;">
-        <img class="features__item-img" src="/assets/images/logo-aws.png" alt="AI Image 1" style="width: 40px;">
-        <img class="features__item-img" src="/assets/images/logo-net.png" alt="AI Image 1" style="width: 40px;">
-        <img class="features__item-img" src="/assets/images/logo-crwd.png" alt="AI Image 1" style="width: 40px;">
-      </div>
-    </div>
-    <div class="section__title">
-      <h1 data-aos="fade-up">Total Privacy</h1>
-      <div class="section__paragraph">
-        <p data-aos="fade-up">
-       <p data-aos="fade-up">
-        User API calls are <span class="highlight highlight--red">never logged</span> in a way that captures API keys, user inputs, or any personally identifiable information. Only <span class="highlight highlight--red">aggregated, anonymized metrics</span> are collected for operational purposes such as dashboard statistics, usage monitoring, and performance analytics.
-        </p>
-        <p data-aos="fade-up">
-          When integrating third-party APIs in your projects, please note that those APIs may have their own logging policies, which can include request logging, AI training, or abuse monitoring, in accordance with their terms of service.
-        </p>
-]        <p data-aos="fade-up">
-          We follow strict privacy codes and will never share user data unless explicitly
-          required by law or uniquely specified in our
-          <a href="/privacy-policy">Privacy Policy<span class="material-symbols-outlined">arrow_outward</span></a>.
-        </p>
-      </div>
-    </div>
-
-  </section>
-
-  <section class="section section--vh80" id="cta">
-    <div class="section__title">
-      <h1 data-aos="fade-up">Get Started</h1>
-    </div>
-    <div class="cta__cards" data-aos="fade-up">
-      <div class="cta__card">
-        <h2>1EX</h2>
-        <p>Read more about 1EX, explore API plans or get started with your development.</p>
-        <div class="cta__buttons">
-          <a href="/login/?mode=login"><button>API Dashboard</button></a>
-          <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
-        </div>
-      </div>
-      <div class="divider divider--vertical"></div>
-      <div class="cta__card">
-        <h2>Documentation</h2>
-        <p>Read our full documentation to get started with our APIs and services.</p>
-        <div class="cta__buttons">
-          <a href="#">Read More<span class="material-symbols-outlined">arrow_outward</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // Add all section IDs you want sticky behavior for
-    const stickySections = [
-      'section1-1',
-      'results-summary'
-    ];
-
-    // Sticky config
-    const stickyActivationOffset = -100; // same value as dynamic_container.style.top
-    const stickyReleaseOffset = 100; // same value as dynamic_container.style.top
-
-    function handleStickyContent() {
-      const scrollY = window.scrollY;
-
-      stickySections.forEach(sectionID => {
-        const section = document.getElementById(sectionID);
-        if (!section) return;
-
-        const dynamic_container = section.querySelector('.section__container--dynamic');
-        if (!dynamic_container) return;
-
-        const contentHeight = dynamic_container.offsetHeight;
-        const sectionTop = section.offsetTop;
-        const sectionBottom = sectionTop + section.offsetHeight;
-
-        // Activate sticky
-        if (
-          scrollY >= sectionTop + stickyActivationOffset &&
-          scrollY < sectionBottom - contentHeight - stickyReleaseOffset
-        ) {
-          dynamic_container.style.position = 'fixed';
-          dynamic_container.style.top = '100px'; // same value as stickyActivationOffset & stickyReleaseOffset 
-          dynamic_container.style.left = '50%';
-          dynamic_container.style.transform = 'translateX(-50%)';
-          dynamic_container.style.width = '100%';
-          dynamic_container.style.zIndex = '1000';
-        }
-
-        // Release — lock to bottom
-        else if (scrollY >= sectionBottom - contentHeight - stickyReleaseOffset) {
-          dynamic_container.style.position = 'absolute';
-          dynamic_container.style.top = (sectionBottom - contentHeight - sectionTop) + 'px';
-          dynamic_container.style.left = '0';
-          dynamic_container.style.transform = '';
-          dynamic_container.style.width = '100%';
-          dynamic_container.style.zIndex = '1000';
-        }
-
-        // Reset
-        else {
-          dynamic_container.style.position = '';
-          dynamic_container.style.top = '';
-          dynamic_container.style.left = '';
-          dynamic_container.style.transform = '';
-          dynamic_container.style.width = '';
-          dynamic_container.style.zIndex = '';
-        }
-      });
     }
 
-    window.addEventListener('scroll', handleStickyContent);
-    window.addEventListener('resize', handleStickyContent);
-    handleStickyContent();
-  </script>
+    function collapseAll() {
+        cards.forEach(card =>
+            card.classList.remove('expandable-card--active')
+        );
+        activeIndex = -1;
+    }
 
-  <button id="scroll-to-top">Back to Top</button>
-  <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
-  <script src="/assets/js/components/back-to-top.js"></script>
+    /* -----------------------------
+       Click handling (delegated)
+    ------------------------------ */
+    document.addEventListener('click', e => {
+        const card = e.target.closest('.expandable-card');
+        if (!card) return;
 
-  <div id="footer-container"></div>
-  <script src="/assets/js/components/footer.js"></script>
-  <link rel="stylesheet" href="/assets/css/components/footer.css">
-</body>
-</html>
+        // Prevent bubbling from buttons
+        if (e.target.closest('.card-button')) return;
+
+        const index = cards.indexOf(card);
+
+        if (card.classList.contains('expandable-card--active')) {
+            collapseAll();
+        } else {
+            setActiveCard(index);
+        }
+    });
+
+    /* -----------------------------
+       Button interaction
+    ------------------------------ */
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.card-button');
+        if (!btn) return;
+
+        e.stopPropagation();
+        btn.classList.add('is-pressed');
+        setTimeout(() => btn.classList.remove('is-pressed'), 120);
+    });
+
+    /* -----------------------------
+       Keyboard navigation
+    ------------------------------ */
+    document.addEventListener('keydown', e => {
+        if (!cards.length) return;
+
+        if (e.key === 'Escape') {
+            collapseAll();
+            return;
+        }
+
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        if (activeIndex === -1) {
+            setActiveCard(0, true);
+            return;
+        }
+
+        const dir = e.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex =
+            (activeIndex + dir + cards.length) % cards.length;
+
+        setActiveCard(nextIndex, true);
+    });
+
+    /* -----------------------------
+       Entry animation (CSS-driven)
+    ------------------------------ */
+    window.addEventListener('load', () => {
+        cards.forEach((card, i) => {
+            card.style.animationDelay = `${i * 80}ms`;
+            card.classList.add('card-enter');
+        });
+    });
+})();
+</script>
+
+ </section>
+
+
+
+
+
+
+
+
+
+
+
+<section id="interact-section">
+    <div class="section-tag">
+        <h1>Make Your First API Call</h1>
+        <h2>Explore Plans or Get Started Building.</h2>
+    </div>
+
+    <div class="interact-hover-actions">
+        <button class="interact-section-hover-btn" type="button">Get Started<span class="material-symbols-outlined">arrow_outward</span></button>
+        <button class="interact-section-hover-btn interact-section-hover-btn--secondary" type="button">View Docs<span class="material-symbols-outlined">description</span></button>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <div class="search-box">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input type="text" class="search-input" placeholder="Search 1EX..." readonly>
+            </div>
+
+            <div class="ai-response-container">
+                <!-- Response 1: Arsenal -->
+                <div class="ai-response" data-response="0">
+                    <div class="ai-response-container__parent_flex">
+                    <div class="ai-response-section">
+                    <div class="response-text">Arsenal currently has 4 players sidelined: Bukayo Saka (hamstring), Martin Odegaard (ankle), Kieran Tierney (shoulder), and Albert Sambi Lokonga (knee). Estimated return dates: Saka - 2 weeks, Odegaard - 1 week, others - 3+ weeks.
+                    <div class="container-mask"></div>                   
+                    </div>
+                    
+                    <div class="ai-response-links">
+                        <a class="response-link"><span class="material-symbols-outlined">groups</span>View Squad</a>
+                        <a class="response-link"><span class="material-symbols-outlined">bar_chart</span>Team Stats</a>
+                    </div>
+                    </div>  
+                    <div class="ai-response-articles">
+                        <div class="articles-label">Top Sources</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Saka ruled out with hamstring strain</div>
+                                <div class="article-source"><a href="#">Sky Sports</a> • Today</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Arsenal defense concerns mount</div>
+                                <div class="article-source"><a href="#">BBC Sport</a> • 2h ago</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Odegaard return timeline update</div>
+                                <div class="article-source"><a href="#">ESPN</a> • 1h ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-mask"></div>
+                </div>
+            </div>  
+
+                <!-- Response 3: Apple -->
+            <div class="ai-response" data-response="2">
+                <div class="ai-response-container__parent_flex">
+                    <div class="ai-response-section">
+                    <span class="shine-animation-text">Polling</span>
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"></a></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                    {
+                    "lineWidth": 2,
+                    "lineType": 0,
+                    "chartType": "area",
+                    "fontColor": "rgb(106, 109, 120)",
+                    "gridLineColor": "rgba(242, 242, 242, 0.06)",
+                    "volumeUpColor": "rgba(34, 171, 148, 0.5)",
+                    "volumeDownColor": "rgba(247, 82, 95, 0.5)",
+                    "backgroundColor": "#0F0F0F",
+                    "widgetFontColor": "#DBDBDB",
+                    "upColor": "#22ab94",
+                    "downColor": "#f7525f",
+                    "borderUpColor": "#22ab94",
+                    "borderDownColor": "#f7525f",
+                    "wickUpColor": "#22ab94",
+                    "wickDownColor": "#f7525f",
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "locale": "en",
+                    "chartOnly": false,
+                    "scalePosition": "right",
+                    "scaleMode": "Normal",
+                    "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+                    "valuesTracking": "1",
+                    "changeMode": "price-and-percent",
+                    "symbols": [
+                        [
+                        "Apple",
+                        "NASDAQ:AAPL|1D"
+                        ]
+                    ],
+                    "dateRanges": [
+                        "1d|1"
+                    ],
+                    "fontSize": "10",
+                    "headerFontSize": "medium",
+                    "autosize": false,
+                    "width": "100%",
+                    "height": "40%",
+                    "noTimeScale": false,
+                    "hideDateRanges": false,
+                    "hideMarketStatus": false,
+                    "hideSymbolLogo": false
+                    }
+                    </script>
+                    </div>
+<!-- TradingView Widget END -->
+
+                    <script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-ticker-tag.js"></script>
+                    <div class="response-text">Apple Inc <tv-ticker-tag symbol="NASDAQ:AAPL" hide-change theme="dark"></tv-ticker-tag> currently trading at <span class="ticker-price-dynamic ticker-class-dynamic">$</span>. 
+                        Q1: Analysts project an annual growth of an estimated <strong>11%</strong> driven by a 
+                        significant update to its product lineup, 
+                        including the <u>iPhone 17e, M5 MacBooks, iPhone Fold, and the $599 MacBook Neo</u>, 
+                        which is Apple's cheapest laptop ever.
+                        <span class="link-symbol"><span class="material-symbols-outlined">link</span>CNET</span>
+                        Additional: Apple Music, iCloud, and Apple TV+, 
+                        achieved an all-time high revenue of $26.6 billion, marking a 12% year-over-year increase.
+                        <span class="link-symbol"><span class="material-symbols-outlined">link</span>Tech Radar</span>
+                        Key catalysts: earnings beat potential and all-new product releases.
+                    <span class="link-symbol"><span class="material-symbols-outlined">link</span>Bloomberg</span>
+                    <br>Forecast:</br>
+                        Bullish: Experts forecast expect estimate a $350 per/share at 'High' or a $290 "Average" although not 
+                        expecting a "Low" or Bearish investors are still wary of U.S. Tarrifs, global inflation, AI-roadmap setbacks
+                        and supply chain issues (<u>Semiconductor and Chip shortages & Raw Materials</u>).
+                        <div class="container-mask"></div>
+                    </div>
+                    <div class="ai-response-links">
+                        <a class="response-link"><span class="material-symbols-outlined">trending_up</span>View Chart</a>
+                        <a class="response-link"><span class="material-symbols-outlined">newspaper</span>News</a>
+                    </div>
+                    </div>  
+                    <div class="ai-response-articles">
+                        <div class="articles-label">Context Relevant</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple Inc.- Wikipedia</div>
+                                <div class="article-source"><a href="#">en.wikipedia.com</a></div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple</div>
+                                <div class="article-source"><a href="#">apple.com</a></div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple Inc. (AAPL) stock price, news, quote and history</div>
+                                <div class="article-source"><a href="#">yahoo finance</a></div>
+                            </div>
+                        </div>
+                        <div class="articles-label">Top Results</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple Q1 earnings beat expectations</div>
+                                <div class="article-source"><a href="#">Bloomberg</a> • 3h ago</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">MacBook Neo, iPhone 17e, and everything else Apple ... - TechCrunch</div>
+                                <div class="article-source"><a href="#">TechCrunch</a> • 2h ago</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">MacRumors: Apple News and Rumors</div>
+                                <div class="article-source"><a href="#">MacRumors</a> • Today</div>
+                            </div>
+                        </div>
+                        <div class="articles-label">External Resources</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">code</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple Stock Chart NASDAQ:AAPL - Widget</div>
+                                <div class="article-source"><a href="#">Tradingview</a> • 1ms ago</div>
+                            </div>
+                        </div>                        
+                    </div>
+                        <div class="container-mask"></div>
+                </div>
+            </div>
+                <!-- Response 5: EU Regulations -->
+                <div class="ai-response" data-response="4">
+                    <div class="ai-response-container__parent_flex">
+                        <div class="ai-response-section">
+                      
+                    <!-- Iframe container -->
+                    <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js"></script>
+
+                    <tv-ticker-tape symbols="PEPPERSTONE:CRUDEF,NYSE:XOM,ADX:ADNOCGAS,EURONEXT:SHELL,OSL:AKER,NYSE:CVX,MCX:CRUDEOIL1!" theme="dark" transparent></tv-ticker-tape>
+                    </div>
+
+                    <span class="response-notice"><span class="material-symbols-outlined">error</span>information as of March 18 2026, for demo purposes only!</span>
+                    <div class="response-text">
+                        Amid rising geopolitical tensions in the Middle East and the Arabian Gulf, energy markets are increasingly questioning 
+                        whether crude oil futures (CL) could surge toward $200 per barrel by the end of March. A major factor driving this 
+                        speculation is the reported disruption and closure of the Strait of Hormuz, one of the most important global oil
+                         transit chokepoints. Normally, a significant portion of the world’s seaborne crude exports pass through this narrow 
+                         corridor, linking Gulf producers to global markets. Any sustained interruption immediately tightens supply and 
+                         raises price volatility across energy markets.
+
+                        In response, major regional producers such as Saudi Aramco, QatarEnergy, and Abu Dhabi National Oil Company are
+                         exploring alternative export routes and logistical strategies. These include diverting shipments through pipelines that bypass the Gulf and increasing tanker traffic through the Red Sea and other maritime corridors. While these alternatives allow some continuation of supply, they introduce longer transit times, higher costs, and capacity limits.
+
+                        If disruptions persist and alternative routes cannot fully compensate for lost throughput, global inventories could 
+                        tighten rapidly. Such a supply shock—combined with market speculation—could push crude significantly higher.
+                        <div class="container-mask"></div>
+                    </div>
+                    <div class="ai-response-links">
+                        <a class="response-link"><span class="material-symbols-outlined">description</span>Full Statement</a>
+                        <a class="response-link"><span class="material-symbols-outlined">info</span>Analysis</a>
+                        </div>
+                    </div>
+                    <div class="ai-response-articles">
+                        <div class="articles-label">Context Relevant</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Bloomberg Markets - Energy</div>
+                                <div class="article-source"><a href="#">Bloomberg</a></div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Crude WTI (CRUDEF) - Tradingview Live Prices & Quotes </div>
+                                <div class="article-source"><a href="#">Tradingview.com</a></div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">US Oil WTI - Dec 2032 (USOIL)</div>
+                                <div class="article-source"><a href="#">MSN</a></div>
+                            </div>
+                        </div>
+                        <div class="articles-label">Top Results</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Oil prices slide 3% as some ships transit Strait of Hormuz</div>
+                                <div class="article-source"><a href="#">Reuters</a> • 1h ago</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Oil prices jump following first reported attacks on Iranian production facilities</div>
+                                <div class="article-source"><a href="#">CNN.com</a> • 2h ago</div>
+                            </div>
+                        </div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">news</span>
+                            <div class="article-content">
+                                <div class="article-title">Oil Stocks Could Reap a $60 Billion Windfall if Crude Prices Remain Elevated This Year</div>
+                                <div class="article-source"><a href="#">The Motley Fool (www.fool.com)</a> • 20m ago</div>
+                            </div>
+                        </div>
+                        <div class="articles-label">External Resources</div>
+                        <div class="article-item">
+                            <span class="article-icon material-symbols-outlined">code</span>
+                            <div class="article-content">
+                                <div class="article-title">Apple Stock Chart NASDAQ:AAPL - Widget</div>
+                                <div class="article-source"><a href="#">Tradingview</a> • 1ms ago</div>
+                            </div>
+                        </div>                        
+                    </div>
+                            <div class="container-mask"></div>
+                    </div>
+                </div>
+            <!-- Response 6: News Feed -->
+            <div class="ai-response" data-response="5">
+                <div class="ai-response-container__parent_flex">
+                    <div class="ai-response-section">
+                        <div class="response-text">
+                            Here are the top trending stories and breaking news from across the globe today. Stay updated with the latest developments in technology, business, politics, and entertainment.
+                            <div class="container-mask"></div>
+                        </div>
+                    </div>
+                    <div class="ai-response-feed">
+                        <div class="article-card">
+                            <div class="article-card-image">
+                                <span class="material-symbols-outlined">image</span>
+                            </div>
+                            <div class="article-card-content">
+                                <div class="article-card-title">Tech Giant Announces Revolutionary AI Breakthrough</div>
+                                <div class="article-card-source"><a href="#">TechCrunch</a> • 5m ago</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <div class="article-card-image">
+                                <span class="material-symbols-outlined">image</span>
+                            </div>
+                            <div class="article-card-content">
+                                <div class="article-card-title">Global Markets React to Economic Data Release</div>
+                                <div class="article-card-source"><a href="#">Bloomberg</a> • 12m ago</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <div class="article-card-image">
+                                <span class="material-symbols-outlined">image</span>
+                            </div>
+                            <div class="article-card-content">
+                                <div class="article-card-title">Space Exploration Program Reaches New Milestone</div>
+                                <div class="article-card-source"><a href="#">NPR</a> • 18m ago</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <div class="article-card-image">
+                                <span class="material-symbols-outlined">image</span>
+                            </div>
+                            <div class="article-card-content">
+                                <div class="article-card-title">Healthcare Innovation Transforms Patient Care</div>
+                                <div class="article-card-source"><a href="#">Medical Journal</a> • 25m ago</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <div class="article-card-image">
+                                <span class="material-symbols-outlined">image</span>
+                            </div>
+                            <div class="article-card-content">
+                                <div class="article-card-title">Environmental Accord Signed by Major Nations</div>
+                                <div class="article-card-source"><a href="#">The Guardian</a> • 32m ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-mask"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script>
+    (() => {
+        // Configuration
+        const CONFIG = {
+            queryTypingSpeed: 40,      // Speed for typing queries (ms per character)
+            queryDeleteSpeed: 20,      // Speed for deleting queries (ms per character)
+            pauseAfterQuery: 800,      // Pause after query before response (ms)
+            pauseAfterResponse: 2000,  // Pause after response before clearing (ms)
+            responseRevealDuration: 700, // Reveal duration for full response text (ms)
+            debugMode: true,            // Enable debug controls
+            tickerSymbol: 'AAPL',       // Stock symbol to track
+            tickerPollInterval: 5000    // Poll every 5 seconds
+        };
+
+        // Search queries that match the pre-built response divs
+        const searchQueries = [
+            "Arsenal current injury report today",
+            "Apple stock news and forecast",
+            "Will crude oil hit $100 by the end of March?",
+            "Top news today"
+        ];
+
+        // State management
+        const state = {
+            currentIndex: 0,
+            hasAnimated: false,
+            isAnimating: false,
+            isPaused: false,
+            timeouts: []  // Track all timeouts for cancellation
+        };
+
+        const searchInput = document.querySelector('.search-input');
+        const responseElements = document.querySelectorAll('.ai-response');
+        const tickerTargets = document.querySelectorAll('.ticker-price-dynamic, .ticker-class-dynamic');
+
+        function setTickerValue(value) {
+            tickerTargets.forEach((node) => {
+                node.textContent = value;
+            });
+        }
+
+        function initTickerMirror() {
+            if (!tickerTargets.length) return;
+
+            // Fetch stock price from backend (which uses Finnhub API)
+            const fetchStockPrice = async () => {
+                try {
+                    const url = `/api/stock-price?symbol=${CONFIG.tickerSymbol}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data.success && data.price) {
+                        setTickerValue(data.price);
+                        console.log(`[Ticker] Updated from Finnhub: ${data.price} (${data.changePercent}%)`);
+                    } else {
+                        console.warn('[Ticker] API error:', data.error);
+                    }
+                } catch (error) {
+                    console.warn('[Ticker] Stock price fetch failed:', error.message);
+                }
+            };
+
+            // Poll every 5 seconds (Finnhub free tier: 60 calls/min)
+            const pollId = setInterval(fetchStockPrice, CONFIG.tickerPollInterval);
+
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', () => clearInterval(pollId), { once: true });
+
+            // Initial fetch after 1 second
+            setTimeout(fetchStockPrice, 1000);
+        }
+
+        initTickerMirror();
+
+        // Debug Controls UI - Only show for admin users
+        let debugPanel = null;
+        let isAdmin = false;
+
+        // Check if user is admin before creating debug panel
+        if (CONFIG.debugMode) {
+            fetch('/api/session')
+                .then(res => res.json())
+                .then(session => {
+                    if (session.loggedIn && session.user && session.user.role === 'admin') {
+                        isAdmin = true;
+                        createDebugPanel();
+                    }
+                })
+                .catch(err => console.error('Session check for debug panel failed:', err));
+        }
+
+        function createDebugPanel() {
+            debugPanel = document.createElement('div');
+            debugPanel.className = 'debug-controls';
+            debugPanel.innerHTML = `
+                <h4>🐛 Debug Controls</h4>
+                <div class="debug-status">
+                    <div class="debug-status-item">
+                        <span class="debug-status-label">Status:</span>
+                        <span class="debug-status-value" id="debug-status">READY</span>
+                    </div>
+                    <div class="debug-status-item">
+                        <span class="debug-status-label">Response:</span>
+                        <span class="debug-status-value" id="debug-index">0 / ${responseElements.length}</span>
+                    </div>
+                    <div class="debug-status-item">
+                        <span class="debug-status-label">Query:</span>
+                        <span class="debug-status-value" id="debug-query" style="color: #9f9;">-</span>
+                    </div>
+                </div>
+                <div class="debug-controls-buttons">
+                    <button class="debug-btn" id="debug-toggle">
+                        <span id="debug-toggle-text">⏸ Pause</span> <kbd>SPACE</kbd>
+                    </button>
+                    <button class="debug-btn" id="debug-next">
+                        ⏭ Next Response <kbd>N</kbd>
+                    </button>
+                    <button class="debug-btn" id="debug-prev">
+                        ⏮ Previous Response <kbd>P</kbd>
+                    </button>
+                    <button class="debug-btn" id="debug-hide">
+                        👁 Hide Panel <kbd>D</kbd>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(debugPanel);
+
+            // Event listeners for buttons
+            document.getElementById('debug-toggle').addEventListener('click', togglePause);
+            document.getElementById('debug-next').addEventListener('click', () => stepResponse(1));
+            document.getElementById('debug-prev').addEventListener('click', () => stepResponse(-1));
+            document.getElementById('debug-hide').addEventListener('click', toggleDebugPanel);
+        }
+
+        function updateDebugPanel() {
+            if (!debugPanel) return;
+            
+            const statusEl = document.getElementById('debug-status');
+            const indexEl = document.getElementById('debug-index');
+            const queryEl = document.getElementById('debug-query');
+            
+            statusEl.textContent = state.isPaused ? 'PAUSED' : (state.isAnimating ? 'ANIMATING' : 'READY');
+            statusEl.className = 'debug-status-value' + (state.isPaused ? ' paused' : '');
+            indexEl.textContent = `${state.currentIndex + 1} / ${responseElements.length}`;
+            queryEl.textContent = searchQueries[state.currentIndex % searchQueries.length].substring(0, 30) + '...';
+        }
+
+        function togglePause() {
+            state.isPaused = !state.isPaused;
+            
+            if (state.isPaused) {
+                // Clear all pending timeouts
+                state.timeouts.forEach(t => clearTimeout(t));
+                state.timeouts = [];
+                document.getElementById('debug-toggle-text').textContent = '▶ Resume';
+            } else {
+                document.getElementById('debug-toggle-text').textContent = '⏸ Pause';
+                // Resume animation if not currently animating
+                if (!state.isAnimating && state.hasAnimated) {
+                    rotateAndDisplay();
+                }
+            }
+            updateDebugPanel();
+        }
+
+        function stepResponse(direction) {
+            if (!state.isPaused) {
+                togglePause(); // Pause first
+            }
+
+            // Clear current display
+            responseElements.forEach(el => {
+                el.style.display = 'none';
+                el.classList.remove('complete', 'fade-out');
+            });
+            searchInput.value = '';
+            state.isAnimating = false;
+
+            // Update index
+            state.currentIndex = (state.currentIndex + direction + responseElements.length) % responseElements.length;
+            
+            // Show the response immediately
+            showResponseImmediate(state.currentIndex);
+            updateDebugPanel();
+        }
+
+        function showResponseImmediate(index) {
+            const query = searchQueries[index % searchQueries.length];
+            const responseEl = responseElements[index % responseElements.length];
+            const textEl = responseEl.querySelector('.response-text');
+
+            // Set query
+            searchInput.value = query;
+
+            // Show response
+            responseEl.style.display = 'block';
+            animateArticleChildren(responseEl);
+            textEl.classList.add('revealed');
+            responseEl.classList.add('complete');
+
+            console.log(`[DEBUG] Showing Response ${index + 1}:`, {
+                query,
+                responseLength: textEl.textContent.length,
+                element: responseEl
+            });
+        }
+
+        function toggleDebugPanel() {
+            debugPanel.style.display = debugPanel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ignore if typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            switch(e.key.toLowerCase()) {
+                case ' ':
+                    e.preventDefault();
+                    togglePause();
+                    break;
+                case 'n':
+                    e.preventDefault();
+                    stepResponse(1);
+                    break;
+                case 'p':
+                    e.preventDefault();
+                    stepResponse(-1);
+                    break;
+                case 'd':
+                    e.preventDefault();
+                    toggleDebugPanel();
+                    break;
+            }
+        });
+
+        // Intersection Observer for scroll detection
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !state.hasAnimated) {
+                    state.hasAnimated = true;
+                    startAnimation();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const interactSection = document.querySelector('#interact-section');
+        if (interactSection) {
+            observer.observe(interactSection);
+        }
+
+        function startAnimation() {
+            updateDebugPanel();
+            if (!state.isPaused) {
+                rotateAndDisplay();
+            }
+        }
+
+        function safeTimeout(callback, delay) {
+            if (state.isPaused) return null;
+            const timeoutId = setTimeout(() => {
+                state.timeouts = state.timeouts.filter(t => t !== timeoutId);
+                if (!state.isPaused) callback();
+            }, delay);
+            state.timeouts.push(timeoutId);
+            return timeoutId;
+        }
+
+        function animateArticleChildren(responseEl) {
+            if (!responseEl || responseEl.dataset.response !== '2') return;
+            responseEl.classList.remove('articles-animate');
+            void responseEl.offsetHeight;
+            responseEl.classList.add('articles-animate');
+        }
+
+        function rotateAndDisplay() {
+            if (state.isAnimating || state.isPaused) return;
+            state.isAnimating = true;
+            updateDebugPanel();
+
+            const query = searchQueries[state.currentIndex % searchQueries.length];
+            const responseEl = responseElements[state.currentIndex % responseElements.length];
+            const textEl = responseEl.querySelector('.response-text');
+
+            console.log(`[DEBUG] Starting Response ${state.currentIndex + 1}/${responseElements.length}`, {
+                query,
+                responseText: textEl.textContent.substring(0, 50) + '...'
+            });
+
+            // Hide all responses first
+            responseElements.forEach(el => {
+                el.style.display = 'none';
+                el.classList.remove('articles-animate');
+            });
+
+            // Type search query
+            typeText(searchInput, query, CONFIG.queryTypingSpeed, () => {
+                if (state.isPaused) return;
+                
+                // Pause and then show response
+                safeTimeout(() => {
+                    responseEl.style.display = 'block';
+                    animateArticleChildren(responseEl);
+
+                    revealResponseText(textEl, CONFIG.responseRevealDuration, () => {
+                        if (state.isPaused) return;
+                        
+                        responseEl.classList.add('complete');
+                        
+                        // Pause before clearing and moving to next
+                        safeTimeout(() => {
+                            // Start fade out animation for response
+                            responseEl.classList.add('fade-out');
+                            
+                            // Clear search input while response fades
+                            clearText(searchInput, CONFIG.queryDeleteSpeed, () => {
+                                if (state.isPaused) return;
+                                
+                                // Wait for fade-out animation to complete
+                                safeTimeout(() => {
+                                    responseEl.classList.remove('complete', 'fade-out');
+                                    responseEl.classList.remove('articles-animate');
+                                    responseEl.style.display = 'none';
+                                    state.currentIndex++;
+                                    state.isAnimating = false;
+                                    updateDebugPanel();
+                                    
+                                    safeTimeout(() => {
+                                        rotateAndDisplay();
+                                    }, 300);
+                                }, 500);
+                            });
+                        }, CONFIG.pauseAfterResponse);
+                    });
+                }, CONFIG.pauseAfterQuery);
+            });
+        }
+
+        function typeText(element, text, speed, callback) {
+            let index = 0;
+            element.value = '';
+
+            function type() {
+                if (state.isPaused) return;
+                
+                if (index < text.length) {
+                    element.value += text[index];
+                    index++;
+                    safeTimeout(type, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+
+            type();
+        }
+
+        function revealResponseText(element, duration, callback) {
+            element.classList.remove('revealed');
+            // Force reflow so the transition restarts each cycle.
+            void element.offsetHeight;
+            element.classList.add('revealed');
+
+            safeTimeout(() => {
+                if (callback) callback();
+            }, duration);
+        }
+
+        function clearText(element, speed, callback) {
+            let value = element.value;
+            
+            function deleteChar() {
+                if (state.isPaused) return;
+                
+                if (value.length > 0) {
+                    value = value.slice(0, -1);
+                    element.value = value;
+                    safeTimeout(deleteChar, speed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+
+            deleteChar();
+        }
+    })();
+    </script>
+
+</section>
+
+
+
+
+
+
+
+
+
+<section id="resources">
+        
+
+ <div class="resources__grid">
+            <div class="resources__item">
+                <h1>Datasets</h1>
+                <p>All our datasets and resources can be found here.</p>
+                <span class="linkSpan"><a href="/resources" target="_self">Resources<span class="material-symbols-outlined"">arrow_outward</span></a></span>
+            </div>
+            <div class="resources__item">
+                <h1>Docs</h1>
+                <p>Full documentation can be found here.</p>
+                <span class="linkSpan"><a href="/1ex/documentation" target="_self">Documentation<span class="material-symbols-outlined">arrow_outward</span></a></span>
+            </div>
+            <div class="resources__item">
+                <h1>More Models</h1>
+                <p>Explore more open-source AI models here.</p>
+                 <span class="linkSpan"><a href="https://ollama.com/search" target="_blank">ollama index<span class="material-symbols-outlined"">arrow_outward</span></a></span>
+            </div>
+    </div>
+
+
+</section>
+
+
+
+<script>
+/* Use Cases Toggle Functionality */
+(() => {
+    const toggles = document.querySelectorAll('.use-case-toggle');
+
+    const setExpandedState = (toggle, expanded) => {
+        const header = toggle.querySelector('.toggle-header');
+        if (header) {
+            header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        }
+    };
+
+    const closeOthers = (currentToggle) => {
+        toggles.forEach(t => {
+            if (t !== currentToggle) {
+                t.classList.remove('active');
+                setExpandedState(t, false);
+            }
+        });
+    };
+
+    const togglePanel = (toggle) => {
+        const willExpand = !toggle.classList.contains('active');
+        closeOthers(toggle);
+        toggle.classList.toggle('active', willExpand);
+        setExpandedState(toggle, willExpand);
+    };
+
+    toggles.forEach(toggle => {
+        setExpandedState(toggle, toggle.classList.contains('active'));
+    });
+    
+    toggles.forEach(toggle => {
+        const header = toggle.querySelector('.toggle-header');
+        
+        header.addEventListener('click', () => {
+            togglePanel(toggle);
+        });
+
+        header.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                togglePanel(toggle);
+            }
+        });
+    });
+})();
+</script>
+
+<script>
+(() => {
+    const lifecycleTrack = document.querySelector('[data-lifecycle-track]');
+    const lifecycleSteps = document.querySelectorAll('.api-lifecycle-step');
+    const detailCard    = document.querySelector('.lifecycle-detail-card');
+    const detailTitle   = document.querySelector('#lifecycle-detail-title');
+    const detailTag     = document.querySelector('#lifecycle-detail-tag');
+    const detailBody    = document.querySelector('#lifecycle-detail-body');
+    const detailCodeWrap = document.querySelector('#lifecycle-detail-code-wrap');
+    const detailCode    = document.querySelector('#lifecycle-detail-code');
+    const hasDetail     = detailTitle && detailTag && detailBody && detailCodeWrap && detailCode;
+
+    if (!lifecycleTrack || !lifecycleSteps.length) return;
+
+    const stepsArray = [...lifecycleSteps];
+    let rafId        = null;
+    let detailRafId  = null;
+    let isOverStep   = false;
+    const isMobile   = () => window.matchMedia('(max-width: 768px)').matches;
+
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+    const N = stepsArray.length;
+
+    // Formula fallback (accurate when gap=0). Overridden by measureNodeRatios() on first paint.
+    let nodeRatios = stepsArray.map((_, i) => (i + 0.5) / N);
+
+    const measureNodeRatios = () => {
+        const tr = lifecycleTrack.getBoundingClientRect();
+        if (tr.width < 10) return;
+        nodeRatios = stepsArray.map(step => {
+            const node = step.querySelector('.lifecycle-node');
+            if (!node) return 0.5;
+            const r = node.getBoundingClientRect();
+            return clamp((r.left + r.width / 2 - tr.left) / tr.width, 0, 1);
+        });
+        lifecycleTrack.style.setProperty('--line-start',     `${nodeRatios[0] * 100}%`);
+        lifecycleTrack.style.setProperty('--line-end-right', `${(1 - nodeRatios[N - 1]) * 100}%`);
+    };
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            measureNodeRatios();
+            const active = lifecycleTrack.querySelector('.api-lifecycle-step.active') || stepsArray[0];
+            const idx = stepsArray.indexOf(active);
+            if (idx >= 0) { setProgress(nodeRatios[idx], idx / N); setCursorPct(nodeRatios[idx]); }
+        }, 150);
+    }, { passive: true });
+
+    const setPct = (prop, ratio) => {
+        const pct = `${clamp(ratio, 0, 1) * 100}%`;
+        lifecycleTrack.style.setProperty(prop, pct);
+    };
+
+    // desktopRatio: measured absolute dot-centre position on the track (drives CSS fill width)
+    // mobileRatio:  i/N fraction (drives mobile vertical line height)
+    const setProgress = (desktopRatio, mobileRatio) => {
+        setPct('--lifecycle-progress', desktopRatio);
+        setPct('--lifecycle-progress-mobile', mobileRatio !== undefined ? mobileRatio : desktopRatio);
+    };
+
+    const setCursorPct = (ratio) => {
+        setPct('--lifecycle-cursor', ratio);
+        setPct('--lifecycle-cursor-mobile', ratio);
+    };
+
+    const updateDetail = (step) => {
+        if (!hasDetail) return;
+        if (detailCard) detailCard.classList.add('is-transitioning');
+        cancelAnimationFrame(detailRafId);
+        detailRafId = requestAnimationFrame(() => {
+            detailTitle.textContent = step.dataset.stepTitle || '';
+            detailTag.textContent   = step.dataset.stepMeta  || '';
+            detailBody.textContent  = step.dataset.stepBody  || '';
+            const code = step.dataset.stepCode || '';
+            detailCodeWrap.style.display = code ? 'block' : 'none';
+            if (code) detailCode.textContent = code;
+            if (detailCard) detailCard.classList.remove('is-transitioning');
+        });
+    };
+
+    const setActiveStep = (nextStep) => {
+        if (!nextStep) return;
+        const idx = stepsArray.indexOf(nextStep);
+        if (idx < 0) return;
+
+        stepsArray.forEach((step, i) => {
+            const active = step === nextStep;
+            step.classList.toggle('active', active);
+            const node = step.querySelector('.lifecycle-node');
+            if (node) {
+                node.setAttribute('aria-expanded', active ? 'true' : 'false');
+                node.setAttribute('tabindex', active ? '0' : '-1');
+            }
+        });
+
+        setProgress(nodeRatios[idx], idx / N);
+        // Only snap ghost cursor when not physically over a different step
+        if (!isOverStep) setCursorPct(nodeRatios[idx]);
+        updateDetail(nextStep);
+    };
+
+    const moveActiveStep = (dir) => {
+        const cur = lifecycleTrack.querySelector('.api-lifecycle-step.active') || stepsArray[0];
+        const next = stepsArray[clamp(stepsArray.indexOf(cur) + dir, 0, stepsArray.length - 1)];
+        setActiveStep(next);
+        const node = next && next.querySelector('.lifecycle-node');
+        if (node) node.focus();
+    };
+
+    const ratioFromPointer = (event) => {
+        const rect = lifecycleTrack.getBoundingClientRect();
+        if (isMobile()) {
+            return rect.height > 0
+                ? clamp((event.clientY - rect.top) / rect.height, 0, 1)
+                : 0;
+        }
+        return rect.width > 0
+            ? clamp((event.clientX - rect.left) / rect.width, 0, 1)
+            : 0;
+    };
+
+    // Dots are centred at (i+0.5)/N; invert to find nearest index from a 0–1 track ratio
+    const nearestStep = (ratio) =>
+        stepsArray[clamp(Math.round(ratio * N - 0.5), 0, N - 1)];
+
+    // --- Per-step events ---
+    stepsArray.forEach((step) => {
+        const node = step.querySelector('.lifecycle-node');
+        if (!node) return;
+
+        // Hover activates step and snaps cursor to that step's position
+        step.addEventListener('pointerenter', () => {
+            isOverStep = true;
+            setCursorPct(nodeRatios[stepsArray.indexOf(step)]);
+            setActiveStep(step);
+        });
+
+        step.addEventListener('pointerleave', () => {
+            isOverStep = false;
+        });
+
+        // Keyboard focus
+        step.addEventListener('focusin', () => setActiveStep(step));
+
+        // Click (also catches touch tap via pointer events)
+        node.addEventListener('click', () => setActiveStep(step));
+
+        node.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ')  { e.preventDefault(); setActiveStep(step); }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); moveActiveStep(1); }
+            if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); moveActiveStep(-1); }
+        });
+    });
+
+    // --- Track-level events ---
+    lifecycleTrack.addEventListener('pointerenter', () => {
+        lifecycleTrack.classList.add('is-hovering');
+    });
+
+    // RAF-batched ghost cursor movement, skip when pointer is directly over a step
+    lifecycleTrack.addEventListener('pointermove', (e) => {
+        if (isOverStep) return;
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => setCursorPct(ratioFromPointer(e)));
+    }, { passive: true });
+
+    lifecycleTrack.addEventListener('pointerleave', () => {
+        lifecycleTrack.classList.remove('is-hovering');
+        isOverStep = false;
+        cancelAnimationFrame(rafId);
+        // Restore ghost cursor to active step position
+        const active = lifecycleTrack.querySelector('.api-lifecycle-step.active') || stepsArray[0];
+        setCursorPct(nodeRatios[stepsArray.indexOf(active)]);
+    });
+
+    // Click on track gap activates nearest step
+    lifecycleTrack.addEventListener('click', (e) => {
+        if (e.target.closest('.lifecycle-node')) return;
+        setActiveStep(nearestStep(ratioFromPointer(e)));
+    });
+
+    // Initialise
+    setActiveStep(
+        lifecycleTrack.querySelector('.api-lifecycle-step.active') || stepsArray[0]
+    );
+    // Measure real dot positions after first paint and update CSS vars
+    requestAnimationFrame(measureNodeRatios);
+})();
+</script>
+
+<script>
+/* ── Target Users Widget ── */
+(function () {
+    var widget = document.getElementById('tuWidget');
+    if (!widget) return;
+    var tabs   = Array.from(widget.querySelectorAll('.tu-tab'));
+    var panels = Array.from(widget.querySelectorAll('.tu-panel'));
+    var fill   = document.getElementById('tuProgressFill');
+    var INTERVAL = 5000;
+    var current = 0, raf = null, start = null;
+
+    function activate(idx, userAction) {
+        tabs.forEach(function(t, i) {
+            t.classList.toggle('is-active', i === idx);
+            t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        });
+        panels.forEach(function(p, i) { p.classList.toggle('is-active', i === idx); });
+        current = idx;
+        resetProgress();
+        if (!userAction) startProgress();
+    }
+
+    function resetProgress() {
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        if (fill) fill.style.width = '0%';
+        start = null;
+    }
+
+    function startProgress() {
+        if (!fill) return;
+        function step(ts) {
+            if (!start) start = ts;
+            var pct = Math.min(((ts - start) / INTERVAL) * 100, 100);
+            fill.style.width = pct + '%';
+            if (pct < 100) { raf = requestAnimationFrame(step); }
+            else { activate((current + 1) % tabs.length); }
+        }
+        raf = requestAnimationFrame(step);
+    }
+
+    tabs.forEach(function(tab, i) {
+        tab.addEventListener('click', function() { activate(i, true); startProgress(); });
+    });
+
+    widget.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') activate((current + 1) % tabs.length, true), startProgress();
+        if (e.key === 'ArrowLeft')  activate((current - 1 + tabs.length) % tabs.length, true), startProgress();
+    });
+
+    widget.addEventListener('mouseenter', function() { if (raf) { cancelAnimationFrame(raf); raf = null; } });
+    widget.addEventListener('mouseleave', function() { if (!raf) startProgress(); });
+
+    activate(0);
+})();
+</script>
+
+    <button id="scroll-to-top">Back to Top</button>
+            <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+      <script src="/assets/js/components/back-to-top.js"></script>
+
+
+
+
+      <div id="footer-container"></div>
+      <script src="/assets/js/components/footer.js"></script>
+      <link rel="stylesheet" href="/assets/css/components/footer.css">
+
+
+
+    </page>
+</master>
+
+
+
+
+    </body>
+    </html>
+
+
+

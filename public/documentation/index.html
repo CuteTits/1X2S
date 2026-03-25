@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="/assets/images/logo.png">
+  <title>1EX Documentation</title>
+  <link rel="stylesheet" href="/assets/css/core/global.css">
+  <link rel="stylesheet" href="/assets/css/core/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --surface: rgba(255, 255, 255, 0.025);
+      --surface-strong: rgba(255, 255, 255, 0.05);
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #efefef;
+      --text-soft: #bdbdbd;
+      --accent: #f74545;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: inter, montserrat, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 420px at 5% -10%, rgba(255,255,255,.07), transparent 60%),
+        linear-gradient(180deg, #101010 0%, #0a0a0a 100%);
+    }
+    .shell { width: min(1180px, 100% - 2.4rem); margin: 0 auto; }
+    .hero {
+      padding: 5rem 0 3rem;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,54,54,.02), rgba(10,10,10,.4));
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: .35rem .75rem;
+      color: #c9c9c9;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin-top: 1rem;
+      font-size: clamp(2rem, 5.4vw, 3.2rem);
+      line-height: 1.06;
+      letter-spacing: -.02em;
+      max-width: 15ch;
+      background: linear-gradient(to left, #666, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      margin-top: .95rem;
+      max-width: 72ch;
+      color: var(--text-soft);
+      font-size: clamp(.94rem, 1.4vw, 1.05rem);
+      line-height: 1.7;
+    }
+    .actions {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      text-decoration: none;
+      font-size: .86rem;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: .68rem .95rem;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #ff2e2e; transform: translateY(-1px); }
+    .btn-ghost { color: #d1d1d1; border-color: var(--line); background: var(--surface); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.22); background: var(--surface-strong); }
+    .search {
+      margin-top: 1.25rem;
+      max-width: 700px;
+      position: relative;
+    }
+    .search i { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: #8a8a8a; }
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      padding: .85rem .95rem .85rem 2.5rem;
+      transition: .2s ease;
+    }
+    .search input:focus { outline: none; border-color: rgba(255,255,255,.24); background: var(--surface-strong); }
+    .layout {
+      width: min(1320px, 100% - 2.4rem);
+      margin: 0 auto;
+      padding: 2rem 0 3.5rem;
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+    .sidebar {
+      position: sticky;
+      top: 92px;
+      height: fit-content;
+      max-height: calc(100vh - 110px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 16px;
+      background: rgba(255,255,255,.015);
+      backdrop-filter: blur(8px);
+      padding: .95rem;
+    }
+    .sidebar h2 {
+      font-size: .74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #8f8f8f;
+      padding-left: .3rem;
+      margin-bottom: .7rem;
+    }
+    .nav { list-style: none; display: grid; gap: .25rem; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      text-decoration: none;
+      color: #bdbdbd;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: .57rem .62rem;
+      font-size: .88rem;
+      transition: .2s ease;
+    }
+    .nav a:hover { border-color: rgba(255,255,255,.14); background: var(--surface); color: #ededed; }
+    .nav a.is-active { border-color: rgba(247,69,69,.3); background: rgba(247,69,69,.12); color: #ffe2e2; }
+    .main { display: grid; gap: 1rem; }
+    .section {
+      scroll-margin-top: 95px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 16px;
+      background: var(--surface);
+      padding: 1.3rem;
+    }
+    .section h2 {
+      font-size: clamp(1.16rem, 2.5vw, 1.6rem);
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      margin-bottom: .68rem;
+    }
+    .section p { color: #c5c5c5; font-size: .9rem; line-height: 1.75; }
+    .grid { margin-top: .9rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    .tile {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      background: rgba(255,255,255,.02);
+      padding: .9rem;
+      transition: .2s ease;
+    }
+    .tile:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.15); }
+    .tile h4 { margin: .2rem 0 .32rem; font-size: .92rem; color: #f0f0f0; }
+    .tile p { font-size: .82rem; color: #afafaf; line-height: 1.68; }
+    .kv { margin-top: .9rem; display: grid; gap: .58rem; }
+    .kv div {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: .72rem .82rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      justify-content: space-between;
+      color: #cacaca;
+      font-size: .84rem;
+      background: rgba(255,255,255,.013);
+    }
+    .kv span { color: #919191; min-width: 138px; font-weight: 600; }
+    .code {
+      margin-top: .9rem;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+    .code-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem .68rem;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.03);
+      color: #a0a0a0;
+      font-size: .73rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .copy {
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      color: #d2d2d2;
+      cursor: pointer;
+      font-size: .76rem;
+      padding: .32rem .5rem;
+    }
+    .copy:hover { background: rgba(255,255,255,.08); }
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      padding: .88rem .95rem 1rem;
+      color: #d8d8d8;
+      font: .79rem/1.62 "Courier New", monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: .9rem;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: .68rem .72rem;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .83rem;
+    }
+    tr:last-child td { border-bottom: none; }
+    th {
+      background: rgba(255,255,255,.05);
+      color: #dfdfdf;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: .76rem;
+      font-weight: 600;
+    }
+    td { color: #c6c6c6; }
+    .callout {
+      margin-top: .9rem;
+      border: 1px solid rgba(247,69,69,.24);
+      border-radius: 12px;
+      background: rgba(247,69,69,.08);
+      color: #ffdada;
+      font-size: .84rem;
+      padding: .78rem;
+    }
+    .chips { margin-top: .78rem; display: flex; flex-wrap: wrap; gap: .55rem; }
+    .chips a {
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: .35rem .68rem;
+      background: rgba(255,255,255,.03);
+      color: #cdcdcd;
+      font-size: .8rem;
+    }
+    .chips a:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.2); }
+    .lang-tabs {
+      margin-top: .9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    .lang-tab {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: #cfcfcf;
+      border-radius: 999px;
+      padding: .38rem .72rem;
+      font-size: .8rem;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .lang-tab:hover {
+      border-color: rgba(255,255,255,.2);
+      background: rgba(255,255,255,.07);
+    }
+    .lang-tab.is-active {
+      border-color: rgba(247,69,69,.35);
+      background: rgba(247,69,69,.16);
+      color: #ffe3e3;
+    }
+    .lang-panel {
+      display: none;
+      margin-top: .85rem;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px;
+      background: rgba(255,255,255,.018);
+      overflow: hidden;
+    }
+    .lang-panel.is-active {
+      display: block;
+    }
+    .lang-panel .code {
+      margin-top: 0;
+      border: none;
+      border-radius: 0;
+    }
+    @media (max-width: 1024px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; max-height: none; }
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <page class="page-content-on-load-true">
+    <nav>
+      <div id="navbar"></div>
+      <script src="/assets/js/components/navbar.js"></script>
+      <link rel="stylesheet" href="/assets/css/components/navbar.css">
+    </nav>
+    <mobilenav>
+      <div id="mobilenavbar"></div>
+      <script src="/assets/js/components/mobile-navbar.js"></script>
+      <link rel="stylesheet" href="/assets/css/components/mobile-navbar.css">
+    </mobilenav>
+
+    <section class="hero">
+      <div class="shell">
+        <span class="eyebrow"><i class='bx bx-book-content'></i> 1EX Platform Docs</span>
+        <h1>Integrate live web intelligence with production-ready confidence.</h1>
+        <p>
+          This reference is designed to feel native to the main 1EX experience and maps directly to the platform flow:
+          request lifecycle, structured retrieval, privacy architecture, and deployment-ready outputs.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#quickstart"><i class='bx bx-rocket'></i> Quickstart</a>
+          <a class="btn btn-ghost" href="/1ex#api-lifecycle-section"><i class='bx bx-git-branch'></i> API Lifecycle</a>
+          <a class="btn btn-ghost" href="/1ex#capabilities-section"><i class='bx bx-layer'></i> Capabilities</a>
+        </div>
+        <div class="search">
+          <i class='bx bx-search-alt-2'></i>
+          <input id="docsSearch" type="text" placeholder="Search docs sections (auth, response, limits)">
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>On This Page</h2>
+        <ul class="nav" id="docsNav">
+          <li><a href="#overview"><i class='bx bx-grid-alt'></i> Overview</a></li>
+          <li><a href="#quickstart"><i class='bx bx-play-circle'></i> Quickstart</a></li>
+          <li><a href="#examples"><i class='bx bx-code-alt'></i> Language Examples</a></li>
+          <li><a href="#authentication"><i class='bx bx-shield-quarter'></i> Authentication</a></li>
+          <li><a href="#endpoint"><i class='bx bx-link-alt'></i> Endpoint & Parameters</a></li>
+          <li><a href="#response"><i class='bx bx-data'></i> Response Format</a></li>
+          <li><a href="#best-practices"><i class='bx bx-check-shield'></i> Best Practices</a></li>
+          <li><a href="#errors"><i class='bx bx-error-circle'></i> Error Handling</a></li>
+          <li><a href="#rate-limits"><i class='bx bx-tachometer'></i> Rate Limits</a></li>
+          <li><a href="#next-steps"><i class='bx bx-right-arrow-alt'></i> Next Steps</a></li>
+        </ul>
+      </aside>
+
+      <main class="main" id="docsMain">
+        <section class="section docs-section" id="overview">
+          <h2><span class="material-symbols-outlined">dashboard</span> Overview</h2>
+          <p>
+            1EX transforms noisy web data into stable, structured context for assistants, automations, and analyst workflows.
+            The API shape mirrors the platform story in the main site: intent parsing, source retrieval, filtering, ranking, and optional summaries.
+          </p>
+          <div class="grid">
+            <article class="tile">
+              <span class="material-symbols-outlined">bolt</span>
+              <h4>Fast Context Retrieval</h4>
+              <p>Built for latency-aware integrations where fresh context is essential.</p>
+            </article>
+            <article class="tile">
+              <span class="material-symbols-outlined">conversion_path</span>
+              <h4>Workflow-Ready JSON</h4>
+              <p>Consistent response shape for pipelines, copilots, and dashboards.</p>
+            </article>
+            <article class="tile">
+              <span class="material-symbols-outlined">admin_panel_settings</span>
+              <h4>Privacy-Aware Design</h4>
+              <p>Integration patterns align with production security and governance needs.</p>
+            </article>
+          </div>
+          <div class="chips">
+            <a href="/1ex#api-lifecycle-section">API Request Lifecycle</a>
+            <a href="/1ex#capabilities-section">Core Capabilities</a>
+            <a href="/1ex#privacy-architecture-section">Privacy Architecture</a>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="quickstart">
+          <h2><span class="material-symbols-outlined">rocket_launch</span> Quickstart</h2>
+          <p>Send a JSON body to the search endpoint and include your API key as a bearer token.</p>
+          <div class="kv">
+            <div><span>Method</span> <code>POST</code></div>
+            <div><span>Endpoint</span> <code>https://api.1ex.io/v1/search</code></div>
+            <div><span>Auth Header</span> <code>Authorization: Bearer YOUR_API_KEY</code></div>
+            <div><span>Content Type</span> <code>application/json</code></div>
+          </div>
+          <div class="code">
+            <div class="code-head">
+              <span>Example Request</span>
+              <button class="copy" data-copy-target="code-quickstart">Copy</button>
+            </div>
+            <pre id="code-quickstart">curl -X POST "https://api.1ex.io/v1/search" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "market sentiment around clean energy stocks",
+    "location": "United States",
+    "max_results": 8,
+    "include_summary": true
+  }'</pre>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="examples">
+          <h2><span class="material-symbols-outlined">terminal</span> Multi-language Examples</h2>
+          <p>Use the same endpoint and payload across languages. Replace <code>YOUR_API_KEY</code> before running.</p>
+          <div class="lang-tabs" role="tablist" aria-label="Language examples">
+            <button class="lang-tab is-active" type="button" role="tab" data-lang-tab="python">Python</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="php">PHP</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="js">JavaScript</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="ts">TypeScript</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="julia">Julia</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="go">Go</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="cpp">C++</button>
+            <button class="lang-tab" type="button" role="tab" data-lang-tab="csharp">C#</button>
+          </div>
+
+          <article class="lang-panel is-active" data-lang-panel="python">
+            <div class="code">
+              <div class="code-head"><span>Python</span><button class="copy" data-copy-target="code-python">Copy</button></div>
+              <pre id="code-python">import requests
+
+url = "https://api.1ex.io/v1/search"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "query": "market sentiment around clean energy stocks",
+    "location": "United States",
+    "max_results": 8,
+    "include_summary": True
+}
+
+response = requests.post(url, headers=headers, json=payload, timeout=30)
+print(response.json())</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="php">
+            <div class="code">
+              <div class="code-head"><span>PHP</span><button class="copy" data-copy-target="code-php">Copy</button></div>
+              <pre id="code-php">$url = "https://api.1ex.io/v1/search";
+$payload = json_encode([
+    "query" => "market sentiment around clean energy stocks",
+    "location" => "United States",
+    "max_results" => 8,
+    "include_summary" => true
+]);
+
+$ch = curl_init($url);
+curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $payload,
+    CURLOPT_HTTPHEADER => [
+        "Authorization: Bearer YOUR_API_KEY",
+        "Content-Type: application/json"
+    ]
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+echo $response;</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="js">
+            <div class="code">
+              <div class="code-head"><span>JavaScript (Node.js)</span><button class="copy" data-copy-target="code-js">Copy</button></div>
+              <pre id="code-js">const response = await fetch("https://api.1ex.io/v1/search", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    query: "market sentiment around clean energy stocks",
+    location: "United States",
+    max_results: 8,
+    include_summary: true
+  })
+});
+
+const data = await response.json();
+console.log(data);</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="ts">
+            <div class="code">
+              <div class="code-head"><span>TypeScript</span><button class="copy" data-copy-target="code-ts">Copy</button></div>
+              <pre id="code-ts">type SearchResponse = {
+  query: { original: string; intent: string };
+  meta: { processing_time_ms: number; total_results: number };
+  results: Array<{ title: string; url: string; source: string }>;
+};
+
+const response = await fetch("https://api.1ex.io/v1/search", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    query: "market sentiment around clean energy stocks",
+    location: "United States",
+    max_results: 8,
+    include_summary: true
+  })
+});
+
+const data = (await response.json()) as SearchResponse;
+console.log(data.results);</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="julia">
+            <div class="code">
+              <div class="code-head"><span>Julia</span><button class="copy" data-copy-target="code-julia">Copy</button></div>
+              <pre id="code-julia">using HTTP, JSON3
+
+url = "https://api.1ex.io/v1/search"
+headers = [
+    "Authorization" => "Bearer YOUR_API_KEY",
+    "Content-Type" => "application/json"
+]
+payload = JSON3.write(Dict(
+    "query" => "market sentiment around clean energy stocks",
+    "location" => "United States",
+    "max_results" => 8,
+    "include_summary" => true
+))
+
+resp = HTTP.post(url, headers, payload)
+println(String(resp.body))</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="go">
+            <div class="code">
+              <div class="code-head"><span>Go</span><button class="copy" data-copy-target="code-go">Copy</button></div>
+              <pre id="code-go">package main
+
+import (
+  "bytes"
+  "fmt"
+  "io"
+  "net/http"
+)
+
+func main() {
+  body := []byte(`{"query":"market sentiment around clean energy stocks","location":"United States","max_results":8,"include_summary":true}`)
+  req, _ := http.NewRequest("POST", "https://api.1ex.io/v1/search", bytes.NewBuffer(body))
+  req.Header.Set("Authorization", "Bearer YOUR_API_KEY")
+  req.Header.Set("Content-Type", "application/json")
+
+  resp, _ := http.DefaultClient.Do(req)
+  defer resp.Body.Close()
+  out, _ := io.ReadAll(resp.Body)
+  fmt.Println(string(out))
+}</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="cpp">
+            <div class="code">
+              <div class="code-head"><span>C++ (libcurl)</span><button class="copy" data-copy-target="code-cpp">Copy</button></div>
+              <pre id="code-cpp">#include &lt;curl/curl.h&gt;
+
+int main() {
+  CURL* curl = curl_easy_init();
+  if (!curl) return 1;
+
+  const char* json = "{\"query\":\"market sentiment around clean energy stocks\",\"location\":\"United States\",\"max_results\":8,\"include_summary\":true}";
+  struct curl_slist* headers = NULL;
+  headers = curl_slist_append(headers, "Authorization: Bearer YOUR_API_KEY");
+  headers = curl_slist_append(headers, "Content-Type: application/json");
+
+  curl_easy_setopt(curl, CURLOPT_URL, "https://api.1ex.io/v1/search");
+  curl_easy_setopt(curl, CURLOPT_POST, 1L);
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  curl_easy_perform(curl);
+
+  curl_slist_free_all(headers);
+  curl_easy_cleanup(curl);
+  return 0;
+}</pre>
+            </div>
+          </article>
+
+          <article class="lang-panel" data-lang-panel="csharp">
+            <div class="code">
+              <div class="code-head"><span>C#</span><button class="copy" data-copy-target="code-csharp">Copy</button></div>
+              <pre id="code-csharp">using System.Net.Http;
+using System.Text;
+
+using var client = new HttpClient();
+client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_API_KEY");
+
+var json = """
+{
+  "query": "market sentiment around clean energy stocks",
+  "location": "United States",
+  "max_results": 8,
+  "include_summary": true
+}
+""";
+
+var content = new StringContent(json, Encoding.UTF8, "application/json");
+var response = await client.PostAsync("https://api.1ex.io/v1/search", content);
+var body = await response.Content.ReadAsStringAsync();
+Console.WriteLine(body);</pre>
+            </div>
+          </article>
+        </section>
+
+        <section class="section docs-section" id="authentication">
+          <h2><span class="material-symbols-outlined">key</span> Authentication</h2>
+          <p>Store keys in environment variables or a secrets manager, and keep authentication server-side only.</p>
+          <div class="callout">Rotate API keys regularly for long-running production deployments.</div>
+          <div class="code">
+            <div class="code-head">
+              <span>Header</span>
+              <button class="copy" data-copy-target="code-auth">Copy</button>
+            </div>
+            <pre id="code-auth">Authorization: Bearer 1ex_live_your_api_key_here</pre>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="endpoint">
+          <h2><span class="material-symbols-outlined">tune</span> Endpoint & Common Parameters</h2>
+          <p>These controls map to the same filtering and lifecycle stages shown on the main `/1ex` page.</p>
+          <table>
+            <thead>
+              <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>query</code></td><td>string</td><td>Main topic or intent.</td></tr>
+              <tr><td><code>location</code></td><td>string</td><td>Regional relevance hint.</td></tr>
+              <tr><td><code>max_results</code></td><td>number</td><td>Result count cap.</td></tr>
+              <tr><td><code>include_summary</code></td><td>boolean</td><td>Adds synthesized summary block.</td></tr>
+              <tr><td><code>recency</code></td><td>string</td><td>Freshness filter such as <code>24h</code> or <code>7d</code>.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section docs-section" id="response">
+          <h2><span class="material-symbols-outlined">code_blocks</span> Response Format</h2>
+          <p>Responses return query metadata, ranked results, and optional summary output for direct app consumption.</p>
+          <div class="code">
+            <div class="code-head">
+              <span>Example JSON</span>
+              <button class="copy" data-copy-target="code-response">Copy</button>
+            </div>
+            <pre id="code-response">{
+  "query": {
+    "original": "clean energy policy updates",
+    "intent": "informational"
+  },
+  "meta": {
+    "processing_time_ms": 324,
+    "total_results": 5
+  },
+  "results": [
+    {
+      "title": "EU updates energy transition incentives",
+      "url": "https://example.com/article",
+      "source": "Example Source",
+      "published": "2026-03-20T09:11:00Z"
+    }
+  ],
+  "summary": {
+    "text": "Recent updates focus on subsidy alignment and faster permitting.",
+    "confidence": 0.92
+  }
+}</pre>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="best-practices">
+          <h2><span class="material-symbols-outlined">verified</span> Best Practices</h2>
+          <p>Keep queries intent-focused and response handling deterministic for stable automation behavior.</p>
+          <div class="grid">
+            <article class="tile">
+              <h4>Be Specific with Query Intent</h4>
+              <p>Explicit entities and goals improve ranking precision.</p>
+            </article>
+            <article class="tile">
+              <h4>Tune Result Limits by Use Case</h4>
+              <p>Lower limits for low-latency agents, higher for analyst review.</p>
+            </article>
+            <article class="tile">
+              <h4>Cache by Query Fingerprint</h4>
+              <p>Reduce duplicate calls while keeping data fresh.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section docs-section" id="errors">
+          <h2><span class="material-symbols-outlined">warning</span> Error Handling</h2>
+          <p>Use status codes plus error payloads to drive retries and user-facing fallback behavior.</p>
+          <table>
+            <thead>
+              <tr><th>Status</th><th>Error Type</th><th>Recommended Action</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>400</code></td><td>invalid_request</td><td>Validate payload fields.</td></tr>
+              <tr><td><code>401</code></td><td>authentication_error</td><td>Check bearer token and key state.</td></tr>
+              <tr><td><code>429</code></td><td>rate_limited</td><td>Apply retry and exponential backoff.</td></tr>
+              <tr><td><code>500</code></td><td>server_error</td><td>Retry safely, then contact support.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section docs-section" id="rate-limits">
+          <h2><span class="material-symbols-outlined">speed</span> Rate Limits</h2>
+          <p>Plan-specific quotas are returned in headers for runtime monitoring and observability.</p>
+          <table>
+            <thead>
+              <tr><th>Tier</th><th>Req / Minute</th><th>Req / Day</th><th>Concurrent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Starter</td><td>20</td><td>1,000</td><td>3</td></tr>
+              <tr><td>Pro</td><td>80</td><td>8,000</td><td>12</td></tr>
+              <tr><td>Enterprise</td><td>Custom</td><td>Custom</td><td>Custom</td></tr>
+            </tbody>
+          </table>
+          <div class="callout">Monitor <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, and <code>X-RateLimit-Reset</code>.</div>
+        </section>
+
+        <section class="section docs-section" id="next-steps">
+          <h2><span class="material-symbols-outlined">start</span> Next Steps</h2>
+          <p>Continue with platform context from the main site and map these docs into your deployment process.</p>
+          <div class="chips">
+            <a href="/1ex#interact-section">Interactive Demo</a>
+            <a href="/1ex#target-users-section">Target Users</a>
+            <a href="/1ex#use-cases-section">Use Cases</a>
+            <a href="/1ex#privacy-architecture-section">Privacy Architecture</a>
+            <a href="mailto:support@1ex.io">Support</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <button id="scroll-to-top">Back to Top</button>
+    <link rel="stylesheet" href="/assets/css/components/back-to-top.css">
+    <script src="/assets/js/components/back-to-top.js"></script>
+    <div id="footer-container"></div>
+    <script src="/assets/js/components/footer.js"></script>
+    <link rel="stylesheet" href="/assets/css/components/footer.css">
+  </page>
+
+  <script>
+    (function () {
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll('#docsNav a'));
+      var sections = Array.prototype.slice.call(document.querySelectorAll('.docs-section'));
+      var searchInput = document.getElementById('docsSearch');
+      var copyButtons = Array.prototype.slice.call(document.querySelectorAll('.copy'));
+      var langTabs = Array.prototype.slice.call(document.querySelectorAll('[data-lang-tab]'));
+      var langPanels = Array.prototype.slice.call(document.querySelectorAll('[data-lang-panel]'));
+
+      function setActive() {
+        var id = '';
+        for (var i = 0; i < sections.length; i += 1) {
+          if (window.scrollY >= sections[i].offsetTop - 140) id = sections[i].id;
+        }
+        navLinks.forEach(function (link) {
+          link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+        });
+      }
+
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+          var target = document.querySelector(link.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function (event) {
+          var q = event.target.value.trim().toLowerCase();
+          sections.forEach(function (section) {
+            if (!q) {
+              section.style.display = 'block';
+              return;
+            }
+            section.style.display = section.textContent.toLowerCase().indexOf(q) !== -1 ? 'block' : 'none';
+          });
+        });
+      }
+
+      if (langTabs.length && langPanels.length) {
+        var setLanguage = function (lang) {
+          langTabs.forEach(function (tab) {
+            tab.classList.toggle('is-active', tab.getAttribute('data-lang-tab') === lang);
+          });
+          langPanels.forEach(function (panel) {
+            panel.classList.toggle('is-active', panel.getAttribute('data-lang-panel') === lang);
+          });
+        };
+
+        langTabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            setLanguage(tab.getAttribute('data-lang-tab'));
+          });
+        });
+      }
+
+      copyButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var targetId = button.getAttribute('data-copy-target');
+          var source = document.getElementById(targetId);
+          if (!source) return;
+          navigator.clipboard.writeText(source.textContent || '').then(function () {
+            var before = button.textContent;
+            button.textContent = 'Copied';
+            setTimeout(function () { button.textContent = before; }, 1200);
+          });
+        });
+      });
+
+      window.addEventListener('scroll', setActive);
+      setActive();
+    })();
+  </script>
+</body>
+</html>
