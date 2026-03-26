@@ -63,36 +63,109 @@
 
 <section id="section2">
 
+<div class="insights-tabs" role="tablist" aria-label="Insights content tabs">
+  <button
+    type="button"
+    class="insights-tab-button active"
+    role="tab"
+    aria-selected="true"
+    data-insights-tab-target="sports-insights"
+  >
+    Sports Insights
+  </button>
+  <button
+    type="button"
+    class="insights-tab-button"
+    role="tab"
+    aria-selected="false"
+    data-insights-tab-target="polymarket-trackers"
+  >
+    Polymarket Trackers
+  </button>
+</div>
+
+<div class="insights-tab-panel" id="polymarket-trackers" role="tabpanel" aria-hidden="true">
 
 
 <div class="side-element-container__absolute">
   <div class="side-element-copy">
-    <span class="side-element-kicker">Market pulse</span>
-    <h2>Track live sentiment alongside weekly insights</h2>
-    <p>
-      Follow current Polymarket pricing without leaving the page. The panel rotates featured markets and keeps a second event pinned for quick comparison.
-    </p>
-    <a href="https://polymarket.com/" target="_blank" rel="noopener noreferrer" class="redirect__button">
-      <span class="redirect__button-brand">
-        <img src="/assets/images/logo-polymarket.png" alt="polymarket logo icon" style="width: 18px;">
-        <span>polymarket.com</span>
-      </span>
-      <span class="material-symbols-outlined">arrow_outward</span>
-    </a>
+
+
   </div>
 
   <div class="side-element-embeds">
-    <iframe
-      id="polymarket-iframe-primary"
-      title="polymarket-market-iframe"
-      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark"
-      frameBorder="0"
-    ></iframe>
-    <iframe
-      title="polymarket-market-iframe-secondary"
-      src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
-      frameBorder="0"
-    ></iframe>
+    <div class="polymarket-market-card polymarket-market-card--featured">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">Featured</span>
+        <h3>Premier League Winner</h3>
+      </div>
+      <iframe
+        id="polymarket-iframe-primary"
+        title="polymarket-featured-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-english-premier-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
+
+    <div class="polymarket-market-card">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">UCL</span>
+        <h3>Arsenal to Win Champions League</h3>
+      </div>
+      <iframe
+        title="polymarket-arsenal-ucl-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-arsenal-win-the-202526-champions-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
+
+    <div class="polymarket-market-card">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">EPL</span>
+        <h3>Manchester City to Win EPL</h3>
+      </div>
+      <iframe
+        title="polymarket-manchester-city-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-manchester-city-win-the-202526-english-premier-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
+
+    <div class="polymarket-market-card">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">EPL</span>
+        <h3>Liverpool to Win EPL</h3>
+      </div>
+      <iframe
+        title="polymarket-liverpool-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-liverpool-win-the-202526-english-premier-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
+
+    <div class="polymarket-market-card">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">EPL</span>
+        <h3>Chelsea to Win EPL</h3>
+      </div>
+      <iframe
+        title="polymarket-chelsea-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-chelsea-win-the-202526-english-premier-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
+
+    <div class="polymarket-market-card">
+      <div class="polymarket-market-card__header">
+        <span class="polymarket-market-card__tag">Cup</span>
+        <h3>Manchester City to Win Champions League</h3>
+      </div>
+      <iframe
+        title="polymarket-manchester-city-ucl-market-iframe"
+        src="https://embed.polymarket.com/market.html?market=will-manchester-city-win-the-202526-champions-league&features=volume&theme=dark"
+        frameBorder="0"
+      ></iframe>
+    </div>
   </div>
 </div>
 
@@ -117,7 +190,13 @@ const POLYMARKET_MARKETS = [
   'will-manchester-city-win-the-202526-english-premier-league',
   'will-aston-villa-win-the-202526-english-premier-league',
   'will-manchester-united-win-the-202526-english-premier-league',
-  'will-liverpool-win-the-202526-english-premier-league'
+  'will-liverpool-win-the-202526-english-premier-league',
+  'will-chelsea-win-the-202526-english-premier-league',
+  'will-newcastle-united-win-the-202526-english-premier-league',
+  'will-tottenham-win-the-202526-english-premier-league',
+  'will-arsenal-win-the-202526-champions-league',
+  'will-manchester-city-win-the-202526-champions-league',
+  'will-liverpool-win-the-202526-champions-league'
 ];
 
 // Configuration
@@ -159,6 +238,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+</div>
+
+<div class="insights-tab-panel active" id="sports-insights" role="tabpanel" aria-hidden="false">
 
   <div class="section-content-body">
 
@@ -518,6 +600,41 @@ function initializeCarouselInteractions() {
 // Load carousel data when DOM is ready
 document.addEventListener("DOMContentLoaded", function() {
   loadCarouselData();
+});
+</script>
+
+</div>
+
+<script>
+function initializeInsightsTabs() {
+  const tabButtons = document.querySelectorAll('.insights-tab-button');
+  const tabPanels = document.querySelectorAll('.insights-tab-panel');
+
+  if (!tabButtons.length || !tabPanels.length) return;
+
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.dataset.insightsTabTarget;
+      const targetPanel = document.getElementById(targetId);
+      if (!targetPanel) return;
+
+      tabButtons.forEach((btn) => {
+        const isActive = btn === button;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
+      });
+
+      tabPanels.forEach((panel) => {
+        const isActive = panel === targetPanel;
+        panel.classList.toggle('active', isActive);
+        panel.setAttribute('aria-hidden', String(!isActive));
+      });
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  initializeInsightsTabs();
 });
 </script>
 
