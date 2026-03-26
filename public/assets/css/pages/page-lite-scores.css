@@ -1280,6 +1280,20 @@ padding: 1rem;
 
 }
 
+
+@media (max-width: 768px) {
+.ai-response-container {
+    height: 800px;
+    width: 600px;
+    right: 100px;
+    position: relative;
+}
+.search-container {
+width: 100%;
+}
+}
+
+
 .ai-response {
 width: 100%;
 padding: 1rem 0;
@@ -1762,7 +1776,13 @@ background: linear-gradient(0deg, rgba(11, 11, 11, 1) 25%, rgba(8, 8, 8, 0.367) 
     justify-content: center;
     gap: 20px;
     padding: 40px 20px;
+    position: relative;
     }
+@media (max-width: 768px) {
+    .ai-display-section{
+    height: 100vh;
+    }
+}
 .features__display-container {
     width: 100%;
     display: flex;
@@ -2722,6 +2742,12 @@ cursor: help;
         padding: 3rem 1rem;
     }
 
+    #api-lifecycle-section {
+       display: none;   
+    }
+
+
+
     #reach-section .timeline-item {
         padding-left: 74px;
     }
@@ -2750,17 +2776,18 @@ cursor: help;
     }
 
     .api-lifecycle-track {
-        padding: 1.2rem 0;
+        margin-top: 1rem;
+        padding: 0.6rem 0 0.4rem;
         cursor: default;
     }
 
     .api-lifecycle-steps {
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 0.7rem;
     }
 
     .api-lifecycle-track::before {
-        left: 20px;
+        left: 16px;
         right: auto;
         top: 0;
         bottom: 0;
@@ -2771,7 +2798,7 @@ cursor: help;
     }
 
     .api-lifecycle-track::after {
-        left: 20px;
+        left: 16px;
         top: 0;
         transform: none;
         width: 2px;
@@ -2781,7 +2808,7 @@ cursor: help;
     }
 
     .lifecycle-hover-line {
-        left: 20px;
+        left: 16px;
         top: 0;
         transform: none;
         width: 2px;
@@ -2791,29 +2818,46 @@ cursor: help;
     }
 
     .lifecycle-cursor {
-        left: 20px;
+        left: 16px;
         top: var(--lifecycle-cursor-mobile);
         transform: translate(-50%, -50%);
     }
 
     .api-lifecycle-step {
         width: 100%;
-        min-height: 92px;
+        min-height: 84px;
         justify-content: flex-start;
-        padding-left: 56px;
+        padding: 0.82rem 0.82rem 0.78rem 2.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.025);
+        transition: border-color 0.22s ease, background-color 0.22s ease, transform 0.22s ease;
+    }
+
+    .api-lifecycle-step.active {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.065);
+        transform: translateX(2px);
     }
 
     .lifecycle-node {
-        left: 11px;
-        top: 50%;
+        left: 7px;
+        top: 0.92rem;
+        transform: none;
+        width: 16px;
+        height: 16px;
     }
 
     .lifecycle-label {
         position: static;
         width: auto;
         text-align: left;
-        opacity: 0.45;
+        opacity: 0.8;
         filter: blur(0);
+        font-size: 0.78rem;
+        line-height: 1.35;
+        color: #dddddd;
+        font-weight: 500;
     }
 
     .lifecycle-label--above {
@@ -2834,12 +2878,40 @@ cursor: help;
     .lifecycle-step-meta {
         position: static;
         justify-self: start;
-        margin-top: 0.22rem;
+        margin-top: 0.3rem;
+        font-size: 0.64rem;
+        padding: 0.2rem 0.54rem;
+    }
+
+    .lifecycle-detail-card {
+        margin-top: 0.75rem;
+        padding: 0.85rem 0.9rem;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-color: rgba(255, 255, 255, 0.11);
     }
 
     .lifecycle-detail-top {
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.45rem;
+    }
+
+    #lifecycle-detail-title {
+        font-size: 0.9rem;
+    }
+
+    #lifecycle-detail-body {
+        font-size: 0.82rem;
+        line-height: 1.58;
+    }
+
+    #lifecycle-detail-code {
+        font-size: 0.72rem;
+        line-height: 1.46;
+        white-space: pre-wrap;
+        word-break: break-word;
     }
 }
 
