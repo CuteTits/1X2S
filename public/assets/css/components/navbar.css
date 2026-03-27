@@ -7,37 +7,6 @@ display: none;
 }
 
 
-#top-banner{
-position:relative;
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-background-color: #ea4040;
-z-index: 1000000;
-border: solid 1px rgb(152, 7, 7);
-}
-#close-banner{
-pointer-events: all;
-cursor: pointer;
-}
-.banner-content{
-position:relative;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 20px;
-}
-.banner-content a{
-font-family: montserrat;
-text-decoration: none;
-color: black;
-font-size: .8em;
-font-weight: 300;
-}
-.banner-content a span{
-text-decoration: underline;
-}
 
 
 #content-wrapper{

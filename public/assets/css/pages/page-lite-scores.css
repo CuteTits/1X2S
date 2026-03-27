@@ -1302,7 +1302,9 @@ color: #c1c1c1;
 font-family: inter, montserrat, sans-serif;
 line-height: 1.7;
 letter-spacing: 0.01em;
-animation: responseSlideIn 0.4s ease-out;
+transform-origin: center top;
+will-change: opacity, transform, filter;
+animation: responseSlideIn 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .response-text {
@@ -1515,27 +1517,215 @@ animation: textShineSweep 2.2s linear infinite;
 @keyframes responseSlideIn {
 from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(16px) scale(0.985);
+    filter: blur(2px);
 }
 to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
 }
 }
 
 .ai-response.fade-out {
-animation: responseSlideOut 0.5s ease-in forwards;
+animation: responseSlideOut 0.5s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 @keyframes responseSlideOut {
 from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
 }
 to {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-14px) scale(0.992);
+    filter: blur(1.5px);
 }
+}
+
+/* Unique inner animations per AI response card */
+.ai-response .container-mask {
+pointer-events: none;
+animation: responseMaskFadeIn 0.55s ease both;
+}
+
+.ai-response[data-response="0"] .ai-response-section {
+opacity: 0;
+animation: responseZeroPanelIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+}
+
+.ai-response[data-response="0"] .ai-response-links .response-link {
+opacity: 0;
+animation: responseZeroLinkIn 0.42s ease forwards;
+}
+
+.ai-response[data-response="0"] .ai-response-links .response-link:nth-child(1) { animation-delay: 0.2s; }
+.ai-response[data-response="0"] .ai-response-links .response-link:nth-child(2) { animation-delay: 0.28s; }
+.ai-response[data-response="0"] .ai-response-articles .articles-label,
+.ai-response[data-response="0"] .ai-response-articles .article-item {
+opacity: 0;
+animation: responseZeroSourcesLift 0.46s ease forwards;
+}
+.ai-response[data-response="0"] .ai-response-articles > *:nth-child(1) { animation-delay: 0.2s; }
+.ai-response[data-response="0"] .ai-response-articles > *:nth-child(2) { animation-delay: 0.26s; }
+.ai-response[data-response="0"] .ai-response-articles > *:nth-child(3) { animation-delay: 0.32s; }
+.ai-response[data-response="0"] .ai-response-articles > *:nth-child(4) { animation-delay: 0.38s; }
+.ai-response[data-response="0"] .ai-response-articles > *:nth-child(5) { animation-delay: 0.44s; }
+
+.ai-response[data-response="2"] .shine-animation-text {
+opacity: 0;
+animation: responseTwoTagSweepIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.06s forwards;
+}
+
+.ai-response[data-response="2"] .tradingview-widget-container {
+opacity: 0;
+animation: responseTwoWidgetReveal 0.62s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+}
+
+.ai-response[data-response="2"] .link-symbol {
+opacity: 0;
+animation: responseTwoCitationIn 0.4s ease forwards;
+}
+
+.ai-response[data-response="2"] .link-symbol:nth-of-type(1) { animation-delay: 0.38s; }
+.ai-response[data-response="2"] .link-symbol:nth-of-type(2) { animation-delay: 0.46s; }
+.ai-response[data-response="2"] .link-symbol:nth-of-type(3) { animation-delay: 0.54s; }
+
+.ai-response[data-response="2"] .ai-response-links .response-link {
+opacity: 0;
+animation: responseTwoLinkPulseIn 0.44s ease forwards;
+}
+
+.ai-response[data-response="2"] .ai-response-links .response-link:nth-child(1) { animation-delay: 0.24s; }
+.ai-response[data-response="2"] .ai-response-links .response-link:nth-child(2) { animation-delay: 0.31s; }
+
+.ai-response[data-response="4"] .response-notice {
+opacity: 0;
+animation: responseFourNoticeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.04s forwards;
+}
+
+.ai-response[data-response="4"] .tradingview-widget-container {
+opacity: 0;
+animation: responseFourTapeReveal 0.62s ease 0.1s forwards;
+}
+
+.ai-response[data-response="4"] .ai-response-links .response-link {
+opacity: 0;
+animation: responseFourLinkSweep 0.44s ease forwards;
+}
+
+.ai-response[data-response="4"] .ai-response-links .response-link:nth-child(1) { animation-delay: 0.22s; }
+.ai-response[data-response="4"] .ai-response-links .response-link:nth-child(2) { animation-delay: 0.3s; }
+.ai-response[data-response="4"] .ai-response-articles .articles-label,
+.ai-response[data-response="4"] .ai-response-articles .article-item {
+opacity: 0;
+animation: responseFourSourcesIn 0.5s ease forwards;
+}
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(1) { animation-delay: 0.2s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(2) { animation-delay: 0.25s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(3) { animation-delay: 0.3s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(4) { animation-delay: 0.35s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(5) { animation-delay: 0.4s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(6) { animation-delay: 0.45s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(7) { animation-delay: 0.5s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(8) { animation-delay: 0.55s; }
+.ai-response[data-response="4"] .ai-response-articles > *:nth-child(9) { animation-delay: 0.6s; }
+
+.ai-response[data-response="5"] .ai-response-section {
+opacity: 0;
+animation: responseFiveLeadIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.07s forwards;
+}
+
+.ai-response[data-response="5"] .ai-response-feed {
+opacity: 0;
+animation: responseFiveFeedSlideIn 0.56s ease 0.14s forwards;
+}
+
+.ai-response[data-response="5"] .article-card {
+opacity: 0;
+animation: responseFiveCardIn 0.44s ease forwards;
+}
+.ai-response[data-response="5"] .article-card:nth-child(1) { animation-delay: 0.2s; }
+.ai-response[data-response="5"] .article-card:nth-child(2) { animation-delay: 0.27s; }
+.ai-response[data-response="5"] .article-card:nth-child(3) { animation-delay: 0.34s; }
+.ai-response[data-response="5"] .article-card:nth-child(4) { animation-delay: 0.41s; }
+.ai-response[data-response="5"] .article-card:nth-child(5) { animation-delay: 0.48s; }
+
+@keyframes responseMaskFadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+@keyframes responseZeroPanelIn {
+from { opacity: 0; transform: translateX(-16px) skewX(-1deg); }
+to { opacity: 1; transform: translateX(0) skewX(0); }
+}
+
+@keyframes responseZeroLinkIn {
+from { opacity: 0; transform: translateY(8px) scale(0.97); }
+to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes responseZeroSourcesLift {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes responseTwoTagSweepIn {
+from { opacity: 0; transform: translateY(-6px) scale(0.96); letter-spacing: 0.2em; }
+to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 0.12em; }
+}
+
+@keyframes responseTwoWidgetReveal {
+from { opacity: 0; transform: translateY(12px) scale(0.992); clip-path: inset(0 100% 0 0); }
+to { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes responseTwoCitationIn {
+from { opacity: 0; transform: translateY(4px) scale(0.95); }
+to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes responseTwoLinkPulseIn {
+from { opacity: 0; transform: translateY(8px) scale(0.96); }
+65% { opacity: 1; transform: translateY(-2px) scale(1.02); }
+to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes responseFourNoticeIn {
+from { opacity: 0; transform: translateY(-6px); filter: blur(1.2px); }
+to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes responseFourTapeReveal {
+from { opacity: 0; transform: translateY(12px); clip-path: inset(0 0 100% 0); }
+to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes responseFourLinkSweep {
+from { opacity: 0; transform: translateX(-10px); }
+to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes responseFourSourcesIn {
+from { opacity: 0; transform: translateY(8px) scale(0.98); }
+to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes responseFiveLeadIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes responseFiveFeedSlideIn {
+from { opacity: 0; transform: translateY(12px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes responseFiveCardIn {
+from { opacity: 0; transform: translateX(14px) scale(0.97); }
+to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 /* Debug Controls */
@@ -1736,7 +1926,8 @@ color: #666666;
 font-family: inter;
 }
 .response-notice .material-symbols-outlined{
-
+font-size: 1rem;
+color: currentColor;
 }
 
 .container-mask{

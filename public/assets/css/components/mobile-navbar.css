@@ -22,7 +22,7 @@
 .mobile-nav-toggle {
   position: fixed;
   top: 14px;
-  right: 14px;
+  left: 14px;
   z-index: 1001001;
   display: flex;
   align-items: center;
@@ -80,6 +80,10 @@
 /* ===================================
    OVERLAY
    =================================== */
+.mobile-sidebar.open{
+z-index: 1001001;
+}
+
 
 .mobile-overlay {
   position: fixed;
@@ -156,6 +160,7 @@
   font-weight: 700;
   color: var(--mobile-nav-text);
   letter-spacing: -0.5px;
+  font-family: zendots;
 }
 
 .mobile-nav-close {
@@ -258,6 +263,8 @@
 
 .link-text {
   flex: 1;
+  font-family: montserrat;
+  font-weight: 400;
 }
 
 /* Active Page Highlight */
